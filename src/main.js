@@ -11,9 +11,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faPlus, faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faCircle, faCaretRight, faCaretLeft, faDotCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faTimes, faPlus, faCircle)
+library.add(faTimes, faPlus, faCircle, faCaretRight, faCaretLeft, faDotCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // turns off the 'You are running Vue in development mode.' msg

@@ -17,11 +17,20 @@
           <b-btn @click="deleteDay(day)" variant="danger" class="ml-2"><font-awesome-icon icon="times" /></b-btn>
         </li>
       </ul>
+      <b-btn @click="previousMonth()" @keyup.left="previousMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-left" /></b-btn>
+      <b-btn @click="changeMonth(now.year, now.month)" variant="info" class="ml-2"><font-awesome-icon icon="dot-circle" /></b-btn>
+      <b-btn @click="nextMonth()" @keyup.right="nextMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-right" /></b-btn>
       <div class="day-grid">
-        <div v-for="i in 7" :key="i" class="day label">{{ dayOfWeekName(i) }}</div>
-        <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: d > date.day }">
+        <!-- day of week labels -->
+        <div v-for="l in 7" class="day label">{{ dayOfWeekName(l) }}</div>
+        <!-- offset days -->
+        <div v-for="o in dayOfWeekOffset" class="day offset"></div>
+        <!-- actual days -->
+        <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: d > now.day }">
           {{ d }}
         </div>
+        <!-- offset days -->
+        <div v-for="o in fillOffset" class="day offset"></div>
       </div>
     </section>
   </div>
@@ -42,6 +51,10 @@
           '-1': 'danger'
         },
         date: {
+          month: now.getMonth()+1,
+          year: now.getFullYear()
+        },
+        now: {
           day: now.getDate(),
           weekday: now.getDay()+1,
           month: now.getMonth()+1,
@@ -79,15 +92,45 @@
       dayOfWeekName: function(dayIndex) {
         return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
       },
+      // change month to display
+      changeMonth: function(year, month) {
+        if (month > 12) {
+          // first month of next year
+          this.date.year = year+1
+          this.date.month = 1
+        } else
+        if (month < 1) {
+          // last month of previous year
+          this.date.year = year-1
+          this.date.month = 12
+        } else {
+          // change month in currently displayed year
+          this.date.year = year
+          this.date.month = month
+        }
+      },
+      // go to next month
+      nextMonth: function() {
+        this.changeMonth(this.date.year, this.date.month+1)
+      },
+      // go to previous month
+      previousMonth: function() {
+        this.changeMonth(this.date.year, this.date.month-1)
+      },
     },
     computed: {
       // compute the number of days of the month currently displayed
       daysInMonth: function() {
-        return new Date(this.date.year, this.date.month, 0).getDate();
+        return new Date(this.date.year, this.date.month-1, 0).getDate();
       },
-      // compute the offset of weekdays
+      // compute the offset of weekdays before actual days
       dayOfWeekOffset: function() {
-        return 0 // TODO
+        return new Date(this.date.year, this.date.month-1, 1).getDay()
+      },
+      // compute the offset of days to fill a total of 7 columns
+      fillOffset: function() {
+        var offset = 36 - (this.daysInMonth + this.dayOfWeekOffset);
+        return offset > 0 ? offset : 0;
       },
     }
   }
@@ -100,7 +143,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    margin: 60px 0;
   }
   .dayList {
     list-style: none;
@@ -124,6 +167,9 @@
   .day-grid .day.label {
     background: none;
     line-height: 80px;
+  }
+  .day-grid .day.offset {
+    background: none;
   }
   .day-grid .day.future {
     background: #eee;
