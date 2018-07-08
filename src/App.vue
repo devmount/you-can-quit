@@ -26,7 +26,7 @@
         <!-- offset days -->
         <div v-for="o in dayOfWeekOffset" class="day offset"></div>
         <!-- actual days -->
-        <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: d > now.day }">
+        <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: isFuture(date.year, date.month, d) }">
           {{ d }}
         </div>
         <!-- offset days -->
@@ -116,6 +116,10 @@
       // go to previous month
       previousMonth: function() {
         this.changeMonth(this.date.year, this.date.month-1)
+      },
+      // check if date is a future date
+      isFuture: function(year, month, day) {
+        return new Date(year, month, day) > new Date(this.now.year, this.now.month, this.now.day)
       },
     },
     computed: {
