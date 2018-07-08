@@ -32,7 +32,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "vue/html-self-closing": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

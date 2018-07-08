@@ -8,7 +8,7 @@
       <div>
         <b-btn @click="addDay" variant="outline-info" class="m-1"><font-awesome-icon icon="plus" /></b-btn>
       </div>
-      <ul class="dayList">
+      <!-- <ul class="dayList">
         <li v-for="(day, index) in days" :key="index">
           <b-alert :variant="states[day.status]" show>{{ day.name }}</b-alert>
           <b-btn @click="updateDay(day, 1)" variant="success" class="m-0"><font-awesome-icon icon="circle" /></b-btn>
@@ -16,7 +16,7 @@
           <b-btn @click="updateDay(day, -1)" variant="danger" class="m-0"><font-awesome-icon icon="circle" /></b-btn>
           <b-btn @click="deleteDay(day)" variant="danger" class="ml-2"><font-awesome-icon icon="times" /></b-btn>
         </li>
-      </ul>
+      </ul> -->
       <b-btn @click="previousMonth()" @keyup.left="previousMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-left" /></b-btn>
       <b-btn @click="changeMonth(now.year, now.month)" variant="info" class="ml-2"><font-awesome-icon icon="dot-circle" /></b-btn>
       <b-btn @click="nextMonth()" @keyup.right="nextMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-right" /></b-btn>
@@ -28,6 +28,11 @@
         <!-- actual days -->
         <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: isFuture(date.year, date.month, d) }">
           {{ d }}
+          <div class="action">
+            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, 1)" variant="success" class="m-0" size="sm"><font-awesome-icon icon="caret-up" /></b-btn>
+            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, 0)" variant="default" class="m-0" size="sm"></b-btn>
+            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, -1)" variant="danger" class="m-0" size="sm"><font-awesome-icon icon="caret-down" /></b-btn>
+          </div>
         </div>
         <!-- offset days -->
         <div v-for="o in fillOffset" class="day offset"></div>
@@ -79,7 +84,23 @@
       },
       // update the status of a day to 1, 0 or -1
       updateDay: function(day, status) {
-        this.$firestore.days.doc(day['.key']).update({status: status})
+        // this.$firestore.days.doc(day['.key']).update({status: status})
+        this.$firestore.days.where("name", "==", day)
+          .get().then(function(querySnapshot) {
+              querySnapshot.forEach(function(doc) {
+                  // doc.data() is never undefined for query doc snapshots
+                  // console.log(doc)
+              })
+          })
+          .catch(function(error) {
+            this.$firestore.days.add(
+              {
+                name: day,
+                status: status,
+                timestamp: new Date()
+              }
+            )
+          })
       },
       deleteDay: function(day) {
         this.$firestore.days.doc(day['.key']).delete()
@@ -149,12 +170,6 @@
     color: #2c3e50;
     margin: 60px 0;
   }
-  .dayList {
-    list-style: none;
-  }
-  .dayList .btn {
-    border-radius: 0;
-  }
   .day-grid {
     display: flex;
     flex-flow: column wrap;
@@ -162,11 +177,13 @@
     height: calc(80px * 7 + 70px);
   }
   .day-grid .day {
-    width: 100px;
+    width: 99px;
     height: 80px;
     padding: 5px;
     margin: 5px;
     background: #ccc;
+    position: relative;
+    overflow: hidden;
   }
   .day-grid .day.label {
     background: none;
@@ -177,5 +194,21 @@
   }
   .day-grid .day.future {
     background: #eee;
+  }
+  .day-grid .day .action {
+    display: flex;
+    flex-flow: row nowrap;
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    transition: all 0.3s;
+  }
+  .day-grid .day:hover .action {
+    bottom: 0;
+  }
+  .day-grid .day .action .btn {
+    border-radius: 0;
+    width: 33px;
+    text-align: center;
   }
 </style>
