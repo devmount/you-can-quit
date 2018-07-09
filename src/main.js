@@ -10,6 +10,8 @@ import { faTimes, faPlus, faCircle, faChevronRight, faCaretUp, faChevronLeft, fa
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faTimes, faPlus, faCircle, faChevronRight, faCaretUp, faChevronLeft, faCaretDown, faDotCircle, faUndoAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+// Vue Shortkey
+Vue.use(require('vue-shortkey'))
 
 // turns off the 'You are running Vue in development mode.' msg
 Vue.config.productionTip = false

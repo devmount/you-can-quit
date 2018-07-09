@@ -7,9 +7,15 @@
       <div class="navigation">
         <h2>{{ monthName(date.month) }} {{ date.year}}</h2>
         <div class="button-group">
-          <button @click="previousMonth()" @keyup.left="previousMonth()"><font-awesome-icon icon="chevron-left" /></button>
-          <button @click="changeMonth(now.year, now.month)"><font-awesome-icon icon="undo-alt" /></button>
-          <button @click="nextMonth()" @keyup.right="nextMonth()"><font-awesome-icon icon="chevron-right" /></button>
+          <button @click="previousMonth()" v-shortkey="['arrowleft']" @shortkey="previousMonth()" title="Previous Month [←]">
+            <font-awesome-icon icon="chevron-left" />
+          </button>
+          <button @click="changeMonth(now.year, now.month)" v-shortkey="['r']" @shortkey="changeMonth(now.year, now.month)" title="Reset [r]">
+            <font-awesome-icon icon="undo-alt" />
+          </button>
+          <button @click="nextMonth()" v-shortkey="['arrowright']" @shortkey="nextMonth()" title="Next Month [→]">
+            <font-awesome-icon icon="chevron-right" />
+          </button>
         </div>
       </div>
       <div class="day-grid">
@@ -191,6 +197,7 @@
     background: #9aeab9;
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: 0 1px 10px -1px #24292e;
   }
   button {
     border: none;
