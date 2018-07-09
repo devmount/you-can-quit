@@ -29,9 +29,9 @@
         <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: isFuture(date.year, date.month, d) }">
           {{ d }}
           <div class="action">
-            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, 1)" variant="success" class="m-0" size="sm"><font-awesome-icon icon="caret-up" /></b-btn>
-            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, 0)" variant="default" class="m-0" size="sm"></b-btn>
-            <b-btn @click="updateDay(date.year + '-' + date.month + '-' + d, -1)" variant="danger" class="m-0" size="sm"><font-awesome-icon icon="caret-down" /></b-btn>
+            <b-btn @click="updateDay(date.year, date.month, d, 1)" variant="success" class="m-0" size="sm"><font-awesome-icon icon="caret-up" /></b-btn>
+            <b-btn @click="updateDay(date.year, date.month, d, 0)" variant="default" class="m-0" size="sm"></b-btn>
+            <b-btn @click="updateDay(date.year, date.month, d, -1)" variant="danger" class="m-0" size="sm"><font-awesome-icon icon="caret-down" /></b-btn>
           </div>
         </div>
         <!-- offset days -->
@@ -83,23 +83,29 @@
         )
       },
       // update the status of a day to 1, 0 or -1
-      updateDay: function(day, status) {
-        // this.$firestore.days.doc(day['.key']).update({status: status})
-        this.$firestore.days.where("name", "==", day)
-          .get().then(function(querySnapshot) {
-              querySnapshot.forEach(function(doc) {
-                  // doc.data() is never undefined for query doc snapshots
-                  // console.log(doc)
-              })
+      updateDay: function(year, month, day, status) {
+        // build date format yyyy-mm-dd
+        var date = year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+        var self = this
+        // find existing records by date of date format above
+        this.$firestore.days.where("name", "==", date)
+          .get().then(function(result) {
+            if (result.empty) {
+              // record doesn't exist: add it
+              self.$firestore.days.add(
+                {
+                  name: date,
+                  status: status,
+                  timestamp: new Date()
+                }
+              )
+            } else {
+              // record exists: update its status
+              self.$firestore.days.doc(result.docs[0].id).update({status: status})
+            }
           })
           .catch(function(error) {
-            this.$firestore.days.add(
-              {
-                name: day,
-                status: status,
-                timestamp: new Date()
-              }
-            )
+            // an error occured. TODO: error handling
           })
       },
       deleteDay: function(day) {
