@@ -5,12 +5,12 @@
     </header>
     <section>
       <h2>{{ monthName(date.month) }} {{ date.year}}</h2>
-      <b-btn @click="previousMonth()" @keyup.left="previousMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-left" /></b-btn>
-      <b-btn @click="changeMonth(now.year, now.month)" variant="info" class="ml-2"><font-awesome-icon icon="dot-circle" /></b-btn>
-      <b-btn @click="nextMonth()" @keyup.right="nextMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-right" /></b-btn>
+      <button @click="previousMonth()" @keyup.left="previousMonth()"><font-awesome-icon icon="chevron-left" /></button>
+      <button @click="changeMonth(now.year, now.month)"><font-awesome-icon icon="undo-alt" /></button>
+      <button @click="nextMonth()" @keyup.right="nextMonth()"><font-awesome-icon icon="chevron-right" /></button>
       <div class="day-grid">
         <!-- day of week labels -->
-        <div v-for="l in 7" class="day label">{{ dayOfWeekName(l) }}</div>
+        <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
         <!-- offset days -->
         <div v-for="o in dayOfWeekOffset" class="day offset"></div>
         <!-- actual days -->
@@ -26,9 +26,9 @@
         >
           {{ d }}
           <div class="action">
-            <b-btn @click="updateDay(date.year, date.month, d, 1)" variant="success" class="m-0" size="sm"><font-awesome-icon icon="caret-up" /></b-btn>
-            <b-btn @click="updateDay(date.year, date.month, d, 0)" variant="default" class="m-0" size="sm"></b-btn>
-            <b-btn @click="updateDay(date.year, date.month, d, -1)" variant="danger" class="m-0" size="sm"><font-awesome-icon icon="caret-down" /></b-btn>
+            <button @click="updateDay(date.year, date.month, d, 1)"><font-awesome-icon icon="caret-up" /></button>
+            <button @click="updateDay(date.year, date.month, d, 0)"></button>
+            <button @click="updateDay(date.year, date.month, d, -1)"><font-awesome-icon icon="caret-down" /></button>
           </div>
         </div>
         <!-- offset days -->
@@ -166,37 +166,52 @@
 </script>
 
 <style>
+  body {
+    background-color: #3d444c; 
+    color: #7e8a9a;
+  }
+  h1, h2, h3 {
+    color: #eee;
+    font-weight: normal;
+  }
+  button {
+    border: none;
+    outline: none;
+    background: transparent;
+  }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     margin: 60px 0;
   }
   .day-grid {
     display: flex;
     flex-flow: column wrap;
     align-content: center;
-    height: calc(80px * 7 + 70px);
+    height: calc((80px + 20px) * 7);
   }
   .day-grid .day {
     width: 99px;
     height: 80px;
+    line-height: 80px;
+    font-size: 1.5em;
     padding: 5px;
     margin: 5px;
-    background: #ccc;
+    background: #4b535d;
     position: relative;
     overflow: hidden;
+    border-radius: 3px;
+    transition: all 0.2s;
   }
   .day-grid .day.label {
     background: none;
-    line-height: 80px;
   }
   .day-grid .day.offset {
     background: none;
   }
-  .day-grid .day.future {
+  .day-grid .day.today {
     background: #eee;
   }
   .day-grid .day.today .action,
@@ -204,10 +219,14 @@
     display: none;
   }
   .day-grid .day.success {
-    background: green;
+    color: white;
+    background-image: linear-gradient(to bottom right,#9aeab9 0,#78d19a 100%);
+    background-color: #9aeab9;
+    box-shadow: 0 8px 20px -8px #24292e;
   }
   .day-grid .day.fail {
-    background: red;
+    color: #24292e;
+    background: transparent;
   }
   .day-grid .day .action {
     display: flex;
