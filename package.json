@@ -33,7 +33,9 @@
       "eslint:recommended"
     ],
     "rules": {
-      "vue/html-self-closing": "off"
+      "vue/require-v-for-key": "off",
+      "vue/no-unused-vars": "warn",
+      "no-unused-vars": "warn"
     },
     "parserOptions": {
       "parser": "babel-eslint"
