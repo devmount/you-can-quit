@@ -18,6 +18,7 @@
           v-for="d in daysInMonth"
           class="day"
           :class="{ 
+            today: isToday(date.year, date.month, d),
             future: isFuture(date.year, date.month, d),
             success: currentDays[getDate(date.year, date.month, d)] == 1,
             fail: currentDays[getDate(date.year, date.month, d)] == -1
@@ -133,6 +134,10 @@
       isFuture: function(year, month, day) {
         return new Date(year, month, day) > new Date(this.now.year, this.now.month, this.now.day)
       },
+      // check if date is today
+      isToday: function(year, month, day) {
+        return year == this.now.year && month == this.now.month && day == this.now.day
+      },
     },
     computed: {
       // compute the number of days of the month currently displayed
@@ -194,6 +199,7 @@
   .day-grid .day.future {
     background: #eee;
   }
+  .day-grid .day.today .action,
   .day-grid .day.future .action {
     display: none;
   }
