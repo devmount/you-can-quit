@@ -4,10 +4,14 @@
       <h1>You can quit!</h1>
     </header>
     <section>
-      <h2>{{ monthName(date.month) }} {{ date.year}}</h2>
-      <button @click="previousMonth()" @keyup.left="previousMonth()"><font-awesome-icon icon="chevron-left" /></button>
-      <button @click="changeMonth(now.year, now.month)"><font-awesome-icon icon="undo-alt" /></button>
-      <button @click="nextMonth()" @keyup.right="nextMonth()"><font-awesome-icon icon="chevron-right" /></button>
+      <div class="navigation">
+        <h2>{{ monthName(date.month) }} {{ date.year}}</h2>
+        <div class="button-group">
+          <button @click="previousMonth()" @keyup.left="previousMonth()"><font-awesome-icon icon="chevron-left" /></button>
+          <button @click="changeMonth(now.year, now.month)"><font-awesome-icon icon="undo-alt" /></button>
+          <button @click="nextMonth()" @keyup.right="nextMonth()"><font-awesome-icon icon="chevron-right" /></button>
+        </div>
+      </div>
       <div class="day-grid">
         <!-- day of week labels -->
         <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
@@ -173,11 +177,26 @@
   h1, h2, h3 {
     color: #eee;
     font-weight: normal;
+    position: relative;
+  }
+  h1 {
+    margin-bottom: 2em;
+  }
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: -1em;
+    width: 10%;
+    height: 5px;
+    background: #9aeab9;
+    left: 50%;
+    transform: translateX(-50%);
   }
   button {
     border: none;
     outline: none;
     background: transparent;
+    cursor: pointer;
   }
   #app {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -185,6 +204,28 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     margin: 60px 0;
+  }
+  .navigation {
+    margin: 1em 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+  .navigation > * {
+    flex-basis: 50%;
+  }
+  .navigation h2 {
+    margin: 0;
+    padding: .3em 1em 0 0;
+    text-align: right;
+  }
+  .navigation .button-group {
+    text-align: left;
+  }
+  .navigation .button-group button {
+    color: #eee;
+    padding: .5em;
+    font-size: 1.5em;
   }
   .day-grid {
     display: flex;
