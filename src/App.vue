@@ -36,9 +36,9 @@
         >
           {{ d }}
           <div class="action">
-            <button @click="updateDay(date.year, date.month, d, 1)"><font-awesome-icon icon="caret-up" /></button>
+            <button @click="updateDay(date.year, date.month, d, 1)"><font-awesome-icon icon="chevron-up" /></button>
             <button @click="updateDay(date.year, date.month, d, 0)"></button>
-            <button @click="updateDay(date.year, date.month, d, -1)"><font-awesome-icon icon="caret-down" /></button>
+            <button @click="updateDay(date.year, date.month, d, -1)"><font-awesome-icon icon="chevron-down" /></button>
           </div>
         </div>
         <!-- offset days -->
