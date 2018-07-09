@@ -5,18 +5,6 @@
     </header>
     <section>
       <h2>{{ monthName(date.month) }} {{ date.year}}</h2>
-      <div>
-        <b-btn @click="addDay" variant="outline-info" class="m-1"><font-awesome-icon icon="plus" /></b-btn>
-      </div>
-      <!-- <ul class="dayList">
-        <li v-for="(day, index) in days" :key="index">
-          <b-alert :variant="states[day.status]" show>{{ day.name }}</b-alert>
-          <b-btn @click="updateDay(day, 1)" variant="success" class="m-0"><font-awesome-icon icon="circle" /></b-btn>
-          <b-btn @click="updateDay(day, 0)" variant="default" class="m-0"><font-awesome-icon icon="circle" /></b-btn>
-          <b-btn @click="updateDay(day, -1)" variant="danger" class="m-0"><font-awesome-icon icon="circle" /></b-btn>
-          <b-btn @click="deleteDay(day)" variant="danger" class="ml-2"><font-awesome-icon icon="times" /></b-btn>
-        </li>
-      </ul> -->
       <b-btn @click="previousMonth()" @keyup.left="previousMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-left" /></b-btn>
       <b-btn @click="changeMonth(now.year, now.month)" variant="info" class="ml-2"><font-awesome-icon icon="dot-circle" /></b-btn>
       <b-btn @click="nextMonth()" @keyup.right="nextMonth()" variant="info" class="ml-2"><font-awesome-icon icon="caret-right" /></b-btn>
@@ -26,7 +14,15 @@
         <!-- offset days -->
         <div v-for="o in dayOfWeekOffset" class="day offset"></div>
         <!-- actual days -->
-        <div v-for="d in daysInMonth" :key="d" class="day" :class="{ future: isFuture(date.year, date.month, d) }">
+        <div
+          v-for="d in daysInMonth"
+          class="day"
+          :class="{ 
+            future: isFuture(date.year, date.month, d),
+            success: currentDays[getDate(date.year, date.month, d)] == 1,
+            fail: currentDays[getDate(date.year, date.month, d)] == -1
+          }"
+        >
           {{ d }}
           <div class="action">
             <b-btn @click="updateDay(date.year, date.month, d, 1)" variant="success" class="m-0" size="sm"><font-awesome-icon icon="caret-up" /></b-btn>
@@ -46,15 +42,15 @@
 
   export default {
     name: 'app',
+    firestore() {
+      return {
+        days: db.collection('days'),
+      }
+    },
     data() {
+      // today
       var now = new Date()
       return {
-        days: [],
-        states: {
-          '1': 'success',
-          '0': 'default',
-          '-1': 'danger'
-        },
         date: {
           month: now.getMonth()+1,
           year: now.getFullYear()
@@ -67,25 +63,14 @@
         }
       }
     },
-    firestore() {
-      return {
-        days: db.collection('days'),
-      }
-    },
     methods: {
-      addDay: function() {
-        this.$firestore.days.add(
-          {
-            name: '2018-07-07',
-            status: 0,
-            timestamp: new Date()
-          }
-        )
+      getDate: function(year, month, day) {
+        return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
       },
       // update the status of a day to 1, 0 or -1
       updateDay: function(year, month, day, status) {
         // build date format yyyy-mm-dd
-        var date = year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+        var date = this.getDate(year, month, day)
         var self = this
         // find existing records by date of date format above
         this.$firestore.days.where("name", "==", date)
@@ -152,7 +137,7 @@
     computed: {
       // compute the number of days of the month currently displayed
       daysInMonth: function() {
-        return new Date(this.date.year, this.date.month-1, 0).getDate();
+        return new Date(this.date.year, this.date.month, 0).getDate();
       },
       // compute the offset of weekdays before actual days
       dayOfWeekOffset: function() {
@@ -163,6 +148,14 @@
         var offset = 36 - (this.daysInMonth + this.dayOfWeekOffset);
         return offset > 0 ? offset : 0;
       },
+      // prepare data in format: yyyy-mm-dd => status
+      currentDays: function() {
+        var currentDays = {}
+        this.days.forEach(function(day) {
+            currentDays[day.name] = day.status
+        })
+        return currentDays
+      }
     }
   }
 </script>
@@ -201,13 +194,22 @@
   .day-grid .day.future {
     background: #eee;
   }
+  .day-grid .day.future .action {
+    display: none;
+  }
+  .day-grid .day.success {
+    background: green;
+  }
+  .day-grid .day.fail {
+    background: red;
+  }
   .day-grid .day .action {
     display: flex;
     flex-flow: row nowrap;
     position: absolute;
     bottom: -28px;
     left: 0;
-    transition: all 0.3s;
+    transition: all 0.2s;
   }
   .day-grid .day:hover .action {
     bottom: 0;
