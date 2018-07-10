@@ -45,6 +45,7 @@
         </div>
         <!-- offset days -->
         <div v-for="o in fillOffset" class="day offset"></div>
+        <hello-world />
       </div>
     </section>
   </div>
@@ -52,6 +53,7 @@
 
 <script>
   import { db } from './firebase'
+  import HelloWorld from './components/HelloWorld.vue'
 
   export default {
     name: 'app',
@@ -59,6 +61,9 @@
       return {
         days: db.collection('days'),
       }
+    },
+    components: {
+      HelloWorld
     },
     data() {
       // today
