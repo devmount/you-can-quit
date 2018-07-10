@@ -37,7 +37,7 @@
           {{ d }}
           <div class="action">
             <button @click="updateDay(date.year, date.month, d, 1)"><font-awesome-icon icon="chevron-up" /></button>
-            <button @click="updateDay(date.year, date.month, d, 0)"></button>
+            <button @click="updateDay(date.year, date.month, d, 0)"><font-awesome-icon icon="undo-alt" /></button>
             <button @click="updateDay(date.year, date.month, d, -1)"><font-awesome-icon icon="chevron-down" /></button>
           </div>
         </div>
@@ -177,11 +177,18 @@
 
 <style>
   body {
-    background-color: #3d444c; 
-    color: #7e8a9a;
+    --c-text-normal: #7e8a9a;
+    --c-text-light: #eee;
+    --c-background: #3d444c;
+    --c-background-element: #4b535d;
+    --c-accent: #9aeab9;
+    --c-accent-variant: #78d19a;
+    --c-shadow: #24292e;
+    background-color: var(--c-background); 
+    color: var(--c-text-normal);
   }
   h1, h2, h3 {
-    color: #eee;
+    color: var(--c-text-light);
     font-weight: normal;
     position: relative;
   }
@@ -193,11 +200,12 @@
     position: absolute;
     bottom: -1em;
     width: 10%;
+    max-width: 120px;
     height: 5px;
-    background: #9aeab9;
+    background: var(--c-accent);
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 1px 10px -1px #24292e;
+    box-shadow: 0 1px 10px -1px var(--c-shadow);
   }
   button {
     border: none;
@@ -230,7 +238,7 @@
     text-align: left;
   }
   .navigation .button-group button {
-    color: #eee;
+    color: var(--c-text-light);
     padding: .5em;
     font-size: 1.5em;
   }
@@ -247,7 +255,7 @@
     font-size: 1.5em;
     padding: 5px;
     margin: 5px;
-    background: #4b535d;
+    background: var(--c-background-element);
     position: relative;
     overflow: hidden;
     border-radius: 3px;
@@ -260,7 +268,7 @@
     background: none;
   }
   .day-grid .day.today {
-    background: #eee;
+    background: var(--c-text-light);
   }
   .day-grid .day.today .action,
   .day-grid .day.future .action {
@@ -268,12 +276,12 @@
   }
   .day-grid .day.success {
     color: white;
-    background-image: linear-gradient(to bottom right,#9aeab9 0,#78d19a 100%);
-    background-color: #9aeab9;
-    box-shadow: 0 8px 20px -8px #24292e;
+    background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
+    background-color: var(--c-accent);
+    box-shadow: 0 8px 20px -8px var(--c-shadow);
   }
   .day-grid .day.fail {
-    color: #24292e;
+    color: var(--c-shadow);
     background: transparent;
   }
   .day-grid .day .action {
