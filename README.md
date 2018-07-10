@@ -43,7 +43,7 @@ This web app is based on Vue.js and Firebase/Firestore and is _currently in deve
     yarn serve
     ```
 
-8. ... or build production
+8. ... or create a production build
 
     ```bash
     yarn build
