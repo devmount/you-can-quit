@@ -105,7 +105,7 @@ export default {
 }
 .day-grid .day .action {
   display: flex;
-  width: 109px;
+  width: 110px;
   flex-flow: row nowrap;
   justify-content: center;
   position: absolute;
