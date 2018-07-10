@@ -27,18 +27,20 @@
         <div
           v-for="d in daysInMonth"
           class="day"
-          :class="{ 
+          :class="{
+            past: isPast(date.year, date.month, d),
             today: isToday(date.year, date.month, d),
             future: isFuture(date.year, date.month, d),
             success: currentDays[getDate(date.year, date.month, d)] == 1,
             fail: currentDays[getDate(date.year, date.month, d)] == -1
           }"
+          :title="isToday(date.year, date.month, d) ? 'Today' : ''"
         >
           {{ d }}
-          <div class="action">
-            <button @click="updateDay(date.year, date.month, d, 1)"><font-awesome-icon icon="chevron-up" /></button>
-            <button @click="updateDay(date.year, date.month, d, 0)"><font-awesome-icon icon="undo-alt" /></button>
-            <button @click="updateDay(date.year, date.month, d, -1)"><font-awesome-icon icon="chevron-down" /></button>
+          <div v-if="isPast(date.year, date.month, d)" class="action">
+            <button @click="updateDay(date.year, date.month, d, 1)" class="success" title="Mark successful"><font-awesome-icon icon="chevron-up" /></button>
+            <button @click="updateDay(date.year, date.month, d, 0)" title="Mark undecided"><font-awesome-icon icon="undo-alt" /></button>
+            <button @click="updateDay(date.year, date.month, d, -1)" class="fail" title="Mark failed"><font-awesome-icon icon="chevron-down" /></button>
           </div>
         </div>
         <!-- offset days -->
@@ -148,6 +150,10 @@
       isToday: function(year, month, day) {
         return year == this.now.year && month == this.now.month && day == this.now.day
       },
+      // check if date is past
+      isPast: function(year, month, day) {
+        return new Date(year, month, day) < new Date(this.now.year, this.now.month, this.now.day)
+      },
     },
     computed: {
       // compute the number of days of the month currently displayed
@@ -209,6 +215,7 @@
   }
   button {
     border: none;
+    border-radius: 0;
     outline: none;
     background: transparent;
     cursor: pointer;
@@ -270,10 +277,6 @@
   .day-grid .day.today {
     background: var(--c-text-light);
   }
-  .day-grid .day.today .action,
-  .day-grid .day.future .action {
-    display: none;
-  }
   .day-grid .day.success {
     color: white;
     background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
@@ -286,18 +289,32 @@
   }
   .day-grid .day .action {
     display: flex;
+    width: 109px;
     flex-flow: row nowrap;
+    justify-content: center;
     position: absolute;
-    bottom: -28px;
+    bottom: -30px;
     left: 0;
     transition: all 0.2s;
   }
-  .day-grid .day:hover .action {
+  .day-grid .day.past:hover {
+    line-height: 50px;
+  }
+  .day-grid .day.past:hover .action {
     bottom: 0;
   }
-  .day-grid .day .action .btn {
-    border-radius: 0;
-    width: 33px;
+  .day-grid .day .action button {
     text-align: center;
+    width: 33.3%;
+    height: 30px;
+    color: var(--c-text-normal);
+  }
+  .day-grid .day .action button.success {
+    color: white;
+    background: var(--c-accent-variant);
+  }
+  .day-grid .day .action button.fail {
+    color: var(--c-shadow);
+    background: var(--c-background);
   }
 </style>
