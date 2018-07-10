@@ -4,49 +4,30 @@
     <h1>You can quit!</h1>
   </header>
   <section>
-    <Navigation
+    <month-navigation
       :month="monthName(date.month)"
       :year="date.year"
       @previous="previousMonth()"
       @change="changeMonth(now.year, now.month)"
       @next="nextMonth()"
     />
-    <div class="day-grid">
-      <!-- day of week labels -->
-      <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
-      <!-- offset days -->
-      <div v-for="o in dayOfWeekOffset" class="day offset"></div>
-      <!-- actual days -->
-      <div
-        v-for="d in daysInMonth"
-        class="day"
-        :class="{
-          past: isPast(date.year, date.month, d),
-          today: isToday(date.year, date.month, d),
-          future: isFuture(date.year, date.month, d),
-          success: currentDays[getDate(date.year, date.month, d)] == 1,
-          fail: currentDays[getDate(date.year, date.month, d)] == -1
-        }"
-        :title="isToday(date.year, date.month, d) ? 'Today' : ''"
-      >
-        {{ d }}
-        <div v-if="isPast(date.year, date.month, d)" class="action">
-          <button @click="updateDay(date.year, date.month, d, 1)" class="success" title="Mark successful"><font-awesome-icon icon="chevron-up" /></button>
-          <button @click="updateDay(date.year, date.month, d, 0)" title="Mark undecided"><font-awesome-icon icon="undo-alt" /></button>
-          <button @click="updateDay(date.year, date.month, d, -1)" class="fail" title="Mark failed"><font-awesome-icon icon="chevron-down" /></button>
-        </div>
-      </div>
-      <!-- offset days -->
-      <div v-for="o in fillOffset" class="day offset"></div>
-    </div>
-    <hello-world msg="test" />
+    <month
+      :day-of-week-offset="dayOfWeekOffset"
+      :days-in-month="daysInMonth"
+      :fill-offset="fillOffset"
+      :current-days="currentDays"
+      :now="now"
+      :date="date"
+      @update="updateDay"
+    />
   </section>
 </div>
 </template>
 
 <script>
 import { db } from './firebase'
-import Navigation from './components/Navigation.vue'
+import Month from './components/Month.vue'
+import MonthNavigation from './components/MonthNavigation.vue'
 
 export default {
   name: 'app',
@@ -56,7 +37,8 @@ export default {
     }
   },
   components: {
-    Navigation
+    Month,
+    MonthNavigation
   },
   data() {
     // today
@@ -75,6 +57,7 @@ export default {
     }
   },
   methods: {
+    // build date format yyyy-mm-dd
     getDate: function(year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
@@ -104,16 +87,9 @@ export default {
           // an error occured. TODO: error handling
         })
     },
-    deleteDay: function(day) {
-      this.$firestore.days.doc(day['.key']).delete()
-    },
     // return the month name
     monthName: function(monthIndex) {
       return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
-    },
-    // return the day of week name
-    dayOfWeekName: function(dayIndex) {
-      return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
     },
     // change month to display
     changeMonth: function(year, month) {
@@ -139,18 +115,6 @@ export default {
     // go to previous month
     previousMonth: function() {
       this.changeMonth(this.date.year, this.date.month-1)
-    },
-    // check if date is a future date
-    isFuture: function(year, month, day) {
-      return new Date(year, month, day) > new Date(this.now.year, this.now.month, this.now.day)
-    },
-    // check if date is today
-    isToday: function(year, month, day) {
-      return year == this.now.year && month == this.now.month && day == this.now.day
-    },
-    // check if date is past
-    isPast: function(year, month, day) {
-      return new Date(year, month, day) < new Date(this.now.year, this.now.month, this.now.day)
     },
   },
   computed: {
@@ -224,73 +188,5 @@ button {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 60px 0;
-}
-.day-grid {
-  display: flex;
-  flex-flow: column wrap;
-  align-content: center;
-  height: calc((80px + 20px) * 7);
-}
-.day-grid .day {
-  width: 99px;
-  height: 80px;
-  line-height: 80px;
-  font-size: 1.5em;
-  padding: 5px;
-  margin: 5px;
-  background: var(--c-background-element);
-  position: relative;
-  overflow: hidden;
-  border-radius: 3px;
-  transition: all 0.2s;
-}
-.day-grid .day.label {
-  background: none;
-}
-.day-grid .day.offset {
-  background: none;
-}
-.day-grid .day.today {
-  background: var(--c-text-light);
-}
-.day-grid .day.success {
-  color: white;
-  background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
-  background-color: var(--c-accent);
-  box-shadow: 0 8px 20px -8px var(--c-shadow);
-}
-.day-grid .day.fail {
-  color: var(--c-shadow);
-  background: transparent;
-}
-.day-grid .day .action {
-  display: flex;
-  width: 109px;
-  flex-flow: row nowrap;
-  justify-content: center;
-  position: absolute;
-  bottom: -30px;
-  left: 0;
-  transition: all 0.2s;
-}
-.day-grid .day.past:hover {
-  line-height: 50px;
-}
-.day-grid .day.past:hover .action {
-  bottom: 0;
-}
-.day-grid .day .action button {
-  text-align: center;
-  width: 33.3%;
-  height: 30px;
-  color: var(--c-text-normal);
-}
-.day-grid .day .action button.success {
-  color: white;
-  background: var(--c-accent-variant);
-}
-.day-grid .day .action button.fail {
-  color: var(--c-shadow);
-  background: var(--c-background);
 }
 </style>
