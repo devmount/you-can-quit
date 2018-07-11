@@ -1,5 +1,5 @@
 <template>
-<div class="day-grid">
+<div class="month-day-grid">
   <!-- day of week labels -->
   <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
@@ -65,13 +65,13 @@ export default {
 </script>
 
 <style>
-.day-grid {
+.month-day-grid {
   display: flex;
   flex-flow: column wrap;
   align-content: center;
   height: calc((80px + 20px) * 7);
 }
-.day-grid .day {
+.month-day-grid .day {
   width: 99px;
   height: 80px;
   line-height: 80px;
@@ -84,26 +84,24 @@ export default {
   border-radius: 3px;
   transition: all 0.2s;
 }
-.day-grid .day.label {
+.month-day-grid .day.label,
+.month-day-grid .day.offset {
   background: none;
 }
-.day-grid .day.offset {
-  background: none;
-}
-.day-grid .day.today {
+.month-day-grid .day.today {
   background: var(--c-text-light);
 }
-.day-grid .day.success {
+.month-day-grid .day.success {
   color: white;
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
   background-color: var(--c-accent);
   box-shadow: 0 8px 20px -8px var(--c-shadow);
 }
-.day-grid .day.fail {
+.month-day-grid .day.fail {
   color: var(--c-shadow);
   background: transparent;
 }
-.day-grid .day .action {
+.month-day-grid .day .action {
   display: flex;
   width: 110px;
   flex-flow: row nowrap;
@@ -113,23 +111,23 @@ export default {
   left: 0;
   transition: all 0.2s;
 }
-.day-grid .day.past:hover {
+.month-day-grid .day.past:hover {
   line-height: 50px;
 }
-.day-grid .day.past:hover .action {
+.month-day-grid .day.past:hover .action {
   bottom: 0;
 }
-.day-grid .day .action button {
+.month-day-grid .day .action button {
   text-align: center;
   width: 33.3%;
   height: 30px;
   color: var(--c-text-normal);
 }
-.day-grid .day .action button.success {
+.month-day-grid .day .action button.success {
   color: white;
   background: var(--c-accent-variant);
 }
-.day-grid .day .action button.fail {
+.month-day-grid .day .action button.fail {
   color: var(--c-shadow);
   background: var(--c-background);
 }

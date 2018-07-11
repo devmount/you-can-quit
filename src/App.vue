@@ -20,6 +20,9 @@
       :date="date"
       @update="updateDay"
     />
+    <year
+      :year="date.year"
+    />
   </section>
 </div>
 </template>
