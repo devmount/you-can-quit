@@ -12,7 +12,7 @@
         v-for="(d,i) in daysInMonth(m)"
         class="day"
         :class="{
-          start: i == 0,
+          today: isToday(year, m, d),
           success: statusData[getDate(year, m, d)] == 1,
           fail: statusData[getDate(year, m, d)] == -1
         }"
@@ -29,6 +29,7 @@ export default {
   props: {
     year: Number,
     statusData: Object,
+    now: Object,
   },
   methods: {
     // build date format yyyy-mm-dd
@@ -46,6 +47,10 @@ export default {
     // return the day of week name
     dayOfWeekName: function(dayIndex) {
       return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
+    },
+    // check if date is today
+    isToday: function(year, month, day) {
+      return year == this.now.year && month == this.now.month && day == this.now.day
     },
   },
   computed: {
@@ -76,6 +81,7 @@ export default {
   position: relative;
   border-radius: 2px;
   transition: all 0.2s;
+  cursor: default;
 }
 .year-day-grid .day.label{
   margin-right: 10px;
@@ -83,6 +89,9 @@ export default {
 }
 .year-day-grid .day.offset {
   background: none;
+}
+.year-day-grid .day.today {
+  background: var(--c-text-light);
 }
 .year-day-grid .day.success {
   color: white;

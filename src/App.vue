@@ -23,6 +23,7 @@
     <year
       :year="date.year"
       :status-data="statusData"
+      :now="now"
     />
   </section>
 </div>

@@ -83,6 +83,7 @@ export default {
   overflow: hidden;
   border-radius: 3px;
   transition: all 0.2s;
+  cursor: default;
 }
 .month-day-grid .day.label,
 .month-day-grid .day.offset {
