@@ -13,6 +13,7 @@
         class="day"
         :class="{
           today: isToday(date.year, m, d),
+          tomonth: m == date.month,
           success: statusData[getDate(date.year, m, d)] == 1,
           fail: statusData[getDate(date.year, m, d)] == -1
         }"
@@ -93,6 +94,9 @@ export default {
 }
 .year-day-grid .day.offset {
   background: none;
+}
+.year-day-grid .day.tomonth {
+  background: var(--c-background-element-variant);
 }
 .year-day-grid .day.today {
   background: var(--c-text-light);
