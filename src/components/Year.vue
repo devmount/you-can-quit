@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h2>{{ year }}</h2>
+  <h2>{{ date.year }}</h2>
   <div class="year-day-grid">
     <!-- day of week labels -->
     <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
@@ -12,12 +12,16 @@
         v-for="(d,i) in daysInMonth(m)"
         class="day"
         :class="{
-          today: isToday(year, m, d),
-          success: statusData[getDate(year, m, d)] == 1,
-          fail: statusData[getDate(year, m, d)] == -1
+          today: isToday(date.year, m, d),
+          success: statusData[getDate(date.year, m, d)] == 1,
+          fail: statusData[getDate(date.year, m, d)] == -1
         }"
+        :title="
+          (isToday(date.year, m, d) ? 'Today' : '') + 
+          (i == 0 ? monthName(m) : '')
+        "
       >
-        <span v-if="i == 0">{{ monthInitial(m) }}</span>
+        <span v-if="i == 0">{{ monthName(m).slice(0, 1) }}</span>
       </div>
     </template>
   </div>
@@ -27,9 +31,9 @@
 <script>
 export default {
   props: {
-    year: Number,
     statusData: Object,
     now: Object,
+    date: Object,
   },
   methods: {
     // build date format yyyy-mm-dd
@@ -38,11 +42,11 @@ export default {
     },
     // compute the number of days of the given month
     daysInMonth: function(month) {
-      return new Date(this.year, month, 0).getDate();
+      return new Date(this.date.year, month, 0).getDate();
     },
     // return the month initial
-    monthInitial: function(monthIndex) {
-      return ['J','F','M','A','M','J','J','A','S','O','N','D'][monthIndex-1];
+    monthName: function(monthIndex) {
+      return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
     },
     // return the day of week name
     dayOfWeekName: function(dayIndex) {
@@ -56,7 +60,7 @@ export default {
   computed: {
     // compute the offset of weekdays before actual days
     dayOfWeekOffset: function() {
-      return new Date(this.year, 0, 1).getDay()
+      return new Date(this.date.year, 0, 1).getDay()
     },
   }
 }

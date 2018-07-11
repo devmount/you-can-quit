@@ -21,9 +21,9 @@
       @update="updateDay"
     />
     <year
-      :year="date.year"
       :status-data="statusData"
       :now="now"
+      :date="date"
     />
   </section>
 </div>
@@ -156,6 +156,7 @@ body {
   --c-text-light: #eee;
   --c-background: #3d444c;
   --c-background-element: #4b535d;
+  --c-background-element-variant: #5f6975;
   --c-accent: #9aeab9;
   --c-accent-variant: #78d19a;
   --c-shadow: #24292e;
