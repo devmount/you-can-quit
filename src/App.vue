@@ -20,6 +20,8 @@
       :date="date"
       @update="updateDay"
     />
+  </section>
+  <section>
     <year
       :status-data="statusData"
       :now="now"
@@ -156,7 +158,7 @@ body {
   --c-text-light: #eee;
   --c-background: #3d444c;
   --c-background-element: #4b535d;
-  --c-background-element-variant: #5f6975;
+  --c-background-element-variant: #57606b;
   --c-accent: #9aeab9;
   --c-accent-variant: #78d19a;
   --c-shadow: #24292e;
@@ -196,5 +198,10 @@ button {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 60px 0;
+}
+#app > section {
+  width: 1200px;
+  margin: auto;
+  padding: .5em 0 1.5em 0;
 }
 </style>
