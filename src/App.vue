@@ -3,23 +3,28 @@
   <header>
     <h1>You can quit!</h1>
   </header>
-  <section>
-    <month-navigation
-      :month="monthName(date.month)"
-      :year="date.year"
-      @previous="previousMonth()"
-      @change="changeMonth(now.year, now.month)"
-      @next="nextMonth()"
-    />
-    <month
-      :day-of-week-offset="dayOfWeekOffset"
-      :days-in-month="daysInMonth"
-      :fill-offset="fillOffset"
-      :status-data="statusData"
-      :now="now"
-      :date="date"
-      @update="updateDay"
-    />
+  <section class="col-2">
+    <div class="month-view">
+      <month-navigation
+        :month="monthName(date.month)"
+        :year="date.year"
+        @previous="previousMonth()"
+        @change="changeMonth(now.year, now.month)"
+        @next="nextMonth()"
+      />
+      <month
+        :day-of-week-offset="dayOfWeekOffset"
+        :days-in-month="daysInMonth"
+        :fill-offset="fillOffset"
+        :status-data="statusData"
+        :now="now"
+        :date="date"
+        @update="updateDay"
+      />
+    </div>
+    <div class="info-view">
+      <Description />
+    </div>
   </section>
   <section>
     <year
@@ -36,6 +41,7 @@ import { db } from './firebase'
 import Month from './components/Month.vue'
 import MonthNavigation from './components/MonthNavigation.vue'
 import Year from './components/Year.vue'
+import Description from './components/Description.vue'
 
 export default {
   name: 'app',
@@ -47,7 +53,8 @@ export default {
   components: {
     Month,
     MonthNavigation,
-    Year
+    Year,
+    Description
   },
   data() {
     // today
@@ -203,5 +210,14 @@ button {
   width: 1200px;
   margin: auto;
   padding: .5em 0 1.5em 0;
+}
+.col-2 {
+  display: flex;
+}
+.col-2 > .month-view {
+  width: 800px;
+}
+.col-2 > .info-view {
+  width: 400px;
 }
 </style>
