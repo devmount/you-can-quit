@@ -22,6 +22,7 @@
     />
     <year
       :year="date.year"
+      :status-data="statusData"
     />
   </section>
 </div>

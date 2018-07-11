@@ -8,7 +8,15 @@
     <div v-for="o in dayOfWeekOffset" class="day offset"></div>
     <!-- days in current year with month initials -->
     <template v-for="m in 12">
-      <div v-for="(d,i) in daysInMonth(m)" class="day" :class="{start: i == 0 }">
+      <div
+        v-for="(d,i) in daysInMonth(m)"
+        class="day"
+        :class="{
+          start: i == 0,
+          success: statusData[getDate(year, m, d)] == 1,
+          fail: statusData[getDate(year, m, d)] == -1
+        }"
+      >
         <span v-if="i == 0">{{ monthInitial(m) }}</span>
       </div>
     </template>
@@ -19,9 +27,14 @@
 <script>
 export default {
   props: {
-    year: Number
+    year: Number,
+    statusData: Object,
   },
   methods: {
+    // build date format yyyy-mm-dd
+    getDate: function(year, month, day) {
+      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+    },
     // compute the number of days of the given month
     daysInMonth: function(month) {
       return new Date(this.year, month, 0).getDate();
@@ -70,5 +83,15 @@ export default {
 }
 .year-day-grid .day.offset {
   background: none;
+}
+.year-day-grid .day.success {
+  color: white;
+  background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
+  background-color: var(--c-accent);
+  box-shadow: 0 8px 20px -8px var(--c-shadow);
+}
+.year-day-grid .day.fail {
+  color: var(--c-shadow);
+  background: transparent;
 }
 </style>
