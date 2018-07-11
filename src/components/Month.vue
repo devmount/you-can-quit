@@ -12,8 +12,8 @@
       past: isPast(date.year, date.month, d),
       today: isToday(date.year, date.month, d),
       future: isFuture(date.year, date.month, d),
-      success: currentDays[getDate(date.year, date.month, d)] == 1,
-      fail: currentDays[getDate(date.year, date.month, d)] == -1
+      success: statusData[getDate(date.year, date.month, d)] == 1,
+      fail: statusData[getDate(date.year, date.month, d)] == -1
     }"
     :title="isToday(date.year, date.month, d) ? 'Today' : ''"
   >
@@ -35,7 +35,7 @@ export default {
     dayOfWeekOffset: Number,
     daysInMonth: Number,
     fillOffset: Number,
-    currentDays: Object,
+    statusData: Object,
     now: Object,
     date: Object,
   },

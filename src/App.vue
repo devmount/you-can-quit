@@ -15,7 +15,7 @@
       :day-of-week-offset="dayOfWeekOffset"
       :days-in-month="daysInMonth"
       :fill-offset="fillOffset"
-      :current-days="currentDays"
+      :status-data="statusData"
       :now="now"
       :date="date"
       @update="updateDay"
@@ -137,12 +137,12 @@ export default {
       return offset > 0 ? offset : 0;
     },
     // prepare data in format: yyyy-mm-dd => status
-    currentDays: function() {
-      var currentDays = {}
+    statusData: function() {
+      var statusData = {}
       this.days.forEach(function(day) {
-          currentDays[day.name] = day.status
+          statusData[day.name] = day.status
       })
-      return currentDays
+      return statusData
     }
   }
 }
