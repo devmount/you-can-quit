@@ -72,7 +72,7 @@ export default {
   height: calc((80px + 20px) * 7);
 }
 .month-day-grid .day {
-  width: 99px;
+  width: 90px;
   height: 80px;
   line-height: 80px;
   font-size: 1.5em;
@@ -104,7 +104,7 @@ export default {
 }
 .month-day-grid .day .action {
   display: flex;
-  width: 110px;
+  width: 101px;
   flex-flow: row nowrap;
   justify-content: center;
   position: absolute;
