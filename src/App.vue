@@ -23,7 +23,7 @@
       />
     </div>
     <div class="info-view">
-      <Description />
+      <Info />
     </div>
   </section>
   <section>
@@ -41,7 +41,7 @@ import { db } from './firebase'
 import Month from './components/Month.vue'
 import MonthNavigation from './components/MonthNavigation.vue'
 import Year from './components/Year.vue'
-import Description from './components/Description.vue'
+import Info from './components/Info.vue'
 
 export default {
   name: 'app',
@@ -54,7 +54,7 @@ export default {
     Month,
     MonthNavigation,
     Year,
-    Description
+    Info
   },
   data() {
     // today
