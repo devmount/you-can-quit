@@ -176,6 +176,7 @@ h1, h2, h3 {
   color: var(--c-text-light);
   font-weight: normal;
   position: relative;
+  cursor: default;
 }
 h1 {
   margin-bottom: 2em;

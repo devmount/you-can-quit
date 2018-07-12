@@ -22,6 +22,7 @@ export default {
   padding-top: 17px;
   display: flex;
   flex-flow: row wrap;
+  cursor: default;
 }
 .legend > div {
   position: relative;
