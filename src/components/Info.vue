@@ -1,7 +1,10 @@
 <template>
 <div class="info">
   <Legend />
-  <Stats />
+  <Stats
+    :status-data="statusData"
+    :now="now"
+  />
 </div>
 </template>
 
@@ -14,7 +17,10 @@ export default {
     Legend,
     Stats
   },
-  props: {}
+  props: {
+    statusData: Object,
+    now: Object
+  }
 }
 </script>
 

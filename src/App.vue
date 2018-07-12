@@ -23,7 +23,10 @@
       />
     </div>
     <div class="info-view">
-      <Info />
+      <Info
+        :status-data="statusData"
+        :now="now"
+      />
     </div>
   </section>
   <section>
