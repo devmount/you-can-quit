@@ -11,7 +11,6 @@
 export default {
   props: {
     statusData: Object,
-    now: Object
   },
   methods: {
     // build date format yyyy-mm-dd

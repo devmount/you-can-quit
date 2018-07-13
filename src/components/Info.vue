@@ -3,7 +3,6 @@
   <Legend />
   <Stats
     :status-data="statusData"
-    :now="now"
   />
 </div>
 </template>
@@ -19,7 +18,6 @@ export default {
   },
   props: {
     statusData: Object,
-    now: Object
   }
 }
 </script>

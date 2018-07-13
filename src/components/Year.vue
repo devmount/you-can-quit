@@ -33,8 +33,18 @@
 export default {
   props: {
     statusData: Object,
-    now: Object,
     date: Object,
+  },
+  data() {
+    // today
+    var now = new Date()
+    return {
+      now: {
+        day: now.getDate(),
+        month: now.getMonth()+1,
+        year: now.getFullYear()
+      }
+    }
   },
   methods: {
     // build date format yyyy-mm-dd

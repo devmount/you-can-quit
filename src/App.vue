@@ -17,7 +17,6 @@
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
         :status-data="statusData"
-        :now="now"
         :date="date"
         @update="updateDay"
       />
@@ -25,14 +24,12 @@
     <div class="info-view">
       <Info
         :status-data="statusData"
-        :now="now"
       />
     </div>
   </section>
   <section>
     <year
       :status-data="statusData"
-      :now="now"
       :date="date"
     />
   </section>
