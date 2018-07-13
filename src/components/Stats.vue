@@ -2,8 +2,27 @@
 <div class="container">
   <h2>Stats</h2>
   <div class="stats">
-    Current streak: {{ currentStreak }}<br>
-    Longest streak: {{ longestStreak }}
+    <div class="box">
+      <div class="title">Current streak</div>
+      <div class="data" :class="{ zero: currentStreak == 0 }">
+        <span>{{ currentStreak }}</span> days
+        <font-awesome-icon icon="angle-up" class="icon" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="title">Longest streak</div>
+      <div class="data" :class="{ zero: longestStreak == 0 }">
+        <span>{{ longestStreak }}</span> days
+        <font-awesome-icon icon="angle-double-up" class="icon" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="title">Successful</div>
+      <div class="data" :class="{ zero: successfulDays == 0 }">
+        <span>{{ successfulDays }}</span> days
+        <font-awesome-icon icon="check" class="icon" />
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -24,8 +43,8 @@ export default {
     minDate () {
       var keys = Object.keys(this.statusData)
       if (typeof keys !== 'undefined' && keys.length > 0) {
-          return keys.reduce(function (p, v) {
-            var pd = new Date(p), vd = new Date(v)
+        return keys.reduce(function (p, v) {
+          var pd = new Date(p), vd = new Date(v)
           return ( pd < vd ? pd : vd );
         });
       }
@@ -58,11 +77,51 @@ export default {
         }
       }
       return max
+    },
+    // get total number of successful days
+    successfulDays () {
+      return Object.values(this.statusData).filter(value => value == 1).length
     }
   }
 }
 </script>
 
 <style>
-
+.stats {
+  display: flex;
+  flex-flow: row wrap;
+  cursor: default;
+}
+.stats .box {
+  width: 33%;
+}
+.stats .box .data {
+  position: relative;
+  overflow: hidden;
+  margin: 10px 5px;
+  padding: 5px 0;
+  color: white;
+  background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
+  background-color: var(--c-accent);
+  box-shadow: 0 8px 20px -8px var(--c-shadow);
+  transition: all 0.2s;
+}
+.stats .box .data.zero {
+  color: var(--c-text-normal);
+  background: var(--c-background-element);
+}
+.stats .box .data > span {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.stats .box .data > .icon {
+  position: absolute;
+  right: -10px;
+  bottom: -15px;
+  color: #ffffff44;
+  font-size: 4em;
+}
+.stats .box .data.zero > .icon {
+  color: #ffffff11;
+}
 </style>

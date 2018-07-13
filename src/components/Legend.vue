@@ -48,7 +48,7 @@ export default {
 }
 .legend > div.failed::before {
   box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 1px solid #00000022;
   background: transparent;
 }
 .legend > div.today::before {
