@@ -6,9 +6,39 @@ import VueFirestore from 'vue-firestore'
 Vue.use(VueFirestore)
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faPlus, faCircle, faChevronRight, faChevronUp, faChevronLeft, faChevronDown, faDotCircle, faUndoAlt, faAngleUp, faAngleDoubleUp, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faTimes,
+  faPlus,
+  faCircle,
+  faChevronRight,
+  faChevronUp,
+  faChevronLeft,
+  faChevronDown,
+  faDotCircle,
+  faUndoAlt,
+  faAngleUp,
+  faAngleDoubleUp,
+  faCheck,
+  faSignOutAlt,
+  faEye
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faTimes, faPlus, faCircle, faChevronRight, faChevronUp, faChevronLeft, faChevronDown, faDotCircle, faUndoAlt, faAngleUp, faAngleDoubleUp, faCheck)
+library.add(
+  faTimes,
+  faPlus,
+  faCircle,
+  faChevronRight,
+  faChevronUp,
+  faChevronLeft,
+  faChevronDown,
+  faDotCircle,
+  faUndoAlt,
+  faAngleUp,
+  faAngleDoubleUp,
+  faCheck,
+  faSignOutAlt,
+  faEye
+)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey
 Vue.use(require('vue-shortkey'))

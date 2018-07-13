@@ -2,6 +2,14 @@
 <div class="container">
   <h2>Achievements</h2>
   <div class="achievements">
+    <div
+      v-for="a in achievements"
+      class="item"
+      :class="{ active: a.count > 0 }"
+      :title="a.title"
+    >
+      <font-awesome-icon :icon="a.icon" class="icon" />
+    </div>
   </div>
 </div>
 </template>
@@ -10,6 +18,24 @@
 export default {
   props: {
     statusData: Object,
+  },
+  data () {
+    return {
+      achievements: {
+        firstday: {
+          title: 'The Beginning',
+          description: 'Mark the first day successful',
+          icon: 'sign-out-alt',
+          count: 0
+        },
+        weekly: {
+          title: '7 in a row',
+          description: '7 successful days in a row',
+          icon: 'eye',
+          count: 0
+        },
+      }
+    }
   },
   methods: {
     // build date format yyyy-mm-dd
@@ -33,12 +59,27 @@ export default {
 </script>
 
 <style>
-.stats {
+.achievements {
   display: flex;
   flex-flow: row wrap;
   cursor: default;
 }
-.stats .item {
-  width: 33%;
+.achievements .item {
+  width: 20%;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 5px;
+  padding: 5px 0;
+  font-size: 2em;
+  color: white;
+  color: var(--c-text-normal);
+  background: var(--c-background-element);
+  box-shadow: 0 8px 20px -8px var(--c-shadow);
+  transition: all 0.2s;
+}
+.achievements .item.active {
+  color: white;
+  background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
+  background-color: var(--c-accent);
 }
 </style>
