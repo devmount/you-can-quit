@@ -35,7 +35,7 @@ export default {
     statusData: Object,
     date: Object,
   },
-  data() {
+  data () {
     // today
     var now = new Date()
     return {
@@ -48,29 +48,29 @@ export default {
   },
   methods: {
     // build date format yyyy-mm-dd
-    getDate: function(year, month, day) {
+    getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
     // compute the number of days of the given month
-    daysInMonth: function(month) {
+    daysInMonth (month) {
       return new Date(this.date.year, month, 0).getDate();
     },
     // return the month initial
-    monthName: function(monthIndex) {
+    monthName (monthIndex) {
       return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
     },
     // return the day of week name
-    dayOfWeekName: function(dayIndex) {
+    dayOfWeekName (dayIndex) {
       return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
     },
     // check if date is today
-    isToday: function(year, month, day) {
+    isToday (year, month, day) {
       return year == this.now.year && month == this.now.month && day == this.now.day
     },
   },
   computed: {
     // compute the offset of weekdays before actual days
-    dayOfWeekOffset: function() {
+    dayOfWeekOffset () {
       return new Date(this.date.year, 0, 1).getDay()
     },
   }

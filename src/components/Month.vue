@@ -38,7 +38,7 @@ export default {
     statusData: Object,
     date: Object,
   },
-  data() {
+  data () {
     // today
     var now = new Date()
     return {
@@ -51,23 +51,23 @@ export default {
   },
   methods: {
     // build date format yyyy-mm-dd
-    getDate: function(year, month, day) {
+    getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
     // return the day of week name
-    dayOfWeekName: function(dayIndex) {
+    dayOfWeekName (dayIndex) {
       return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
     },
     // check if date is a future date
-    isFuture: function(year, month, day) {
+    isFuture (year, month, day) {
       return new Date(year, month, day) > new Date(this.now.year, this.now.month, this.now.day)
     },
     // check if date is today
-    isToday: function(year, month, day) {
+    isToday (year, month, day) {
       return year == this.now.year && month == this.now.month && day == this.now.day
     },
     // check if date is past
-    isPast: function(year, month, day) {
+    isPast (year, month, day) {
       return new Date(year, month, day) < new Date(this.now.year, this.now.month, this.now.day)
     },
   }

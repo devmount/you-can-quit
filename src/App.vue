@@ -45,7 +45,7 @@ import Info from './components/Info.vue'
 
 export default {
   name: 'app',
-  firestore() {
+  firestore () {
     return {
       days: db.collection('days'),
     }
@@ -56,7 +56,7 @@ export default {
     Year,
     Info
   },
-  data() {
+  data () {
     // today
     var now = new Date()
     return {
@@ -74,11 +74,11 @@ export default {
   },
   methods: {
     // build date format yyyy-mm-dd
-    getDate: function(year, month, day) {
+    getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
     // update the status of a day to 1, 0 or -1
-    updateDay: function(year, month, day, status) {
+    updateDay (year, month, day, status) {
       // build date format yyyy-mm-dd
       var date = this.getDate(year, month, day)
       var self = this
@@ -104,11 +104,11 @@ export default {
         })
     },
     // return the month name
-    monthName: function(monthIndex) {
+    monthName (monthIndex) {
       return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
     },
     // change month to display
-    changeMonth: function(year, month) {
+    changeMonth (year, month) {
       if (month > 12) {
         // first month of next year
         this.date.year = year+1
@@ -125,30 +125,30 @@ export default {
       }
     },
     // go to next month
-    nextMonth: function() {
+    nextMonth () {
       this.changeMonth(this.date.year, this.date.month+1)
     },
     // go to previous month
-    previousMonth: function() {
+    previousMonth () {
       this.changeMonth(this.date.year, this.date.month-1)
     },
   },
   computed: {
     // compute the number of days of the month currently displayed
-    daysInMonth: function() {
+    daysInMonth () {
       return new Date(this.date.year, this.date.month, 0).getDate();
     },
     // compute the offset of weekdays before actual days
-    dayOfWeekOffset: function() {
+    dayOfWeekOffset () {
       return new Date(this.date.year, this.date.month-1, 1).getDay()
     },
     // compute the offset of days to fill a total of 7 columns
-    fillOffset: function() {
+    fillOffset () {
       var offset = 36 - (this.daysInMonth + this.dayOfWeekOffset);
       return offset > 0 ? offset : 0;
     },
     // prepare data in format: yyyy-mm-dd => status
-    statusData: function() {
+    statusData () {
       var statusData = {}
       this.days.forEach(function(day) {
           statusData[day.name] = day.status
