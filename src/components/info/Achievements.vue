@@ -22,16 +22,40 @@ export default {
   data () {
     return {
       achievements: {
-        firstday: {
+        beginning: {
           title: 'The Beginning',
           description: 'Mark the first day successful',
           icon: 'sign-out-alt',
           count: 0
         },
-        weekly: {
-          title: '7 in a row',
+        speed: {
+          title: 'Pick Up Speed',
           description: '7 successful days in a row',
-          icon: 'eye',
+          icon: 'tachometer-alt',
+          count: 0
+        },
+        alea: {
+          title: 'Alea Iacta Est',
+          description: 'A month with 6 fails or less',
+          icon: 'dice-six',
+          count: 0
+        },
+        tide: {
+          title: 'The tide is turned',
+          description: 'More successful than failed days',
+          icon: 'umbrella-beach',
+          count: 0
+        },
+        clean: {
+          title: 'Stay Clean',
+          description: 'A complete month without a fail',
+          icon: 'broom',
+          count: 0
+        },
+        master: {
+          title: 'Master Of Success',
+          description: 'A total of 365 successful days',
+          icon: 'graduation-cap',
           count: 0
         },
       }
@@ -62,14 +86,17 @@ export default {
 .achievements {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
   cursor: default;
 }
 .achievements .item {
-  width: 20%;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
   position: relative;
   overflow: hidden;
-  margin: 10px 5px;
-  padding: 5px 0;
+  margin: 7px 0;
+  padding: 5px;
   font-size: 2em;
   color: white;
   color: var(--c-text-normal);

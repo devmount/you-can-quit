@@ -20,7 +20,11 @@ import {
   faAngleDoubleUp,
   faCheck,
   faSignOutAlt,
-  faEye
+  faTachometerAlt,
+  faGraduationCap,
+  faBroom,
+  faDiceSix,
+  faUmbrellaBeach
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -37,7 +41,11 @@ library.add(
   faAngleDoubleUp,
   faCheck,
   faSignOutAlt,
-  faEye
+  faTachometerAlt,
+  faGraduationCap,
+  faBroom,
+  faDiceSix,
+  faUmbrellaBeach
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey

@@ -90,15 +90,16 @@ export default {
 .stats {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
   cursor: default;
 }
 .stats .box {
-  width: 33%;
+  width: 31%;
 }
 .stats .box .data {
   position: relative;
   overflow: hidden;
-  margin: 10px 5px;
+  margin: 10px 0;
   padding: 5px 0;
   color: white;
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
