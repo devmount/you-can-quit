@@ -42,7 +42,7 @@ export default {
         },
         tide: {
           title: 'The tide is turned',
-          description: 'More successful than failed days',
+          description: 'More successful days than failed days',
           icon: 'umbrella-beach',
           count: 0
         },
