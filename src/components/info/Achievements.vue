@@ -3,12 +3,63 @@
   <h2>Achievements</h2>
   <div class="achievements">
     <div
-      v-for="a in achievements"
+      id="beginning"
       class="item"
-      :class="{ active: a.count > 0 }"
-      :title="a.title"
+      :class="{ active: achievedBeginning }"
+      title="The Beginning"
     >
-      <font-awesome-icon :icon="a.icon" class="icon" />
+      <font-awesome-icon icon="sign-out-alt" class="icon" />
+      <div class="description">Mark the first day successful</div>
+    </div>
+    <div
+      id="speed"
+      class="item"
+      :class="{ active: achievedSpeed > 0 }"
+      title="Pick Up Speed"
+    >
+      <div class="badge" v-if="achievedSpeed > 1">{{ achievedSpeed }}</div>
+      <font-awesome-icon icon="tachometer-alt" class="icon" />
+      <div class="description">7 successful days in a row</div>
+    </div>
+    <div
+      id="alea"
+      class="item"
+      :class="{ active: achievedAlea > 0 }"
+      title="Alea Iacta Est"
+    >
+      <div class="badge" v-if="achievedAlea > 0">{{ achievedAlea }}</div>
+      <font-awesome-icon icon="dice-six" class="icon" />
+      <div class="description">A month with 6 fails or less</div>
+    </div>
+    <div
+      id="tide"
+      class="item"
+      :class="{ active: achievedTide > 0 }"
+      title="The tide is turned"
+    >
+      <div class="badge" v-if="achievedTide > 0">{{ achievedTide }}</div>
+      <font-awesome-icon icon="umbrella-beach" class="icon" />
+      <div class="description">More successful days than failed days</div>
+    </div>
+    <div
+      id="clean"
+      class="item"
+      :class="{ active: achievedClean > 0 }"
+      title="Stay Clean"
+    >
+      <div class="badge" v-if="achievedClean > 0">{{ achievedClean }}</div>
+      <font-awesome-icon icon="broom" class="icon" />
+      <div class="description">A complete month without a fail</div>
+    </div>
+    <div
+      id="master"
+      class="item"
+      :class="{ active: achievedMaster > 0 }"
+      title="Master Of Success"
+    >
+      <div class="badge" v-if="achievedMaster > 0">{{ achievedMaster }}</div>
+      <font-awesome-icon icon="graduation-cap" class="icon" />
+      <div class="description">A total of 365 successful days</div>
     </div>
   </div>
 </div>
@@ -18,48 +69,6 @@
 export default {
   props: {
     statusData: Object,
-  },
-  data () {
-    return {
-      achievements: {
-        beginning: {
-          title: 'The Beginning',
-          description: 'Mark the first day successful',
-          icon: 'sign-out-alt',
-          count: 0
-        },
-        speed: {
-          title: 'Pick Up Speed',
-          description: '7 successful days in a row',
-          icon: 'tachometer-alt',
-          count: 0
-        },
-        alea: {
-          title: 'Alea Iacta Est',
-          description: 'A month with 6 fails or less',
-          icon: 'dice-six',
-          count: 0
-        },
-        tide: {
-          title: 'The tide is turned',
-          description: 'More successful days than failed days',
-          icon: 'umbrella-beach',
-          count: 0
-        },
-        clean: {
-          title: 'Stay Clean',
-          description: 'A complete month without a fail',
-          icon: 'broom',
-          count: 0
-        },
-        master: {
-          title: 'Master Of Success',
-          description: 'A total of 365 successful days',
-          icon: 'graduation-cap',
-          count: 0
-        },
-      }
-    }
   },
   methods: {
     // build date format yyyy-mm-dd
@@ -78,6 +87,40 @@ export default {
         });
       }
     },
+    // achievement: first successful day | returns bool
+    achievedBeginning () {
+      return Object.values(this.statusData).filter(value => value == 1).length > 0
+    },
+    // achievement: 7 successful days in a row | returns number
+    achievedSpeed () {
+      var streak = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        if (streak == 7) {
+          count++
+          streak = 0
+        }
+        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
+          streak = 0
+        } else {
+          streak++
+        }
+      }
+      return count
+    },
+    achievedAlea () {
+      return 0
+    },
+    achievedTide () {
+      return 0
+    },
+    achievedClean () {
+      return 0
+    },
+    achievedMaster () {
+      return 0
+    },
   }
 }
 </script>
@@ -94,11 +137,10 @@ export default {
   height: 60px;
   line-height: 60px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin: 7px 0;
   padding: 5px;
   font-size: 2em;
-  color: white;
   color: var(--c-text-normal);
   background: var(--c-background-element);
   box-shadow: 0 8px 20px -8px var(--c-shadow);
@@ -108,5 +150,20 @@ export default {
   color: white;
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
   background-color: var(--c-accent);
+}
+.achievements .item .badge {
+  position: absolute;
+  font-size: .4em;
+  line-height: .4em;
+  font-weight: bold;
+  top: -2px;
+  right: -2px;
+  background: white;
+  color: var(--c-accent-variant);
+  padding: 7px 5px;
+
+}
+.achievements .item .description {
+  display: none;
 }
 </style>
