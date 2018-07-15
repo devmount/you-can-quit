@@ -109,7 +109,10 @@ export default {
       }
       return count
     },
+    // achievement: a month with 6 fails or less | returns number
     achievedAlea () {
+      // TODO
+      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = ''
       return 0
     },
     achievedTide () {
@@ -119,7 +122,7 @@ export default {
       return 0
     },
     achievedMaster () {
-      return 0
+      return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
     },
   }
 }
