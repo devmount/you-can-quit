@@ -161,32 +161,15 @@ export default {
     },
     // achievement: 3 successful days after a one day fail | returns number
     achievedDefense () {
-      var streak = 0, failed = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        if (key in this.statusData && this.statusData[key] == -1) {
-          if (failed == 0 && streak >= 3) {
-            failed = 1
-          } else {
-            streak = 0
-          }
-        } 
-        if (key in this.statusData && this.statusData[key] == 1) {
-          if (failed == 1 && streak >= 3) {
-            count++
-            failed = 0
-            streak = 1
-          } else {
-            streak++
-          }
-        }
-        if (!(key in this.statusData)) {
-          failed = 0
-          streak = 0
-        }
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
       }
-      return count
+      return (states.match(/sssfs/g) || []).length
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
