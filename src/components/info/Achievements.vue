@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2>Achievements</h2>
+  <h2 class="mt-2">Achievements</h2>
   <div class="achievements">
     <div
       id="beginning"

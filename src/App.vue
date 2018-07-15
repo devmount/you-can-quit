@@ -221,4 +221,10 @@ button {
 .col-2 > .info-view {
   width: 400px;
 }
+.mt-1 {
+  margin-top: 1em;
+}
+.mt-2 {
+  margin-top: 2em;
+}
 </style>
