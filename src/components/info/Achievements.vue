@@ -37,7 +37,6 @@
       :class="{ active: achievedTide > 0 }"
       title="The tide is turned"
     >
-      <div class="badge" v-if="achievedTide > 0">{{ achievedTide }}</div>
       <font-awesome-icon icon="umbrella-beach" class="icon" />
       <div class="description">More successful days than failed days</div>
     </div>
@@ -115,12 +114,14 @@ export default {
       var fails = 0, count = 0, n = new Date(), min = this.minDate, key = ''
       return 0
     },
+    // achievement: more successful days than failed days | returns bool
     achievedTide () {
-      return 0
+      return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length
     },
     achievedClean () {
       return 0
     },
+    // achievement: 365 successful days | returns number
     achievedMaster () {
       return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
     },
