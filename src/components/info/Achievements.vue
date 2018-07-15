@@ -70,6 +70,7 @@
       <font-awesome-icon icon="monument" class="icon" />
       <div class="description">A whole year without a fail</div>
     </div>
+    <div v-for="i in 4" class="item offset"></div>
   </div>
 </div>
 </template>
@@ -137,7 +138,7 @@ export default {
     achievedMaster () {
       return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
     },
-    // achievement: a whole month without a fail | returns number
+    // achievement: a whole year without a fail | returns number
     achievedLegend () {
       // TODO
       return 0
@@ -166,6 +167,10 @@ export default {
   background: var(--c-background-element);
   box-shadow: 0 8px 20px -8px var(--c-shadow);
   transition: all 0.2s;
+}
+.achievements .item.offset {
+  background: transparent;
+  box-shadow: none;
 }
 .achievements .item.active {
   color: white;
