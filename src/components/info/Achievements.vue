@@ -60,6 +60,16 @@
       <font-awesome-icon icon="graduation-cap" class="icon" />
       <div class="description">A total of 365 successful days</div>
     </div>
+    <div
+      id="legend"
+      class="item"
+      :class="{ active: achievedLegend > 0 }"
+      title="Legendary"
+    >
+      <div class="badge" v-if="achievedLegend > 0">{{ achievedLegend }}</div>
+      <font-awesome-icon icon="monument" class="icon" />
+      <div class="description">A whole year without a fail</div>
+    </div>
   </div>
 </div>
 </template>
@@ -126,6 +136,11 @@ export default {
     // achievement: 365 successful days | returns number
     achievedMaster () {
       return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
+    },
+    // achievement: a whole month without a fail | returns number
+    achievedLegend () {
+      // TODO
+      return 0
     },
   }
 }
