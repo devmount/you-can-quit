@@ -44,6 +44,17 @@
       <font-awesome-icon icon="umbrella-beach" class="icon" />
       <div class="description">More successful days than failed days</div>
     </div>
+    <!-- achievement: defense | 3 successful days after a one day fail -->
+    <div
+      id="defense"
+      class="item"
+      :class="{ active: achievedDefense > 0 }"
+      title="Strong Defense"
+    >
+      <div class="badge" v-if="achievedDefense > 0">{{ achievedDefense }}</div>
+      <font-awesome-icon icon="shield-alt" class="icon" />
+      <div class="description">3 successful days after a one day fail</div>
+    </div>
     <!-- achievement: clean | A whole month without a fail -->
     <div
       id="clean"
@@ -147,6 +158,35 @@ export default {
     // achievement: more successful days than failed days | returns bool
     achievedTide () {
       return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length
+    },
+    // achievement: 3 successful days after a one day fail | returns number
+    achievedDefense () {
+      var streak = 0, failed = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        if (key in this.statusData && this.statusData[key] == -1) {
+          if (failed == 0 && streak >= 3) {
+            failed = 1
+          } else {
+            streak = 0
+          }
+        } 
+        if (key in this.statusData && this.statusData[key] == 1) {
+          if (failed == 1 && streak >= 3) {
+            count++
+            failed = 0
+            streak = 1
+          } else {
+            streak++
+          }
+        }
+        if (!(key in this.statusData)) {
+          failed = 0
+          streak = 0
+        }
+      }
+      return count
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
