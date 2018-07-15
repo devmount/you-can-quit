@@ -48,7 +48,7 @@
     >
       <div class="badge" v-if="achievedClean > 0">{{ achievedClean }}</div>
       <font-awesome-icon icon="broom" class="icon" />
-      <div class="description">A complete month without a fail</div>
+      <div class="description">A whole month without a fail</div>
     </div>
     <div
       id="master"
@@ -118,7 +118,9 @@ export default {
     achievedTide () {
       return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length
     },
+    // achievement: a whole month without a fail | returns number
     achievedClean () {
+      // TODO
       return 0
     },
     // achievement: 365 successful days | returns number
