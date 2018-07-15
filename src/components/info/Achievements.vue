@@ -2,6 +2,7 @@
 <div class="container">
   <h2 class="mt-2">Achievements</h2>
   <div class="achievements">
+    <!-- achievement: beginning | Mark the first day successful -->
     <div
       id="beginning"
       class="item"
@@ -11,6 +12,7 @@
       <font-awesome-icon icon="sign-out-alt" class="icon" />
       <div class="description">Mark the first day successful</div>
     </div>
+    <!-- achievement: speed | 7 successful days in a row -->
     <div
       id="speed"
       class="item"
@@ -21,6 +23,7 @@
       <font-awesome-icon icon="tachometer-alt" class="icon" />
       <div class="description">7 successful days in a row</div>
     </div>
+    <!-- achievement: alea | A month with 6 fails or less -->
     <div
       id="alea"
       class="item"
@@ -31,6 +34,7 @@
       <font-awesome-icon icon="dice-six" class="icon" />
       <div class="description">A month with 6 fails or less</div>
     </div>
+    <!-- achievement: tide | More successful days than failed days -->
     <div
       id="tide"
       class="item"
@@ -40,6 +44,7 @@
       <font-awesome-icon icon="umbrella-beach" class="icon" />
       <div class="description">More successful days than failed days</div>
     </div>
+    <!-- achievement: clean | A whole month without a fail -->
     <div
       id="clean"
       class="item"
@@ -50,6 +55,18 @@
       <font-awesome-icon icon="broom" class="icon" />
       <div class="description">A whole month without a fail</div>
     </div>
+    <!-- achievement: epic | 40 successful days in a row -->
+    <div
+      id="epic"
+      class="item"
+      :class="{ active: achievedEpic > 0 }"
+      title="Epic Trophy"
+    >
+      <div class="badge" v-if="achievedEpic > 0">{{ achievedEpic }}</div>
+      <font-awesome-icon icon="trophy" class="icon" />
+      <div class="description">40 successful days in a row</div>
+    </div>
+    <!-- achievement: master | A total of 365 successful days -->
     <div
       id="master"
       class="item"
@@ -60,16 +77,18 @@
       <font-awesome-icon icon="graduation-cap" class="icon" />
       <div class="description">A total of 365 successful days</div>
     </div>
+    <!-- achievement: legend | A whole year without a fail -->
     <div
       id="legend"
       class="item"
       :class="{ active: achievedLegend > 0 }"
-      title="Legendary"
+      title="Legendary Monument"
     >
       <div class="badge" v-if="achievedLegend > 0">{{ achievedLegend }}</div>
       <font-awesome-icon icon="monument" class="icon" />
       <div class="description">A whole year without a fail</div>
     </div>
+    <!-- offset to show all items inline next to each other -->
     <div v-for="i in 4" class="item offset"></div>
   </div>
 </div>
@@ -133,6 +152,24 @@ export default {
     achievedClean () {
       // TODO
       return 0
+    },
+    // achievement: 7 successful days in a row | returns number
+    achievedEpic () {
+      var streak = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        if (streak == 40) {
+          count++
+          streak = 0
+        }
+        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
+          streak = 0
+        } else {
+          streak++
+        }
+      }
+      return count
     },
     // achievement: 365 successful days | returns number
     achievedMaster () {

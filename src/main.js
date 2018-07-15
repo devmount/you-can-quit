@@ -25,7 +25,8 @@ import {
   faBroom,
   faDiceSix,
   faUmbrellaBeach,
-  faMonument
+  faMonument,
+  faTrophy
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -47,7 +48,8 @@ library.add(
   faBroom,
   faDiceSix,
   faUmbrellaBeach,
-  faMonument
+  faMonument,
+  faTrophy
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey
