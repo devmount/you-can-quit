@@ -30,7 +30,8 @@ export default {
   width: calc(50% - 35px);
 }
 .legend > div::before {
-  content: '';
+  content: '•';
+  text-align: center;
   position: absolute;
   left: 0;
   width: 18px;
@@ -47,9 +48,8 @@ export default {
   background: var(--c-background-element);
 }
 .legend > div.failed::before {
-  box-sizing: border-box;
-  border: 1px solid #00000022;
-  background: transparent;
+  color: var(--c-shadow);
+  background: var(--c-background);
 }
 .legend > div.today::before {
   background: var(--c-text-light);
