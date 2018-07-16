@@ -144,21 +144,15 @@ export default {
     },
     // achievement: 7 successful days in a row | returns number
     achievedSpeed () {
-      var streak = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        if (streak == 7) {
-          count++
-          streak = 0
-        }
-        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
-          streak = 0
-        } else {
-          streak++
-        }
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
       }
-      return count
+      return (states.match(/sssssss/g) || []).length
     },
     // achievement: a month with 6 fails or less | returns number
     achievedAlea () {
@@ -195,30 +189,24 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/sssss/g) || []).length
+      return (states.match(/(s)\1{4}/g) || []).length
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
       // TODO
       return 0
     },
-    // achievement: 7 successful days in a row | returns number
+    // achievement: 40 successful days in a row | returns number
     achievedEpic () {
-      var streak = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        if (streak == 40) {
-          count++
-          streak = 0
-        }
-        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
-          streak = 0
-        } else {
-          streak++
-        }
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
       }
-      return count
+      return (states.match(/(s)\1{40}/g) || []).length
     },
     // achievement: 365 successful days | returns number
     achievedMaster () {
