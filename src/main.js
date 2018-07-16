@@ -27,7 +27,8 @@ import {
   faUmbrellaBeach,
   faMonument,
   faTrophy,
-  faShieldAlt
+  faShieldAlt,
+  faChurch
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -51,7 +52,8 @@ library.add(
   faUmbrellaBeach,
   faMonument,
   faTrophy,
-  faShieldAlt
+  faShieldAlt,
+  faChurch
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey

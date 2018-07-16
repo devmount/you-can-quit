@@ -30,7 +30,7 @@
       :class="{ active: achievedAlea > 0 }"
       title="Alea Iacta Est"
     >
-      <div class="badge" v-if="achievedAlea > 0">{{ achievedAlea }}</div>
+      <div class="badge" v-if="achievedAlea > 1">{{ achievedAlea }}</div>
       <font-awesome-icon icon="dice-six" class="icon" />
       <div class="description">A month with 6 fails or less</div>
     </div>
@@ -51,9 +51,20 @@
       :class="{ active: achievedDefense > 0 }"
       title="Strong Defense"
     >
-      <div class="badge" v-if="achievedDefense > 0">{{ achievedDefense }}</div>
+      <div class="badge" v-if="achievedDefense > 1">{{ achievedDefense }}</div>
       <font-awesome-icon icon="shield-alt" class="icon" />
       <div class="description">3 successful days after a one day fail</div>
+    </div>
+    <!-- achievement: praise | 5 successful sundays in a row -->
+    <div
+      id="praise"
+      class="item"
+      :class="{ active: achievedPraise > 0 }"
+      title="Praise The Lord"
+    >
+      <div class="badge" v-if="achievedPraise > 1">{{ achievedPraise }}</div>
+      <font-awesome-icon icon="church" class="icon" />
+      <div class="description">5 successful sundays in a row </div>
     </div>
     <!-- achievement: clean | A whole month without a fail -->
     <div
@@ -62,7 +73,7 @@
       :class="{ active: achievedClean > 0 }"
       title="Stay Clean"
     >
-      <div class="badge" v-if="achievedClean > 0">{{ achievedClean }}</div>
+      <div class="badge" v-if="achievedClean > 1">{{ achievedClean }}</div>
       <font-awesome-icon icon="broom" class="icon" />
       <div class="description">A whole month without a fail</div>
     </div>
@@ -73,7 +84,7 @@
       :class="{ active: achievedEpic > 0 }"
       title="Epic Trophy"
     >
-      <div class="badge" v-if="achievedEpic > 0">{{ achievedEpic }}</div>
+      <div class="badge" v-if="achievedEpic > 1">{{ achievedEpic }}</div>
       <font-awesome-icon icon="trophy" class="icon" />
       <div class="description">40 successful days in a row</div>
     </div>
@@ -84,7 +95,7 @@
       :class="{ active: achievedMaster > 0 }"
       title="Master Of Success"
     >
-      <div class="badge" v-if="achievedMaster > 0">{{ achievedMaster }}</div>
+      <div class="badge" v-if="achievedMaster > 1">{{ achievedMaster }}</div>
       <font-awesome-icon icon="graduation-cap" class="icon" />
       <div class="description">A total of 365 successful days</div>
     </div>
@@ -95,7 +106,7 @@
       :class="{ active: achievedLegend > 0 }"
       title="Legendary Monument"
     >
-      <div class="badge" v-if="achievedLegend > 0">{{ achievedLegend }}</div>
+      <div class="badge" v-if="achievedLegend > 1">{{ achievedLegend }}</div>
       <font-awesome-icon icon="monument" class="icon" />
       <div class="description">A whole year without a fail</div>
     </div>
@@ -170,6 +181,21 @@ export default {
         states = !(key in this.statusData) ? states + 'n' : states
       }
       return (states.match(/sssfs/g) || []).length
+    },
+    // achievement: 5 successful sundays in a row | returns number
+    achievedPraise () {
+      var states = '', n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        if (n.getDay() > 0) {
+          continue
+        }
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
+      }
+      return (states.match(/sssss/g) || []).length
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
