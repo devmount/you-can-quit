@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2 class="mt-2">Achievements</h2>
+  <h2 class="mt-2">Achievements ({{ totalAchievements }})</h2>
   <div class="achievements">
     <!-- achievement: beginning | Mark the first day successful -->
     <div
@@ -137,6 +137,19 @@ export default {
           return ( pd < vd ? pd : vd );
         });
       }
+    },
+    // get number of total achievements
+    totalAchievements () {
+      return (this.achievedBeginning ? 1 : 0)
+        + this.achievedSpeed
+        + this.achievedAlea
+        + (this.achievedTide ? 1 : 0)
+        + this.achievedDefense
+        + this.achievedPraise
+        + this.achievedClean
+        + this.achievedEpic
+        + this.achievedMaster
+        + this.achievedLegend
     },
     // achievement: first successful day | returns bool
     achievedBeginning () {
