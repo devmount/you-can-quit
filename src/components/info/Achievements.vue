@@ -23,7 +23,7 @@
       <font-awesome-icon icon="tachometer-alt" class="icon" />
       <div class="description">7 successful days in a row</div>
     </div>
-    <!-- achievement: alea | A month with 6 fails or less -->
+    <!-- achievement: alea | A complete month with 6 fails or less -->
     <div
       id="alea"
       class="item"
@@ -32,7 +32,7 @@
     >
       <div class="badge" v-if="achievedAlea > 1">{{ achievedAlea }}</div>
       <font-awesome-icon icon="dice-six" class="icon" />
-      <div class="description">A month with 6 fails or less</div>
+      <div class="description">A complete month with 6 fails or less</div>
     </div>
     <!-- achievement: tide | More successful days than failed days -->
     <div
@@ -167,10 +167,17 @@ export default {
       }
       return (states.match(/sssssss/g) || []).length
     },
-    // achievement: a month with 6 fails or less | returns number
+    // achievement: a complete month with 6 fails or less | returns number
     achievedAlea () {
       // TODO
       var fails = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
+      }
       return 0
     },
     // achievement: more successful days than failed days | returns bool
