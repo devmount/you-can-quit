@@ -170,13 +170,16 @@ export default {
     // achievement: a complete month with 6 fails or less | returns number
     achievedAlea () {
       // TODO
-      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = ''
+      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = '', month = 0
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
+        if (n.getDate() == 1) {
+          month = n.getMonth()
+        }
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
-        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
-        states = !(key in this.statusData) ? states + 'n' : states
+        // states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        // states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        // states = !(key in this.statusData) ? states + 'n' : states
       }
       return 0
     },
