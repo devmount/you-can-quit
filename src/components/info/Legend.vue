@@ -30,16 +30,15 @@ export default {
   width: calc(50% - 35px);
 }
 .legend > div::before {
-  content: '•';
+  content: '';
   text-align: center;
   position: absolute;
   left: 0;
-  width: 18px;
+  width: 20px;
   height: 20px;
   border-radius: 2px;
 }
 .legend > div.successful::before {
-  color: white;
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
   background-color: var(--c-accent);
   box-shadow: 0 8px 20px -8px var(--c-shadow);
@@ -48,7 +47,6 @@ export default {
   background: var(--c-background-element);
 }
 .legend > div.failed::before {
-  color: var(--c-shadow);
   background: var(--c-background);
 }
 .legend > div.today::before {
