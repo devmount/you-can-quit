@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2 class="mt-2">Stats</h2>
+  <h2 class="mt-1">Stats</h2>
   <div class="stats">
     <div class="box">
       <div class="title">Current streak</div>

@@ -1,8 +1,8 @@
 <template>
 <div class="info">
-  <Legend />
   <Stats :status-data="statusData" />
   <Achievements :status-data="statusData" />
+  <Legend />
 </div>
 </template>
 
@@ -22,3 +22,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.info {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 784px;
+  justify-content: space-between;
+}
+</style>

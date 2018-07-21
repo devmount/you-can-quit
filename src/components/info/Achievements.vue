@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2 class="mt-2">Achievements ({{ totalAchievements }})</h2>
+  <h2>Achievements ({{ totalAchievements }})</h2>
   <div class="achievements">
     <!-- achievement: beginning | Mark the first day successful -->
     <div
