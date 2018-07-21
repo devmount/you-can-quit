@@ -76,6 +76,17 @@
       <font-awesome-icon icon="chart-line" class="icon" />
       <div class="description">4 times more successful days than failed days</div>
     </div>
+    <!-- achievement: gatherer | Collected 15 achievements -->
+    <div
+      id="gatherer"
+      class="item"
+      :class="{ active: achievedGatherer > 0 }"
+      title="Gatherer"
+    >
+      <div class="badge" v-if="achievedGatherer > 1">{{ achievedGatherer }}</div>
+      <font-awesome-icon icon="award" class="icon" />
+      <div class="description">Collected 15 achievements</div>
+    </div>
     <!-- achievement: clean | A whole month without a fail -->
     <div
       id="clean"
@@ -156,6 +167,7 @@ export default {
         + (this.achievedTide ? 1 : 0)
         + this.achievedDefense
         + this.achievedPraise
+        + (this.achievedUptrend ? 1 : 0)
         + this.achievedClean
         + this.achievedEpic
         + this.achievedMaster
@@ -227,6 +239,11 @@ export default {
     // achievement: 4 times more successful days than failed days | returns bool
     achievedUptrend () {
       return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
+    },
+    // achievement: collected 15 achievements | returns number
+    achievedGatherer () {
+      // TODO
+      return Math.floor(this.totalAchievements / 15)
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {

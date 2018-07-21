@@ -29,7 +29,8 @@ import {
   faTrophy,
   faShieldAlt,
   faChurch,
-  faChartLine
+  faChartLine,
+  faAward
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -55,7 +56,8 @@ library.add(
   faTrophy,
   faShieldAlt,
   faChurch,
-  faChartLine
+  faChartLine,
+  faAward
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey
