@@ -79,24 +79,30 @@ export default {
     },
     // update the status of a day to 1, 0 or -1
     updateDay (year, month, day, status) {
-      // build date format yyyy-mm-dd
-      var date = this.getDate(year, month, day)
-      var self = this
+      // get date format yyyy-mm-dd
+      var date = this.getDate(year, month, day), self = this
       // find existing records by date of date format above
       this.$firestore.days.where("name", "==", date)
         .get().then(function(result) {
           if (result.empty) {
-            // record doesn't exist: add it
-            self.$firestore.days.add(
-              {
-                name: date,
-                status: status,
-                timestamp: new Date()
-              }
-            )
+            if (status != 0) {
+              // record doesn't exist and status is not undecided: add it
+              self.$firestore.days.add(
+                {
+                  name: date,
+                  status: status,
+                  timestamp: new Date()
+                }
+              )
+            }
           } else {
-            // record exists: update its status
-            self.$firestore.days.doc(result.docs[0].id).update({status: status})
+            if (status == 0) {
+              // day is undecided: delete it from database
+              self.$firestore.days.doc(result.docs[0].id).delete()
+            } else {
+              // record exists: update its status
+              self.$firestore.days.doc(result.docs[0].id).update({status: status})
+            }
           }
         })
         .catch(function(error) {
