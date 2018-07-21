@@ -165,7 +165,7 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/sssssss/g) || []).length
+      return (states.match(/(s)\1{6}/g) || []).length
     },
     // achievement: a complete month with 6 fails or less | returns number
     achievedAlea () {
@@ -229,7 +229,7 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{40}/g) || []).length
+      return (states.match(/(s)\1{39}/g) || []).length
     },
     // achievement: 365 successful days | returns number
     achievedMaster () {
