@@ -38,7 +38,7 @@
     <div
       id="tide"
       class="item"
-      :class="{ active: achievedTide > 0 }"
+      :class="{ active: achievedTide }"
       title="The tide is turned"
     >
       <font-awesome-icon icon="umbrella-beach" class="icon" />
@@ -64,7 +64,17 @@
     >
       <div class="badge" v-if="achievedPraise > 1">{{ achievedPraise }}</div>
       <font-awesome-icon icon="church" class="icon" />
-      <div class="description">5 successful sundays in a row </div>
+      <div class="description">5 successful sundays in a row</div>
+    </div>
+    <!-- achievement: uptrend | 4 times more successful days than failed days -->
+    <div
+      id="uptrend"
+      class="item"
+      :class="{ active: achievedUptrend }"
+      title="Rising tendency of Success"
+    >
+      <font-awesome-icon icon="chart-line" class="icon" />
+      <div class="description">4 times more successful days than failed days</div>
     </div>
     <!-- achievement: clean | A whole month without a fail -->
     <div
@@ -170,7 +180,7 @@ export default {
     // achievement: a complete month with 6 fails or less | returns number
     achievedAlea () {
       // TODO
-      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = '', month = 0
+      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = '', month = -1
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
         if (n.getDate() == 1) {
@@ -213,6 +223,10 @@ export default {
         states = !(key in this.statusData) ? states + 'n' : states
       }
       return (states.match(/(s)\1{4}/g) || []).length
+    },
+    // achievement: 4 times more successful days than failed days | returns bool
+    achievedUptrend () {
+      return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
