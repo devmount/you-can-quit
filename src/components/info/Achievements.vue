@@ -132,7 +132,7 @@
       <div class="description">A whole year without a fail</div>
     </div>
     <!-- offset to show all items inline next to each other -->
-    <div v-for="i in 4" class="item offset"></div>
+    <div v-for="i in 3" class="item offset"></div>
   </div>
 </div>
 </template>
@@ -240,9 +240,8 @@ export default {
     achievedUptrend () {
       return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
     },
-    // achievement: collected 15 achievements | returns number
+    // achievement: collected 15 achievements (without this one) | returns number
     achievedGatherer () {
-      // TODO
       return Math.floor(this.totalAchievements / 15)
     },
     // achievement: a whole month without a fail | returns number
