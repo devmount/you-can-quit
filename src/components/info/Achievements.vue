@@ -305,8 +305,32 @@ export default {
     },
     // achievement: a whole year without a fail | returns number
     achievedLegend () {
-      // TODO
-      return 0
+      var count = 0, n = new Date(), years = []
+      // get all relevant years
+      while (this.minDate <= n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        if (n.getMonth() == 0 && n.getDate() == 1) {
+          years.push(n.getFullYear())
+        }
+      }
+      // iterate over all relevant years
+      for (let i = 0; i < years.length; i++) {
+        var noSuccess = 0
+        for (let m = 0; m < 12; m++) {
+          const days = new Date(years[i], m, 0).getDate()
+          // iterate over all days of the current month
+          for (let d = 1; d <= days; d++) {
+            var key = this.getDate(years[i], m, d)
+            if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] == -1)) {
+              noSuccess++
+            }
+          }
+        }
+        if (noSuccess == 0) {
+          count++
+        }
+      }
+      return count
     },
   }
 }
