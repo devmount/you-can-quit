@@ -76,7 +76,7 @@
       <font-awesome-icon icon="chart-line" class="icon" />
       <div class="description">4 times more successful days than failed days</div>
     </div>
-    <!-- achievement: gatherer | Collected 15 achievements -->
+    <!-- achievement: gatherer | Collected 15 achievements (without itself) -->
     <div
       id="gatherer"
       class="item"
@@ -85,7 +85,7 @@
     >
       <div class="badge" v-if="achievedGatherer > 1">{{ achievedGatherer }}</div>
       <font-awesome-icon icon="award" class="icon" />
-      <div class="description">Collected 15 achievements</div>
+      <div class="description">Collected 15 achievements (without itself)</div>
     </div>
     <!-- achievement: clean | A whole month without a fail -->
     <div
@@ -161,6 +161,11 @@ export default {
     },
     // get number of total achievements
     totalAchievements () {
+      return this.totalAchievementsWithoutGatherer + this.achievedGatherer
+    },
+    // get number of total achievements without the gatherer achievements
+    // (as gatherer needs to count the number of achievements without itself)
+    totalAchievementsWithoutGatherer () {
       return (this.achievedBeginning ? 1 : 0)
         + this.achievedSpeed
         + this.achievedAlea
@@ -240,9 +245,9 @@ export default {
     achievedUptrend () {
       return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
     },
-    // achievement: collected 15 achievements (without this one) | returns number
+    // achievement: collected 15 achievements (without itself) | returns number
     achievedGatherer () {
-      return Math.floor(this.totalAchievements / 15)
+      return Math.floor(this.totalAchievementsWithoutGatherer / 15)
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
