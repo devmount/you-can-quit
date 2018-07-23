@@ -23,7 +23,7 @@
       <font-awesome-icon icon="tachometer-alt" class="icon" />
       <div class="description">7 successful days in a row</div>
     </div>
-    <!-- achievement: alea | A complete month with 6 fails or less -->
+    <!-- achievement: alea | A whole month with 6 fails or less -->
     <div
       id="alea"
       class="item"
@@ -32,7 +32,7 @@
     >
       <div class="badge" v-if="achievedAlea > 1">{{ achievedAlea }}</div>
       <font-awesome-icon icon="dice-six" class="icon" />
-      <div class="description">A complete month with 6 fails or less</div>
+      <div class="description">A whole month with 6 fails or less</div>
     </div>
     <!-- achievement: tide | More successful days than failed days -->
     <div
@@ -194,21 +194,32 @@ export default {
       }
       return (states.match(/(s)\1{6}/g) || []).length
     },
-    // achievement: a complete month with 6 fails or less | returns number
+    // achievement: a whole month with 6 fails or less | returns number
     achievedAlea () {
-      // TODO
-      var fails = 0, count = 0, n = new Date(), min = this.minDate, key = '', month = -1
-      while (min < n) {
+      var count = 0, n = new Date(), months = []
+      // get all relevant months
+      while (this.minDate <= n) {
         n = new Date(n.setDate(n.getDate() - 1))
         if (n.getDate() == 1) {
-          month = n.getMonth()
+          months.push([n.getFullYear(), n.getMonth()])
         }
-        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        // states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
-        // states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
-        // states = !(key in this.statusData) ? states + 'n' : states
       }
-      return 0
+      // iterate over all relevant months
+      for (let i = 0; i < months.length; i++) {
+        const days = new Date(months[i][0], months[i][1]+1, 0).getDate()
+        var noSuccess = 0
+        // iterate over all days of the current month
+        for (let d = 1; d <= days; d++) {
+          var key = this.getDate(months[i][0], months[i][1]+1, d)
+          if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] == -1)) {
+            noSuccess++
+          }
+        }
+        if (noSuccess <= 6) {
+          count++
+        }
+      }
+      return count
     },
     // achievement: more successful days than failed days | returns bool
     achievedTide () {
@@ -251,8 +262,30 @@ export default {
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
-      // TODO
-      return 0
+      var count = 0, n = new Date(), months = []
+      // get all relevant months
+      while (this.minDate <= n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        if (n.getDate() == 1) {
+          months.push([n.getFullYear(), n.getMonth()])
+        }
+      }
+      // iterate over all relevant months
+      for (let i = 0; i < months.length; i++) {
+        const days = new Date(months[i][0], months[i][1]+1, 0).getDate()
+        var noSuccess = 0
+        // iterate over all days of the current month
+        for (let d = 1; d <= days; d++) {
+          var key = this.getDate(months[i][0], months[i][1]+1, d)
+          if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] == -1)) {
+            noSuccess++
+          }
+        }
+        if (noSuccess == 0) {
+          count++
+        }
+      }
+      return count
     },
     // achievement: 40 successful days in a row | returns number
     achievedEpic () {
