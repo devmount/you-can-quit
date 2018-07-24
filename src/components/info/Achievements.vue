@@ -405,7 +405,7 @@ export default {
 .achievements .item .description {
   position: absolute;
   font-size: .5em;
-  line-height: 1.1em;
+  line-height: 1.2em;
   visibility: hidden;
   opacity: 0;
   z-index: 2;
