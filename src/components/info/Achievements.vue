@@ -430,6 +430,23 @@ export default {
   border-right: 14px solid transparent;
   border-bottom: 14px solid var(--c-background-element);
 }
+.achievements .item:nth-child(5n+1) .description {
+  left: 0;
+  transform: initial;
+}
+.achievements .item:nth-child(5n+1) .description::before {
+  left: 35px;
+}
+.achievements .item:nth-child(5n) .description {
+  left: auto;
+  right: 0;
+  transform: initial;
+}
+.achievements .item:nth-child(5n) .description::before {
+  left: auto;
+  right: 35px;
+  transform: translateX(50%);
+}
 .achievements .item .description .title {
   position: relative;
   font-size: 1.3em;
