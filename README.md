@@ -4,7 +4,7 @@ A tool to track your habits and support your progress in quitting whatever your 
 
 This web app is based on Vue.js and Firebase/Firestore and is _currently in development_.
 
-![screenshot](https://user-images.githubusercontent.com/5441654/42732886-a6107862-8829-11e8-8b7e-219142d65b5a.png)
+![screenshot](https://user-images.githubusercontent.com/5441654/43220478-6cd4bea4-904a-11e8-80f0-d26f198c151c.png)
 
 ## Get started
 
