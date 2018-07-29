@@ -22,6 +22,11 @@ This web app is based on Vue.js and Firebase/Firestore and is _currently in deve
     ```
 
 3. Create an empty file called `config.js` in `you-can-quit/src`
+
+    ```bash
+    touch src/config.js
+    ```
+
 4. Log in to your [Firebase account](https://console.firebase.google.com) and hit the "Create new project" button
 5. Enter your new project and click "Add Firebase to your web app"
 6. Copy the following code into your just created `config.js`. Replace the values with those of your Firebase project
@@ -37,13 +42,13 @@ This web app is based on Vue.js and Firebase/Firestore and is _currently in deve
     }
     ```
 
-7. Either start the development server ...
+7. Either start the development server with hot reload at localhost:8080 ...
 
     ```bash
     yarn serve
     ```
 
-8. ... or create a production build
+8. ... or create a production build with minification
 
     ```bash
     yarn build
