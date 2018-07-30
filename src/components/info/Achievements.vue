@@ -90,7 +90,7 @@
         4 times more successful days than failed days
       </div>
     </div>
-    <!-- achievement: gatherer | Collected 15 achievements (without itself) -->
+    <!-- achievement: gatherer | Collected 15 achievements -->
     <div
       id="gatherer"
       class="item"
@@ -100,7 +100,7 @@
       <font-awesome-icon icon="award" class="icon" />
       <div class="description">
         <div class="title">Gatherer</div>
-        Collected 15 achievements (without itself)
+        Collected 15 achievements
       </div>
     </div>
     <!-- achievement: clean | A whole month without a fail -->
@@ -280,9 +280,9 @@ export default {
     achievedUptrend () {
       return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
     },
-    // achievement: collected 15 achievements (without itself) | returns number
+    // achievement: collected 15 achievements | returns number
     achievedGatherer () {
-      return Math.floor(this.totalAchievementsWithoutGatherer / 15)
+      return Math.floor((Math.floor(this.totalAchievementsWithoutGatherer / 14) + this.totalAchievementsWithoutGatherer) / 15)
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
