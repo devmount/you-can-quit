@@ -471,4 +471,8 @@ export default {
   visibility: visible;
   opacity: 1;
 }
+.achievements .item .description:hover {
+  visibility: hidden;
+  opacity: 0;
+}
 </style>
