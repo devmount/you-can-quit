@@ -2,157 +2,17 @@
 <div class="container">
   <h2>Achievements ({{ totalAchievements }})</h2>
   <div class="achievements">
-    <!-- achievement: beginning | Mark the first day successful -->
+    <!-- single achievement items -->
     <div
-      id="beginning"
+      v-for="(a, k) in achievements"
       class="item"
-      :class="{ active: achievedBeginning }"
+      :class="{ active: getAchievementStatus(k) > 0 }"
     >
-      <font-awesome-icon icon="sign-out-alt" class="icon" />
+      <div class="badge" v-if="getAchievementStatus(k) > 1">{{ getAchievementStatus(k) }}</div>
+      <font-awesome-icon :icon="a.icon" class="icon" />
       <div class="description">
-        <div class="title">The Beginning</div>
-        Mark the first day successful
-      </div>
-    </div>
-    <!-- achievement: speed | 7 successful days in a row -->
-    <div
-      id="speed"
-      class="item"
-      :class="{ active: achievedSpeed > 0 }"
-    >
-      <div class="badge" v-if="achievedSpeed > 1">{{ achievedSpeed }}</div>
-      <font-awesome-icon icon="tachometer-alt" class="icon" />
-      <div class="description">
-        <div class="title">Pick Up Speed</div>
-        7 successful days in a row
-      </div>
-    </div>
-    <!-- achievement: alea | A whole month with 6 fails or less -->
-    <div
-      id="alea"
-      class="item"
-      :class="{ active: achievedAlea > 0 }"
-    >
-      <div class="badge" v-if="achievedAlea > 1">{{ achievedAlea }}</div>
-      <font-awesome-icon icon="dice-six" class="icon" />
-      <div class="description">
-        <div class="title">Alea Iacta Est</div>
-        A whole month with 6 fails or less
-      </div>
-    </div>
-    <!-- achievement: tide | More successful days than failed days -->
-    <div
-      id="tide"
-      class="item"
-      :class="{ active: achievedTide }"
-    >
-      <font-awesome-icon icon="umbrella-beach" class="icon" />
-      <div class="description">
-        <div class="title">The tide is turned</div>
-        More successful days than failed days
-      </div>
-    </div>
-    <!-- achievement: defense | 3 successful days after a one day fail -->
-    <div
-      id="defense"
-      class="item"
-      :class="{ active: achievedDefense > 0 }"
-    >
-      <div class="badge" v-if="achievedDefense > 1">{{ achievedDefense }}</div>
-      <font-awesome-icon icon="shield-alt" class="icon" />
-      <div class="description">
-        <div class="title">Strong Defense</div>
-        3 successful days after a one day fail
-      </div>
-    </div>
-    <!-- achievement: praise | 5 successful sundays in a row -->
-    <div
-      id="praise"
-      class="item"
-      :class="{ active: achievedPraise > 0 }"
-    >
-      <div class="badge" v-if="achievedPraise > 1">{{ achievedPraise }}</div>
-      <font-awesome-icon icon="church" class="icon" />
-      <div class="description">
-        <div class="title">Praise The Lord</div>
-        5 successful sundays in a row
-      </div>
-    </div>
-    <!-- achievement: uptrend | 4 times more successful days than failed days -->
-    <div
-      id="uptrend"
-      class="item"
-      :class="{ active: achievedUptrend }"
-    >
-      <font-awesome-icon icon="chart-line" class="icon" />
-      <div class="description">
-        <div class="title">Rising tendency of Success</div>
-        4 times more successful days than failed days
-      </div>
-    </div>
-    <!-- achievement: gatherer | Collected 15 achievements -->
-    <div
-      id="gatherer"
-      class="item"
-      :class="{ active: achievedGatherer > 0 }"
-    >
-      <div class="badge" v-if="achievedGatherer > 1">{{ achievedGatherer }}</div>
-      <font-awesome-icon icon="award" class="icon" />
-      <div class="description">
-        <div class="title">Gatherer</div>
-        Collected 15 achievements
-      </div>
-    </div>
-    <!-- achievement: clean | A whole month without a fail -->
-    <div
-      id="clean"
-      class="item"
-      :class="{ active: achievedClean > 0 }"
-    >
-      <div class="badge" v-if="achievedClean > 1">{{ achievedClean }}</div>
-      <font-awesome-icon icon="broom" class="icon" />
-      <div class="description">
-        <div class="title">Stay Clean</div>
-        A whole month without a fail
-      </div>
-    </div>
-    <!-- achievement: epic | 40 successful days in a row -->
-    <div
-      id="epic"
-      class="item"
-      :class="{ active: achievedEpic > 0 }"
-    >
-      <div class="badge" v-if="achievedEpic > 1">{{ achievedEpic }}</div>
-      <font-awesome-icon icon="trophy" class="icon" />
-      <div class="description">
-        <div class="title">Epic Trophy</div>
-        40 successful days in a row
-      </div>
-    </div>
-    <!-- achievement: master | A total of 365 successful days -->
-    <div
-      id="master"
-      class="item"
-      :class="{ active: achievedMaster > 0 }"
-    >
-      <div class="badge" v-if="achievedMaster > 1">{{ achievedMaster }}</div>
-      <font-awesome-icon icon="graduation-cap" class="icon" />
-      <div class="description">
-        <div class="title">Master Of Success</div>
-        A total of 365 successful days
-      </div>
-    </div>
-    <!-- achievement: legend | A whole year without a fail -->
-    <div
-      id="legend"
-      class="item"
-      :class="{ active: achievedLegend > 0 }"
-    >
-      <div class="badge" v-if="achievedLegend > 1">{{ achievedLegend }}</div>
-      <font-awesome-icon icon="monument" class="icon" />
-      <div class="description">
-        <div class="title">Legendary Monument</div>
-        A whole year without a fail
+        <div class="title">{{ a.title }}</div>
+        {{ a.description }}
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
@@ -166,10 +26,96 @@ export default {
   props: {
     statusData: Object,
   },
+  data () {
+    return {
+      // the achievements object contains all existing achievements
+      // to add a new achievement, provide a new key: {title, description, fa-icon-name}
+      achievements: {
+        beginning: {
+          title: 'The Beginning',
+          description: 'Mark the first day successful',
+          icon: 'sign-out-alt',
+        },
+        speed: {
+          title: 'Pick Up Speed',
+          description: '7 successful days in a row',
+          icon: 'tachometer-alt',
+        },
+        alea: {
+          title: 'Alea Iacta Est',
+          description: 'A whole month with 6 fails or less',
+          icon: 'dice-six',
+        },
+        tide: {
+          title: 'The tide is turned',
+          description: 'More successful days than failed days',
+          icon: 'umbrella-beach',
+        },
+        defense: {
+          title: 'Strong Defense',
+          description: '3 successful days after a one day fail',
+          icon: 'shield-alt',
+        },
+        praise: {
+          title: 'Praise The Lord',
+          description: '5 successful sundays in a row',
+          icon: 'church',
+        },
+        uptrend: {
+          title: 'Rising tendency of Success',
+          description: '4 times more successful days than failed days',
+          icon: 'chart-line',
+        },
+        gatherer: {
+          title: 'Gatherer',
+          description: 'Collected 15 achievements',
+          icon: 'award',
+        },
+        clean: {
+          title: 'Stay Clean',
+          description: 'A whole month without a fail',
+          icon: 'broom',
+        },
+        epic: {
+          title: 'Epic Trophy',
+          description: '40 successful days in a row',
+          icon: 'trophy',
+        },
+        master: {
+          title: 'Master Of Success',
+          description: 'A total of 365 successful days',
+          icon: 'graduation-cap',
+        },
+        legend: {
+          title: 'Legendary Monument',
+          description: 'A whole year without a fail',
+          icon: 'monument',
+        },
+      }
+    }
+  },
   methods: {
     // build date format yyyy-mm-dd
     getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+    },
+    // get the current status of each achievement
+    getAchievementStatus (a) {
+      switch (a) {
+        case 'beginning': return this.achievedBeginning
+        case 'speed': return this.achievedSpeed
+        case 'alea': return this.achievedAlea
+        case 'tide': return this.achievedTide
+        case 'defense': return this.achievedDefense
+        case 'praise': return this.achievedPraise
+        case 'uptrend': return this.achievedUptrend
+        case 'gatherer': return this.achievedGatherer
+        case 'clean': return this.achievedClean
+        case 'epic': return this.achievedEpic
+        case 'master': return this.achievedMaster
+        case 'legend': return this.achievedLegend
+        default:  break;
+      }
     },
   },
   computed: {
@@ -190,21 +136,17 @@ export default {
     // get number of total achievements without the gatherer achievements
     // (as gatherer needs to count the number of achievements without itself)
     totalAchievementsWithoutGatherer () {
-      return (this.achievedBeginning ? 1 : 0)
-        + this.achievedSpeed
-        + this.achievedAlea
-        + (this.achievedTide ? 1 : 0)
-        + this.achievedDefense
-        + this.achievedPraise
-        + (this.achievedUptrend ? 1 : 0)
-        + this.achievedClean
-        + this.achievedEpic
-        + this.achievedMaster
-        + this.achievedLegend
+      var sum = 0
+      for (const a in this.achievements) {
+        if (this.achievements.hasOwnProperty(a) && a != 'gatherer') {
+          sum += this.getAchievementStatus(a)
+        }
+      }
+      return sum
     },
-    // achievement: first successful day | returns bool
+    // achievement: first successful day
     achievedBeginning () {
-      return Object.values(this.statusData).filter(value => value == 1).length > 0
+      return Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0
     },
     // achievement: 7 successful days in a row | returns number
     achievedSpeed () {
@@ -245,9 +187,9 @@ export default {
       }
       return count
     },
-    // achievement: more successful days than failed days | returns bool
+    // achievement: more successful days than failed days
     achievedTide () {
-      return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length
+      return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
     },
     // achievement: 3 successful days after a one day fail | returns number
     achievedDefense () {
@@ -276,9 +218,9 @@ export default {
       }
       return (states.match(/(s)\1{4}/g) || []).length
     },
-    // achievement: 4 times more successful days than failed days | returns bool
+    // achievement: 4 times more successful days than failed days
     achievedUptrend () {
-      return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length
+      return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
     },
     // achievement: collected 15 achievements | returns number
     achievedGatherer () {
