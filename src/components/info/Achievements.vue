@@ -95,11 +95,8 @@ export default {
     }
   },
   methods: {
-    // build date format yyyy-mm-dd
-    getDate (year, month, day) {
-      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-    },
     // get the current status of each achievement
+    // this function maps an achievement key to its computed property value
     getAchievementStatus (a) {
       switch (a) {
         case 'beginning': return this.achievedBeginning
@@ -116,6 +113,10 @@ export default {
         case 'legend': return this.achievedLegend
         default:  break;
       }
+    },
+    // build date format yyyy-mm-dd
+    getDate (year, month, day) {
+      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
   },
   computed: {
