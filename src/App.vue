@@ -185,12 +185,14 @@ h1, h2, h3 {
   cursor: default;
 }
 h1 {
-  margin-bottom: 2em;
+  font-size: 3em;
+  margin-bottom: 1.2em;
+  margin-top: 0;
 }
 h1::after {
   content: '';
   position: absolute;
-  bottom: -1em;
+  bottom: -.8em;
   width: 10%;
   max-width: 120px;
   height: 5px;
@@ -211,7 +213,7 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin: 60px 0;
+  margin: 40px 0;
 }
 #app > section {
   width: 1200px;
