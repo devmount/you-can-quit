@@ -33,6 +33,7 @@
       :date="date"
     />
   </section>
+  <notifications group="main" />
 </div>
 </template>
 
@@ -82,32 +83,38 @@ export default {
       // get date format yyyy-mm-dd
       var date = this.getDate(year, month, day), self = this
       // find existing records by date of date format above
-      this.$firestore.days.where("name", "==", date)
-        .get().then(function(result) {
-          if (result.empty) {
-            if (status != 0) {
-              // record doesn't exist and status is not undecided: add it
-              self.$firestore.days.add(
-                {
-                  name: date,
-                  status: status,
-                  timestamp: new Date()
-                }
-              )
-            }
-          } else {
-            if (status == 0) {
-              // day is undecided: delete it from database
-              self.$firestore.days.doc(result.docs[0].id).delete()
-            } else {
-              // record exists: update its status
-              self.$firestore.days.doc(result.docs[0].id).update({status: status})
-            }
+      this.$firestore.days.where("name", "==", date).get().then(function(result) {
+        if (result.empty) {
+          if (status != 0) {
+            // record doesn't exist and status is not undecided: add it
+            self.$firestore.days.add(
+              {
+                name: date,
+                status: status,
+                timestamp: new Date()
+              }
+            )
           }
-        })
-        .catch(function(error) {
-          // an error occured. TODO: error handling
-        })
+        } else {
+          if (status == 0) {
+            // day is undecided: delete it from database
+            self.$firestore.days.doc(result.docs[0].id).delete()
+          } else {
+            // record exists: update its status
+            self.$firestore.days.doc(result.docs[0].id).update({status: status})
+          }
+        }
+      })
+      .catch(function(error) {
+        // an error occured. TODO: error handling
+      })
+      if (status == 1) {
+        this.$notify({
+          group: 'main',
+          title: 'Important message',
+          text: 'Hello user! This is a notification!'
+        });
+      }
     },
     // return the month name
     monthName (monthIndex) {

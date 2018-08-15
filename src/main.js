@@ -62,6 +62,9 @@ library.add(
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey
 Vue.use(require('vue-shortkey'))
+// Vue Notifications
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
 
 // turns off the 'You are running Vue in development mode.' msg
 Vue.config.productionTip = false
