@@ -33,7 +33,7 @@
       :date="date"
     />
   </section>
-  <notifications group="main" position="bottom center"/>
+  <notifications group="main" position="bottom right"/>
 </div>
 </template>
 
@@ -163,7 +163,7 @@ export default {
         group: 'main',
         title: titles[Math.floor(Math.random() * titles.length)],
         text: texts[Math.floor(Math.random() * texts.length)],
-        duration: 100000
+        duration: 10000
       }
     }
   },
@@ -266,7 +266,7 @@ button {
 #app .vue-notification {
   cursor: pointer;
   padding: 1em;
-  margin: 0 0 15px 0;
+  margin: 0 15px 15px 0;
   font-size: 1.2em;
   color: white;
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
