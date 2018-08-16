@@ -33,7 +33,7 @@
       :date="date"
     />
   </section>
-  <notifications group="main" />
+  <notifications group="main" position="bottom center"/>
 </div>
 </template>
 
@@ -109,11 +109,7 @@ export default {
         // an error occured. TODO: error handling
       })
       if (status == 1) {
-        this.$notify({
-          group: 'main',
-          title: 'Important message',
-          text: 'Hello user! This is a notification!'
-        });
+        this.$notify(this.randomSuccessNotification());
       }
     },
     // return the month name
@@ -145,6 +141,31 @@ export default {
     previousMonth () {
       this.changeMonth(this.date.year, this.date.month-1)
     },
+    // return a notyf message object with random success title and text
+    randomSuccessNotification () {
+      var titles = [
+        'You did it!',
+        'YES!',
+        'Strike!',
+        'Bulls Eye!',
+        'Nailed!',
+        'Nice one!',
+        'Impressive!',
+      ],
+      texts = [
+        'There\'s the proof. You rock!',
+        'You are awesome!',
+        'Now that\'s how it\'s done!',
+        'You are a hero! Seriously!',
+        'Another unbreakable proof of your success!'
+      ]
+      return {
+        group: 'main',
+        title: titles[Math.floor(Math.random() * titles.length)],
+        text: texts[Math.floor(Math.random() * texts.length)],
+        duration: 100000
+      }
+    }
   },
   computed: {
     // compute the number of days of the month currently displayed
@@ -241,5 +262,19 @@ button {
 }
 .mt-2 {
   margin-top: 2em;
+}
+#app .vue-notification {
+  cursor: pointer;
+  padding: 1em;
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+  color: white;
+  background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
+  background-color: var(--c-accent);
+  box-shadow: 0 8px 20px -8px var(--c-shadow);
+  border-left: 5px solid var(--c-accent-variant);
+}
+#app .vue-notification .notification-title {
+  font-size: 1.5em;
 }
 </style>
