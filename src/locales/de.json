@@ -1,3 +1,130 @@
 {
-  "title": "Du kannst aufhören!"
+  "title": "Du kannst aufhören!",
+  "name": {
+    "month": {
+      "1": "Januar",
+      "2": "Februar",
+      "3": "März",
+      "4": "April",
+      "5": "Mai",
+      "6": "Juni",
+      "7": "Juli",
+      "8": "August",
+      "9": "September",
+      "10": "Oktober",
+      "11": "November",
+      "12": "Dezember"
+    },
+    "dayofweek": {
+      "1": "Sonntag",
+      "2": "Montag",
+      "3": "Dienstag",
+      "4": "Mittwoch",
+      "5": "Donnerstag",
+      "6": "Freitag",
+      "7": "Samstag"
+    }
+  },
+  "month": {
+    "previous": "Vorheriger Monat",
+    "next": "Nächster Monat"
+  },
+  "reset": "Reset",
+  "today": "Heute",
+  "mark": {
+    "successful": "Erfolgreich markieren",
+    "undecided": "Nicht entschieden markieren",
+    "failed": "Gescheitert markieren"
+  },
+  "stats": {
+    "title": "Statistik",
+    "streak": {
+      "current": "Aktueller Lauf",
+      "longest": "Längster Lauf"
+    }
+  },
+  "legend": {
+    "title": "Legende",
+    "day": {
+      "successful": "Erfolgreich",
+      "undecided": "Nicht entschieden",
+      "failed": "Gescheitert"
+    }
+  },
+  "successful": "Erfolgreich",
+  "day": "Tag | Tage",
+  "achievement": "Errungenschaft | Errungenschaften",
+  "achievements": {
+    "beginning": {
+      "title": "Der Anfang",
+      "description": "Markiere den ersten Tag erfolgreich",
+      "icon": "sign-out-alt"
+    },
+    "speed": {
+      "title": "Durchstarten",
+      "description": "7 aufeinanderfolgende erfolgreiche Tage",
+      "icon": "tachometer-alt"
+    },
+    "alea": {
+      "title": "Alea Iacta Est",
+      "description": "Ein ganzer Monat mit 6 oder weniger Misserfolgen",
+      "icon": "dice-six"
+    },
+    "tide": {
+      "title": "Das Blatt hat sich gewendet",
+      "description": "Mehr erfolgreiche als gescheiterte Tage",
+      "icon": "leaf"
+    },
+    "defense": {
+      "title": "Starke Verteidigung",
+      "description": "6 erfolgreiche Tage nach einem einmaligen Misserfolg",
+      "icon": "shield-alt"
+    },
+    "praise": {
+      "title": "Lobet den Herrn",
+      "description": "5 aufeinanderfolgende erfolgreiche Sonntage",
+      "icon": "church"
+    },
+    "uptrend": {
+      "title": "Tendenz des Erfolgs",
+      "description": "4 mal mehr erfolgreiche als gescheiterte Tage",
+      "icon": "chart-line"
+    },
+    "gatherer": {
+      "title": "Sammler",
+      "description": "15 Errungenschaften erreicht",
+      "icon": "award"
+    },
+    "news": {
+      "title": "Gute Neuigkeiten",
+      "description": "Der längste Lauf ist ein Vielfaches von 10",
+      "icon": "newspaper"
+    },
+    "clean": {
+      "title": "Sauber bleiben",
+      "description": "Ein ganzer Monat ohne Misserfolg",
+      "icon": "broom"
+    },
+    "strike": {
+      "title": "Zehnfacher Strike",
+      "description": "Anzahl erfolgreicher Tage ist ein Vielfaches von 100",
+      "icon": "bowling-ball"
+    },
+    "epic": {
+      "title": "Epische Trophäe",
+      "description": "40 aufeinanderfolgende erfolgreiche Tage",
+      "icon": "trophy"
+    },
+    "master": {
+      "title": "Meister des Erfolgs",
+      "description": "365 erfolgreiche Tage",
+      "icon": "graduation-cap"
+    },
+    "legend": {
+      "title": "Legendäres Denkmal",
+      "description": "Ein ganzes Jahr ohne Misserfolg",
+      "icon": "monument"
+    }
+  }
+
 }

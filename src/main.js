@@ -32,7 +32,8 @@ import {
   faChartLine,
   faAward,
   faNewspaper,
-  faBowlingBall
+  faBowlingBall,
+  faLeaf
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -61,7 +62,8 @@ library.add(
   faChartLine,
   faAward,
   faNewspaper,
-  faBowlingBall
+  faBowlingBall,
+  faLeaf
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey
@@ -73,7 +75,7 @@ Vue.use(Notifications)
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: navigator.language.substring(0, 2),
+  locale: 'de',
   fallbackLocale: 'en',
   messages: {
     "en": require("./locales/en.json"),
