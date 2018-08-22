@@ -1,7 +1,7 @@
 <template>
 <div class="month-day-grid">
   <!-- day of week labels -->
-  <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
+  <div v-for="l in 7" class="day label">{{ $t('dayofweekname.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
   <div v-for="o in dayOfWeekOffset" class="day offset"></div>
   <!-- actual days -->
@@ -15,13 +15,30 @@
       success: statusData[getDate(date.year, date.month, d)] == 1,
       fail: statusData[getDate(date.year, date.month, d)] == -1
     }"
-    :title="isToday(date.year, date.month, d) ? 'Today' : ''"
+    :title="isToday(date.year, date.month, d) ? $t('today') : ''"
   >
     {{ d }}
     <div v-if="isPast(date.year, date.month, d)" class="action">
-      <button @click="$emit('update', date.year, date.month, d, 1)" class="success" title="Mark successful"><font-awesome-icon icon="chevron-up" /></button>
-      <button @click="$emit('update', date.year, date.month, d, 0)" title="Mark undecided"><font-awesome-icon icon="undo-alt" /></button>
-      <button @click="$emit('update', date.year, date.month, d, -1)" class="fail" title="Mark failed"><font-awesome-icon icon="chevron-down" /></button>
+      <button
+        @click="$emit('update', date.year, date.month, d, 1)"
+        class="success"
+        :title="$t('mark.successful')"
+      >
+        <font-awesome-icon icon="chevron-up" />
+      </button>
+      <button
+        @click="$emit('update', date.year, date.month, d, 0)"
+        :title="$t('mark.undecided')"
+      >
+        <font-awesome-icon icon="undo-alt" />
+      </button>
+      <button
+        @click="$emit('update', date.year, date.month, d, -1)"
+        class="fail"
+        :title="$t('mark.failed')"
+      >
+        <font-awesome-icon icon="chevron-down" />
+      </button>
     </div>
   </div>
   <!-- offset days -->
@@ -53,10 +70,6 @@ export default {
     // build date format yyyy-mm-dd
     getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-    },
-    // return the day of week name
-    dayOfWeekName (dayIndex) {
-      return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
     },
     // check if date is a future date
     isFuture (year, month, day) {

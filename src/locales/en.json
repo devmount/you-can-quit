@@ -16,5 +16,20 @@
   },
   "previous-month": "Previous Month",
   "next-month": "Next Month",
-  "reset": "Reset"
+  "reset": "Reset",
+  "dayofweekname": {
+    "1": "Sunday",
+    "2": "Monday",
+    "3": "Tuesday",
+    "4": "Wednesday",
+    "5": "Thursday",
+    "6": "Friday",
+    "7": "Saturday"
+  },
+  "today": "Today",
+  "mark": {
+    "successful": "Mark successful",
+    "undecided": "Mark undecided",
+    "failed": "Mark failed"
+  }
 }
