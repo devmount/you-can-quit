@@ -53,7 +53,7 @@ export default {
         },
         defense: {
           title: 'Strong Defense',
-          description: '3 successful days after a one day fail',
+          description: '6 successful days after a one day fail',
           icon: 'shield-alt',
         },
         praise: {
@@ -192,9 +192,9 @@ export default {
     achievedTide () {
       return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
     },
-    // achievement: 3 successful days after a one day fail | returns number
+    // achievement: 6 successful days after a one day fail | returns number
     achievedDefense () {
-      var states = '', n = new Date(), min = this.minDate, key = ''
+      var count = 0, states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
         n = new Date(n.setDate(n.getDate() - 1))
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
@@ -202,7 +202,12 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/sssfs/g) || []).length
+      for (let i = 0; i < states.length-7; i++) {
+        if (states.substring(i, i+8) == 'ssssssfs') {
+          count++
+        }
+      }
+      return count
     },
     // achievement: 5 successful sundays in a row | returns number
     achievedPraise () {
