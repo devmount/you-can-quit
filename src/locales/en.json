@@ -43,6 +43,14 @@
       "longest": "Longest streak"
     }
   },
+  "legend": {
+    "title": "Legend",
+    "day": {
+      "successful": "Successful day",
+      "undecided": "Undecided day",
+      "failed": "Failed day"
+    }
+  },
   "successful": "Successful",
   "day": "day | days",
   "achievement": "Achievement | Achievements",

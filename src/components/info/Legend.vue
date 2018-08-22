@@ -1,11 +1,11 @@
 <template>
 <div class="container">
-  <h2>Legend</h2>
+  <h2>{{ $t('legend.title') }}</h2>
   <div class="legend">
-    <div class="today">Today</div>
-    <div class="successful">Successful day</div>
-    <div class="undecided">Undecided day</div>
-    <div class="failed">Failed day</div>
+    <div class="today">{{ $t('today') }}</div>
+    <div class="successful">{{ $t('legend.day.successful') }}</div>
+    <div class="undecided">{{ $t('legend.day.undecided') }}</div>
+    <div class="failed">{{ $t('legend.day.failed') }}</div>
   </div>
 </div>
 </template>
