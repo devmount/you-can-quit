@@ -3,7 +3,7 @@
   <h2>{{ date.year }}</h2>
   <div class="year-day-grid">
     <!-- day of week labels -->
-    <div v-for="l in 7" class="day label">{{ dayOfWeekName(l).slice(0, 2).toUpperCase() }}</div>
+    <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
     <!-- offset days -->
     <div v-for="o in dayOfWeekOffset" class="day offset"></div>
     <!-- days in current year with month initials -->
@@ -19,10 +19,10 @@
         }"
         :title="
           (isToday(date.year, m, d) ? 'Today' : '') + 
-          (i == 0 ? monthName(m) : '')
+          (i == 0 ? $t('name.month.' + m) : '')
         "
       >
-        <span v-if="i == 0">{{ monthName(m).slice(0, 1) }}</span>
+        <span v-if="i == 0">{{ $t('name.month.' + m).slice(0, 1) }}</span>
       </div>
     </template>
   </div>
@@ -54,14 +54,6 @@ export default {
     // compute the number of days of the given month
     daysInMonth (month) {
       return new Date(this.date.year, month, 0).getDate();
-    },
-    // return the month initial
-    monthName (monthIndex) {
-      return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
-    },
-    // return the day of week name
-    dayOfWeekName (dayIndex) {
-      return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex-1];
     },
     // check if date is today
     isToday (year, month, day) {
