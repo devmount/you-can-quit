@@ -35,5 +35,14 @@
     "successful": "Mark successful",
     "undecided": "Mark undecided",
     "failed": "Mark failed"
-  }
+  },
+  "stats": {
+    "title": "Stats",
+    "streak": {
+      "current": "Current streak",
+      "longest": "Longest streak"
+    }
+  },
+  "successful": "Successful",
+  "day": "day | days"
 }

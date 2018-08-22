@@ -1,25 +1,25 @@
 <template>
 <div class="container">
-  <h2 class="mt-1">Stats</h2>
+  <h2 class="mt-1">{{ $t('stats.title') }}</h2>
   <div class="stats">
     <div class="box">
-      <div class="title">Current streak</div>
+      <div class="title">{{ $t('stats.streak.current') }}</div>
       <div class="data" :class="{ zero: currentStreak == 0 }">
-        <span>{{ currentStreak }}</span> days
+        <span>{{ currentStreak }}</span> {{ $tc('day', currentStreak) }}
         <font-awesome-icon icon="angle-up" class="icon" />
       </div>
     </div>
     <div class="box">
-      <div class="title">Longest streak</div>
+      <div class="title">{{ $t('stats.streak.longest') }}</div>
       <div class="data" :class="{ zero: longestStreak == 0 }">
-        <span>{{ longestStreak }}</span> days
+        <span>{{ longestStreak }}</span> {{ $tc('day', longestStreak) }}
         <font-awesome-icon icon="angle-double-up" class="icon" />
       </div>
     </div>
     <div class="box">
-      <div class="title">Successful</div>
+      <div class="title">{{ $t('successful') }}</div>
       <div class="data" :class="{ zero: successfulDays == 0 }">
-        <span>{{ successfulDays }}</span> days
+        <span>{{ successfulDays }}</span> {{ $tc('day', successfulDays) }}
         <font-awesome-icon icon="check" class="icon" />
       </div>
     </div>
