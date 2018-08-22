@@ -81,6 +81,11 @@ export default {
           description: 'A whole month without a fail',
           icon: 'broom',
         },
+        strike: {
+          title: 'Tenfold Strike',
+          description: 'Number of successful days reached a multiple of 100',
+          icon: 'bowling-ball',
+        },
         epic: {
           title: 'Epic Trophy',
           description: '40 successful days in a row',
@@ -114,6 +119,7 @@ export default {
         case 'gatherer': return this.achievedGatherer
         case 'news': return this.achievedNews
         case 'clean': return this.achievedClean
+        case 'strike': return this.achievedStrike
         case 'epic': return this.achievedEpic
         case 'master': return this.achievedMaster
         case 'legend': return this.achievedLegend
@@ -155,7 +161,7 @@ export default {
     achievedBeginning () {
       return Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0
     },
-    // achievement: 7 successful days in a row | returns number
+    // achievement: 7 successful days in a row
     achievedSpeed () {
       var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
@@ -167,7 +173,7 @@ export default {
       }
       return (states.match(/(s)\1{6}/g) || []).length
     },
-    // achievement: a whole month with 6 fails or less | returns number
+    // achievement: a whole month with 6 fails or less
     achievedAlea () {
       var count = 0, n = new Date(), months = []
       // get all relevant months
@@ -198,7 +204,7 @@ export default {
     achievedTide () {
       return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
     },
-    // achievement: 6 successful days after a one day fail | returns number
+    // achievement: 6 successful days after a one day fail
     achievedDefense () {
       var count = 0, states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
@@ -215,7 +221,7 @@ export default {
       }
       return count
     },
-    // achievement: 5 successful sundays in a row | returns number
+    // achievement: 5 successful sundays in a row
     achievedPraise () {
       var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
@@ -234,11 +240,11 @@ export default {
     achievedUptrend () {
       return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
     },
-    // achievement: collected 15 achievements | returns number
+    // achievement: collected 15 achievements
     achievedGatherer () {
       return Math.floor((Math.floor(this.totalAchievementsWithoutGatherer / 14) + this.totalAchievementsWithoutGatherer) / 15)
     },
-    // achievement: Longest streak reached a multiple of 10 | returns number
+    // achievement: Longest streak reached a multiple of 10
     achievedNews () {
       var streak = 0, max = 0, n = new Date(), min = this.minDate, key = ''
       while (min < n) {
@@ -253,7 +259,7 @@ export default {
       }
       return Math.floor(max/10)
     },
-    // achievement: a whole month without a fail | returns number
+    // achievement: a whole month without a fail
     achievedClean () {
       var count = 0, n = new Date(), months = []
       // get all relevant months
@@ -280,7 +286,11 @@ export default {
       }
       return count
     },
-    // achievement: 40 successful days in a row | returns number
+    // achievement: Number of successful days reached a multiple of 100
+    achievedStrike () {
+      return Math.floor(Object.values(this.statusData).filter(value => value == 1).length/100)
+    },
+    // achievement: 40 successful days in a row
     achievedEpic () {
       var states = '', n = new Date(), min = this.minDate, key = ''
       while (min < n) {
@@ -292,11 +302,11 @@ export default {
       }
       return (states.match(/(s)\1{39}/g) || []).length
     },
-    // achievement: 365 successful days | returns number
+    // achievement: 365 successful days
     achievedMaster () {
       return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
     },
-    // achievement: a whole year without a fail | returns number
+    // achievement: a whole year without a fail
     achievedLegend () {
       var count = 0, n = new Date(), years = []
       // get all relevant years
