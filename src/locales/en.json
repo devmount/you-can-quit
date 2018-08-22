@@ -13,5 +13,8 @@
     "10": "October",
     "11": "November",
     "12": "December"
-  }
+  },
+  "previous-month": "Previous Month",
+  "next-month": "Next Month",
+  "reset": "Reset"
 }

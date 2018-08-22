@@ -2,13 +2,28 @@
 <div class="navigation">
   <h2>{{ $t('monthname.' + date.month) }} {{ date.year }}</h2>
   <div class="button-group">
-    <button @click="$emit('previous')" v-shortkey="['arrowleft']" @shortkey="$emit('previous')" title="Previous Month [←]">
+    <button
+      @click="$emit('previous')"
+      v-shortkey="['arrowleft']"
+      @shortkey="$emit('previous')"
+      :title="$t('previous-month') + ' [←]'"
+    >
       <font-awesome-icon icon="chevron-left" />
     </button>
-    <button @click="$emit('change')" v-shortkey="['r']" @shortkey="$emit('change')" title="Reset [r]">
+    <button
+      @click="$emit('change')"
+      v-shortkey="['r']"
+      @shortkey="$emit('change')"
+      :title="$t('reset') + ' [r]'"
+    >
       <font-awesome-icon icon="undo-alt" />
     </button>
-    <button @click="$emit('next')" v-shortkey="['arrowright']" @shortkey="$emit('next')" title="Next Month [→]">
+    <button
+      @click="$emit('next')"
+      v-shortkey="['arrowright']"
+      @shortkey="$emit('next')"
+      :title="$t('next-month') + ' [→]'"
+    >
       <font-awesome-icon icon="chevron-right" />
     </button>
   </div>
