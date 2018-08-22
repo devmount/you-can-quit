@@ -1,7 +1,7 @@
 <template>
 <div class="month-day-grid">
   <!-- day of week labels -->
-  <div v-for="l in 7" class="day label">{{ $t('dayofweekname.' + l).slice(0, 2).toUpperCase() }}</div>
+  <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
   <div v-for="o in dayOfWeekOffset" class="day offset"></div>
   <!-- actual days -->
