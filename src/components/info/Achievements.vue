@@ -71,6 +71,11 @@ export default {
           description: 'Collected 15 achievements',
           icon: 'award',
         },
+        news: {
+          title: 'Good News',
+          description: 'Longest streak reached a multiple of 10',
+          icon: 'newspaper',
+        },
         clean: {
           title: 'Stay Clean',
           description: 'A whole month without a fail',
@@ -107,6 +112,7 @@ export default {
         case 'praise': return this.achievedPraise
         case 'uptrend': return this.achievedUptrend
         case 'gatherer': return this.achievedGatherer
+        case 'news': return this.achievedNews
         case 'clean': return this.achievedClean
         case 'epic': return this.achievedEpic
         case 'master': return this.achievedMaster
@@ -231,6 +237,21 @@ export default {
     // achievement: collected 15 achievements | returns number
     achievedGatherer () {
       return Math.floor((Math.floor(this.totalAchievementsWithoutGatherer / 14) + this.totalAchievementsWithoutGatherer) / 15)
+    },
+    // achievement: Longest streak reached a multiple of 10 | returns number
+    achievedNews () {
+      var streak = 0, max = 0, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
+          max = streak > max ? streak : max
+          streak = 0
+        } else {
+          streak++
+        }
+      }
+      return Math.floor(max/10)
     },
     // achievement: a whole month without a fail | returns number
     achievedClean () {
