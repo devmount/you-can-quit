@@ -1,6 +1,6 @@
 <template>
 <div class="navigation">
-  <h2>{{ month }} {{ year }}</h2>
+  <h2>{{ $t('monthname.' + date.month) }} {{ date.year }}</h2>
   <div class="button-group">
     <button @click="$emit('previous')" v-shortkey="['arrowleft']" @shortkey="$emit('previous')" title="Previous Month [←]">
       <font-awesome-icon icon="chevron-left" />
@@ -18,8 +18,7 @@
 <script>
 export default {
   props: {
-    month: String,
-    year: Number,
+    date: Object,
   }
 }
 </script>

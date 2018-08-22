@@ -1,13 +1,12 @@
 <template>
 <div id="app">
   <header>
-    <h1>You can quit!</h1>
+    <h1>{{ $t('title') }}</h1>
   </header>
   <section class="col-2">
     <div class="month-view">
       <month-navigation
-        :month="monthName(date.month)"
-        :year="date.year"
+        :date="date"
         @previous="previousMonth()"
         @change="changeMonth(now.year, now.month)"
         @next="nextMonth()"
@@ -38,7 +37,9 @@
 </template>
 
 <script>
+// get database object authorized in config.js
 import { db } from './firebase'
+// get single file components
 import Month from './components/Month.vue'
 import MonthNavigation from './components/MonthNavigation.vue'
 import Year from './components/Year.vue'
@@ -111,10 +112,6 @@ export default {
       if (status == 1) {
         this.$notify(this.randomSuccessNotification());
       }
-    },
-    // return the month name
-    monthName (monthIndex) {
-      return ['January','February','March','April','May','June','July','August','September','October','November','December'][monthIndex-1];
     },
     // change month to display
     changeMonth (year, month) {
