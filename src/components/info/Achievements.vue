@@ -1,18 +1,18 @@
 <template>
 <div class="container">
-  <h2>Achievements ({{ totalAchievements }})</h2>
+  <h2>{{ totalAchievements }} {{ $tc('achievement', totalAchievements) }}</h2>
   <div class="achievements">
     <!-- single achievement items -->
     <div
-      v-for="(a, k) in achievements"
+      v-for="a in achievements"
       class="item"
-      :class="{ active: getAchievementStatus(k) > 0 }"
+      :class="{ active: getAchievementStatus(a) > 0 }"
     >
-      <div class="badge" v-if="getAchievementStatus(k) > 1">{{ getAchievementStatus(k) }}</div>
-      <font-awesome-icon :icon="a.icon" class="icon" />
+      <div class="badge" v-if="getAchievementStatus(a) > 1">{{ getAchievementStatus(a) }}</div>
+      <font-awesome-icon :icon="$t('achievements.' + a + '.icon')" class="icon" />
       <div class="description">
-        <div class="title">{{ a.title }}</div>
-        {{ a.description }}
+        <div class="title">{{ $t('achievements.' + a + '.title') }}</div>
+        {{ $t('achievements.' + a + '.description') }}
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
@@ -30,78 +30,22 @@ export default {
     return {
       // the achievements object contains all existing achievements
       // to add a new achievement, provide a new key: {title, description, fa-icon-name}
-      achievements: {
-        beginning: {
-          title: 'The Beginning',
-          description: 'Mark the first day successful',
-          icon: 'sign-out-alt',
-        },
-        speed: {
-          title: 'Pick Up Speed',
-          description: '7 successful days in a row',
-          icon: 'tachometer-alt',
-        },
-        alea: {
-          title: 'Alea Iacta Est',
-          description: 'A whole month with 6 fails or less',
-          icon: 'dice-six',
-        },
-        tide: {
-          title: 'The tide is turned',
-          description: 'More successful days than failed days',
-          icon: 'umbrella-beach',
-        },
-        defense: {
-          title: 'Strong Defense',
-          description: '6 successful days after a one day fail',
-          icon: 'shield-alt',
-        },
-        praise: {
-          title: 'Praise The Lord',
-          description: '5 successful sundays in a row',
-          icon: 'church',
-        },
-        uptrend: {
-          title: 'Rising tendency of Success',
-          description: '4 times more successful days than failed days',
-          icon: 'chart-line',
-        },
-        gatherer: {
-          title: 'Gatherer',
-          description: 'Collected 15 achievements',
-          icon: 'award',
-        },
-        news: {
-          title: 'Good News',
-          description: 'Longest streak reached a multiple of 10',
-          icon: 'newspaper',
-        },
-        clean: {
-          title: 'Stay Clean',
-          description: 'A whole month without a fail',
-          icon: 'broom',
-        },
-        strike: {
-          title: 'Tenfold Strike',
-          description: 'Number of successful days reached a multiple of 100',
-          icon: 'bowling-ball',
-        },
-        epic: {
-          title: 'Epic Trophy',
-          description: '40 successful days in a row',
-          icon: 'trophy',
-        },
-        master: {
-          title: 'Master Of Success',
-          description: 'A total of 365 successful days',
-          icon: 'graduation-cap',
-        },
-        legend: {
-          title: 'Legendary Monument',
-          description: 'A whole year without a fail',
-          icon: 'monument',
-        },
-      }
+      achievements: [
+        'beginning',
+        'speed',
+        'alea',
+        'tide',
+        'defense',
+        'praise',
+        'uptrend',
+        'gatherer',
+        'news',
+        'clean',
+        'strike',
+        'epic',
+        'master',
+        'legend',
+      ]
     }
   },
   methods: {
@@ -150,8 +94,8 @@ export default {
     // (as gatherer needs to count the number of achievements without itself)
     totalAchievementsWithoutGatherer () {
       var sum = 0
-      for (const a in this.achievements) {
-        if (this.achievements.hasOwnProperty(a) && a != 'gatherer') {
+      for (let a of this.achievements) {
+        if (a != 'gatherer') {
           sum += this.getAchievementStatus(a)
         }
       }
