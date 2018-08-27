@@ -100,6 +100,11 @@
       "description": "Der längste Lauf ist ein Vielfaches von 10",
       "icon": "newspaper"
     },
+    "madness": {
+      "title": "Multi-Mittwoch",
+      "description": "5 aufeinanderfolgende erfolgreiche Mittwochs",
+      "icon": "grin-tongue-wink"
+    },
     "clean": {
       "title": "Sauber bleiben",
       "description": "Ein ganzer Monat ohne Misserfolg",

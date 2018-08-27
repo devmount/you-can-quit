@@ -33,7 +33,8 @@ import {
   faAward,
   faNewspaper,
   faBowlingBall,
-  faLeaf
+  faLeaf,
+  faGrinTongueWink
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
@@ -63,7 +64,8 @@ library.add(
   faAward,
   faNewspaper,
   faBowlingBall,
-  faLeaf
+  faLeaf,
+  faGrinTongueWink
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Shortkey

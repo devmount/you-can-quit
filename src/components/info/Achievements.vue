@@ -40,6 +40,7 @@ export default {
         'uptrend',
         'gatherer',
         'news',
+        'madness',
         'clean',
         'strike',
         'epic',
@@ -62,6 +63,7 @@ export default {
         case 'uptrend': return this.achievedUptrend
         case 'gatherer': return this.achievedGatherer
         case 'news': return this.achievedNews
+        case 'madness': return this.achievedMadness
         case 'clean': return this.achievedClean
         case 'strike': return this.achievedStrike
         case 'epic': return this.achievedEpic
@@ -202,6 +204,21 @@ export default {
         }
       }
       return Math.floor(max/10)
+    },
+    // achievement: 8 successful wednesdays in a row
+    achievedMadness () {
+      var states = '', n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        if (n.getDay() != 3) {
+          continue
+        }
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
+      }
+      return (states.match(/(s)\1{7}/g) || []).length
     },
     // achievement: a whole month without a fail
     achievedClean () {

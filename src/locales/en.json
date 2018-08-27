@@ -100,6 +100,11 @@
       "description": "Longest streak reached a multiple of 10",
       "icon": "newspaper"
     },
+    "madness": {
+      "title": "Midweek Madness",
+      "description": "8 successful wednesdays in a row",
+      "icon": "grin-tongue-wink"
+    },
     "clean": {
       "title": "Stay Clean",
       "description": "A whole month without a fail",
