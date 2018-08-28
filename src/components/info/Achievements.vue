@@ -16,7 +16,7 @@
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
-    <div v-for="i in 2" class="item offset"></div>
+    <div v-for="i in achievementOffset" class="item offset"></div>
   </div>
 </div>
 </template>
@@ -107,6 +107,11 @@ export default {
         }
       }
       return sum
+    },
+    // achievements are displayed using flexbox
+    // to align the last line left, it is filled up with invisible offset items
+    achievementOffset () {
+      return 5 - (this.achievements.length % 5)
     },
     // achievement: first successful day
     achievedBeginning () {
