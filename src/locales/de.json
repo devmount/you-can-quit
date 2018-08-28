@@ -105,6 +105,11 @@
       "description": "Der längste Lauf ist ein Vielfaches von 10",
       "icon": "newspaper"
     },
+    "spock": {
+      "title": "Lang Und Erfolgreich",
+      "description": "Die ersten 50 erfolgreichen Tage",
+      "icon": "hand-spock"
+    },
     "madness": {
       "title": "Multi-Mittwoch",
       "description": "8 aufeinanderfolgende erfolgreiche Mittwoche",

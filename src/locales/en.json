@@ -105,6 +105,11 @@
       "description": "Longest streak reached a multiple of 10",
       "icon": "newspaper"
     },
+    "spock": {
+      "title": "Long And Prosper",
+      "description": "The first 50 successful days",
+      "icon": "hand-spock"
+    },
     "madness": {
       "title": "Midweek Madness",
       "description": "8 successful wednesdays in a row",

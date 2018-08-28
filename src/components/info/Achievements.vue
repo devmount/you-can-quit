@@ -16,7 +16,7 @@
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
-    <div v-for="i in 3" class="item offset"></div>
+    <div v-for="i in 2" class="item offset"></div>
   </div>
 </div>
 </template>
@@ -40,6 +40,7 @@ export default {
         'uptrend',
         'gatherer',
         'news',
+        'spock',
         'madness',
         'clean',
         'strike',
@@ -65,6 +66,7 @@ export default {
         case 'uptrend': return this.achievedUptrend
         case 'gatherer': return this.achievedGatherer
         case 'news': return this.achievedNews
+        case 'spock': return this.achievedSpock
         case 'madness': return this.achievedMadness
         case 'clean': return this.achievedClean
         case 'strike': return this.achievedStrike
@@ -211,6 +213,10 @@ export default {
         }
       }
       return Math.floor(max/10)
+    },
+    // achievement: first 50 successful days
+    achievedSpock () {
+      return Object.values(this.statusData).filter(value => value == 1).length >= 50 ? 1 : 0
     },
     // achievement: 8 successful wednesdays in a row
     achievedMadness () {
