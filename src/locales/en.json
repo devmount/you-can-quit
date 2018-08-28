@@ -57,8 +57,13 @@
   "achievements": {
     "beginning": {
       "title": "The Beginning",
-      "description": "Mark the first day successful",
+      "description": "The first successful day",
       "icon": "sign-out-alt"
+    },
+    "ten": {
+      "title": "First Ten",
+      "description": "The first 10 successful days",
+      "icon": "tasks"
     },
     "speed": {
       "title": "Pick Up Speed",

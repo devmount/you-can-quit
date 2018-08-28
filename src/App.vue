@@ -152,6 +152,7 @@ export default {
       texts = [
         'There\'s the proof. You rock!',
         'You are awesome!',
+        'You\'re a true inspiration!',
         'Now that\'s how it\'s done!',
         'You are a hero! Seriously!',
         'Another unbreakable proof of your success!'

@@ -57,8 +57,13 @@
   "achievements": {
     "beginning": {
       "title": "Der Anfang",
-      "description": "Markiere den ersten Tag erfolgreich",
+      "description": "Der erste erfolgreiche Tag",
       "icon": "sign-out-alt"
+    },
+    "ten": {
+      "title": "Erste Zehn",
+      "description": "Die ersten 10 erfolgreichen Tage",
+      "icon": "tasks"
     },
     "speed": {
       "title": "Durchstarten",

@@ -29,9 +29,9 @@ export default {
   data () {
     return {
       // the achievements object contains all existing achievements
-      // to add a new achievement, provide a new key: {title, description, fa-icon-name}
       achievements: [
         'beginning',
+        'ten',
         'speed',
         'alea',
         'tide',
@@ -55,6 +55,7 @@ export default {
     getAchievementStatus (a) {
       switch (a) {
         case 'beginning': return this.achievedBeginning
+        case 'ten': return this.achievedTen
         case 'speed': return this.achievedSpeed
         case 'alea': return this.achievedAlea
         case 'tide': return this.achievedTide
@@ -106,6 +107,10 @@ export default {
     // achievement: first successful day
     achievedBeginning () {
       return Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0
+    },
+    // achievement: first 10 successful days
+    achievedTen () {
+      return Object.values(this.statusData).filter(value => value == 1).length >= 10 ? 1 : 0
     },
     // achievement: 7 successful days in a row
     achievedSpeed () {
