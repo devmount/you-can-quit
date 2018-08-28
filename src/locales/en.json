@@ -130,6 +130,11 @@
       "description": "A total of 365 successful days",
       "icon": "graduation-cap"
     },
+    "strength": {
+      "title": "Feat Of Strength",
+      "description": "100 successful days in a row",
+      "icon": "dumbbell"
+    },
     "legend": {
       "title": "Legendary Monument",
       "description": "A whole year without a fail",

@@ -130,6 +130,11 @@
       "description": "365 erfolgreiche Tage",
       "icon": "graduation-cap"
     },
+    "strength": {
+      "title": "Kraftakt",
+      "description": "100 aufeinanderfolgende erfolgreiche Tage",
+      "icon": "dumbbell"
+    },
     "legend": {
       "title": "Legendäres Denkmal",
       "description": "Ein ganzes Jahr ohne Misserfolg",

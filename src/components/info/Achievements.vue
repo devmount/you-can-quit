@@ -45,6 +45,7 @@ export default {
         'strike',
         'epic',
         'master',
+        'strength',
         'legend',
       ]
     }
@@ -69,6 +70,7 @@ export default {
         case 'strike': return this.achievedStrike
         case 'epic': return this.achievedEpic
         case 'master': return this.achievedMaster
+        case 'strength': return this.achievedStrength
         case 'legend': return this.achievedLegend
         default:  break;
       }
@@ -271,6 +273,18 @@ export default {
     // achievement: 365 successful days
     achievedMaster () {
       return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
+    },
+    // achievement: 100 successful days in a row
+    achievedStrength () {
+      var states = '', n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        states = (key in this.statusData && this.statusData[key] == -1) ? states + 'f' : states
+        states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
+        states = !(key in this.statusData) ? states + 'n' : states
+      }
+      return (states.match(/(s)\1{99}/g) || []).length
     },
     // achievement: a whole year without a fail
     achievedLegend () {
