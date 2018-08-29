@@ -36,6 +36,25 @@
     "undecided": "Nicht entschieden markieren",
     "failed": "Gescheitert markieren"
   },
+  "messages": {
+    "titles": [
+      "Geschafft!",
+      "YES!",
+      "Strike!",
+      "Volltreffer!",
+      "Perfekt!",
+      "Nice one!",
+      "Beeindruckend!"
+    ],
+    "texts": [
+      "Das ist der Beweis. Du rockst!",
+      "Du bist großartig!",
+      "Du bist eine echte Inspiration!",
+      "So wird das gemacht!",
+      "Du bist ein Held! Ernsthaft!",
+      "Ein weiterer unwiderlegbarer Beweis deines Erfolgs!"
+    ]
+  },
   "stats": {
     "title": "Statistik",
     "streak": {

@@ -140,27 +140,10 @@ export default {
     },
     // return a notyf message object with random success title and text
     randomSuccessNotification () {
-      var titles = [
-        'You did it!',
-        'YES!',
-        'Strike!',
-        'Bulls Eye!',
-        'Nailed!',
-        'Nice one!',
-        'Impressive!',
-      ],
-      texts = [
-        'There\'s the proof. You rock!',
-        'You are awesome!',
-        'You\'re a true inspiration!',
-        'Now that\'s how it\'s done!',
-        'You are a hero! Seriously!',
-        'Another unbreakable proof of your success!'
-      ]
       return {
         group: 'main',
-        title: titles[Math.floor(Math.random() * titles.length)],
-        text: texts[Math.floor(Math.random() * texts.length)],
+        title: this.$t('messages.titles')[Math.floor(Math.random() * this.$t('messages.titles').length)],
+        text: this.$t('messages.texts')[Math.floor(Math.random() * this.$t('messages.texts').length)],
         duration: 10000
       }
     }
