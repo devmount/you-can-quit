@@ -24,6 +24,14 @@ Enhancement suggestions are also tracked as [GitHub issues](https://github.com/d
 ### Pull Requests
 
 Simply fill in [the required template](PULL_REQUEST_TEMPLATE.md). Please do not include issue numbers in the PR title.
+Consider starting your commit messages with one of the following emojis:
+
+- :heavy_plus_sign: `:heavy_plus_sign:` when adding/implementing a feature or file
+- :hammer: `:hammer:` when fixing a bug or issue
+- :green_heart: `:green_heart:` when improving code, comments or docs
+- :key: `:key:` when dealing with security
+- :arrows_counterclockwise: `:arrows_counterclockwise:` when updating dependencies or data
+- :x: `:x:` when removing code or files
 
 ## Adding Translations
 
