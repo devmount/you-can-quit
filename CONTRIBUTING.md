@@ -4,12 +4,12 @@ First off, thanks for taking the time to contribute! You are awesome! :tada::cla
 
 ## Table Of Contents
 
-  * [How to contribute](#how-to-contribute)
-    * [Reporting Bugs](#reporting-bugs)
-    * [Suggesting Enhancements](#suggesting-enhancements)
-    * [Pull Requests](#pull-requests)
-  * [Adding Translations](#adding-translations)  
-  * [Adding Achievements](#adding-achievements)
+- [How to contribute](#how-to-contribute)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Suggesting Enhancements](#suggesting-enhancements)
+  - [Pull Requests](#pull-requests)
+- [Adding Translations](#adding-translations)  
+- [Adding Achievements](#adding-achievements)
   
 ## How to contribute
 
@@ -24,14 +24,20 @@ Enhancement suggestions are also tracked as [GitHub issues](https://github.com/d
 ### Pull Requests
 
 Simply fill in [the required template](PULL_REQUEST_TEMPLATE.md). Please do not include issue numbers in the PR title.
-Consider starting your commit messages with one of the following emojis:
 
-- :heavy_plus_sign: `:heavy_plus_sign:` when adding/implementing a feature or file
-- :hammer: `:hammer:` when fixing a bug or issue
-- :green_heart: `:green_heart:` when improving code, comments or docs
-- :key: `:key:` when dealing with security
-- :arrows_counterclockwise: `:arrows_counterclockwise:` when updating dependencies or data
-- :x: `:x:` when removing code or files
+#### Git Commit Messages
+
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Limit the first line to 72 characters or less
+- Consider starting your commit messages with one of the following emojis:
+  - :heavy_plus_sign: `:heavy_plus_sign:` when adding/implementing a feature or file
+  - :hammer: `:hammer:` when fixing a bug or issue
+  - :green_heart: `:green_heart:` when improving code, comments or docs
+  - :key: `:key:` when dealing with security
+  - :repeat: `:repeat:` when updating dependencies or data
+  - :shirt: `:shirt:` when removing linter warnings
+  - :x: `:x:` when removing code or files
 
 ## Adding Translations
 
@@ -45,16 +51,16 @@ Achievements are meant to keep the user motivated. It is really important that a
 
 You can propose a new achievements by providing the following information:
 
-  - Key: one word that is unique among all achievements
-  - Title: a catching, funny heading for the achievement
-  - Description: an explanation how to get the achievement
-  - Icon: a [free FontAwesome icon](https://fontawesome.com/icons?d=gallery&m=free). Simply use its name (i.e. address-book).
+- Key: one word that is unique among all achievements
+- Title: a catching, funny heading for the achievement
+- Description: an explanation how to get the achievement
+- Icon: a [free FontAwesome icon](https://fontawesome.com/icons?d=gallery&m=free). Simply use its name (i.e. address-book).
 
 To implement an achievement, you have to touch the following files:
 
-  - `src/main.js`: add your icon in camelCase style to both icon lists
-  - `src/locales/en.json`: add your achievement key to the achievements list and provide title, description and icon
-  - `src/components/info/Achievements.vue`:
-    - Add your key to the keys list in the `data()` Object
-    - Add your key and the corresponding status function to the `getAchievementStatus ()` function
-    - Implement your status function under `computed`. It always returns an integer (how often the achievement was reached).
+- `src/main.js`: add your icon in camelCase style to both icon lists
+- `src/locales/en.json`: add your achievement key to the achievements list and provide title, description and icon
+- `src/components/info/Achievements.vue`:
+  - Add your key to the keys list in the `data()` Object
+  - Add your key and the corresponding status function to the `getAchievementStatus ()` function
+  - Implement your status function under `computed`. It always returns an integer (how often the achievement was reached).
