@@ -40,8 +40,8 @@
 // get database object authorized in config.js
 import { db } from './firebase'
 // get single file components
-import Month from './components/Month.vue'
 import MonthNavigation from './components/MonthNavigation.vue'
+import Month from './components/Month.vue'
 import Year from './components/Year.vue'
 import Info from './components/Info.vue'
 
