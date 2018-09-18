@@ -1,10 +1,10 @@
 # you-can-quit
 
-A tool to track your habits and support your progress in quitting whatever your vice or addiction is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
+A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
 This web app is based on Vue.js and Firebase/Firestore and is _currently in development_.
 
-![screenshot](https://user-images.githubusercontent.com/5441654/43220478-6cd4bea4-904a-11e8-80f0-d26f198c151c.png)
+![screenshot](https://user-images.githubusercontent.com/5441654/45680370-11267e00-bb3b-11e8-86f9-1f6d10336096.png)
 
 ## Get started
 
