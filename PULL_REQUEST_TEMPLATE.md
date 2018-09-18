@@ -1,4 +1,4 @@
-# <Custom Title>
+# ~Custom Title~
 
 ## Requirements
 
