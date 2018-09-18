@@ -107,7 +107,8 @@ export default {
         }
       })
       .catch(function(error) {
-        // an error occured. TODO: error handling
+        // an error occured. TODO: error message style
+        this.$notify(error);
       })
       if (status == 1) {
         this.$notify(this.randomSuccessNotification());

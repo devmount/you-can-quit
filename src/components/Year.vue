@@ -5,7 +5,7 @@
     <!-- day of week labels -->
     <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
     <!-- offset days -->
-    <div v-for="o in dayOfWeekOffset" class="day offset"></div>
+    <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
     <!-- days in current year with month initials -->
     <template v-for="m in 12">
       <div

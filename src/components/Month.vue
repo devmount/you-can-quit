@@ -3,7 +3,7 @@
   <!-- day of week labels -->
   <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
-  <div v-for="o in dayOfWeekOffset" class="day offset"></div>
+  <div v-for="o in dayOfWeekOffset" :class="'day offset month-day-pre-offset-' + o"></div>
   <!-- actual days -->
   <div
     v-for="d in daysInMonth"
@@ -42,7 +42,7 @@
     </div>
   </div>
   <!-- offset days -->
-  <div v-for="o in fillOffset" class="day offset"></div>
+  <div v-for="o in fillOffset" :class="'day offset month-day-post-offset-' + o"></div>
 </div>
 </template>
 
