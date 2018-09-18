@@ -6,6 +6,14 @@ This web app is based on Vue.js and Firebase/Firestore and is _currently in deve
 
 ![screenshot](https://user-images.githubusercontent.com/5441654/45680370-11267e00-bb3b-11e8-86f9-1f6d10336096.png)
 
+## Features
+
+- Simple month and year views to see successful and failed days (and possible patterns) at one glance
+- Stats section with showing current and longest streak (successful days in a row) and the total number of successful days
+- Earn achievements with successful days by reaching various goals
+- Supports multiple languages
+- Supports shortcuts (<kbd>←</kbd> and <kbd>→</kbd> to go to previous/next month, <kbd>R</kbd> to reset to current month)
+
 ## Get started
 
 1. Get all files
