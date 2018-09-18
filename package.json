@@ -55,5 +55,10 @@
   ],
   "vue": {
     "baseUrl": ""
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
   }
 }
