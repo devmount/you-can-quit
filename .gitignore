@@ -1,7 +1,10 @@
+# general directories
 .DS_Store
 node_modules
-/dist
+
+# exclude config (firebase credentials) and therefore also dist/
 src/config.js
+/dist
 
 # local env files
 .env.local
