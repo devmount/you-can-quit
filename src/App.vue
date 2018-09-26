@@ -226,12 +226,19 @@ button {
   margin: 40px 0;
 }
 #app > section {
-  width: 1200px;
   margin: auto;
   padding: .5em 0 1.5em 0;
 }
-.col-2 {
-  display: flex;
+@media (min-width: 1200px) {
+  #app > section {
+    width: 1200px;
+  }
+  .col-2 {
+    display: flex;
+  }
+}
+.col-2 > div {
+  margin: 0 auto;
 }
 .col-2 > .month-view {
   width: 800px;

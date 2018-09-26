@@ -1,30 +1,32 @@
 <template>
 <div>
   <h2>{{ date.year }}</h2>
-  <div class="year-day-grid">
-    <!-- day of week labels -->
-    <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
-    <!-- offset days -->
-    <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
-    <!-- days in current year with month initials -->
-    <template v-for="m in 12">
-      <div
-        v-for="(d,i) in daysInMonth(m)"
-        class="day"
-        :class="{
-          today: isToday(date.year, m, d),
-          tomonth: m == date.month,
-          success: statusData[getDate(date.year, m, d)] == 1,
-          fail: statusData[getDate(date.year, m, d)] == -1
-        }"
-        :title="
-          (isToday(date.year, m, d) ? 'Today' : '') + 
-          (i == 0 ? $t('name.month.' + m) : '')
-        "
-      >
-        <span v-if="i == 0">{{ $t('name.month.' + m).slice(0, 1) }}</span>
-      </div>
-    </template>
+  <div class="year-container">
+    <div class="year-day-grid">
+      <!-- day of week labels -->
+      <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+      <!-- offset days -->
+      <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
+      <!-- days in current year with month initials -->
+      <template v-for="m in 12">
+        <div
+          v-for="(d,i) in daysInMonth(m)"
+          class="day"
+          :class="{
+            today: isToday(date.year, m, d),
+            tomonth: m == date.month,
+            success: statusData[getDate(date.year, m, d)] == 1,
+            fail: statusData[getDate(date.year, m, d)] == -1
+          }"
+          :title="
+            (isToday(date.year, m, d) ? 'Today' : '') + 
+            (i == 0 ? $t('name.month.' + m) : '')
+          "
+        >
+          <span v-if="i == 0">{{ $t('name.month.' + m).slice(0, 1) }}</span>
+        </div>
+      </template>
+    </div>
   </div>
 </div>
 </template>
@@ -70,7 +72,11 @@ export default {
 </script>
 
 <style>
+.year-container {
+  overflow-x: auto;
+}
 .year-day-grid {
+  width: 1200px;
   display: flex;
   flex-flow: column wrap;
   align-content: center;
