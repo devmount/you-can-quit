@@ -16,8 +16,7 @@
       fail: statusData[getDate(date.year, date.month, d)] == -1
     }"
     :title="isToday(date.year, date.month, d) ? $t('today') : ''"
-  >
-    {{ d }}
+  >{{ d }}
     <div v-if="isPast(date.year, date.month, d)" class="action">
       <button
         @click="$emit('update', date.year, date.month, d, 1)"
