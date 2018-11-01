@@ -72,7 +72,7 @@ export default {
     },
     // check if date is a future date
     isFuture (year, month, day) {
-      return new Date(year, month, day) > new Date(this.now.year, this.now.month, this.now.day)
+      return new Date(year, month-1, day) > new Date(this.now.year, this.now.month-1, this.now.day)
     },
     // check if date is today
     isToday (year, month, day) {
@@ -80,7 +80,7 @@ export default {
     },
     // check if date is past
     isPast (year, month, day) {
-      return new Date(year, month, day) < new Date(this.now.year, this.now.month, this.now.day)
+      return new Date(year, month-1, day) < new Date(this.now.year, this.now.month-1, this.now.day)
     },
   }
 }
