@@ -19,7 +19,7 @@ Before creating bug reports, please make sure there isn't already an existing is
 
 ### Suggesting Enhancements
 
-Enhancement suggestions are also tracked as [GitHub issues](https://github.com/devmount/you-can-quit/issues). Before creating enhancement suggestions, please check the existing issues as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please include as many details as possible. Fill in [the template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the feature you're requesting existed.
+Enhancement suggestions are also tracked as [GitHub issues](https://github.com/devmount/you-can-quit/issues). Before creating enhancement suggestions, please check the existing issues as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please include as many details as possible. Fill in [the template](https://github.com/devmount/you-can-quit/issues/new?template=feature_request.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
 ### Pull Requests
 
