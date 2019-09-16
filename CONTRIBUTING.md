@@ -37,6 +37,7 @@ Simply fill in [the required template](PULL_REQUEST_TEMPLATE.md). Please do not 
   - :key: `:key:` when dealing with security
   - :repeat: `:repeat:` when updating dependencies or data
   - :shirt: `:shirt:` when removing linter warnings
+  - :gear: `:gear:` when reconfiguring something
   - :x: `:x:` when removing code or files
 
 ## Adding Translations
