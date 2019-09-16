@@ -48,7 +48,7 @@ Finally you can add your new language file in the `src/main.js` to the `messages
 
 ## Adding Achievements
 
-Achievements are meant to keep the user motivated. It is really important that an achievement motivates success and makes somehow sense (good example: "more than 10 successful days in a row", bad example: "alternating successful and failed days for 10 days").
+Achievements are meant to keep the user motivated. It is really important that an achievement motivates success and makes somehow sense (good example: "10 successful days in a row", bad example: "alternating successful and failed days for 10 days").
 
 You can propose a new achievements by providing the following information:
 
