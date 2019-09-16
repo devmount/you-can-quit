@@ -66,4 +66,4 @@ This web app is based on Vue.js and Firebase/Firestore and is _currently in deve
 
 ---
 
-you-can-quit is completely free to use. If you enjoy it, please consider [contributing](./CONTRIBUTION.md) or [donating via Paypal](https://paypal.me/devmount) for further development. :green_heart:
+you-can-quit is completely free to use. If you enjoy it, please consider [contributing](./CONTRIBUTING.md) or [donating via Paypal](https://paypal.me/devmount) for further development. :green_heart:
