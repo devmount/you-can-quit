@@ -15,7 +15,7 @@ First off, thanks for taking the time to contribute! You are awesome! :tada::cla
 
 ### Reporting Bugs
 
-Before creating bug reports, please make sure there isn't already an existing issue describing your problem, for bugs are tracked as [GitHub issues](https://github.com/devmount/you-can-quit/issues). Simply create an issue and provide the necessary information by filling in [the template](ISSUE_TEMPLATE.md).
+Before creating bug reports, please make sure there isn't already an existing issue describing your problem, for bugs are tracked as [GitHub issues](https://github.com/devmount/you-can-quit/issues). Simply create an issue and provide the necessary information by filling in [the template](https://github.com/devmount/you-can-quit/issues/new?template=bug_report.md).
 
 ### Suggesting Enhancements
 
