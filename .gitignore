@@ -2,8 +2,7 @@
 .DS_Store
 node_modules
 
-# exclude config (firebase credentials) and therefore also dist/
-src/config.js
+# exclude dist
 /dist
 
 # local env files

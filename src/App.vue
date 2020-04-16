@@ -15,20 +15,20 @@
         :day-of-week-offset="dayOfWeekOffset"
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
-        :status-data="idays"
+        :status-data="data"
         :date="date"
         @update="updateDay"
       />
     </div>
     <div class="info-view">
       <Info
-        :status-data="idays"
+        :status-data="data"
       />
     </div>
   </section>
   <section>
     <year
-      :status-data="idays"
+      :status-data="data"
       :date="date"
     />
   </section>
@@ -37,10 +37,8 @@
 </template>
 
 <script>
-// get database object authorized in config.js
-import { db } from './firebase'
-// get indexeddb
-import idb from './database'
+// get indexed db
+import db from './database'
 // get single file components
 import MonthNavigation from './components/MonthNavigation.vue'
 import Month from './components/Month.vue'
@@ -49,11 +47,6 @@ import Info from './components/Info.vue'
 
 export default {
   name: 'app',
-  firestore () {
-    return {
-      days: db.collection('days'),
-    }
-  },
   components: {
     Month,
     MonthNavigation,
@@ -74,7 +67,7 @@ export default {
         month: now.getMonth()+1,
         year: now.getFullYear()
       },
-      idays: {}
+      data: {}
     }
   },
   created () {
@@ -83,10 +76,10 @@ export default {
   methods: {
     async fetchData () {
       let days = {}
-      await idb.days.toCollection().each(d => {
+      await db.days.toCollection().each(d => {
         days[d.name] = d.status
       })
-      this.idays = days
+      this.data = days
     },
     // build date format yyyy-mm-dd
     getDate (year, month, day) {
@@ -98,11 +91,11 @@ export default {
       var date = this.getDate(year, month, day)
       // delete record if status == 0 (reset)
       if (status == 0) {
-        await idb.days.delete(date)
+        await db.days.delete(date)
       }
       // add/update record if status == 1 || -1 (success || fail)
       else {
-        await idb.days.put({name: date, status: status})
+        await db.days.put({name: date, status: status})
         if (status == 1) {
           this.$notify(this.randomSuccessNotification());
         }
@@ -159,14 +152,6 @@ export default {
       var offset = 36 - (this.daysInMonth + this.dayOfWeekOffset);
       return offset > 0 ? offset : 0;
     },
-    // prepare data in format: yyyy-mm-dd => status
-    statusData () {
-      var statusData = {}
-      this.days.forEach(function(day) {
-          statusData[day.name] = day.status
-      })
-      return statusData
-    }
   }
 }
 </script>

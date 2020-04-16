@@ -1,9 +1,6 @@
 // Vue Js
 import Vue from 'vue'
 import App from './App.vue'
-// Firestore
-import VueFirestore from 'vue-firestore'
-Vue.use(VueFirestore)
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
