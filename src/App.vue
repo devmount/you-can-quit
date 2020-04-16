@@ -15,20 +15,20 @@
         :day-of-week-offset="dayOfWeekOffset"
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
-        :status-data="statusData"
+        :status-data="idays"
         :date="date"
         @update="updateDay"
       />
     </div>
     <div class="info-view">
       <Info
-        :status-data="statusData"
+        :status-data="idays"
       />
     </div>
   </section>
   <section>
     <year
-      :status-data="statusData"
+      :status-data="idays"
       :date="date"
     />
   </section>
@@ -39,6 +39,8 @@
 <script>
 // get database object authorized in config.js
 import { db } from './firebase'
+// get indexeddb
+import idb from './database'
 // get single file components
 import MonthNavigation from './components/MonthNavigation.vue'
 import Month from './components/Month.vue'
@@ -71,48 +73,42 @@ export default {
         weekday: now.getDay()+1,
         month: now.getMonth()+1,
         year: now.getFullYear()
-      }
+      },
+      idays: {}
     }
   },
+  created () {
+    this.fetchData()
+  },
   methods: {
+    async fetchData () {
+      let days = {}
+      await idb.days.toCollection().each(d => {
+        days[d.name] = d.status
+      })
+      this.idays = days
+    },
     // build date format yyyy-mm-dd
     getDate (year, month, day) {
       return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
     },
     // update the status of a day to 1, 0 or -1
-    updateDay (year, month, day, status) {
+    async updateDay (year, month, day, status) {
       // get date format yyyy-mm-dd
-      var date = this.getDate(year, month, day), self = this
-      // find existing records by date of date format above
-      this.$firestore.days.where("name", "==", date).get().then(function(result) {
-        if (result.empty) {
-          if (status != 0) {
-            // record doesn't exist and status is not undecided: add it
-            self.$firestore.days.add(
-              {
-                name: date,
-                status: status,
-                timestamp: new Date()
-              }
-            )
-          }
-        } else {
-          if (status == 0) {
-            // day is undecided: delete it from database
-            self.$firestore.days.doc(result.docs[0].id).delete()
-          } else {
-            // record exists: update its status
-            self.$firestore.days.doc(result.docs[0].id).update({status: status})
-          }
-        }
-      })
-      .catch(function(error) {
-        // an error occured. TODO: error message style
-        this.$notify(error);
-      })
-      if (status == 1) {
-        this.$notify(this.randomSuccessNotification());
+      var date = this.getDate(year, month, day)
+      // delete record if status == 0 (reset)
+      if (status == 0) {
+        await idb.days.delete(date)
       }
+      // add/update record if status == 1 || -1 (success || fail)
+      else {
+        await idb.days.put({name: date, status: status})
+        if (status == 1) {
+          this.$notify(this.randomSuccessNotification());
+        }
+      }
+      // update db
+      this.fetchData()
     },
     // change month to display
     changeMonth (year, month) {
