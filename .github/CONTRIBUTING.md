@@ -23,7 +23,7 @@ Enhancement suggestions are also tracked as [GitHub issues](https://github.com/d
 
 ### Pull Requests
 
-Simply fill in [the required template](PULL_REQUEST_TEMPLATE.md). Please do not include issue numbers in the PR title.
+Simply fill in [the required template](./PULL_REQUEST_TEMPLATE.md). Please do not include issue numbers in the PR title.
 
 #### Git Commit Messages
 

@@ -1,6 +1,6 @@
 # you-can-quit
 
-[![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md) [![release](https://img.shields.io/badge/release-v0.2.0-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit/releases) [![size](https://img.shields.io/badge/size-500%20KB-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-78d19a.svg?style=flat-square)](./CONTRIBUTING.md)
+[![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md) [![release](https://img.shields.io/badge/release-v0.2.0-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit/releases) [![size](https://img.shields.io/badge/size-500%20KB-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-78d19a.svg?style=flat-square)](.github/CONTRIBUTING.md)
 
 A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
@@ -45,4 +45,4 @@ This web app is based on Vue.js and Dexie.js and is _currently in development_.
 
 ---
 
-you-can-quit is completely free to use. If you enjoy it, please consider [contributing](./CONTRIBUTING.md) or [donating via Paypal](https://paypal.me/devmount) for further development. :green_heart:
+you-can-quit is completely free to use. If you enjoy it, please consider [contributing](.github/CONTRIBUTING.md) or [donating via Paypal](https://paypal.me/devmount) for further development. :green_heart:
