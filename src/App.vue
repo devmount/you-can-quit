@@ -219,8 +219,13 @@ body {
   --c-background: #3d444c;
   --c-background-element: #4b535d;
   --c-background-element-variant: #57606b;
+  --c-background-element-variant-transparent: #57606b44;
   --c-accent: #9aeab9;
   --c-accent-variant: #78d19a;
+  --c-accent-variant-transparent: #78d19a44;
+  --c-danger: #ea9ab2;
+  --c-danger-variant: #d17887;
+  --c-danger-variant-transparent: #d1788744;
   --c-shadow: #24292e;
   background-color: var(--c-background); 
   color: var(--c-text-normal);
@@ -283,11 +288,68 @@ button {
 .col-2 > .info-view {
   width: 400px;
 }
+.col-half {
+  width: 50%;
+}
 .mt-1 {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 .mt-2 {
-  margin-top: 2em;
+  margin-top: 2rem;
+}
+.px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.btn {
+  background: var(--c-background-element-variant);
+  border: 2px solid var(--c-background-element-variant);
+  color: var(--c-text-light);
+  appearance: none;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  padding: .6rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background .2s, border .2s, box-shadow .2s, color .2s;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.btn:focus,
+.btn:hover,
+.btn:active {
+  box-shadow: 0 0 0 .3rem var(--c-background-element-variant-transparent);
+  text-decoration: none;
+}
+.btn.btn-primary {
+  background: var(--c-accent-variant);
+  border: 2px solid var(--c-accent-variant);
+  color: var(--c-text-light);
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover,
+.btn.btn-primary:active {
+  box-shadow: 0 0 0 .3rem var(--c-accent-variant-transparent);
+}
+.btn.btn-danger {
+  background: var(--c-danger-variant);
+  border: 2px solid var(--c-danger-variant);
+  color: var(--c-text-light);
+}
+.btn.btn-danger:focus,
+.btn.btn-danger:hover,
+.btn.btn-danger:active {
+  box-shadow: 0 0 0 .3rem var(--c-danger-variant-transparent);
+}
+.btn[type=file] {
+  padding: .4rem;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-around;
 }
 #app .vue-notification {
   cursor: pointer;
