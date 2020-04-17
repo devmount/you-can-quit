@@ -29,6 +29,10 @@
     "previous": "Vorheriger Monat",
     "next": "Nächster Monat"
   },
+  "year": {
+    "previous": "Vorheriges Jahr",
+    "next": "Nächstes Jahr"
+  },
   "reset": "Reset",
   "today": "Heute",
   "mark": {

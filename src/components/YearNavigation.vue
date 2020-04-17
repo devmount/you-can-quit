@@ -1,10 +1,10 @@
 <template>
 <div class="navigation" tabindex="0">
-  <h2>{{ $t('name.month.' + date.month) }} {{ date.year }}</h2>
+  <h2>{{ date.year }}</h2>
   <div class="button-group">
     <button
       @click="$emit('previous')"
-      :title="$t('month.previous') + ' [←]'"
+      :title="$t('year.previous') + ' CTRL+[←]'"
     >
       <font-awesome-icon icon="chevron-left" />
     </button>
@@ -16,7 +16,7 @@
     </button>
     <button
       @click="$emit('next')"
-      :title="$t('month.next') + ' [→]'"
+      :title="$t('year.next') + ' CTRL+[→]'"
     >
       <font-awesome-icon icon="chevron-right" />
     </button>

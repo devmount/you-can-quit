@@ -1,6 +1,5 @@
 <template>
 <div>
-  <h2>{{ date.year }}</h2>
   <div class="year-container">
     <div class="year-day-grid">
       <!-- day of week labels -->

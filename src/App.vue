@@ -35,6 +35,12 @@
     </div>
   </section>
   <section>
+    <year-navigation
+      :date="date"
+      @previous="previousYear()"
+      @change="changeMonth(now.year, now.month)"
+      @next="nextYear()"
+    />
     <year
       :status-data="data"
       :date="date"
@@ -67,6 +73,7 @@ import db from './database'
 // get single file components
 import MonthNavigation from './components/MonthNavigation.vue'
 import Month from './components/Month.vue'
+import YearNavigation from './components/YearNavigation.vue'
 import Year from './components/Year.vue'
 import Info from './components/Info.vue'
 
@@ -76,6 +83,7 @@ export default {
     Month,
     MonthNavigation,
     Year,
+    YearNavigation,
     Info
   },
   data () {
