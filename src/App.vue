@@ -34,6 +34,7 @@
   </section>
   <section>
     <button @click="exportBackup">Export Data</button>
+    <input type="file" ref="backupFile" @change="importBackup">
   </section>
   <notifications group="main" position="bottom right"/>
 </div>
@@ -140,15 +141,38 @@ export default {
         duration: 10000
       }
     },
+    // create a file download of whole database as JSON
     exportBackup () {
       this.download(JSON.stringify(this.data), 'backup.json', 'text/plain')
     },
+    // import a backup JSON file and replace current database
+    importBackup () {
+      let file = this.$refs.backupFile.files[0]
+      if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return
+      
+      let reader = new FileReader()
+      reader.readAsText(file, "UTF-8")
+      reader.onload = async (evt) => {
+        let backup = JSON.parse(evt.target.result)
+        for (const date in backup) {
+          if (backup.hasOwnProperty(date)) {
+            const status = backup[date];
+            await db.days.put({name: date, status: status})
+          }
+        }
+        this.fetchData()
+      }
+      reader.onerror = evt => {
+        // eslint-disable-next-line
+        console.error(evt)
+      }
+    },
+    // execute a file download
     download (content, fileName, contentType) {
-      var a = document.createElement("a");
-      var file = new Blob([content], {type: contentType});
-      a.href = URL.createObjectURL(file);
-      a.download = fileName;
-      a.click();
+      let a = document.createElement("a"), file = new Blob([content], {type: contentType})
+      a.href = URL.createObjectURL(file)
+      a.download = fileName
+      a.click()
     }
   },
   computed: {
