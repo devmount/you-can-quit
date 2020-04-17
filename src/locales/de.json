@@ -166,6 +166,18 @@
     }
   },
   "admin": {
+    "title": "Administration",
+    "backup": {
+      "title": "Backupbereich",
+      "text": "Hier kannst du deine aktuellen Daten manuell herunterladen. Du kannst das als Backup benutzen oder zum Transfer deiner Daten in einen anderen Browser oder auf ein anderes Gerät.",
+      "buttonExport": "Datenbank Exportieren"
+    },
+    "danger": {
+      "title": "Gefahrenbereich",
+      "text": "Hier kannst du eine zuvor exportierte JSON Datei importieren or oder alle Daten löschen um neu anzufangen. Ein Import überschreibt alle bisherigen Daten und ein Leeren der Datenbank löscht jegliche Daten. Lege immer vorher ein Backup an um Datenverlust zu vermeiden!",
+      "buttonImport": "Datenbank Importieren",
+      "buttonClear": "Datenbank Leeren"
+    },
     "exportSuccess": {
       "title": "Export erfolgreich",
       "text": "Datenbank erfolgreich exportiert."

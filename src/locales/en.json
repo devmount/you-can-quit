@@ -166,6 +166,18 @@
     }
   },
   "admin": {
+    "title": "Administration",
+    "backup": {
+      "title": "Backup Zone",
+      "text": "Here you can manually export your current data. You can use this as backup or to transfer your data to another browser or machine.",
+      "buttonExport": "Export Database"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "text": "Here you can import a previously exported JSON file or you can clear all data to start over again. An import overwrites all existing records and a database wipe removes the complete database. Make sure to always backup your data first to prevent data loss!",
+      "buttonImport": "Import Database",
+      "buttonClear": "Clear Database"
+    },
     "exportSuccess": {
       "title": "Export successful",
       "text": "Database successfully exported."
