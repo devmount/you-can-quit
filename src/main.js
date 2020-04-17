@@ -71,8 +71,6 @@ library.add(
   faHandSpock
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-// Vue Shortkey
-Vue.use(require('vue-shortkey'))
 // Vue Notifications
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
