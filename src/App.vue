@@ -38,7 +38,7 @@
       <h3>Backup Zone</h3>
       <p>Here you can manually export your current data.
          You can use this as backup or to transfer your data to another browser or machine.</p>
-      <button class="btn btn-primary" @click="exportBackup">Export Data</button>
+      <button class="btn btn-primary" @click="exportBackup"><strong>Export</strong> Database</button>
     </div>
     <div class="col-half px-1 danger-zone">
       <h3>Danger Zone</h3>
@@ -46,8 +46,9 @@
          An import overwrites all existing records and a database wipe removes the complete database.
          Make sure to always backup your data first to prevent data loss!</p>
       <div class="btn-group">
-        <input class="btn btn-danger" type="file" ref="backupFile" @change="importBackup">
-        <button class="btn btn-danger" @click="clearDatabase">Clear Database</button>
+        <label class="btn btn-danger" for="backup"><strong>Import</strong> Database</label>
+        <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="importBackup">
+        <button class="btn btn-danger" @click="clearDatabase"><strong>Clear</strong> Database</button>
       </div>
     </div>
   </section>
@@ -259,9 +260,10 @@ button {
   outline: none;
   background: transparent;
   cursor: pointer;
+  font-family: inherit;
 }
 #app {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -271,12 +273,18 @@ button {
   margin: auto;
   padding: .5em 0 1.5em 0;
 }
+#app > section p {
+  text-align: left;
+}
 @media (min-width: 1200px) {
   #app > section {
     width: 1200px;
   }
   .col-2 {
     display: flex;
+  }
+  .col-half {
+    width: 50%;
   }
 }
 .col-2 > div {
@@ -289,7 +297,7 @@ button {
   width: 400px;
 }
 .col-half {
-  width: 50%;
+  width: 90%;
 }
 .mt-1 {
   margin-top: 1rem;
@@ -301,10 +309,14 @@ button {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.hidden {
+  display: none;
+}
 .btn {
   background: var(--c-background-element-variant);
   border: 2px solid var(--c-background-element-variant);
   color: var(--c-text-light);
+  font-size: 16px;
   appearance: none;
   border-radius: 2px;
   cursor: pointer;
@@ -343,9 +355,6 @@ button {
 .btn.btn-danger:hover,
 .btn.btn-danger:active {
   box-shadow: 0 0 0 .3rem var(--c-danger-variant-transparent);
-}
-.btn[type=file] {
-  padding: .4rem;
 }
 .btn-group {
   display: flex;
