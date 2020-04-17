@@ -2,9 +2,11 @@
 <div
   id="app"
   ref="container"
+  @keydown.ctrl.left.exact="previousYear()"
   @keydown.left.exact="previousMonth()"
   @keydown.82.prevent="changeMonth(now.year, now.month)"
   @keydown.right.exact="nextMonth()"
+  @keydown.ctrl.right.exact="nextYear()"
 >
   <header>
     <h1>{{ $t('title') }}</h1>
@@ -153,6 +155,14 @@ export default {
     // go to previous month
     previousMonth () {
       this.changeMonth(this.date.year, this.date.month-1)
+    },
+    // go to next year
+    nextYear () {
+      this.changeMonth(this.date.year+1, this.date.month)
+    },
+    // go to previous year
+    previousYear () {
+      this.changeMonth(this.date.year-1, this.date.month)
     },
     // return a notyf message object with random success title and text
     randomSuccessNotification () {
