@@ -32,6 +32,9 @@
       :date="date"
     />
   </section>
+  <section>
+    <button @click="exportBackup">Export Data</button>
+  </section>
   <notifications group="main" position="bottom right"/>
 </div>
 </template>
@@ -136,6 +139,16 @@ export default {
         text: this.$t('messages.texts')[Math.floor(Math.random() * this.$t('messages.texts').length)],
         duration: 10000
       }
+    },
+    exportBackup () {
+      this.download(JSON.stringify(this.data), 'backup.json', 'text/plain')
+    },
+    download (content, fileName, contentType) {
+      var a = document.createElement("a");
+      var file = new Blob([content], {type: contentType});
+      a.href = URL.createObjectURL(file);
+      a.download = fileName;
+      a.click();
     }
   },
   computed: {
