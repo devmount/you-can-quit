@@ -32,10 +32,24 @@
       :date="date"
     />
   </section>
-  <section>
-    <button @click="exportBackup">Export Data</button>
-    <input type="file" ref="backupFile" @change="importBackup">
-    <button @click="clearDatabase">Clear Database</button>
+  <h2>Administration</h2>
+  <section class="col-2">
+    <div class="col-half px-1 backup-zone">
+      <h3>Backup Zone</h3>
+      <p>Here you can manually export your current data.
+         You can use this as backup or to transfer your data to another browser or machine.</p>
+      <button class="btn btn-primary" @click="exportBackup">Export Data</button>
+    </div>
+    <div class="col-half px-1 danger-zone">
+      <h3>Danger Zone</h3>
+      <p>Here you can import a previously exported JSON file or you can clear all data to start over again.
+         An import overwrites all existing records and a database wipe removes the complete database.
+         Make sure to always backup your data first to prevent data loss!</p>
+      <div class="btn-group">
+        <input class="btn btn-danger" type="file" ref="backupFile" @change="importBackup">
+        <button class="btn btn-danger" @click="clearDatabase">Clear Database</button>
+      </div>
+    </div>
   </section>
   <notifications group="main" position="bottom right"/>
 </div>
