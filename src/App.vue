@@ -35,6 +35,7 @@
   <section>
     <button @click="exportBackup">Export Data</button>
     <input type="file" ref="backupFile" @change="importBackup">
+    <button @click="clearDatabase">Clear Database</button>
   </section>
   <notifications group="main" position="bottom right"/>
 </div>
@@ -166,6 +167,10 @@ export default {
         // eslint-disable-next-line
         console.error(evt)
       }
+    },
+    async clearDatabase () {
+      await db.days.toCollection().delete()
+      this.data = {}
     },
     // execute a file download
     download (content, fileName, contentType) {
