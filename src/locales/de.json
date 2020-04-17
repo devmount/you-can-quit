@@ -164,6 +164,19 @@
       "description": "Ein ganzes Jahr ohne Misserfolg",
       "icon": "monument"
     }
+  },
+  "admin": {
+    "exportSuccess": {
+      "title": "Export erfolgreich",
+      "text": "Datenbank erfolgreich exportiert."
+    },
+    "importSuccess": {
+      "title": "Import erfolgreich",
+      "text": "Datenbank erfolgreich importiert und vorherige Daten überschrieben."
+    },
+    "clearSuccess": {
+      "title": "Clearing erfolgreich",
+      "text": "Datenbank erfolgreich zurückgesetzt und vorherige Daten entfernt."
+    }
   }
-
 }

@@ -160,6 +160,12 @@ export default {
     // create a file download of whole database as JSON
     exportBackup () {
       this.download(JSON.stringify(this.data), 'backup.json', 'text/plain')
+      this.$notify({
+        group: 'main',
+        title: this.$t('admin.exportSuccess.title'),
+        text: this.$t('admin.exportSuccess.text'),
+        duration: 6000
+      });
     },
     // import a backup JSON file and replace current database
     importBackup () {
@@ -177,6 +183,12 @@ export default {
           }
         }
         this.fetchData()
+        this.$notify({
+          group: 'main',
+          title: this.$t('admin.importSuccess.title'),
+          text: this.$t('admin.importSuccess.text'),
+          duration: 6000
+        });
       }
       reader.onerror = evt => {
         // eslint-disable-next-line
@@ -186,6 +198,12 @@ export default {
     async clearDatabase () {
       await db.days.toCollection().delete()
       this.data = {}
+      this.$notify({
+        group: 'main',
+        title: this.$t('admin.clearSuccess.title'),
+        text: this.$t('admin.clearSuccess.text'),
+        duration: 6000
+      });
     },
     // execute a file download
     download (content, fileName, contentType) {

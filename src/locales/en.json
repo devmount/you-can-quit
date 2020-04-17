@@ -164,6 +164,19 @@
       "description": "A whole year without a fail",
       "icon": "monument"
     }
+  },
+  "admin": {
+    "exportSuccess": {
+      "title": "Export successful",
+      "text": "Database successfully exported."
+    },
+    "importSuccess": {
+      "title": "Import successful",
+      "text": "Database successfully imported and previous data overwritten."
+    },
+    "clearSuccess": {
+      "title": "Clearing successful",
+      "text": "Database successfully cleared and previous data removed."
+    }
   }
-
 }
