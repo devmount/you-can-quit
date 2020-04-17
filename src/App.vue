@@ -1,5 +1,11 @@
 <template>
-<div id="app">
+<div
+  id="app"
+  ref="container"
+  @keydown.left.exact="previousMonth()"
+  @keydown.82.prevent="changeMonth(now.year, now.month)"
+  @keydown.right.exact="nextMonth()"
+>
   <header>
     <h1>{{ $t('title') }}</h1>
   </header>
@@ -90,6 +96,9 @@ export default {
   created () {
     this.fetchData()
   },
+  mounted () {
+		this.$refs['container'].focus()
+	},
   methods: {
     async fetchData () {
       let days = {}

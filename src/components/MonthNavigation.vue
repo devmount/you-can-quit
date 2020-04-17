@@ -1,27 +1,21 @@
 <template>
-<div class="navigation">
+<div class="navigation" tabindex="0">
   <h2>{{ $t('name.month.' + date.month) }} {{ date.year }}</h2>
   <div class="button-group">
     <button
       @click="$emit('previous')"
-      v-shortkey="['arrowleft']"
-      @shortkey="$emit('previous')"
       :title="$t('month.previous') + ' [←]'"
     >
       <font-awesome-icon icon="chevron-left" />
     </button>
     <button
       @click="$emit('change')"
-      v-shortkey="['r']"
-      @shortkey="$emit('change')"
-      :title="$t('reset') + ' [r]'"
+      :title="$t('reset') + ' [R]'"
     >
       <font-awesome-icon icon="undo-alt" />
     </button>
     <button
       @click="$emit('next')"
-      v-shortkey="['arrowright']"
-      @shortkey="$emit('next')"
       :title="$t('month.next') + ' [→]'"
     >
       <font-awesome-icon icon="chevron-right" />
