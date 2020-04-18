@@ -180,7 +180,11 @@
       "title": "Gefahrenbereich",
       "text": "Hier kannst du eine zuvor exportierte JSON Datei importieren or oder alle Daten löschen um neu anzufangen. Ein Import überschreibt alle bisherigen Daten und ein Leeren der Datenbank löscht jegliche Daten. Lege immer vorher ein Backup an um Datenverlust zu vermeiden!",
       "buttonImport": "Datenbank Importieren",
-      "buttonClear": "Datenbank Leeren"
+      "buttonClear": "Datenbank Leeren",
+      "confirmImport": "Daten wirklich überschreiben?",
+      "confirmClear": "Daten wirklich löschen?",
+      "yes": "Ja",
+      "no": "Nein"
     },
     "exportSuccess": {
       "title": "Export erfolgreich",

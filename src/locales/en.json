@@ -180,7 +180,11 @@
       "title": "Danger Zone",
       "text": "Here you can import a previously exported JSON file or you can clear all data to start over again. An import overwrites all existing records and a database wipe removes the complete database. Make sure to always backup your data first to prevent data loss!",
       "buttonImport": "Import Database",
-      "buttonClear": "Clear Database"
+      "buttonClear": "Clear Database",
+      "confirmImport": "Really Overwrite Data?",
+      "confirmClear": "Really Remove Data?",
+      "yes": "Yes",
+      "no": "No"
     },
     "exportSuccess": {
       "title": "Export successful",

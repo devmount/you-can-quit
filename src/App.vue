@@ -59,7 +59,12 @@
       <div class="btn-group">
         <label class="btn btn-danger" for="backup">{{ $t('admin.danger.buttonImport') }}</label>
         <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="importBackup">
-        <button class="btn btn-danger" @click="clearDatabase">{{ $t('admin.danger.buttonClear') }}</button>
+        <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ $t('admin.danger.buttonClear') }}</button>
+        <button v-if="confirm.clear" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.clear }">
+          {{ $t('admin.danger.confirmClear') }}
+          <span class="btn-mini" @click="clearDatabase">{{ $t('admin.danger.yes') }}</span>
+          <span class="btn-mini" @click="confirm.clear = false">{{ $t('admin.danger.no') }}</span>
+        </button>
       </div>
     </div>
   </section>
@@ -92,15 +97,19 @@ export default {
     return {
       date: {
         month: now.getMonth()+1,
-        year: now.getFullYear()
+        year: now.getFullYear(),
       },
       now: {
         day: now.getDate(),
         weekday: now.getDay()+1,
         month: now.getMonth()+1,
-        year: now.getFullYear()
+        year: now.getFullYear(),
       },
-      data: {}
+      data: {},
+      confirm: {
+        import: false,
+        clear: false,
+      },
     }
   },
   created () {
@@ -269,6 +278,8 @@ body {
   --c-danger: #ea9ab2;
   --c-danger-variant: #d17887;
   --c-danger-variant-transparent: #d1788744;
+  --c-danger-important: #d8344f;
+  --c-danger-important-variant: #ac2a40;
   --c-shadow: #24292e;
   background-color: var(--c-background); 
   color: var(--c-text-normal);
@@ -397,6 +408,20 @@ button {
 .btn.btn-danger:hover,
 .btn.btn-danger:active {
   box-shadow: 0 0 0 .3rem var(--c-danger-variant-transparent);
+}
+.btn.btn-danger.btn.btn-danger-important {
+  background: var(--c-danger-important);
+  border: 2px solid var(--c-danger-important);
+}
+.btn-mini {
+  padding: 3px 8px;
+  margin-left: 10px;
+  background: var(--c-danger-important-variant);
+}
+.btn-mini:focus,
+.btn-mini:hover,
+.btn-mini:active {
+  background: var(--c-danger-variant);
 }
 .btn-group {
   display: flex;
