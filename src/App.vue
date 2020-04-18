@@ -57,7 +57,12 @@
       <h3>{{ $t('admin.danger.title') }}</h3>
       <p>{{ $t('admin.danger.text') }}</p>
       <div class="btn-group">
-        <label class="btn btn-danger" for="backup">{{ $t('admin.danger.buttonImport') }}</label>
+        <label v-if="!confirm.import" class="btn btn-danger" @click="confirm.import = true">{{ $t('admin.danger.buttonImport') }}</label>
+        <label v-if="confirm.import" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.import }">
+          {{ $t('admin.danger.confirmImport') }}
+          <span class="btn-mini" @click="$refs['backupFile'].click()">{{ $t('admin.danger.yes') }}</span>
+          <span class="btn-mini" @click="confirm.import = false">{{ $t('admin.danger.no') }}</span>
+        </label>
         <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="importBackup">
         <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ $t('admin.danger.buttonClear') }}</button>
         <button v-if="confirm.clear" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.clear }">
@@ -227,6 +232,7 @@ export default {
         // eslint-disable-next-line
         console.error(evt)
       }
+      this.confirm.import = false
     },
     async clearDatabase () {
       await db.days.toCollection().delete()
@@ -237,6 +243,7 @@ export default {
         text: this.$t('admin.clearSuccess.text'),
         duration: 6000
       });
+      this.confirm.clear = false
     },
     // execute a file download
     download (content, fileName, contentType) {
