@@ -1,12 +1,14 @@
 # you-can-quit
 
-[![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md) [![release](https://img.shields.io/badge/release-v0.2.0-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit/releases) [![size](https://img.shields.io/badge/size-500%20KB-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-78d19a.svg?style=flat-square)](.github/CONTRIBUTING.md)
+[![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md) [![release](https://img.shields.io/badge/release-v1.0.0-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit/releases) [![size](https://img.shields.io/badge/gzipped-100%20KB-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-78d19a.svg?style=flat-square)](.github/CONTRIBUTING.md)
 
-A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
+A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded in. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
 This web app is based on Vue.js and Dexie.js and is _currently in development_.
 
-![screenshot](https://user-images.githubusercontent.com/5441654/45680370-11267e00-bb3b-11e8-86f9-1f6d10336096.png)
+> ℹ Technical Hint: This app isn't meant to synchronize between devices, since local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
+
+![screenshot](https://user-images.githubusercontent.com/5441654/79687237-20edd300-8246-11ea-87ce-4faee94ef1c2.png)
 
 ## Features
 
@@ -31,17 +33,53 @@ This web app is based on Vue.js and Dexie.js and is _currently in development_.
     yarn
     ```
 
-3. Either start the development server with hot reload at localhost:8080 ...
+3. Run the app by ...
+
+    ... either run the `you-can-quit/dist/index.html` in your browser, e.g.
+
+    ```bash
+    firefox dist/index.html&
+    ```
+
+    ... or start the development server with hot reload at localhost:8080
 
     ```bash
     yarn serve
     ```
 
-4. ... or create a production build with minification
+    ... or make the production build with minification yourself
 
     ```bash
     yarn build
     ```
+
+## Upgrade from 0.x to 1.x
+
+The breaking chang in version 1.x is, that the database was switched from Firebase to IndexedDB. This means, it's no longer compatible with your current data. If you rather want to migrate your data instead of starting from scratch (depends on how much days you already used this app), you can do the following:
+
+1. Export your Firebase data into a local `.json` file in the following format:
+
+    ```json
+    {
+      "2019-02-02": 1,
+      "2019-07-25": -1,
+      "2019-01-10": -1,
+      "2019-11-09": 1,
+      ...
+    }
+    ```
+
+    The order of dates doesn't matter. If you have any problems to do so, please [create an issue](https://github.com/devmount/you-can-quit/issues/new?template=bug_report.md).
+
+2. Update app files and dependencies
+
+    ```bash
+    cd you-can-quit
+    git pull
+    yarn
+    ```
+
+3. Run the app (see instructions above in the *Get started* section) and import this data file in the administration section at the bottom.
 
 ---
 

@@ -1,8 +1,12 @@
 {
   "name": "you-can-quit",
   "productName": "You Can Quit!",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A tool to support your progress in quitting whatever your bad habit is.",
+  "author": {
+    "name": "Andreas Müller",
+    "url": "https://devmount.de"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/devmount/you-can-quit.git"
@@ -17,6 +21,7 @@
     }
   ],
   "private": false,
+  "browser": "./dist/index.html",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
