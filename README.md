@@ -4,6 +4,8 @@
 
 A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded in. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
+**y**ou-**c**an-**q**uit in short: **YCQ**, which also means (if you pronounce it): You Seek You. This app is about you, making an impact on your own life.
+
 This web app is based on Vue.js and Dexie.js and is _currently in development_.
 
 > ℹ Technical Hint: This app isn't meant to synchronize between devices, since local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
@@ -16,8 +18,12 @@ This web app is based on Vue.js and Dexie.js and is _currently in development_.
 - Stats section with showing current and longest streak (successful days in a row) and the total number of successful days
 - Earn achievements with successful days by reaching various goals
 - Supports multiple languages
-- Supports shortcuts (<kbd>←</kbd> and <kbd>→</kbd> to go to previous/next month, <kbd>CTRL</kbd>+<kbd>←</kbd> and <kbd>CTRL</kbd>+<kbd>→</kbd> to go to previous/next year, <kbd>R</kbd> to reset to current month)
+- Supports shortcuts:
+  - <kbd>←</kbd> / <kbd>→</kbd> to go to previous/next month
+  - <kbd>CTRL</kbd>+<kbd>←</kbd> / <kbd>CTRL</kbd>+<kbd>→</kbd> to go to previous/next year
+  - <kbd>R</kbd> to reset to current month
 - Provides administration section to backup, import or clear database
+- Made for offline usage - no synchronisation of data around the web
 
 ## Get started
 
@@ -65,8 +71,7 @@ The breaking change in version 1.x is, that the database was switched from Fireb
       "2019-02-02": 1,
       "2019-07-25": -1,
       "2019-01-10": -1,
-      "2019-11-09": 1,
-      ...
+      "2019-11-09": 1
     }
     ```
 
