@@ -16,7 +16,8 @@ This web app is based on Vue.js and Dexie.js and is _currently in development_.
 - Stats section with showing current and longest streak (successful days in a row) and the total number of successful days
 - Earn achievements with successful days by reaching various goals
 - Supports multiple languages
-- Supports shortcuts (<kbd>←</kbd> and <kbd>→</kbd> to go to previous/next month, <kbd>R</kbd> to reset to current month)
+- Supports shortcuts (<kbd>←</kbd> and <kbd>→</kbd> to go to previous/next month, <kbd>CTRL</kbd>+<kbd>←</kbd> and <kbd>CTRL</kbd>+<kbd>→</kbd> to go to previous/next year, <kbd>R</kbd> to reset to current month)
+- Provides administration section to backup, import or clear database
 
 ## Get started
 
@@ -55,7 +56,7 @@ This web app is based on Vue.js and Dexie.js and is _currently in development_.
 
 ## Upgrade from 0.x to 1.x
 
-The breaking chang in version 1.x is, that the database was switched from Firebase to IndexedDB. This means, it's no longer compatible with your current data. If you rather want to migrate your data instead of starting from scratch (depends on how much days you already used this app), you can do the following:
+The breaking change in version 1.x is, that the database was switched from Firebase to IndexedDB. This means, it's no longer compatible with your current data. If you rather want to migrate your data instead of starting from scratch (depends on how much days you already used this app), you can do the following:
 
 1. Export your Firebase data into a local `.json` file in the following format:
 
