@@ -313,16 +313,22 @@ export default {
           streak++
         }
       }
+      let state = Math.floor(max/10)
+      let progress = this.currentStreak*100/(10*(state+1))
+      if (this.currentStreak >= 10*(state+1)) {
+        progress = 100
+      }
       return {
-        state: Math.floor(max/10),
-        progress: 0
+        state: state,
+        progress: progress
       }
     },
     // achievement: first 50 successful days
     achievedSpock () {
+      let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
-        state: Object.values(this.statusData).filter(value => value == 1).length >= 50 ? 1 : 0,
-        progress: 0
+        state: state >= 50 ? 1 : 0,
+        progress: state < 50 ? state*100/50 : 100
       }
     },
     // achievement: 8 successful wednesdays in a row
@@ -338,9 +344,15 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
+      let successful = 0
+      let sequence = states.replace(/^n+/g, '')
+      for (let i = 0; i < sequence.length; i++) {
+        if (sequence[i] == 'f') break
+        if (sequence[i] == 's') successful++
+      }
       return {
         state: (states.match(/(s)\1{7}/g) || []).length,
-        progress: 0
+        progress: ((successful%8)/8)*100
       }
     },
     // achievement: a whole month without a fail
