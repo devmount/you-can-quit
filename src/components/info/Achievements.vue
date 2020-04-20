@@ -184,9 +184,10 @@ export default {
       for (let i = 0; i < months.length; i++) {
         const days = new Date(months[i][0], months[i][1]+1, 0).getDate()
         var noSuccess = 0
-        // iterate over all days of the current month
+        // iterate over all days of the given month
         for (let d = 1; d <= days; d++) {
-          var key = this.getDate(months[i][0], months[i][1]+1, d)
+          let key = this.getDate(months[i][0], months[i][1]+1, d)
+          // track non successful or missing days
           if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] == -1)) {
             noSuccess++
           }
@@ -195,16 +196,29 @@ export default {
           count++
         }
       }
+      // for progress: find number of successful days in current month
+      let successful = 0, now = new Date()
+      const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
+      for (let d = 1; d <= days; d++) {
+        let key = this.getDate(now.getFullYear(), now.getMonth()+1, d)
+        // track non successful or missing days
+        if (key in this.statusData && this.statusData[key] == 1) {
+          successful++
+        }
+      }
       return {
         state: count,
-        progress: 0
+        progress: (successful/days)*100
       }
     },
     // achievement: more successful days than failed days
     achievedTide () {
+      let successful = Object.values(this.statusData).filter(value => value == 1).length
+      let failed = Object.values(this.statusData).filter(value => value == -1).length
+      let state = successful > failed
       return {
-        state: Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0,
-        progress: 0
+        state: state ? 1 : 0,
+        progress: state > 0 ? 100 : successful*100/(failed+1)
       }
     },
     // achievement: 6 successful days after a one day fail
@@ -222,9 +236,28 @@ export default {
           count++
         }
       }
+      // for progress: find number of current successful days after one day fail
+      let successful = 0, failed = false
+      let sequence = states.replace(/^n+/g, '').replace(/n+/g, 'f')
+      for (let i = 0; i < sequence.length; i++) {
+        if (sequence[i] == 'n') continue
+        if (sequence[i] == 'f' && successful == 0 || sequence[i] == 's' && failed || successful >= 6) break
+        if (sequence[i] == 'f' && failed) {
+          successful = 0
+          break
+        }
+        if (sequence[i] == 'f' && !failed) {
+          failed = true
+          continue
+        }
+        if (sequence[i] == 's' && !failed) {
+          successful++
+          continue
+        }
+      }
       return {
         state: count,
-        progress: 0
+        progress: (successful/6)*100
       }
     },
     // achievement: 5 successful sundays in a row
