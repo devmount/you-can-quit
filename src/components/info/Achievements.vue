@@ -5,11 +5,13 @@
     <!-- single achievement items -->
     <div
       v-for="a in achievements"
+      :key="a"
       class="item"
-      :class="{ active: getAchievementStatus(a) > 0 }"
+      :class="{ active: getAchievementStatus(a).state > 0 }"
     >
-      <div class="badge" v-if="getAchievementStatus(a) > 1">{{ getAchievementStatus(a) }}</div>
+      <div class="badge" v-if="getAchievementStatus(a).state > 1">{{ getAchievementStatus(a).state }}</div>
       <font-awesome-icon :icon="$t('achievements.' + a + '.icon')" class="icon" />
+      <div class="progress" :style="'width: ' + getAchievementStatus(a).progress + '%;'"></div>
       <div class="description">
         <div class="title">{{ $t('achievements.' + a + '.title') }}</div>
         {{ $t('achievements.' + a + '.description') }}
@@ -74,7 +76,7 @@ export default {
         case 'master': return this.achievedMaster
         case 'strength': return this.achievedStrength
         case 'legend': return this.achievedLegend
-        default:  break;
+        default: break;
       }
     },
     // build date format yyyy-mm-dd
@@ -83,7 +85,7 @@ export default {
     },
   },
   computed: {
-    // get the minimum date (edited date that is most past)
+    // get the first date entry (edited date that is most past)
     minDate () {
       var keys = Object.keys(this.statusData)
       if (typeof keys !== 'undefined' && keys.length > 0) {
@@ -95,7 +97,7 @@ export default {
     },
     // get number of total achievements
     totalAchievements () {
-      return this.totalAchievementsWithoutGatherer + this.achievedGatherer
+      return this.totalAchievementsWithoutGatherer + this.achievedGatherer.state
     },
     // get number of total achievements without the gatherer achievements
     // (as gatherer needs to count the number of achievements without itself)
@@ -103,23 +105,38 @@ export default {
       var sum = 0
       for (let a of this.achievements) {
         if (a != 'gatherer') {
-          sum += this.getAchievementStatus(a)
+          sum += this.getAchievementStatus(a).state
         }
       }
       return sum
     },
+    /*
+      below are all computed achievement properties.
+      They always return an object of structure { state: 2, progress: 0 }
+      where 'state' describes the number of times, this was achieved (integer)
+      and 'progress' is a percentage that describes how close the (next) achievement is
+    */
     // achievements are displayed using flexbox
     // to align the last line left, it is filled up with invisible offset items
     achievementOffset () {
-      return 5 - (this.achievements.length % 5)
+      return {
+        state: 5 - (this.achievements.length % 5),
+        progress: 0
+      }
     },
     // achievement: first successful day
     achievedBeginning () {
-      return Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0
+      return {
+        state: Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0,
+        progress: 0
+      }
     },
     // achievement: first 10 successful days
     achievedTen () {
-      return Object.values(this.statusData).filter(value => value == 1).length >= 10 ? 1 : 0
+      return {
+        state: Object.values(this.statusData).filter(value => value == 1).length >= 10 ? 1 : 0,
+        progress: 0
+      }
     },
     // achievement: 7 successful days in a row
     achievedSpeed () {
@@ -131,7 +148,10 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{6}/g) || []).length
+      return {
+        state: (states.match(/(s)\1{6}/g) || []).length,
+        progress: 0
+      }
     },
     // achievement: a whole month with 6 fails or less
     achievedAlea () {
@@ -158,11 +178,17 @@ export default {
           count++
         }
       }
-      return count
+      return {
+        state: count,
+        progress: 0
+      }
     },
     // achievement: more successful days than failed days
     achievedTide () {
-      return Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
+      return {
+        state: Object.values(this.statusData).filter(value => value == 1).length > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0,
+        progress: 0
+      }
     },
     // achievement: 6 successful days after a one day fail
     achievedDefense () {
@@ -179,7 +205,10 @@ export default {
           count++
         }
       }
-      return count
+      return {
+        state: count,
+        progress: 0
+      }
     },
     // achievement: 5 successful sundays in a row
     achievedPraise () {
@@ -194,15 +223,24 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{4}/g) || []).length
+      return {
+        state: (states.match(/(s)\1{4}/g) || []).length,
+        progress: 0
+      }
     },
     // achievement: 4 times more successful days than failed days
     achievedUptrend () {
-      return (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0
+      return {
+        state: (Object.values(this.statusData).filter(value => value == 1).length / 4) > Object.values(this.statusData).filter(value => value == -1).length ? 1 : 0,
+        progress: 0
+      }
     },
     // achievement: collected 15 achievements
     achievedGatherer () {
-      return Math.floor((Math.floor(this.totalAchievementsWithoutGatherer / 14) + this.totalAchievementsWithoutGatherer) / 15)
+      return {
+        state: Math.floor((Math.floor(this.totalAchievementsWithoutGatherer / 14) + this.totalAchievementsWithoutGatherer) / 15),
+        progress: 0
+      }
     },
     // achievement: Longest streak reached a multiple of 10
     achievedNews () {
@@ -217,11 +255,17 @@ export default {
           streak++
         }
       }
-      return Math.floor(max/10)
+      return {
+        state: Math.floor(max/10),
+        progress: 0
+      }
     },
     // achievement: first 50 successful days
     achievedSpock () {
-      return Object.values(this.statusData).filter(value => value == 1).length >= 50 ? 1 : 0
+      return {
+        state: Object.values(this.statusData).filter(value => value == 1).length >= 50 ? 1 : 0,
+        progress: 0
+      }
     },
     // achievement: 8 successful wednesdays in a row
     achievedMadness () {
@@ -236,7 +280,10 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{7}/g) || []).length
+      return {
+        state: (states.match(/(s)\1{7}/g) || []).length,
+        progress: 0
+      }
     },
     // achievement: a whole month without a fail
     achievedClean () {
@@ -263,11 +310,17 @@ export default {
           count++
         }
       }
-      return count
+      return {
+        state: count,
+        progress: 0
+      }
     },
     // achievement: Number of successful days reached a multiple of 100
     achievedStrike () {
-      return Math.floor(Object.values(this.statusData).filter(value => value == 1).length/100)
+      return {
+        state: Math.floor(Object.values(this.statusData).filter(value => value == 1).length/100),
+        progress: 0
+      }
     },
     // achievement: 40 successful days in a row
     achievedEpic () {
@@ -279,11 +332,17 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{39}/g) || []).length
+      return {
+        state: (states.match(/(s)\1{39}/g) || []).length,
+        progress: 0
+      }
     },
     // achievement: 365 successful days
     achievedMaster () {
-      return Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365)
+      return {
+        state: Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365),
+        progress: 0
+      }
     },
     // achievement: 100 successful days in a row
     achievedStrength () {
@@ -295,7 +354,10 @@ export default {
         states = (key in this.statusData && this.statusData[key] == 1) ? states + 's' : states
         states = !(key in this.statusData) ? states + 'n' : states
       }
-      return (states.match(/(s)\1{99}/g) || []).length
+      return {
+        state: (states.match(/(s)\1{99}/g) || []).length,
+        progress: 0
+      }
     },
     // achievement: a whole year without a fail
     achievedLegend () {
@@ -324,7 +386,10 @@ export default {
           count++
         }
       }
-      return count
+      return {
+        state: count,
+        progress: 0
+      }
     },
   }
 }
@@ -370,7 +435,14 @@ export default {
   background: white;
   color: var(--c-accent-variant);
   padding: 7px 5px;
-
+}
+.achievements .item .progress {
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background: white;
 }
 .achievements .item .description {
   position: absolute;
