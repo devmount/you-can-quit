@@ -110,32 +110,49 @@ export default {
       }
       return sum
     },
+    // achievements are displayed using flexbox
+    // to align the last line left, it is filled up with invisible offset items
+    achievementOffset () {
+      return 5 - (this.achievements.length % 5)
+    },
+    // get number of successful days in a row directly preceding today
+    currentStreak () {
+      var streak = 0, undecided = true, n = new Date(), min = this.minDate, key = ''
+      while (min < n) {
+        n = new Date(n.setDate(n.getDate() - 1))
+        key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
+        if ((!(key in this.statusData) || this.statusData[key] == 0) && undecided) {
+          continue
+        }
+        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
+          break
+        } else {
+          undecided = false
+          streak++
+        }
+      }
+      return streak
+    },
     /*
       below are all computed achievement properties.
       They always return an object of structure { state: 2, progress: 0 }
       where 'state' describes the number of times, this was achieved (integer)
       and 'progress' is a percentage that describes how close the (next) achievement is
     */
-    // achievements are displayed using flexbox
-    // to align the last line left, it is filled up with invisible offset items
-    achievementOffset () {
-      return {
-        state: 5 - (this.achievements.length % 5),
-        progress: 0
-      }
-    },
     // achievement: first successful day
     achievedBeginning () {
+      let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
-        state: Object.values(this.statusData).filter(value => value == 1).length > 0 ? 1 : 0,
-        progress: 0
+        state: state > 0 ? 1 : 0,
+        progress: state > 0 ? 100 : 0
       }
     },
     // achievement: first 10 successful days
     achievedTen () {
+      let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
-        state: Object.values(this.statusData).filter(value => value == 1).length >= 10 ? 1 : 0,
-        progress: 0
+        state: state >= 10 ? 1 : 0,
+        progress: state < 10 ? state*10 : 100
       }
     },
     // achievement: 7 successful days in a row
@@ -150,7 +167,7 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{6}/g) || []).length,
-        progress: 0
+        progress: (this.currentStreak%7)/7*100
       }
     },
     // achievement: a whole month with 6 fails or less
@@ -443,6 +460,7 @@ export default {
   bottom: 0;
   left: 0;
   background: white;
+  transition: width 0.2s;
 }
 .achievements .item .description {
   position: absolute;
