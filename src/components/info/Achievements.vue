@@ -420,9 +420,10 @@ export default {
     },
     // achievement: 365 successful days
     achievedMaster () {
+      let successful = Object.values(this.statusData).filter(value => value == 1).length
       return {
-        state: Math.floor(Object.values(this.statusData).filter(value => value == 1).length / 365),
-        progress: 0
+        state: Math.floor(successful/365),
+        progress: successful%365*100/365
       }
     },
     // achievement: 100 successful days in a row
@@ -437,7 +438,7 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{99}/g) || []).length,
-        progress: 0
+        progress: this.currentStreak%100
       }
     },
     // achievement: a whole year without a fail
