@@ -117,16 +117,13 @@ export default {
     },
     // get number of successful days in a row directly preceding today
     currentStreak () {
-      var streak = 0, undecided = true, n = new Date(), min = this.minDate, key = ''
-      while (min < n) {
+      let streak = 0, undecided = true, n = new Date(), min = new Date(this.minDate), key = ''
+      while (min <= n) {
         n = new Date(n.setDate(n.getDate() - 1))
         key = this.getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-        if ((!(key in this.statusData) || this.statusData[key] == 0) && undecided) {
-          continue
-        }
-        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] != 1)) {
-          break
-        } else {
+        if (!(key in this.statusData) && undecided) continue
+        if (!(key in this.statusData) || (key in this.statusData && this.statusData[key] < 1)) break
+        else {
           undecided = false
           streak++
         }
