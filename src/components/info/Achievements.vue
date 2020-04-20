@@ -198,7 +198,7 @@ export default {
       const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
       for (let d = 1; d <= days; d++) {
         let key = this.getDate(now.getFullYear(), now.getMonth()+1, d)
-        // track non successful or missing days
+        // track successful days
         if (key in this.statusData && this.statusData[key] == 1) {
           successful++
         }
@@ -380,16 +380,27 @@ export default {
           count++
         }
       }
+      // for progress: find number of successful days in current month
+      let successful = 0, now = new Date()
+      const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
+      for (let d = 1; d <= days; d++) {
+        let key = this.getDate(now.getFullYear(), now.getMonth()+1, d)
+        // track successful days
+        if (key in this.statusData && this.statusData[key] == 1) {
+          successful++
+        }
+      }
       return {
         state: count,
-        progress: 0
+        progress: (successful/days)*100
       }
     },
     // achievement: Number of successful days reached a multiple of 100
     achievedStrike () {
+      let successful = Object.values(this.statusData).filter(value => value == 1).length
       return {
-        state: Math.floor(Object.values(this.statusData).filter(value => value == 1).length/100),
-        progress: 0
+        state: Math.floor(successful/100),
+        progress: successful%100
       }
     },
     // achievement: 40 successful days in a row
@@ -404,7 +415,7 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{39}/g) || []).length,
-        progress: 0
+        progress: (this.currentStreak%40)/40*100
       }
     },
     // achievement: 365 successful days
