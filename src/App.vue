@@ -333,9 +333,16 @@ button {
 #app footer {
   margin-top: 80px;
 }
-#app footer .icon {
+#app footer a .icon {
+  color: var(--c-text-normal);
   font-size: 2rem;
-  margin: 0 .5rem;
+  margin: 0 .8rem;
+  transition: color .3s;
+}
+#app footer a:hover .icon,
+#app footer a:focus .icon,
+#app footer a:active .icon {
+  color: var(--c-accent);
 }
 @media (min-width: 1200px) {
   #app section {
