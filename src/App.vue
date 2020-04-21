@@ -46,33 +46,11 @@
       :date="date"
     />
   </section>
-  <h2>{{ $t('admin.title') }}</h2>
-  <section class="col-2">
-    <div class="col-half px-1 backup-zone">
-      <h3>{{ $t('admin.backup.title') }}</h3>
-      <p>{{ $t('admin.backup.text') }}</p>
-      <button class="btn btn-primary" @click="exportBackup">{{ $t('admin.backup.buttonExport') }}</button>
-    </div>
-    <div class="col-half px-1 danger-zone">
-      <h3>{{ $t('admin.danger.title') }}</h3>
-      <p>{{ $t('admin.danger.text') }}</p>
-      <div class="btn-group">
-        <label v-if="!confirm.import" class="btn btn-danger" @click="confirm.import = true">{{ $t('admin.danger.buttonImport') }}</label>
-        <label v-if="confirm.import" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.import }">
-          {{ $t('admin.danger.confirmImport') }}
-          <span class="btn-mini" @click="$refs['backupFile'].click()">{{ $t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.import = false">{{ $t('admin.danger.no') }}</span>
-        </label>
-        <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="importBackup">
-        <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ $t('admin.danger.buttonClear') }}</button>
-        <button v-if="confirm.clear" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.clear }">
-          {{ $t('admin.danger.confirmClear') }}
-          <span class="btn-mini" @click="clearDatabase">{{ $t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.clear = false">{{ $t('admin.danger.no') }}</span>
-        </button>
-      </div>
-    </div>
-  </section>
+    <administration
+      @import="importBackup"
+      @export="exportBackup()"
+      @clear="clearDatabase()"
+    />
   <notifications group="main" position="bottom right"/>
 </div>
 </template>
@@ -86,6 +64,7 @@ import Month from './components/Month.vue'
 import YearNavigation from './components/YearNavigation.vue'
 import Year from './components/Year.vue'
 import Info from './components/Info.vue'
+import Administration from './components/Administration.vue'
 
 export default {
   name: 'app',
@@ -94,7 +73,8 @@ export default {
     MonthNavigation,
     Year,
     YearNavigation,
-    Info
+    Info,
+    Administration,
   },
   data () {
     // today
@@ -111,10 +91,6 @@ export default {
         year: now.getFullYear(),
       },
       data: {},
-      confirm: {
-        import: false,
-        clear: false,
-      },
     }
   },
   created () {
@@ -206,8 +182,8 @@ export default {
       });
     },
     // import a backup JSON file and replace current database
-    importBackup () {
-      let file = this.$refs.backupFile.files[0]
+    importBackup (handle) {
+      let file = handle.files[0]
       if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return
       
       let reader = new FileReader()
@@ -232,7 +208,6 @@ export default {
         // eslint-disable-next-line
         console.error(evt)
       }
-      this.confirm.import = false
     },
     async clearDatabase () {
       await db.days.toCollection().delete()
@@ -243,7 +218,6 @@ export default {
         text: this.$t('admin.clearSuccess.text'),
         duration: 6000
       });
-      this.confirm.clear = false
     },
     // execute a file download
     download (content, fileName, contentType) {
@@ -329,15 +303,15 @@ button {
   text-align: center;
   margin: 40px 0;
 }
-#app > section {
+#app section {
   margin: auto;
   padding: .5em 0 1.5em 0;
 }
-#app > section p {
+#app section p {
   text-align: left;
 }
 @media (min-width: 1200px) {
-  #app > section {
+  #app section {
     width: 1200px;
   }
   .col-2 {
@@ -371,68 +345,6 @@ button {
 }
 .hidden {
   display: none;
-}
-.btn {
-  background: var(--c-background-element-variant);
-  border: 2px solid var(--c-background-element-variant);
-  color: var(--c-text-light);
-  font-size: 16px;
-  appearance: none;
-  border-radius: 2px;
-  cursor: pointer;
-  display: inline-block;
-  outline: none;
-  padding: .6rem 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: background .2s, border .2s, box-shadow .2s, color .2s;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.btn:focus,
-.btn:hover,
-.btn:active {
-  box-shadow: 0 0 0 .3rem var(--c-background-element-variant-transparent);
-  text-decoration: none;
-}
-.btn.btn-primary {
-  background: var(--c-accent-variant);
-  border: 2px solid var(--c-accent-variant);
-  color: var(--c-text-light);
-}
-.btn.btn-primary:focus,
-.btn.btn-primary:hover,
-.btn.btn-primary:active {
-  box-shadow: 0 0 0 .3rem var(--c-accent-variant-transparent);
-}
-.btn.btn-danger {
-  background: var(--c-danger-variant);
-  border: 2px solid var(--c-danger-variant);
-  color: var(--c-text-light);
-}
-.btn.btn-danger:focus,
-.btn.btn-danger:hover,
-.btn.btn-danger:active {
-  box-shadow: 0 0 0 .3rem var(--c-danger-variant-transparent);
-}
-.btn.btn-danger.btn.btn-danger-important {
-  background: var(--c-danger-important);
-  border: 2px solid var(--c-danger-important);
-}
-.btn-mini {
-  padding: 3px 8px;
-  margin-left: 10px;
-  background: var(--c-danger-important-variant);
-}
-.btn-mini:focus,
-.btn-mini:hover,
-.btn-mini:active {
-  background: var(--c-danger-variant);
-}
-.btn-group {
-  display: flex;
-  justify-content: space-around;
 }
 #app .vue-notification {
   cursor: pointer;
