@@ -34,7 +34,9 @@ import {
   faGrinTongueWink,
   faTasks,
   faDumbbell,
-  faHandSpock
+  faHandSpock,
+  faInfoCircle,
+  faShoePrints
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faTwitter,
@@ -74,6 +76,8 @@ library.add(
   faTasks,
   faDumbbell,
   faHandSpock,
+  faInfoCircle,
+  faShoePrints,
   faTwitter,
   faGithub,
   faDev

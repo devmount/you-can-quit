@@ -14,9 +14,9 @@
       <div class="progress" :style="'width: ' + getAchievementStatus(a).progress + '%;'"></div>
       <div class="description">
         <div class="title">{{ $t('achievements.' + a + '.title') }}</div>
-        <div>{{ $t('achievements.' + a + '.description') }}</div>
-        <div v-if="getAchievementStatus(a).progress == 100">{{ $tc('achievement', 1) }} {{ $t('completed') }}</div>
-        <div v-else-if="getAchievementStatus(a).progress != 0">{{ getAchievementStatus(a).progress.toFixed(1) }}% {{ $t('done') }}</div>
+        <div><font-awesome-icon icon="info-circle" class="icon" /> {{ $t('achievements.' + a + '.description') }}</div>
+        <div v-if="getAchievementStatus(a).progress == 100"><font-awesome-icon icon="check" class="icon" /> {{ $t('completed') }}</div>
+        <div v-else-if="getAchievementStatus(a).progress != 0"><font-awesome-icon icon="shoe-prints" class="icon" /> {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ $t('done') }}</div>
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
