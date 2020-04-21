@@ -172,7 +172,7 @@ export default {
       return {
         state: (states.match(/(s)\1{6}/g) || []).length,
         progress: (this.currentStreak%7)/7*100,
-        left: 1
+        left: 7-this.currentStreak%7
       }
     },
     // achievement: a whole month with 6 fails or less
@@ -211,10 +211,11 @@ export default {
           successful++
         }
       }
+      let daysLeft = days-successful-6
       return {
         state: count,
-        progress: (successful/days)*100,
-        left: 1
+        progress: (successful/(days-6))*100,
+        left: daysLeft > 0 ? daysLeft : 0
       }
     },
     // achievement: more successful days than failed days
@@ -225,7 +226,7 @@ export default {
       return {
         state: state ? 1 : 0,
         progress: state > 0 ? 100 : successful*100/(failed+1),
-        left: 1
+        left: state > 0 ? 0 : failed+1-successful
       }
     },
     // achievement: 6 successful days after a one day fail
