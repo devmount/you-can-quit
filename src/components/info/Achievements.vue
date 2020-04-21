@@ -263,10 +263,11 @@ export default {
           continue
         }
       }
+      let daysLeft = 6-successful
       return {
         state: count,
         progress: ((successful%6)/6)*100,
-        left: 1
+        left: daysLeft > 0 ? daysLeft : 0
       }
     },
     // achievement: 5 successful sundays in a row
@@ -291,7 +292,7 @@ export default {
       return {
         state: (states.match(/(s)\1{4}/g) || []).length,
         progress: ((successful%5)/5)*100,
-        left: 1
+        left: 5-successful%5
       }
     },
     // achievement: 4 times more successful days than failed days
@@ -302,7 +303,7 @@ export default {
       return {
         state: state ? 1 : 0,
         progress: state > 0 ? 100 : (successful/4)*100/(failed+1/4),
-        left: 1
+        left: state > 0 ? 0 : failed*4+1-successful
       }
     },
     // achievement: collected 15 achievements
