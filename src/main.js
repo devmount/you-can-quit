@@ -36,6 +36,11 @@ import {
   faDumbbell,
   faHandSpock
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTwitter,
+  faGithub,
+  faDev
+} from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(
   faTimes,
@@ -68,7 +73,10 @@ library.add(
   faGrinTongueWink,
   faTasks,
   faDumbbell,
-  faHandSpock
+  faHandSpock,
+  faTwitter,
+  faGithub,
+  faDev
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Vue Notifications

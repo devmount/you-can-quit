@@ -46,11 +46,20 @@
       :date="date"
     />
   </section>
-    <administration
-      @import="importBackup"
-      @export="exportBackup()"
-      @clear="clearDatabase()"
-    />
+  <administration
+    @import="importBackup"
+    @export="exportBackup()"
+    @clear="clearDatabase()"
+  />
+  <footer>
+    <div>
+      <a href="https://github.com/devmount/you-can-quit" target="_blank"><font-awesome-icon :icon="['fab', 'github']" class="icon" /></a>
+      <a href="https://twitter.com/intent/tweet?text=Awesome%20little%20app%20to%20help%20quitting%20with%20a%20bad%20habit%20%F0%9F%98%8E&url=https%3A%2F%2Fyoucanqu.it&via=devmount&hashtags=ycq%2Cvuejs%2CDEVcommunity" target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" class="icon" /></a>
+      <a href="https://dev.to/devmount" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
+    </div>
+    <div class="mt-2">Version 1.1.0</div>
+    <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
+  </footer>
   <notifications group="main" position="bottom right"/>
 </div>
 </template>
@@ -288,6 +297,17 @@ h1::after {
   transform: translateX(-50%);
   box-shadow: 0 1px 10px -1px var(--c-shadow);
 }
+a {
+  color: var(--c-text-light);
+  outline: 0;
+  text-decoration: none;
+  transition: color .3s;
+}
+a:hover,
+a:focus,
+a:active {
+  color: var(--c-accent);
+}
 button {
   border: none;
   border-radius: 0;
@@ -309,6 +329,13 @@ button {
 }
 #app section p {
   text-align: left;
+}
+#app footer {
+  margin-top: 80px;
+}
+#app footer .icon {
+  font-size: 2rem;
+  margin: 0 .5rem;
 }
 @media (min-width: 1200px) {
   #app section {
