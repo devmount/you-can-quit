@@ -16,7 +16,10 @@
         <div class="title">{{ $t('achievements.' + a + '.title') }}</div>
         <div><font-awesome-icon icon="info-circle" class="icon" /> {{ $t('achievements.' + a + '.description') }}</div>
         <div v-if="getAchievementStatus(a).progress == 100"><font-awesome-icon icon="check" class="icon" /> {{ $t('completed') }}</div>
-        <div v-else-if="getAchievementStatus(a).progress != 0"><font-awesome-icon icon="shoe-prints" class="icon" /> {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ $t('done') }}</div>
+        <div v-else-if="getAchievementStatus(a).progress != 0">
+          <font-awesome-icon icon="shoe-prints" class="icon" />
+          {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ $t('done') }}, {{ getAchievementStatus(a).left }} {{ $tc('day', getAchievementStatus(a).left) }} left
+        </div>
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
@@ -143,7 +146,8 @@ export default {
       let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
         state: state > 0 ? 1 : 0,
-        progress: state > 0 ? 100 : 0
+        progress: state > 0 ? 100 : 0,
+        left: state < 1 ? 1 : 0
       }
     },
     // achievement: first 10 successful days
@@ -151,7 +155,8 @@ export default {
       let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
         state: state >= 10 ? 1 : 0,
-        progress: state < 10 ? state*10 : 100
+        progress: state < 10 ? state*10 : 100,
+        left: state < 10 ? 10-state : 0
       }
     },
     // achievement: 7 successful days in a row
@@ -166,7 +171,8 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{6}/g) || []).length,
-        progress: (this.currentStreak%7)/7*100
+        progress: (this.currentStreak%7)/7*100,
+        left: 1
       }
     },
     // achievement: a whole month with 6 fails or less
@@ -207,7 +213,8 @@ export default {
       }
       return {
         state: count,
-        progress: (successful/days)*100
+        progress: (successful/days)*100,
+        left: 1
       }
     },
     // achievement: more successful days than failed days
@@ -217,7 +224,8 @@ export default {
       let state = successful > failed
       return {
         state: state ? 1 : 0,
-        progress: state > 0 ? 100 : successful*100/(failed+1)
+        progress: state > 0 ? 100 : successful*100/(failed+1),
+        left: 1
       }
     },
     // achievement: 6 successful days after a one day fail
@@ -256,7 +264,8 @@ export default {
       }
       return {
         state: count,
-        progress: ((successful%6)/6)*100
+        progress: ((successful%6)/6)*100,
+        left: 1
       }
     },
     // achievement: 5 successful sundays in a row
@@ -280,7 +289,8 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{4}/g) || []).length,
-        progress: ((successful%5)/5)*100
+        progress: ((successful%5)/5)*100,
+        left: 1
       }
     },
     // achievement: 4 times more successful days than failed days
@@ -290,7 +300,8 @@ export default {
       let state = (successful/4) > failed
       return {
         state: state ? 1 : 0,
-        progress: state > 0 ? 100 : (successful/4)*100/(failed+1/4)
+        progress: state > 0 ? 100 : (successful/4)*100/(failed+1/4),
+        left: 1
       }
     },
     // achievement: collected 15 achievements
@@ -299,7 +310,8 @@ export default {
       let total = this.totalAchievementsWithoutGatherer + state
       return {
         state: state,
-        progress: ((total%15)/15)*100
+        progress: ((total%15)/15)*100,
+        left: 1
       }
     },
     // achievement: Longest streak reached a multiple of 10
@@ -322,7 +334,8 @@ export default {
       }
       return {
         state: state,
-        progress: progress
+        progress: progress,
+        left: 1
       }
     },
     // achievement: first 50 successful days
@@ -330,7 +343,8 @@ export default {
       let state = Object.values(this.statusData).filter(value => value == 1).length
       return {
         state: state >= 50 ? 1 : 0,
-        progress: state < 50 ? state*100/50 : 100
+        progress: state < 50 ? state*100/50 : 100,
+        left: 1
       }
     },
     // achievement: 8 successful wednesdays in a row
@@ -354,7 +368,8 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{7}/g) || []).length,
-        progress: ((successful%8)/8)*100
+        progress: ((successful%8)/8)*100,
+        left: 1
       }
     },
     // achievement: a whole month without a fail
@@ -394,7 +409,8 @@ export default {
       }
       return {
         state: count,
-        progress: (successful/days)*100
+        progress: (successful/days)*100,
+        left: 1
       }
     },
     // achievement: Number of successful days reached a multiple of 100
@@ -402,7 +418,8 @@ export default {
       let successful = Object.values(this.statusData).filter(value => value == 1).length
       return {
         state: Math.floor(successful/100),
-        progress: successful%100
+        progress: successful%100,
+        left: 1
       }
     },
     // achievement: 40 successful days in a row
@@ -417,7 +434,8 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{39}/g) || []).length,
-        progress: (this.currentStreak%40)/40*100
+        progress: (this.currentStreak%40)/40*100,
+        left: 1
       }
     },
     // achievement: 365 successful days
@@ -425,7 +443,8 @@ export default {
       let successful = Object.values(this.statusData).filter(value => value == 1).length
       return {
         state: Math.floor(successful/365),
-        progress: successful%365*100/365
+        progress: successful%365*100/365,
+        left: 1
       }
     },
     // achievement: 100 successful days in a row
@@ -440,7 +459,8 @@ export default {
       }
       return {
         state: (states.match(/(s)\1{99}/g) || []).length,
-        progress: this.currentStreak%100
+        progress: this.currentStreak%100,
+        left: 1
       }
     },
     // achievement: a whole year without a fail
@@ -485,7 +505,8 @@ export default {
       }
       return {
         state: count,
-        progress: (successful/days)*100
+        progress: (successful/days)*100,
+        left: 1
       }
     },
   }
