@@ -468,9 +468,22 @@ export default {
           count++
         }
       }
+      // for progress: find number of successful days in current year
+      let successful = 0, now = new Date(), year = now.getFullYear()
+      const days = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0) ? 366 : 365
+      for (let m = 0; m < 12; m++) {
+        const mdays = new Date(year, m+1, 0).getDate()
+        for (let d = 1; d <= mdays; d++) {
+          let key = this.getDate(year, m+1, d)
+          // track successful days
+          if (key in this.statusData && this.statusData[key] == 1) {
+            successful++
+          }
+        }
+      }
       return {
         state: count,
-        progress: 0
+        progress: (successful/days)*100
       }
     },
   }
