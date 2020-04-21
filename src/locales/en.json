@@ -77,6 +77,8 @@
   "successful": "Successful",
   "day": "day | days",
   "achievement": "Achievement | Achievements",
+  "completed": "completed!",
+  "done": "done",
   "achievements": {
     "beginning": {
       "title": "The Beginning",

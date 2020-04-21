@@ -77,6 +77,8 @@
   "successful": "Erfolgreich",
   "day": "Tag | Tage",
   "achievement": "Errungenschaft | Errungenschaften",
+  "completed": "abgeschlossen!",
+  "done": "geschafft",
   "achievements": {
     "beginning": {
       "title": "Der Anfang",
