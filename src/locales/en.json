@@ -175,7 +175,7 @@
     "title": "Administration",
     "backup": {
       "title": "Backup Zone",
-      "text": "Here you can manually export your current data. You can use this as backup or to transfer your data to another browser or machine.",
+      "text": "This project uses the database engine (Indexed Database API) of your browser - no data is leaving your machine or synchronized with a server. Here you can manually export your current data. You can use this as backup or to transfer your data to another browser or machine.",
       "buttonExport": "Export Database"
     },
     "danger": {

@@ -175,7 +175,7 @@
     "title": "Administration",
     "backup": {
       "title": "Backupbereich",
-      "text": "Hier kannst du deine aktuellen Daten manuell herunterladen. Du kannst das als Backup benutzen oder zum Transfer deiner Daten in einen anderen Browser oder auf ein anderes Gerät.",
+      "text": "Dieses Projekt nutzt die Datenbank-Engine (Indexed Database API) deines Browsers - keine Daten verlassen deinen Rechner oder werden mit einem Server synchronisiert. Hier kannst du deine aktuellen Daten manuell herunterladen. Du kannst das als Backup benutzen oder zum Transfer deiner Daten in einen anderen Browser oder auf ein anderes Gerät.",
       "buttonExport": "Datenbank Exportieren"
     },
     "danger": {
