@@ -9,7 +9,9 @@
   @keydown.ctrl.right.exact="nextYear()"
 >
   <header>
-    <h1>{{ $t('title') }}</h1>
+    <h1>{{ $t('title') }} <font-awesome-icon icon="sign-out-alt" class="icon" /></h1>
+    <p>Track your progress and get encouraged on your way of quitting a bad habit.</p>
+    <hr />
   </header>
   <section class="col-2">
     <div class="month-view">
@@ -281,21 +283,18 @@ h1, h2, h3 {
   cursor: default;
 }
 h1 {
-  font-size: 3em;
-  margin-bottom: 1.2em;
-  margin-top: 0;
+  font-size: 3rem;
+  margin-bottom: .5rem;
 }
-h1::after {
-  content: '';
-  position: absolute;
-  bottom: -.8em;
+hr {
+  border: none;
+  outline: 0;
   width: 10%;
   max-width: 120px;
   height: 5px;
   background: var(--c-accent);
-  left: 50%;
-  transform: translateX(-50%);
   box-shadow: 0 1px 10px -1px var(--c-shadow);
+  margin: 2rem auto 1rem auto;
 }
 a {
   color: var(--c-text-light);
