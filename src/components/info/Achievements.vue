@@ -462,7 +462,7 @@ export default {
       return {
         state: Math.floor(successful/365),
         progress: successful%365*100/365,
-        left: 1,
+        left: 365-successful%365,
         unit: 'day'
       }
     },
@@ -479,7 +479,7 @@ export default {
       return {
         state: (states.match(/(s)\1{99}/g) || []).length,
         progress: this.currentStreak%100,
-        left: 1,
+        left: 100-this.currentStreak%100,
         unit: 'day'
       }
     },
@@ -523,10 +523,11 @@ export default {
           }
         }
       }
+      let daysLeft = days-successful
       return {
         state: count,
         progress: (successful/days)*100,
-        left: 1,
+        left: daysLeft > 0 ? daysLeft : 0,
         unit: 'day'
       }
     },
