@@ -2,30 +2,35 @@
 
 [![release](https://img.shields.io/badge/release-v1.0.0-78d19a.svg?style=flat-square)](https://github.com/devmount/you-can-quit/releases) [![downloads](https://img.shields.io/npm/dt/you-can-quit?label=downloads&color=78d19a&style=flat-square)](https://www.npmjs.com/package/you-can-quit) [![last commit](https://img.shields.io/github/last-commit/devmount/you-can-quit?label=updated&color=78d19a&style=flat-square)](https://github.com/devmount/you-can-quit/commits/master) [![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md) [![contributions welcome](https://img.shields.io/badge/PRs-welcome-78d19a.svg?style=flat-square)](./.github/CONTRIBUTING.md)
 
-A tool to support your progress in quitting whatever your bad habit is. In a simple calendar view, you can mark past days as _successful_ or _failed_. Based on your selection, you can see encouraging stats about the number of days you succeeded in. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
+This app is a tool to track your progress and encourage you on the way of quitting a bad habit. In a simple calendar view, you can set past days _successful_ or _failed_. Based on this data, you can see encouraging stats about the number of days you succeeded in. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
-**y**ou-**c**an-**q**uit in short: **YCQ**, which also means (if you pronounce it): You Seek You. This app is about you, making an impact on your own life.
+**y**ou-**c**an-**q**uit in short: **YCQ**, which also means (if you pronounce it): You Seek You. It's about you, making an impact on your own life.
 
-This web app is based on Vue.js and Dexie.js and is _currently in development_.
+This web app is based on Vue.js and Dexie.js.
 
-> ℹ Technical Hint: This app isn't meant to synchronize between devices, since local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
+> ℹ This app values privacy. The data isn't meant to be synchronized between different devices, therefore local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
 
 ![screenshot](https://user-images.githubusercontent.com/5441654/79687237-20edd300-8246-11ea-87ce-4faee94ef1c2.png)
 
 ## Features
 
-- Simple month and year views to see successful and failed days (and possible patterns) at one glance
-- Stats section with showing current and longest streak (successful days in a row) and the total number of successful days
-- Earn achievements with successful days by reaching various goals
-- Supports multiple languages
-- Supports shortcuts:
+- 📅 Simple month and year views to see successful and failed days (and possible patterns) at one glance
+- 📈 Stats section showing current and longest streak (successful days in a row) and the total number of successful days
+- 🏆 Earn encouraging and funny achievements by reaching various goals, see progress of each achievement
+- 🌐 UI supports multiple languages (currently only English and German)
+- ⌨ Navigation with shortcuts:
   - <kbd>←</kbd> / <kbd>→</kbd> to go to previous/next month
   - <kbd>CTRL</kbd>+<kbd>←</kbd> / <kbd>CTRL</kbd>+<kbd>→</kbd> to go to previous/next year
   - <kbd>R</kbd> to reset to current month
-- Provides administration section to backup, import or clear database
-- Made for offline usage - no synchronisation of data around the web
+- 💾 Provides administration section to backup, import or clear database
+- ⚡ Made for offline usage, the data is stored only in your local browsers
+- 🔒 Values privacy - no synchronisation of data around the web
 
 ## Get started
+
+Just head over to <https://youcanqu.it> and start your journey.
+
+## Build it yourself
 
 1. Get all files
 
@@ -89,4 +94,4 @@ The breaking change in version 1.x is, that the database was switched from Fireb
 
 ---
 
-you-can-quit is completely free to use. If you enjoy it, please consider [contributing](.github/CONTRIBUTING.md) or [donating via Paypal](https://paypal.me/devmount) for further development. :green_heart:
+you-can-quit is completely free to use. If you enjoy it, please consider [contributing](.github/CONTRIBUTING.md), [donating via Paypal](https://paypal.me/devmount) or [become a sponsor](https://github.com/sponsors/devmount/) for further development. :green_heart:
