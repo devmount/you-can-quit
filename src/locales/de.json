@@ -76,6 +76,8 @@
   },
   "successful": "Erfolgreich",
   "day": "Tag | Tage",
+  "sunday": "Sonntag | Sonntag",
+  "wednesday": "Mittwoch | Mittwoche",
   "achievement": "Errungenschaft | Errungenschaften",
   "completed": "abgeschlossen",
   "done": "geschafft",

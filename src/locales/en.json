@@ -76,6 +76,8 @@
   },
   "successful": "Successful",
   "day": "day | days",
+  "sunday": "sunday | sundays",
+  "wednesday": "wednesday | wednesdays",
   "achievement": "Achievement | Achievements",
   "completed": "completed",
   "done": "done",
