@@ -435,7 +435,7 @@ export default {
       return {
         state: Math.floor(successful/100),
         progress: successful%100,
-        left: 1,
+        left: 100-successful%100,
         unit: 'day'
       }
     },
@@ -452,7 +452,7 @@ export default {
       return {
         state: (states.match(/(s)\1{39}/g) || []).length,
         progress: (this.currentStreak%40)/40*100,
-        left: 1,
+        left: 40-this.currentStreak%40,
         unit: 'day'
       }
     },
