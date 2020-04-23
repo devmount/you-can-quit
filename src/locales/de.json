@@ -1,5 +1,5 @@
 {
-  "title": "Du kannst aufhören!",
+  "title": "Du Kannst Aufhören!",
   "name": {
     "month": {
       "1": "Januar",
@@ -201,6 +201,17 @@
     "clearSuccess": {
       "title": "Clearing erfolgreich",
       "text": "Datenbank erfolgreich zurückgesetzt und vorherige Daten entfernt."
+    }
+  },
+  "about": {
+    "title": "Über diese App",
+    "what": {
+      "title": "Was ist das hier?",
+      "text": "..."
+    },
+    "how": {
+      "title": "Wie funktioniert es?",
+      "text": "..."
     }
   }
 }

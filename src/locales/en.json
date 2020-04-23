@@ -1,5 +1,5 @@
 {
-  "title": "You can quit!",
+  "title": "You Can Quit!",
   "name": {
     "month": {
       "1": "January",
@@ -201,6 +201,17 @@
     "clearSuccess": {
       "title": "Clearing successful",
       "text": "Database successfully cleared and previous data removed."
+    }
+  },
+  "about": {
+    "title": "About this app",
+    "what": {
+      "title": "What is this?",
+      "text": "This is a little tool that aims to help you not doing something anymore on a daily basis. If you have the goal of quitting a bad habit or quality, you can use this app to track your progress and get encouraging notifications and achievements on your way. You also have the possibility to recognize patterns in your behaviour with the help of the annual overview."
+    },
+    "how": {
+      "title": "How does it work?",
+      "text": "It's as simple as setting the past day successful or failed, depending on wether you reached your goal on that day or not. To do that, just move the cursor over one of the past days in the monthly overview and click the left or right button. You can also set that day back to undecided, if you want. With every successful day, you will see your stats and achievements increase. And that's it! Keep it up and good luck!"
     }
   }
 }

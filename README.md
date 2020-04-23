@@ -4,7 +4,7 @@
 
 This app is a tool to track your progress and encourage you on the way of quitting a bad habit. In a simple calendar view, you can set past days _successful_ or _failed_. Based on this data, you can see encouraging stats about the number of days you succeeded in. Plus you can earn special achievements to reach different goals and keep you motivated on your way.
 
-**y**ou-**c**an-**q**uit in short: **YCQ**, which also means (if you pronounce it): You Seek You. It's about you, making an impact on your own life.
+**you**-**c**an-**q**uit in short: **UCQ**, which also means (if you pronounce it): You Seek You. It's about you, making an impact on your own life.
 
 This web app is based on Vue.js and Dexie.js.
 

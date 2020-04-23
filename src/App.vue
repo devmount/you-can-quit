@@ -53,6 +53,7 @@
     @export="exportBackup()"
     @clear="clearDatabase()"
   />
+  <about />
   <footer>
     <div>
       <a href="https://github.com/devmount/you-can-quit" target="_blank"><font-awesome-icon :icon="['fab', 'github']" class="icon" /></a>
@@ -76,6 +77,7 @@ import YearNavigation from './components/YearNavigation.vue'
 import Year from './components/Year.vue'
 import Info from './components/Info.vue'
 import Administration from './components/Administration.vue'
+import About from './components/About.vue'
 
 export default {
   name: 'app',
@@ -86,6 +88,7 @@ export default {
     YearNavigation,
     Info,
     Administration,
+    About,
   },
   data () {
     // today
@@ -330,7 +333,7 @@ button {
   text-align: left;
 }
 #app footer {
-  margin-top: 80px;
+  margin: 8rem 0 10rem 0;
 }
 #app footer a .icon {
   color: var(--c-text-normal);
