@@ -64,4 +64,17 @@ To implement an achievement, you have to touch the following files:
 - `src/components/info/Achievements.vue`:
   - Add your key to the keys list in the `data()` Object
   - Add your key and the corresponding status function to the `getAchievementStatus ()` function
-  - Implement your status function under `computed`. It always returns an integer (how often the achievement was reached).
+  - Implement your status function under `computed`. It always returns the following object:
+
+  ```javascript
+  {
+    // integer (how often the achievement was received, e.g. 2)
+    state: count,
+    // float (percentage how much progress till next achievement, e.g. 30.0)
+    progress: progress,
+    // integer (how many units left till next achivement, e.g. 5)
+    left: left,
+    // string (label of unit, e.g. 'day' or 'monday')
+    unit: 'day'
+  }
+  ```
