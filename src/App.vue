@@ -49,11 +49,12 @@
     />
   </section>
   <administration
+    class="mt-5"
     @import="importBackup"
     @export="exportBackup()"
     @clear="clearDatabase()"
   />
-  <about />
+  <about class="mt-5" />
   <footer>
     <div>
       <a href="https://github.com/devmount/you-can-quit" target="_blank"><font-awesome-icon :icon="['fab', 'github']" class="icon" /></a>
@@ -374,6 +375,9 @@ button {
 }
 .mt-2 {
   margin-top: 2rem;
+}
+.mt-5 {
+  margin-top: 5rem;
 }
 .px-1 {
   padding-left: 1rem;
