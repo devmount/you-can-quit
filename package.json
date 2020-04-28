@@ -1,32 +1,18 @@
 {
   "name": "you-can-quit",
-  "productName": "You Can Quit!",
   "version": "1.1.0",
+  "private": false,
   "description": "A tool to support your progress in quitting whatever your bad habit is.",
   "author": {
     "name": "Andreas Müller",
     "url": "https://devmount.de"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/devmount/you-can-quit.git"
-  },
-  "bugs": {
-    "url": "https://github.com/devmount/you-can-quit/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/devmount/you-can-quit/raw/master/LICENSE.md"
-    }
-  ],
-  "private": false,
-  "browser": "./dist/index.html",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "browser": "./dist/index.html",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
@@ -41,8 +27,17 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
+    "@vue/cli-plugin-pwa": "~4.3.0",
     "@vue/cli-service": "^3.0.0-beta.15",
     "vue-template-compiler": "^2.5.16"
+  },
+  "vue": {
+    "publicPath": ""
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
   },
   "eslintConfig": {
     "root": true,
@@ -72,12 +67,18 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "vue": {
-    "publicPath": ""
+  "bugs": {
+    "url": "https://github.com/devmount/you-can-quit/issues"
   },
-  "babel": {
-    "presets": [
-      "@vue/app"
-    ]
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/devmount/you-can-quit/raw/master/LICENSE.md"
+    }
+  ],
+  "productName": "You Can Quit!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devmount/you-can-quit.git"
   }
 }
