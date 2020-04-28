@@ -1,6 +1,10 @@
-// Vue Js
+// Vue
 import Vue from 'vue'
 import App from './App.vue'
+
+// service worker
+import './registerServiceWorker'
+
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
