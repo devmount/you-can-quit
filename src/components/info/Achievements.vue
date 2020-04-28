@@ -215,9 +215,10 @@ export default {
         }
       }
       let daysLeft = days-successful-6
+      let progress = successful >= days-6 ? 1 : successful/(days-6)
       return {
         state: count,
-        progress: (successful/(days-6))*100,
+        progress: progress*100,
         left: daysLeft > 0 ? daysLeft : 0,
         unit: 'day'
       }
