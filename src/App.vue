@@ -10,7 +10,7 @@
 >
   <header>
     <h1>{{ $t('title') }} <font-awesome-icon icon="sign-out-alt" class="icon" /></h1>
-    <p>Track your progress and get encouraged on your way of quitting a bad habit.</p>
+    <p>{{ $t('subtitle') }}</p>
     <hr />
   </header>
   <section class="col-2">
