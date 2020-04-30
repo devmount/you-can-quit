@@ -59,7 +59,7 @@
     <div>
       <a href="https://github.com/devmount/you-can-quit" target="_blank"><font-awesome-icon :icon="['fab', 'github']" class="icon" /></a>
       <a href="https://twitter.com/intent/tweet?text=Awesome%20little%20app%20to%20help%20quitting%20with%20a%20bad%20habit%20%F0%9F%98%8E&url=https%3A%2F%2Fyoucanqu.it&via=devmount&hashtags=ycq%2Cvuejs%2CDEVcommunity" target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" class="icon" /></a>
-      <a href="https://dev.to/devmount" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
+      <a href="https://dev.to/devmount/you-can-quit-with-the-help-of-vue-and-dexie-221i" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
     </div>
     <div class="mt-2">Version 1.1.0</div>
     <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
