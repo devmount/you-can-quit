@@ -32,7 +32,7 @@
     "vue-template-compiler": "^2.5.16"
   },
   "vue": {
-    "publicPath": ""
+    "publicPath": "/"
   },
   "babel": {
     "presets": [
