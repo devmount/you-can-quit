@@ -31,9 +31,6 @@
     "@vue/cli-service": "^3.0.0-beta.15",
     "vue-template-compiler": "^2.5.16"
   },
-  "vue": {
-    "publicPath": "/"
-  },
   "babel": {
     "presets": [
       "@vue/app"
