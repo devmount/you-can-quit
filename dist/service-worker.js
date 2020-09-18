@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a19421d53240635a0b80d2fa2f5a8298.js"
+  "/precache-manifest.28ed348cf63af0254a88a2023b741523.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "you-can-quit"});
