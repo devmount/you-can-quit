@@ -1,0 +1,219 @@
+{
+  "title": "Puoi smettere!",
+  "subtitle": "Traccia i tuoi progressi e ottieni supporto per perdere le tue pessime abitudini!",
+  "name": {
+    "month": {
+      "1": "Gennaio",
+      "2": "Febbraio",
+      "3": "Marzo",
+      "4": "Aprile",
+      "5": "Maggio",
+      "6": "Giugno",
+      "7": "Luglio",
+      "8": "Agosto",
+      "9": "Settembre",
+      "10": "Ottobre",
+      "11": "Novembre",
+      "12": "Dicembre"
+    },
+    "dayofweek": {
+      "1": "Domenica",
+      "2": "Lunedì",
+      "3": "Martedì",
+      "4": "Mercoledì",
+      "5": "Giovedì",
+      "6": "Venerdì",
+      "7": "Sabato"
+    }
+  },
+  "month": {
+    "previous": "Mese precedente",
+    "next": "Mese successivo"
+  },
+  "year": {
+    "previous": "Anno precedente",
+    "next": "Anno successivo"
+  },
+  "reset": "Reset",
+  "today": "Oggi",
+  "mark": {
+    "successful": "Segna come positivo",
+    "undecided": "Segna come indeciso",
+    "failed": "Segna come fallito"
+  },
+  "messages": {
+    "titles": [
+      "Ce l'hai fatta!",
+      "SÌ!",
+      "Grande!",
+      "Hai fatto centro!",
+      "Capolavoro!",
+      "Spettacolo!",
+      "Straordinario!"
+    ],
+    "texts": [
+      "Ora c'è la prova, sei grande!",
+      "Sei eccezionale!",
+      "Sei davvero un'ispirazione!",
+      "È così che si fa!",
+      "Sei fortissimǝ! Davvero!",
+      "L'ennesima prova tangibile del tuo successo!"
+    ]
+  },
+  "stats": {
+    "title": "Statistiche",
+    "streak": {
+      "current": "Serie corrente",
+      "longest": "Serie più lunga"
+    }
+  },
+  "legend": {
+    "title": "Legenda",
+    "day": {
+      "successful": "Giorno positivo",
+      "undecided": "Giorno indeciso",
+      "failed": "Giorno fallito"
+    }
+  },
+  "successful": "Successo",
+  "day": "giorno | giorni",
+  "sunday": "domenica | domeniche",
+  "wednesday": "mercoledì | mercoledì",
+  "achievement": "Conquista | Conquiste",
+  "completed": "completato",
+  "done": "fatto",
+  "achievements": {
+    "beginning": {
+      "title": "L'inizio",
+      "description": "Il primo giorno positivo",
+      "icon": "sign-out-alt"
+    },
+    "ten": {
+      "title": "Primi dieci!",
+      "description": "I primi dieci giorni positivi",
+      "icon": "tasks"
+    },
+    "speed": {
+      "title": "Stai accelerando",
+      "description": "7 giorni positivi di fila",
+      "icon": "tachometer-alt"
+    },
+    "alea": {
+      "title": "Alea Iacta Est",
+      "description": "Un mese con meno di sei giornate fallite",
+      "icon": "dice-six"
+    },
+    "tide": {
+      "title": "Ribaltamento di fronte",
+      "description": "Più giornate positive di quelle fallite",
+      "icon": "umbrella-beach"
+    },
+    "defense": {
+      "title": "Difesa impenetrabile",
+      "description": "6 giorni positivi dopo un fallimento",
+      "icon": "shield-alt"
+    },
+    "praise": {
+      "title": "Sia benedetto il signore",
+      "description": "5 domeniche positive di fila",
+      "icon": "church"
+    },
+    "uptrend": {
+      "title": "Stella nascente",
+      "description": "I giorni positivi superano di 4 volte i fallimenti",
+      "icon": "chart-line"
+    },
+    "gatherer": {
+      "title": "Raccoglitore",
+      "description": "Colleziona 15 conquiste",
+      "icon": "award"
+    },
+    "news": {
+      "title": "Buone notizie",
+      "description": "Serie più lunga multipla di 10",
+      "icon": "newspaper"
+    },
+    "spock": {
+      "title": "Lunga vita e prosperità",
+      "description": "I primi 50 giorni positivi!",
+      "icon": "hand-spock"
+    },
+    "madness": {
+      "title": "Follia infrasettimanale",
+      "description": "8 mercoledì positivi di fila",
+      "icon": "grin-tongue-wink"
+    },
+    "clean": {
+      "title": "Resta pulitǝ",
+      "description": "Un intero mese senza fallimenti",
+      "icon": "broom"
+    },
+    "strike": {
+      "title": "Combo secolare!",
+      "description": "Il numero di giorni positivi ha raggiunto un multiplo di 100",
+      "icon": "bowling-ball"
+    },
+    "epic": {
+      "title": "Trofeo Epico",
+      "description": "40 giorni positivi di fila",
+      "icon": "trophy"
+    },
+    "master": {
+      "title": "Mastrǝ del Successo",
+      "description": "Un totale di 365 giorni positivi",
+      "icon": "graduation-cap"
+    },
+    "strength": {
+      "title": "Talento di forza",
+      "description": "100 giorni positivi di fila",
+      "icon": "dumbbell"
+    },
+    "legend": {
+      "title": "Leggendariǝ",
+      "description": "Un intero anno senza fallimenti",
+      "icon": "monument"
+    }
+  },
+  "admin": {
+    "title": "Amministrazione",
+    "backup": {
+      "title": "Backup Zone",
+      "text": "Questo progetto usa un database (Indexed Database API) nel tuo browser: nessun dato lascia la tua macchina o è sincronizzata con un server. Puoi esportare manualmente i tuoi dati per trasferirli su un altro browser o semplicemente farne un backup.",
+      "buttonExport": "Esporta Database"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "text": "Qui puoi importare un file precedentemente esportato o pulire completamente tutti i dati attualmente salvati per ricominciare da zero. Una importazione sovrascrive tutti i dati attualmente salvati mentre una pulizia del database azzera completamente il sistema. Assicurati di fare un backup prima di procedere così da evitare perdite di dati!",
+      "buttonImport": "Importa Database",
+      "buttonClear": "Pulisci Database",
+      "confirmImport": "Vuoi davvero sovrascrivere i dati?",
+      "confirmClear": "Vuoi davvero eliminare i dati?",
+      "yes": "Sì",
+      "no": "No"
+    },
+    "exportSuccess": {
+      "title": "Esportazione avvenuta con successo",
+      "text": "Il database è stato correttamente salvato."
+    },
+    "importSuccess": {
+      "title": "Importazione avvenuta con successo",
+      "text": "Il database è stato correttamente importato e sono stati rimossi i dati precedenti."
+    },
+    "clearSuccess": {
+      "title": "Pulizia avvenuta con successo",
+      "text": "Il database è stato pulito con successo e azzerato completamente."
+    }
+  },
+  "about": {
+    "title": "A proposito di questa App",
+    "what": {
+      "title": "A cosa serve tutto questo?",
+      "text": "Questo piccolo strumento ti aiuta a cercare di migliorare la tua vita su base quotidiana. Se il tuo scopo è smettere con una pessima abitudine puoi usare questa app per tracciare i tuoi progressi e ottenere incoraggiamenti sulla tua strada. Hai anche la possibilità di tracciare comportamenti negativi così da migliorare la tua vita anno dopo anno."
+    },
+    "how": {
+      "title": "Come funziona?",
+      "text": "È sufficiente impostare un giorno come positivo o negativo a seconda del raggiungimento del tuo scopo. Per farlo sposta il cursore sui giorni passati nel calendario e clicca il tasto destro o sinistro. Puoi anche lasciare un giorno come indeciso se preferisci. Con ogni giorno positivo vedrai aumentare le tue statistiche e i tuoi traguardi. In bocca al lupo, ce la puoi fare!"
+    }
+  },
+  "version": "versione"
+}
