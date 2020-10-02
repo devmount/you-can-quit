@@ -87,9 +87,23 @@ library.add(
   faDev
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 // Vue Notifications
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
+
+// global mixin
+Vue.mixin({
+  computed: {
+		// static language list of existing translations
+		languages: () => ({
+			de: 'Deutsch',
+			en: 'English',
+			it: 'Italiano',
+    }),
+  }
+})
+
 // Vue i18n
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)

@@ -215,5 +215,8 @@
       "text": "It's as simple as setting the past day successful or failed, depending on whether you have reached your goal on that day or not. To do that, just move the cursor over one of the past days in the monthly overview and click the left or right button. You can also set that day back to undecided, if you want. With every successful day, you will see your stats and achievements increase. And that's it! Keep it up and good luck!"
     }
   },
-  "version": "version"
+  "footer": {
+    "switchLanguage": "Switch language:",
+    "version": "version"
+  }
 }
