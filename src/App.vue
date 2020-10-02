@@ -56,12 +56,18 @@
   />
   <about class="mt-5" />
   <footer>
-    <div>
+    <div class="mt-2">
+      {{ $t('footer.switchLanguage') }}
+      <select v-model="$i18n.locale" class="lang-select" id="language">
+        <option v-for="(lang, i) in Object.keys(languages)" :key="i" :value="lang">{{ languages[lang] }}</option>
+      </select>
+    </div>
+    <div class="mt-3">
       <a href="https://github.com/devmount/you-can-quit" target="_blank"><font-awesome-icon :icon="['fab', 'github']" class="icon" /></a>
       <a href="https://twitter.com/intent/tweet?text=Awesome%20little%20app%20to%20help%20quitting%20with%20a%20bad%20habit%20%F0%9F%98%8E&url=https%3A%2F%2Fyoucanqu.it&via=devmount&hashtags=ycq%2Cvuejs%2CDEVcommunity" target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" class="icon" /></a>
       <a href="https://dev.to/devmount/you-can-quit-with-the-help-of-vue-and-dexie-221i" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
     </div>
-    <div class="mt-2">{{ $t('version') }} {{ appVersion }}</div>
+    <div class="mt-2">{{ $t('footer.version') }} {{ appVersion }}</div>
     <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
   </footer>
   <notifications group="main" position="bottom right"/>
@@ -346,6 +352,13 @@ button {
   margin: 0 .8rem;
   transition: color .3s;
 }
+#app footer .lang-select {
+  background: transparent;
+  color: inherit;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
 #app footer a:hover .icon,
 #app footer a:focus .icon,
 #app footer a:active .icon {
@@ -379,6 +392,9 @@ button {
 }
 .mt-2 {
   margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
 }
 .mt-5 {
   margin-top: 5rem;

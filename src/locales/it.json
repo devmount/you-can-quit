@@ -215,5 +215,8 @@
       "text": "È sufficiente impostare un giorno come positivo o negativo a seconda del raggiungimento del tuo scopo. Per farlo sposta il cursore sui giorni passati nel calendario e clicca il tasto destro o sinistro. Puoi anche lasciare un giorno come indeciso se preferisci. Con ogni giorno positivo vedrai aumentare le tue statistiche e i tuoi traguardi. In bocca al lupo, ce la puoi fare!"
     }
   },
-  "version": "versione"
+  "footer": {
+    "switchLanguage": "Cambia lingua:",
+    "version": "versione"
+  }
 }
