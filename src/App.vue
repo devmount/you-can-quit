@@ -358,6 +358,7 @@ button {
   border: none;
   font-family: inherit;
   font-size: inherit;
+  text-align: center;
 }
 #app footer a:hover .icon,
 #app footer a:focus .icon,

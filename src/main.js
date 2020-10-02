@@ -97,9 +97,10 @@ Vue.mixin({
   computed: {
 		// static language list of existing translations
 		languages: () => ({
-			de: 'Deutsch',
-			en: 'English',
-			it: 'Italiano',
+			'de': 'Deutsch',
+			'en': 'English',
+      'it': 'Italiano',
+      'pt-br': 'Português (brasileiro)'
     }),
   }
 })
@@ -111,10 +112,10 @@ const i18n = new VueI18n({
   locale: navigator.language.substring(0, 2),
   fallbackLocale: 'en',
   messages: {
-    "en": require("./locales/en.json"),
-    "de": require("./locales/de.json"),
-    "it": require("./locales/it.json"),
-    "pt-br": require("./locales/pt-br.json"),
+    'en': require('./locales/en.json'),
+    'de': require('./locales/de.json'),
+    'it': require('./locales/it.json'),
+    'pt-br': require('./locales/pt-br.json'),
   }
 })
 
