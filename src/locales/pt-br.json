@@ -1,0 +1,222 @@
+{
+  "title": "Você pode parar!",
+  "subtitle": "Acompanhe seu progresso e seja incentivado a abandonar um mau hábito.",
+  "name": {
+    "month": {
+      "1": "Janeiro",
+      "2": "Fevereiro",
+      "3": "Março",
+      "4": "Abril",
+      "5": "Maio",
+      "6": "Junho",
+      "7": "Julho",
+      "8": "Agosto",
+      "9": "Setembro",
+      "10": "Outubro",
+      "11": "Novembro",
+      "12": "Dezembro"
+    },
+    "dayofweek": {
+      "1": "Domingo",
+      "2": "Segunda-feira",
+      "3": "Terça-feira",
+      "4": "Quarta-feira",
+      "5": "Quinta-feira",
+      "6": "Sexta-feira",
+      "7": "Sabado"
+    }
+  },
+  "month": {
+    "previous": "Mês Anterior",
+    "next": "Próximo Mês"
+  },
+  "year": {
+    "previous": "Ano Anterior",
+    "next": "Próximo Ano"
+  },
+  "reset": "Redefinir",
+  "today": "Hoje",
+  "mark": {
+    "successful": "Marcar sucesso",
+    "undecided": "Marcar indeciso",
+    "failed": "Marcar falha"
+  },
+  "messages": {
+    "titles": [
+      "Você conseguiu!",
+      "SIM!",
+      "Strike!",
+      "Na mosca!",
+      "É isso ai!",
+      "BOA!",
+      "Impressionante!"
+    ],
+    "texts": [
+      "Ai está a prova. Você é foda!",
+      "Brabo!",
+      "Você é inspirador!",
+      "Mostra como é que se faz!",
+      "Você é um herói! Sério mesmo!",
+      "Outra prova de sucesso!"
+    ]
+  },
+  "stats": {
+    "title": "Estatísticas",
+    "streak": {
+      "current": "Sequência atual",
+      "longest": "Sequência mais longa"
+    }
+  },
+  "legend": {
+    "title": "Lenda",
+    "day": {
+      "successful": "Dia de sucesso",
+      "undecided": "Dia indeciso",
+      "failed": "Dia falhado"
+    }
+  },
+  "successful": "Bem-sucedido",
+  "day": "dia | dias",
+  "sunday": "domingo | domingos",
+  "wednesday": "quarta-feira | quartas-feiras",
+  "achievement": "Conquista | Conquistas",
+  "completed": "completado",
+  "done": "feito",
+  "achievements": {
+    "beginning": {
+      "title": "O Inicio",
+      "description": "Primeiro dia de sucesso",
+      "icon": "sign-out-alt"
+    },
+    "ten": {
+      "title": "Primeiros Dez",
+      "description": "Os primeiros dez dias de sucesso",
+      "icon": "tasks"
+    },
+    "speed": {
+      "title": "Ganhando Velocidade",
+      "description": "7 dias de sucesso seguidos",
+      "icon": "tachometer-alt"
+    },
+    "alea": {
+      "title": "A sorte está lançada",
+      "description": "Um mês inteiro com 6 falhas ou menos",
+      "icon": "dice-six"
+    },
+    "tide": {
+      "title": "A maré mudou",
+      "description": "Mais dias de sucesso do que dias de falha",
+      "icon": "umbrella-beach"
+    },
+    "defense": {
+      "title": "Defesa Forte",
+      "description": "6 dias de sucesso após um dia de falha",
+      "icon": "shield-alt"
+    },
+    "praise": {
+      "title": "Louve o Senhor",
+      "description": "5 domingos de sucesso consecutivos",
+      "icon": "church"
+    },
+    "uptrend": {
+      "title": "Tendência crescente de Sucesso",
+      "description": "4 vezes mais dias de sucesso do que dias de falha",
+      "icon": "chart-line"
+    },
+    "gatherer": {
+      "title": "Coletor",
+      "description": "Coletou 15 conquistas",
+      "icon": "award"
+    },
+    "news": {
+      "title": "Boas Notícias",
+      "description": "A sequência mais longa atingiu um múltiplo de 10",
+      "icon": "newspaper"
+    },
+    "spock": {
+      "title": "Longo e Próspero",
+      "description": "Os primeiros 50 dias de sucesso",
+      "icon": "hand-spock"
+    },
+    "madness": {
+      "title": "Loucura da Quarta-Feira",
+      "description": "8 quartas-feiras de sucesso consecutivas",
+      "icon": "grin-tongue-wink"
+    },
+    "clean": {
+      "title": "Fique Limpo",
+      "description": "Um mês inteiro sem falhas",
+      "icon": "broom"
+    },
+    "strike": {
+      "title": "Vezes Dez",
+      "description": "O número de dias bem-sucedidos atingiu um múltiplo de 100",
+      "icon": "bowling-ball"
+    },
+    "epic": {
+      "title": "Troféu Épico",
+      "description": "40 dias de sucesso consecutivos",
+      "icon": "trophy"
+    },
+    "master": {
+      "title": "Mestre do Sucesso",
+      "description": "Um total de 365 dias de sucesso",
+      "icon": "graduation-cap"
+    },
+    "strength": {
+      "title": "Talento De Força",
+      "description": "100 dias de sucesso consecutivos",
+      "icon": "dumbbell"
+    },
+    "legend": {
+      "title": "Monumento Lendário",
+      "description": "Um ano inteiro sem falhas",
+      "icon": "monument"
+    }
+  },
+  "admin": {
+    "title": "Administração",
+    "backup": {
+      "title": "Zona de Backup",
+      "text": "Este projeto usa o mecanismo de banco de dados (API Indexed Database) do seu navegador - nenhum dado está saindo de sua máquina ou sincronizado com um servidor. Aqui você pode exportar manualmente seus dados atuais. Você pode usar isso como backup ou para transferir seus dados para outro navegador ou máquina.",
+      "buttonExport": "Exportar banco de dados"
+    },
+    "danger": {
+      "title": "Zona de Perigo",
+      "text": "Aqui você pode importar um arquivo JSON exportado anteriormente ou limpar todos os dados para começar de novo. Uma importação substitui todos os registros existentes e uma limpeza do banco de dados remove o banco de dados completo. Certifique-se de sempre fazer backup de seus dados primeiro para evitar perda de dados!",
+      "buttonImport": "Importar Banco de Dados",
+      "buttonClear": "Limpar Banco de Dados",
+      "confirmImport": "Você quer realmente sobrescrever os dados?",
+      "confirmClear": "Você quer realmente remover os dados?",
+      "yes": "Sim",
+      "no": "Não"
+    },
+    "exportSuccess": {
+      "title": "Exportação bem sucedida.",
+      "text": "Banco de dados exportado com sucesso."
+    },
+    "importSuccess": {
+      "title": "Importação bem sucedida.",
+      "text": "Banco de dados importado com sucesso e dados anteriores substituídos."
+    },
+    "clearSuccess": {
+      "title": "Limpeza bem sucedida.",
+      "text": "Banco de dados limpo com sucesso e dados anteriores removidos."
+    }
+  },
+  "about": {
+    "title": "Sobre este aplicativo",
+    "what": {
+      "title": "O que é isso?",
+      "text": "Esta é uma pequena ferramenta que visa ajudá-lo a não fazer mais nada no dia a dia. Se você tem o objetivo de abandonar um mau hábito ou qualidade, pode usar este aplicativo para rastrear seu progresso e receber notificações e conquistas encorajadoras em seu caminho. Você também tem a possibilidade de reconhecer padrões em seu comportamento com a ajuda da visão geral anual."
+    },
+    "how": {
+      "title": "Como funciona?",
+      "text": "É tão simples quanto definir o dia anterior com êxito ou falha, dependendo se você alcançou sua meta naquele dia ou não. Para fazer isso, basta mover o cursor sobre um dos últimos dias na visão geral do mês e clicar com o botão esquerdo ou direito. Você também pode definir esse dia como indeciso, se quiser. A cada dia de sucesso, você verá suas estatísticas e conquistas aumentarem. E é isso! Continue assim e boa sorte!"
+    }
+  },
+  "footer": {
+    "switchLanguage": "Mudar de idioma:",
+    "version": "versão"
+  }
+}
