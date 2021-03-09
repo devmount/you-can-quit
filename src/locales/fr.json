@@ -212,8 +212,7 @@
     },
     "how": {
       "title": "Comment cela fonctionne ?",
-      "text" : "C'est aussi simple que de noter le succès ou l'échec de la journée passée, selon que vous avez atteint votre objectif ce jour-là ou non. Pour ce faire, il suffit de déplacer le curseur sur l'un des jours passés dans l'aperçu mensuel et de cliquer sur le bouton gauche ou droit. Vous pouvez aussi, si vous le souhaitez, remettre ce jour à l'état d'indécision. À chaque jour de réussite, vous verrez vos statistiques et vos réalisations augmenter. Et c'est tout ! Continuez comme ça et bonne chance !
-
+      "text" : "C'est aussi simple que de noter le succès ou l'échec de la journée passée, selon que vous avez atteint votre objectif ce jour-là ou non. Pour ce faire, il suffit de déplacer le curseur sur l'un des jours passés dans l'aperçu mensuel et de cliquer sur le bouton gauche ou droit. Vous pouvez aussi, si vous le souhaitez, remettre ce jour à l'état d'indécision. À chaque jour de réussite, vous verrez vos statistiques et vos réalisations augmenter. Et c'est tout ! Continuez comme ça et bonne chance !"
     }
   },
   "footer": {
