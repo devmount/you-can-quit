@@ -1,0 +1,222 @@
+{
+  "title": "Tu peux arrêter !",
+  "subtitle": "Suivez vos progrès et faites vous encourager sur la manière de perdre une mauvaise habitude.",
+  "name": {
+    "month": {
+      "1": "Janvier",
+      "2": "Février",
+      "3": "Mars",
+      "4": "Avril",
+      "5": "Mai",
+      "6": "Juin",
+      "7": "Juillet",
+      "8": "Août",
+      "9": "Septembre",
+      "10": "Octobre",
+      "11": "Novembre",
+      "12": "Décembre"
+    },
+    "dayofweek": {
+      "1": "Dimanche",
+      "2": "Lundi",
+      "3": "Mardi",
+      "4": "Mercredi",
+      "5": "Jeudi",
+      "6": "Vendredi",
+      "7": "Samedi"
+    }
+  },
+  "month": {
+    "previous": "Mois précédent",
+    "next": "Mois suivant"
+  },
+  "year": {
+    "previous": "Année précédente",
+    "next": "Année suivante"
+  },
+  "reset": "Réinitialiser",
+  "today": "Aujourd'hui",
+  "mark": {
+    "successful": "Marquer un succès",
+    "undecided": "Marquer indécis",
+    "failed": "Marquer un échec"
+  },
+  "messages": {
+    "titles": [
+      "Tu peux le faire !",
+      "OUI !",
+      "Strike!",
+      "Dans le mille !",
+      "Cloué !",
+      "Bien joué !",
+      "Imprésionnant !"
+    ],
+    "texts": [
+      "Voilà la preuve. Tu es génial !",
+      "Tu es impressionnant !",
+      "Tu es une vraie inspiration !",
+      "C'est comme ça qu'on fait !",
+      "Tu es un héros, sérieusement !",
+      "Encore une preuve incontestable de ton succès !"
+    ]
+  },
+  "stats": {
+    "title": "Statistiques",
+    "streak": {
+      "current": "Tendance actuelle",
+      "longest": "Tendance globale"
+    }
+  },
+  "legend": {
+    "title": "Legend",
+    "day": {
+      "successful": "Journée réussie",
+      "undecided": "Journée indécie",
+      "failed": "Journée ratée"
+    }
+  },
+  "successful": "Succès",
+  "day": "jour | jours",
+  "sunday": "dimanche | dimanches",
+  "wednesday": "mercredi | mercredis",
+  "achievement": "Réalisation | Réalisations",
+  "completed": "complété",
+  "done": "fait",
+  "achievements": {
+    "beginning": {
+      "title": "Le débutant",
+      "description": "Le premier jour réussi",
+      "icon": "sign-out-alt"
+    },
+    "ten": {
+      "title": "Première dizaine",
+      "description": "Premier dizaine réussie !",
+      "icon": "tasks"
+    },
+    "speed": {
+      "title": "Passe la seconde !",
+      "description": "7 jours de succès d'affilée",
+      "icon": "tachometer-alt"
+    },
+    "alea": {
+      "title": "Alea Iacta Est",
+      "description": "Un mois entier avec 6 échecs ou moins",
+      "icon": "dice-six"
+    },
+    "tide": {
+      "title": "La roue tourne !",
+      "description": "Plus de jours de succès que de jours d'échec",
+      "icon": "umbrella-beach"
+    },
+    "defense": {
+      "title": "Une défense solide",
+      "description": "Six jours réussis après une journée d'échec",
+      "icon": "shield-alt"
+    },
+    "praise": {
+      "title": "Prie le Seigneur",
+      "description": "5 dimanches d'affilée réussis",
+      "icon": "church"
+    },
+    "uptrend": {
+      "title": "Tendance à la réussite",
+      "description": "4 fois plus de jours réussis que de jours d'échec",
+      "icon": "chart-line"
+    },
+    "gatherer": {
+      "title": "Rassembleur",
+      "description": "15 succès collectés",
+      "icon": "award"
+    },
+    "news": {
+      "title": "Bonne nouvélle",
+      "description": "La plus longue série a atteint un multiple de 10",
+      "icon": "newspaper"
+    },
+    "spock": {
+      "title": "Longue vie et prospérité",
+      "description": "Le premier 50 jours réussis d'affilés !",
+      "icon": "hand-spock"
+    },
+    "madness": {
+      "title": "La folie du milieu de semaine",
+      "description": "8 mercredis consécutifs réussis",
+      "icon": "grin-tongue-wink"
+    },
+    "clean": {
+      "title": "Rester clean",
+      "description": "Un mois entier sans échec",
+      "icon": "broom"
+    },
+    "strike": {
+      "title": "Strike décuplé",
+      "description": "Le nombre de journées réussies a atteint un multiple de 100",
+      "icon": "bowling-ball"
+    },
+    "epic": {
+      "title": "Trophé épique",
+      "description": "40 jours de succès d'affilée",
+      "icon": "trophy"
+    },
+    "master": {
+      "title": "Maître du succès",
+      "description": "Un total de 365 jours de réussite",
+      "icon": "graduation-cap"
+    },
+    "strength": {
+      "title": "Coup de force",
+      "description": "100 jours de succès d'affilée",
+      "icon": "dumbbell"
+    },
+    "legend": {
+      "title": "Monument légendaire",
+      "description": "Une année entière sans échec",
+      "icon": "monument"
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "backup": {
+      "title": "Zone de sauvegarde",
+      "text": "Ce projet utilise le moteur de base de données (API Indexed Database) de votre navigateur - aucune donnée ne quitte votre machine ou n'est synchronisée avec un serveur. Vous pouvez ici exporter manuellement vos données actuelles. Vous pouvez l'utiliser comme sauvegarde ou pour transférer vos données vers un autre navigateur ou une autre machine.",
+      "buttonExport": "Exporter la base de données"
+    },
+    "danger": {
+      "title": "Zone de danger",
+      "text": "Ici, vous pouvez importer un fichier JSON précédemment exporté ou vous pouvez effacer toutes les données pour recommencer à zéro. Une importation écrase tous les enregistrements existants et un effacement de la base de données supprime la base de données complète. Veillez à toujours sauvegarder vos données en premier lieu pour éviter toute perte de données !",
+      "buttonImport": "Importer la base de données",
+      "buttonClear": "Netoyer la base de données",
+      "confirmImport": "Écraser les données ?",
+      "confirmClear": "Éffacer les données ?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "exportSuccess": {
+      "title": "Succès de l'export",
+      "text": "La base de données a été exporté."
+    },
+    "importSuccess": {
+      "title": "Succès de l'import",
+      "text": "La base de données a bien été importé et les données précédentes écrasés."
+    },
+    "clearSuccess": {
+      "title": "Netoyage réussi",
+      "text": "La base de données a été effacée avec succès et les données précédentes ont été supprimées."
+    }
+  },
+  "about": {
+    "title": "A propos de l'application",
+    "what": {
+      "title": "Qu'est-ce que c'est ?",
+      "text": "C'est un petit outil qui vise à vous aider à ne plus faire quelque chose au quotidien. Si vous avez pour objectif d'arrêter une mauvaise habitude ou qualité, vous pouvez utiliser cette application pour suivre vos progrès et obtenir des notifications et des réalisations encourageantes sur votre chemin. Vous avez également la possibilité de reconnaître des modèles dans votre comportement à l'aide de l'aperçu annuel."
+    },
+    "how": {
+      "title": "Comment cela fonctionne ?",
+      "text" : "C'est aussi simple que de noter le succès ou l'échec de la journée passée, selon que vous avez atteint votre objectif ce jour-là ou non. Pour ce faire, il suffit de déplacer le curseur sur l'un des jours passés dans l'aperçu mensuel et de cliquer sur le bouton gauche ou droit. Vous pouvez aussi, si vous le souhaitez, remettre ce jour à l'état d'indécision. À chaque jour de réussite, vous verrez vos statistiques et vos réalisations augmenter. Et c'est tout ! Continuez comme ça et bonne chance !"
+    }
+  },
+  "footer": {
+    "switchLanguage": "Changer de langue :",
+    "version": "version"
+  }
+}
