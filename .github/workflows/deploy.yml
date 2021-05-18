@@ -1,0 +1,32 @@
+# This workflow will do a clean install of node dependencies, build the application and deploy it to production
+
+name: Build & Deploy
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: Build app using Yarn
+      run: |
+        npm install -g yarn
+        yarn install
+        yarn build
+    - name: Push Build files to production
+      uses: kostya-ten/ssh-server-deploy@v4
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        port: ${{ secrets.DEPLOY_PORT }}
+        username: ${{ secrets.DEPLOY_USER }}
+        password: ${{ secrets.DEPLOY_PASS }}
+        scp_source: dist/*
+        scp_target: ${{ secrets.DEPLOY_PATH }}
