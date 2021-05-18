@@ -119,8 +119,11 @@ const i18n = new VueI18n({
   }
 })
 
-// turns off the 'You are running Vue in development mode.' msg
+// set local config
 Vue.config.productionTip = false
+
+// set global properties
+Vue.prototype.$version = process.env.VUE_APP_VERSION
 
 new Vue({
   i18n,
