@@ -10,6 +10,16 @@
       "src": "./img/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
-		}
-	]
+    },
+    {
+      "src": "./img/icons/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
 }
