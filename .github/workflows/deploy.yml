@@ -1,4 +1,6 @@
-# This workflow will do a clean install of node dependencies, build the application and deploy it to production
+# This workflow will do a clean install of node dependencies,
+# build the application and deploy it to production
+# when a new version (git tag) is released
 
 name: Build & Deploy
 
@@ -12,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 14.x
+    - name: Use Node.js 17
       uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 17.x
     - name: Build app using Yarn
       run: |
         npm install -g yarn
