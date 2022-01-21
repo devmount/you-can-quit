@@ -24,11 +24,13 @@ jobs:
         yarn install
         yarn build
     - name: Push Build files to production
-      uses: kostya-ten/ssh-server-deploy@v4
+      uses: burnett01/rsync-deployments@5.2
       with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        port: ${{ secrets.DEPLOY_PORT }}
-        username: ${{ secrets.DEPLOY_USER }}
-        password: ${{ secrets.DEPLOY_PASS }}
-        scp_source: dist/*
-        scp_target: ${{ secrets.DEPLOY_PATH }}
+        switches: -avzr --delete
+        path: dist/
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_SSH_KEY }}
+        remote_key_pass: ${{ secrets.DEPLOY_SSH_PHRASE }}
