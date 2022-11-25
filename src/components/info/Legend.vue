@@ -10,12 +10,6 @@
 </div>
 </template>
 
-<script>
-export default {
-  
-}
-</script>
-
 <style>
 .legend {
   text-align: left;

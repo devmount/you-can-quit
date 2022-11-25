@@ -67,7 +67,7 @@
       <a href="https://twitter.com/intent/tweet?text=Awesome%20little%20app%20to%20help%20quitting%20with%20a%20bad%20habit%20%F0%9F%98%8E&url=https%3A%2F%2Fyoucanqu.it&via=devmount&hashtags=ycq%2Cvuejs%2CDEVcommunity" target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" class="icon" /></a>
       <a href="https://dev.to/devmount/you-can-quit-with-the-help-of-vue-and-dexie-221i" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
     </div>
-    <div class="mt-2">{{ $t('footer.version') }} {{ $version }}</div>
+    <div class="mt-2">{{ $t('footer.version') }} {{ version }}</div>
     <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
   </footer>
   <notifications group="main" position="bottom right"/>
@@ -75,18 +75,19 @@
 </template>
 
 <script>
+import { defineComponent, inject } from 'vue';
 // get indexed db
-import db from './database'
+import db from '@/database';
 // get single file components
-import MonthNavigation from './components/MonthNavigation.vue'
-import Month from './components/Month.vue'
-import YearNavigation from './components/YearNavigation.vue'
-import Year from './components/Year.vue'
-import Info from './components/Info.vue'
-import Administration from './components/Administration.vue'
-import About from './components/About.vue'
+import MonthNavigation from '@/components/MonthNavigation.vue';
+import Month from '@/components/Month.vue';
+import YearNavigation from '@/components/YearNavigation.vue';
+import Year from '@/components/Year.vue';
+import Info from '@/components/Info.vue';
+import Administration from '@/components/Administration.vue';
+import About from '@/components/About.vue';
 
-export default {
+export default defineComponent({
   name: 'app',
   components: {
     Month,
@@ -96,6 +97,9 @@ export default {
     Info,
     Administration,
     About,
+  },
+  setup () {
+    const version = inject('version');
   },
   data () {
     // today
@@ -263,7 +267,7 @@ export default {
       return offset > 0 ? offset : 0;
     },
   }
-}
+});
 </script>
 
 <style>

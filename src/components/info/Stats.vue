@@ -28,7 +28,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: {
     statusData: Object,
   },
@@ -86,7 +88,7 @@ export default {
       return Object.values(this.statusData).filter(value => value == 1).length
     }
   }
-}
+});
 </script>
 
 <style>

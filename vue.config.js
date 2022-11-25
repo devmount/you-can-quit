@@ -1,4 +1,4 @@
-process.env.VUE_APP_VERSION = require('./package.json').version
+process.env.VUE_APP_VERSION = require('./package.json').version;
 
 module.exports = {
 	configureWebpack: {
@@ -7,8 +7,8 @@ module.exports = {
 			maxAssetSize: 1024000
 		},
 		output: {
-			filename: 'js/[name].js',
-			chunkFilename: 'js/[name].bundle.js',
+			filename: 'js/[contenthash]-[name].js',
+			chunkFilename: 'js/[chunkhash]-[name].bundle.js',
 		},
 	},
 	productionSourceMap: false,

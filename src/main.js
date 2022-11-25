@@ -1,12 +1,13 @@
-// Vue
-import Vue from 'vue'
-import App from './App'
+// init app
+import { createApp } from 'vue';
+import App from '@/App.vue';
+const app = createApp(App);
 
 // service worker
-import './registerServiceWorker'
+import '@/registerServiceWorker';
 
 // FontAwesome icons
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
   faTimes,
   faPlus,
@@ -41,13 +42,13 @@ import {
   faHandSpock,
   faInfoCircle,
   faShoePrints
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 import {
   faTwitter,
   faGithub,
   faDev
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+} from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
   faTimes,
   faPlus,
@@ -85,20 +86,21 @@ library.add(
   faTwitter,
   faGithub,
   faDev
-)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+);
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 // Vue Notifications
-import Notifications from 'vue-notification'
-Vue.use(Notifications)
+import Notifications from 'vue-notification';
+app.use(Notifications)
 
 // global mixin
-Vue.mixin({
+app.mixin({
   computed: {
 		// static language list of existing translations
 		languages: () => ({
 			'de': 'Deutsch',
 			'en': 'English',
+			'fr': 'Francais',
       'it': 'Italiano',
       'pt-br': 'Português (brasileiro)'
     }),
@@ -106,26 +108,22 @@ Vue.mixin({
 })
 
 // Vue i18n
-import VueI18n from 'vue-i18n'
-Vue.use(VueI18n)
-const i18n = new VueI18n({
-  locale: navigator.language.substring(0, 2),
+import { createI18n } from 'vue-i18n';
+const i18n = createI18n({
+  locale: navigator.language || navigator.userLanguage,
   fallbackLocale: 'en',
   messages: {
     'en': require('./locales/en.json'),
     'de': require('./locales/de.json'),
+    'fr': require('./locales/fr.json'),
     'it': require('./locales/it.json'),
     'pt-br': require('./locales/pt-br.json'),
   }
-})
-
-// set local config
-Vue.config.productionTip = false
+});
+app.use(i18n);
 
 // set global properties
-Vue.prototype.$version = process.env.VUE_APP_VERSION
+app.provide('version', process.env.VUE_APP_VERSION);
 
-new Vue({
-  i18n,
-  render: h => h(App)
-}).$mount('#app')
+// ready? let's go!
+app.mount('#app');

@@ -31,7 +31,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: {
     statusData: Object,
     date: Object,
@@ -67,7 +69,7 @@ export default {
       return new Date(this.date.year, 0, 1).getDay()
     },
   }
-}
+});
 </script>
 
 <style>

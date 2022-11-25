@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import Legend from './info/Legend.vue'
-import Stats from './info/Stats.vue'
-import Achievements from './info/Achievements.vue'
+import { defineComponent } from 'vue';
+import Legend from './info/Legend.vue';
+import Stats from './info/Stats.vue';
+import Achievements from './info/Achievements.vue';
 
-export default {
+export default defineComponent({
   components: {
     Legend,
     Stats,
@@ -20,7 +21,7 @@ export default {
   props: {
     statusData: Object,
   }
-}
+});
 </script>
 
 <style>

@@ -46,7 +46,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: {
     dayOfWeekOffset: Number,
     daysInMonth: Number,
@@ -83,7 +85,7 @@ export default {
       return new Date(year, month-1, day) < new Date(this.now.year, this.now.month-1, this.now.day)
     },
   }
-}
+});
 </script>
 
 <style>
