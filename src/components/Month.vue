@@ -1,7 +1,7 @@
 <template>
 <div class="month-day-grid">
   <!-- day of week labels -->
-  <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+  <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
   <div v-for="o in dayOfWeekOffset" :class="'day offset month-day-pre-offset-' + o"></div>
   <!-- actual days -->
@@ -15,26 +15,26 @@
       success: statusData[getDate(date.year, date.month, d)] == 1,
       fail: statusData[getDate(date.year, date.month, d)] == -1
     }"
-    :title="isToday(date.year, date.month, d) ? $t('today') : ''"
+    :title="isToday(date.year, date.month, d) ? t('today') : ''"
   >{{ d }}
     <div v-if="isPast(date.year, date.month, d)" class="action">
       <button
-        @click="$emit('update', date.year, date.month, d, 1)"
+        @click="emit('update', date.year, date.month, d, 1)"
         class="success"
-        :title="$t('mark.successful')"
+        :title="t('mark.successful')"
       >
         <font-awesome-icon icon="chevron-up" />
       </button>
       <button
-        @click="$emit('update', date.year, date.month, d, 0)"
-        :title="$t('mark.undecided')"
+        @click="emit('update', date.year, date.month, d, 0)"
+        :title="t('mark.undecided')"
       >
         <font-awesome-icon icon="undo-alt" />
       </button>
       <button
-        @click="$emit('update', date.year, date.month, d, -1)"
+        @click="emit('update', date.year, date.month, d, -1)"
         class="fail"
-        :title="$t('mark.failed')"
+        :title="t('mark.failed')"
       >
         <font-awesome-icon icon="chevron-down" />
       </button>
@@ -45,47 +45,45 @@
 </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineProps, reactive, defineEmits } from 'vue';
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
-export default defineComponent({
-  props: {
-    dayOfWeekOffset: Number,
-    daysInMonth: Number,
-    fillOffset: Number,
-    statusData: Object,
-    date: Object,
-  },
-  data () {
-    // today
-    var now = new Date()
-    return {
-      now: {
-        day: now.getDate(),
-        month: now.getMonth()+1,
-        year: now.getFullYear()
-      }
-    }
-  },
-  methods: {
-    // build date format yyyy-mm-dd
-    getDate (year, month, day) {
-      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-    },
-    // check if date is a future date
-    isFuture (year, month, day) {
-      return new Date(year, month-1, day) > new Date(this.now.year, this.now.month-1, this.now.day)
-    },
-    // check if date is today
-    isToday (year, month, day) {
-      return year == this.now.year && month == this.now.month && day == this.now.day
-    },
-    // check if date is past
-    isPast (year, month, day) {
-      return new Date(year, month-1, day) < new Date(this.now.year, this.now.month-1, this.now.day)
-    },
-  }
+const emit = defineEmits(['update'])
+
+const props = defineProps({
+  dayOfWeekOffset: Number,
+  daysInMonth: Number,
+  fillOffset: Number,
+  statusData: Object,
+  date: Object,
 });
+
+// today
+const d = new Date()
+const now = reactive({
+  day: d.getDate(),
+  month: d.getMonth()+1,
+  year: d.getFullYear()
+});
+
+// build date format yyyy-mm-dd
+const getDate = (year, month, day) => {
+  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+};
+// check if date is a future date
+const isFuture = (year, month, day) => {
+  return new Date(year, month-1, day) > new Date(now.year, now.month-1, now.day)
+};
+// check if date is today
+const isToday = (year, month, day) => {
+  return year == now.year && month == now.month && day == now.day
+};
+// check if date is past
+const isPast = (year, month, day) => {
+  return new Date(year, month-1, day) < new Date(now.year, now.month-1, now.day)
+};
 </script>
 
 <style>
