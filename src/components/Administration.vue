@@ -1,28 +1,28 @@
 <template>
 <div class="administration-container">
-  <h2>{{ $t('admin.title') }}</h2>
+  <h2>{{ t('admin.title') }}</h2>
   <section class="col-2">
     <div class="col-half px-1 backup-zone">
-      <h3>{{ $t('admin.backup.title') }}</h3>
-      <p>{{ $t('admin.backup.text') }}</p>
-      <button class="btn btn-primary" @click="$emit('export')">{{ $t('admin.backup.buttonExport') }}</button>
+      <h3>{{ t('admin.backup.title') }}</h3>
+      <p>{{ t('admin.backup.text') }}</p>
+      <button class="btn btn-primary" @click="$emit('export')">{{ t('admin.backup.buttonExport') }}</button>
     </div>
     <div class="col-half px-1 danger-zone">
-      <h3>{{ $t('admin.danger.title') }}</h3>
-      <p>{{ $t('admin.danger.text') }}</p>
+      <h3>{{ t('admin.danger.title') }}</h3>
+      <p>{{ t('admin.danger.text') }}</p>
       <div class="btn-group">
-        <label v-if="!confirm.import" class="btn btn-danger" @click="confirm.import = true">{{ $t('admin.danger.buttonImport') }}</label>
+        <label v-if="!confirm.import" class="btn btn-danger" @click="confirm.import = true">{{ t('admin.danger.buttonImport') }}</label>
         <label v-if="confirm.import" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.import }">
-          {{ $t('admin.danger.confirmImport') }}
-          <span class="btn-mini" @click="$refs['backupFile'].click()">{{ $t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.import = false">{{ $t('admin.danger.no') }}</span>
+          {{ t('admin.danger.confirmImport') }}
+          <span class="btn-mini" @click="$refs['backupFile'].click()">{{ t('admin.danger.yes') }}</span>
+          <span class="btn-mini" @click="confirm.import = false">{{ t('admin.danger.no') }}</span>
         </label>
         <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="$emit('import', $refs['backupFile']);confirm.import = false">
-        <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ $t('admin.danger.buttonClear') }}</button>
+        <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ t('admin.danger.buttonClear') }}</button>
         <button v-if="confirm.clear" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.clear }">
-          {{ $t('admin.danger.confirmClear') }}
-          <span class="btn-mini" @click="$emit('clear');confirm.clear = false">{{ $t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.clear = false">{{ $t('admin.danger.no') }}</span>
+          {{ t('admin.danger.confirmClear') }}
+          <span class="btn-mini" @click="$emit('clear');confirm.clear = false">{{ t('admin.danger.yes') }}</span>
+          <span class="btn-mini" @click="confirm.clear = false">{{ t('admin.danger.no') }}</span>
         </button>
       </div>
     </div>
@@ -30,18 +30,14 @@
 </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { reactive } from 'vue';
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
-export default defineComponent({
-  data () {
-    return {
-      confirm: {
-        import: false,
-        clear: false,
-      }
-    }
-  }
+const confirm = reactive({
+  import: false,
+  clear: false,
 });
 </script>
 

@@ -89,9 +89,9 @@ library.add(
 );
 app.component('font-awesome-icon', FontAwesomeIcon);
 
-// Vue Notifications
-import Notifications from 'vue-notification';
-app.use(Notifications)
+// vue-notification
+import Notifications from '@kyvg/vue3-notification';
+app.use(Notifications);
 
 // global mixin
 app.mixin({
@@ -112,6 +112,7 @@ import { createI18n } from 'vue-i18n';
 const i18n = createI18n({
   locale: navigator.language || navigator.userLanguage,
   fallbackLocale: 'en',
+  legacy: false,
   messages: {
     'en': require('./locales/en.json'),
     'de': require('./locales/de.json'),

@@ -3,7 +3,7 @@
   <div class="year-container">
     <div class="year-day-grid">
       <!-- day of week labels -->
-      <div v-for="l in 7" class="day label">{{ $t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+      <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
       <!-- offset days -->
       <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
       <!-- days in current year with month initials -->
@@ -19,10 +19,10 @@
           }"
           :title="
             (isToday(date.year, m, d) ? 'Today' : '') + 
-            (i == 0 ? $t('name.month.' + m) : '')
+            (i == 0 ? t('name.month.' + m) : '')
           "
         >
-          <span v-if="i == 0">{{ $t('name.month.' + m).slice(0, 1) }}</span>
+          <span v-if="i == 0">{{ t('name.month.' + m).slice(0, 1) }}</span>
         </div>
       </template>
     </div>
@@ -30,45 +30,40 @@
 </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineProps, reactive, computed } from 'vue';
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
-export default defineComponent({
-  props: {
-    statusData: Object,
-    date: Object,
-  },
-  data () {
-    // today
-    var now = new Date()
-    return {
-      now: {
-        day: now.getDate(),
-        month: now.getMonth()+1,
-        year: now.getFullYear()
-      }
-    }
-  },
-  methods: {
-    // build date format yyyy-mm-dd
-    getDate (year, month, day) {
-      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-    },
-    // compute the number of days of the given month
-    daysInMonth (month) {
-      return new Date(this.date.year, month, 0).getDate();
-    },
-    // check if date is today
-    isToday (year, month, day) {
-      return year == this.now.year && month == this.now.month && day == this.now.day
-    },
-  },
-  computed: {
-    // compute the offset of weekdays before actual days
-    dayOfWeekOffset () {
-      return new Date(this.date.year, 0, 1).getDay()
-    },
-  }
+const props = defineProps({
+  statusData: Object,
+  date: Object,
+});
+
+// today
+const d = new Date()
+const now = reactive({
+  day: d.getDate(),
+  month: d.getMonth()+1,
+  year: d.getFullYear()
+});
+
+// build date format yyyy-mm-dd
+const getDate = (year, month, day) => {
+  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+};
+// compute the number of days of the given month
+const daysInMonth = (month) => {
+  return new Date(props.date.year, month, 0).getDate();
+};
+// check if date is today
+const isToday = (year, month, day) => {
+  return year == now.year && month == now.month && day == now.day
+};
+
+// compute the offset of weekdays before actual days
+const dayOfWeekOffset = computed(() => {
+  return new Date(props.date.year, 0, 1).getDay()
 });
 </script>
 

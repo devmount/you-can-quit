@@ -1,14 +1,19 @@
 <template>
 <div class="container">
-  <h2>{{ $t('legend.title') }}</h2>
+  <h2>{{ t('legend.title') }}</h2>
   <div class="legend">
-    <div class="today">{{ $t('today') }}</div>
-    <div class="successful">{{ $t('legend.day.successful') }}</div>
-    <div class="undecided">{{ $t('legend.day.undecided') }}</div>
-    <div class="failed">{{ $t('legend.day.failed') }}</div>
+    <div class="today">{{ t('today') }}</div>
+    <div class="successful">{{ t('legend.day.successful') }}</div>
+    <div class="undecided">{{ t('legend.day.undecided') }}</div>
+    <div class="failed">{{ t('legend.day.failed') }}</div>
   </div>
 </div>
 </template>
+
+<script setup>
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+</script>
 
 <style>
 .legend {

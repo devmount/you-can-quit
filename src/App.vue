@@ -4,48 +4,48 @@
   ref="container"
   @keydown.ctrl.left.exact="previousYear()"
   @keydown.left.exact="previousMonth()"
-  @keydown.82.prevent="changeMonth(now.year, now.month)"
+  @keydown.82.prevent="changeMonth(calNow.year, calNow.month)"
   @keydown.right.exact="nextMonth()"
   @keydown.ctrl.right.exact="nextYear()"
 >
   <header>
-    <h1>{{ $t('title') }} <font-awesome-icon icon="sign-out-alt" class="icon" /></h1>
-    <p>{{ $t('subtitle') }}</p>
+    <h1>{{ t('title') }} <font-awesome-icon icon="sign-out-alt" class="icon" /></h1>
+    <p>{{ t('subtitle') }}</p>
     <hr />
   </header>
   <section class="col-2">
     <div class="month-view">
       <month-navigation
-        :date="date"
+        :date="calDate"
         @previous="previousMonth()"
-        @change="changeMonth(now.year, now.month)"
+        @change="changeMonth(calNow.year, calNow.month)"
         @next="nextMonth()"
       />
       <month
         :day-of-week-offset="dayOfWeekOffset"
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
-        :status-data="data"
-        :date="date"
+        :status-data="calData"
+        :date="calDate"
         @update="updateDay"
       />
     </div>
     <div class="info-view">
       <Info
-        :status-data="data"
+        :status-data="calData"
       />
     </div>
   </section>
   <section>
     <year-navigation
-      :date="date"
+      :date="calDate"
       @previous="previousYear()"
-      @change="changeMonth(now.year, now.month)"
+      @change="changeMonth(calNow.year, calNow.month)"
       @next="nextYear()"
     />
     <year
-      :status-data="data"
-      :date="date"
+      :status-data="calData"
+      :date="calDate"
     />
   </section>
   <administration
@@ -57,8 +57,8 @@
   <about class="mt-5" />
   <footer>
     <div class="mt-2">
-      {{ $t('footer.switchLanguage') }}
-      <select v-model="$i18n.locale" class="lang-select" id="language">
+      {{ t('footer.switchLanguage') }}
+      <select v-model="locale" class="lang-select" id="language">
         <option v-for="(lang, i) in Object.keys(languages)" :key="i" :value="lang">{{ languages[lang] }}</option>
       </select>
     </div>
@@ -67,18 +67,22 @@
       <a href="https://twitter.com/intent/tweet?text=Awesome%20little%20app%20to%20help%20quitting%20with%20a%20bad%20habit%20%F0%9F%98%8E&url=https%3A%2F%2Fyoucanqu.it&via=devmount&hashtags=ycq%2Cvuejs%2CDEVcommunity" target="_blank"><font-awesome-icon :icon="['fab', 'twitter']" class="icon" /></a>
       <a href="https://dev.to/devmount/you-can-quit-with-the-help-of-vue-and-dexie-221i" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
     </div>
-    <div class="mt-2">{{ $t('footer.version') }} {{ version }}</div>
+    <div class="mt-2">{{ t('footer.version') }} {{ version }}</div>
     <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
   </footer>
   <notifications group="main" position="bottom right"/>
 </div>
 </template>
 
-<script>
-import { defineComponent, inject } from 'vue';
+<script setup>
+import { ref, reactive, inject, onMounted, computed } from 'vue';
+import { notify } from '@kyvg/vue3-notification';
+import { useI18n } from "vue-i18n";
+
 // get indexed db
 import db from '@/database';
-// get single file components
+
+// get components
 import MonthNavigation from '@/components/MonthNavigation.vue';
 import Month from '@/components/Month.vue';
 import YearNavigation from '@/components/YearNavigation.vue';
@@ -87,186 +91,174 @@ import Info from '@/components/Info.vue';
 import Administration from '@/components/Administration.vue';
 import About from '@/components/About.vue';
 
-export default defineComponent({
-  name: 'app',
-  components: {
-    Month,
-    MonthNavigation,
-    Year,
-    YearNavigation,
-    Info,
-    Administration,
-    About,
-  },
-  setup () {
-    const version = inject('version');
-  },
-  data () {
-    // today
-    var now = new Date()
-    return {
-      date: {
-        month: now.getMonth()+1,
-        year: now.getFullYear(),
-      },
-      now: {
-        day: now.getDate(),
-        weekday: now.getDay()+1,
-        month: now.getMonth()+1,
-        year: now.getFullYear(),
-      },
-      data: {},
-    }
-  },
-  created () {
-    this.fetchData()
-  },
-  mounted () {
-		this.$refs['container'].focus()
-	},
-  methods: {
-    async fetchData () {
-      let days = {}
-      await db.days.toCollection().each(d => {
-        days[d.name] = d.status
-      })
-      this.data = days
-    },
-    // build date format yyyy-mm-dd
-    getDate (year, month, day) {
-      return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-    },
-    // update the status of a day to 1, 0 or -1
-    async updateDay (year, month, day, status) {
-      // get date format yyyy-mm-dd
-      var date = this.getDate(year, month, day)
-      // delete record if status == 0 (reset)
-      if (status == 0) {
-        await db.days.delete(date)
-      }
-      // add/update record if status == 1 || -1 (success || fail)
-      else {
-        await db.days.put({name: date, status: status})
-        if (status == 1) {
-          this.$notify(this.randomSuccessNotification());
-        }
-      }
-      // update db
-      this.fetchData()
-    },
-    // change month to display
-    changeMonth (year, month) {
-      if (month > 12) {
-        // first month of next year
-        this.date.year = year+1
-        this.date.month = 1
-      } else
-      if (month < 1) {
-        // last month of previous year
-        this.date.year = year-1
-        this.date.month = 12
-      } else {
-        // change month in currently displayed year
-        this.date.year = year
-        this.date.month = month
-      }
-    },
-    // go to next month
-    nextMonth () {
-      this.changeMonth(this.date.year, this.date.month+1)
-    },
-    // go to previous month
-    previousMonth () {
-      this.changeMonth(this.date.year, this.date.month-1)
-    },
-    // go to next year
-    nextYear () {
-      this.changeMonth(this.date.year+1, this.date.month)
-    },
-    // go to previous year
-    previousYear () {
-      this.changeMonth(this.date.year-1, this.date.month)
-    },
-    // return a notyf message object with random success title and text
-    randomSuccessNotification () {
-      return {
-        group: 'main',
-        title: this.$t('messages.titles')[Math.floor(Math.random() * this.$t('messages.titles').length)],
-        text: this.$t('messages.texts')[Math.floor(Math.random() * this.$t('messages.texts').length)],
-        duration: 10000
-      }
-    },
-    // create a file download of whole database as JSON
-    exportBackup () {
-      this.download(JSON.stringify(this.data), 'backup.json', 'text/plain')
-      this.$notify({
-        group: 'main',
-        title: this.$t('admin.exportSuccess.title'),
-        text: this.$t('admin.exportSuccess.text'),
-        duration: 6000
-      });
-    },
-    // import a backup JSON file and replace current database
-    importBackup (handle) {
-      let file = handle.files[0]
-      if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return
-      
-      let reader = new FileReader()
-      reader.readAsText(file, "UTF-8")
-      reader.onload = async (evt) => {
-        let backup = JSON.parse(evt.target.result)
-        for (const date in backup) {
-          if (backup.hasOwnProperty(date)) {
-            const status = backup[date];
-            await db.days.put({name: date, status: status})
-          }
-        }
-        this.fetchData()
-        this.$notify({
-          group: 'main',
-          title: this.$t('admin.importSuccess.title'),
-          text: this.$t('admin.importSuccess.text'),
-          duration: 6000
-        });
-      }
-      reader.onerror = evt => {
-        // eslint-disable-next-line
-        console.error(evt)
-      }
-    },
-    async clearDatabase () {
-      await db.days.toCollection().delete()
-      this.data = {}
-      this.$notify({
-        group: 'main',
-        title: this.$t('admin.clearSuccess.title'),
-        text: this.$t('admin.clearSuccess.text'),
-        duration: 6000
-      });
-    },
-    // execute a file download
-    download (content, fileName, contentType) {
-      let a = document.createElement("a"), file = new Blob([content], {type: contentType})
-      a.href = URL.createObjectURL(file)
-      a.download = fileName
-      a.click()
-    }
-  },
-  computed: {
-    // compute the number of days of the month currently displayed
-    daysInMonth () {
-      return new Date(this.date.year, this.date.month, 0).getDate();
-    },
-    // compute the offset of weekdays before actual days
-    dayOfWeekOffset () {
-      return new Date(this.date.year, this.date.month-1, 1).getDay()
-    },
-    // compute the offset of days to fill a total of 7 columns
-    fillOffset () {
-      var offset = 36 - (this.daysInMonth + this.dayOfWeekOffset);
-      return offset > 0 ? offset : 0;
-    },
+const { t, locale } = useI18n();
+const version = inject('version');
+
+// today
+const d = new Date();
+const calDate = reactive({
+  month: d.getMonth()+1,
+  year: d.getFullYear(),
+});
+const calNow = reactive({
+  day: d.getDate(),
+  weekday: d.getDay()+1,
+  month: d.getMonth()+1,
+  year: d.getFullYear(),
+});
+const calData = ref({});
+
+// handle mount hooks
+onMounted(() => {
+  fetchData();
+  // this.$refs['container'].focus()
+});
+
+// retrieve existing data
+const fetchData = async () => {
+  let days = {}
+  await db.days.toCollection().each(d => {
+    days[d.name] = d.status;
+  });
+  calData.value = days;
+};
+
+// build date format yyyy-mm-dd
+const getDate = (year, month, day) => {
+  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
+};
+
+// update the status of a day to 1, 0 or -1
+const updateDay = async (year, month, day, status) => {
+  // get date format yyyy-mm-dd
+  let date = getDate(year, month, day);
+  // delete record if status == 0 (reset)
+  if (status == 0) {
+    await db.days.delete(date);
   }
+  // add/update record if status == 1 || -1 (success || fail)
+  else {
+    await db.days.put({name: date, status: status});
+    if (status == 1) {
+      notify(randomSuccessNotification());
+    }
+  }
+  // update db
+  fetchData();
+};
+
+// change month to display
+const changeMonth = (year, month) => {
+  if (month > 12) {
+    // first month of next year
+    calDate.year = year+1;
+    calDate.month = 1;
+  } else
+  if (month < 1) {
+    // last month of previous year
+    calDate.year = year-1;
+    calDate.month = 12;
+  } else {
+    // change month in currently displayed year
+    calDate.year = year;
+    calDate.month = month;
+  }
+};
+
+// go to next month
+const nextMonth = () => {
+  changeMonth(calDate.year, calDate.month+1);
+};
+// go to previous month
+const previousMonth = () => {
+  changeMonth(calDate.year, calDate.month-1);
+};
+// go to next year
+const nextYear = () => {
+  changeMonth(calDate.year+1, calDate.month);
+};
+// go to previous year
+const previousYear = () => {
+  changeMonth(calDate.year-1, calDate.month);
+};
+
+// return a notyf message object with random success title and text
+const randomSuccessNotification = () => {
+  return {
+    group: 'main',
+    title: t('messages.titles.' + Math.floor(Math.random() * 7)),
+    text: t('messages.texts.' + Math.floor(Math.random() * 6)),
+    duration: 10000
+  }
+};
+
+// create a file download of whole database as JSON
+const exportBackup = () => {
+  download(JSON.stringify(calData.value), 'backup.json', 'text/plain');
+  notify({
+    group: 'main',
+    title: t('admin.exportSuccess.title'),
+    text: t('admin.exportSuccess.text'),
+    duration: 6000
+  });
+};
+// import a backup JSON file and replace current database
+const importBackup = (handle) => {
+  let file = handle.files[0];
+  if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return;
+  let reader = new FileReader();
+  reader.readAsText(file, "UTF-8");
+  reader.onload = async (evt) => {
+    let backup = JSON.parse(evt.target.result)
+    for (const date in backup) {
+      if (backup.hasOwnProperty(date)) {
+        const status = backup[date];
+        await db.days.put({name: date, status: status});
+      }
+    }
+    fetchData();
+    notify({
+      group: 'main',
+      title: t('admin.importSuccess.title'),
+      text: t('admin.importSuccess.text'),
+      duration: 6000
+    });
+  }
+  reader.onerror = evt => console.error(evt);
+};
+
+// throw all data away
+const clearDatabase = async () => {
+  await db.days.toCollection().delete()
+  calData.value = {};
+  notify({
+    group: 'main',
+    title: t('admin.clearSuccess.title'),
+    text: t('admin.clearSuccess.text'),
+    duration: 6000
+  });
+};
+
+// execute a file download
+const download = (content, fileName, contentType) => {
+  let a = document.createElement("a"), file = new Blob([content], {type: contentType})
+  a.href = URL.createObjectURL(file)
+  a.download = fileName
+  a.click()
+};
+  
+// compute the number of days of the month currently displayed
+const daysInMonth = computed(() => {
+  return new Date(calDate.year, calDate.month, 0).getDate();
+});
+// compute the offset of weekdays before actual days
+const dayOfWeekOffset = computed(() => {
+  return new Date(calDate.year, calDate.month-1, 1).getDay();
+});
+// compute the offset of days to fill a total of 7 columns
+const fillOffset = computed(() => {
+  var offset = 36 - (daysInMonth.value + dayOfWeekOffset.value);
+  return offset > 0 ? offset : 0;
 });
 </script>
 
