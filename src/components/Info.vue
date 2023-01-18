@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import Legend from './info/Legend.vue';
 import Stats from './info/Stats.vue';
 import Achievements from './info/Achievements.vue';
