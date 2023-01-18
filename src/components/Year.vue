@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { defineProps, reactive, computed } from 'vue';
+import { reactive, computed } from 'vue';
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 

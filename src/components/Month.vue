@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { defineProps, reactive, defineEmits } from 'vue';
+import { reactive } from 'vue';
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
