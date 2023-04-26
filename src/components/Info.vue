@@ -1,15 +1,15 @@
 <template>
 <div class="info">
-  <Stats :status-data="statusData" />
-  <Achievements :status-data="statusData" />
-  <Legend />
+  <stats :status-data="statusData" />
+  <achievements :status-data="statusData" />
+  <legend />
 </div>
 </template>
 
 <script setup>
-import Legend from './info/Legend.vue';
-import Stats from './info/Stats.vue';
-import Achievements from './info/Achievements.vue';
+import Achievements from '@/components/info/Achievements.vue';
+import Legend from '@/components/info/Legend.vue';
+import Stats from '@/components/info/Stats.vue';
 
 defineProps({
   statusData: Object,

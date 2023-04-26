@@ -75,21 +75,21 @@
 </template>
 
 <script setup>
-import { ref, reactive, inject, onMounted, computed } from 'vue';
 import { notify } from '@kyvg/vue3-notification';
+import { ref, reactive, inject, onMounted, computed } from 'vue';
 import { useI18n } from "vue-i18n";
 
 // get indexed db
 import db from '@/database';
 
 // get components
-import MonthNavigation from '@/components/MonthNavigation.vue';
-import Month from '@/components/Month.vue';
-import YearNavigation from '@/components/YearNavigation.vue';
-import Year from '@/components/Year.vue';
-import Info from '@/components/Info.vue';
-import Administration from '@/components/Administration.vue';
 import About from '@/components/About.vue';
+import Administration from '@/components/Administration.vue';
+import Info from '@/components/Info.vue';
+import Month from '@/components/Month.vue';
+import MonthNavigation from '@/components/MonthNavigation.vue';
+import Year from '@/components/Year.vue';
+import YearNavigation from '@/components/YearNavigation.vue';
 
 const { t, locale } = useI18n();
 const version = inject('version');

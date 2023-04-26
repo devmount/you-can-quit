@@ -8,8 +8,9 @@
     "url": "https://devmount.de"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "browser": "./dist/index.html",
   "dependencies": {
@@ -24,38 +25,8 @@
     "vue-i18n": "^9.2.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.0-beta.3",
-    "@vue/cli-plugin-pwa": "^5.0.0-beta.3",
-    "@vue/cli-service": "^5.0.0-beta.3",
-    "vue-template-compiler": "^2.6.12"
-  },
-  "babel": {
-    "presets": [
-      "@vue/cli-plugin-babel/preset"
-    ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {
-      "vue/require-v-for-key": "off",
-      "vue/no-unused-vars": "warn",
-      "no-unused-vars": "warn"
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+    "@vitejs/plugin-vue": "^4.2.1",
+    "vite": "^4.3.2"
   },
   "browserslist": [
     "> 1%",

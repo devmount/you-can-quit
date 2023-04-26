@@ -108,23 +108,28 @@ app.mixin({
 })
 
 // Vue i18n
+import de from '@/locales/de.json';
+import en from '@/locales/en.json';
+import fr from '@/locales/fr.json';
+import it from '@/locales/it.json';
+import ptbr from '@/locales/pt-br.json';
 import { createI18n } from 'vue-i18n';
 const i18n = createI18n({
   locale: navigator.language || navigator.userLanguage,
   fallbackLocale: 'en',
   legacy: false,
   messages: {
-    'en': require('./locales/en.json'),
-    'de': require('./locales/de.json'),
-    'fr': require('./locales/fr.json'),
-    'it': require('./locales/it.json'),
-    'pt-br': require('./locales/pt-br.json'),
+    'de': de,
+    'en': en,
+    'fr': fr,
+    'it': it,
+    'pt-br': ptbr,
   }
 });
 app.use(i18n);
 
 // set global properties
-app.provide('version', process.env.VUE_APP_VERSION);
+app.provide('version', APP_VERSION);
 
 // ready? let's go!
 app.mount('#app');
