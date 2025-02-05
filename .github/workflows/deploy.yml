@@ -14,15 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 17
+    - name: Use Node.js 20
       uses: actions/setup-node@v1
       with:
-        node-version: 17.x
-    - name: Build app using Yarn
+        node-version: 20.x
+    - name: Build app
       run: |
-        npm install -g yarn
-        yarn install
-        yarn build
+        npm i
+        npm build
     - name: Push Build files to production
       uses: burnett01/rsync-deployments@5.2
       with:
