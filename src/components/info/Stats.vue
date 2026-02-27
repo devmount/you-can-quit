@@ -123,8 +123,8 @@ const successfulDays = computed(() => {
 }
 .stats .box .data > .icon {
   position: absolute;
-  right: -10px;
-  bottom: -15px;
+  right: -20px;
+  bottom: -10px;
   color: #ffffff44;
   font-size: 4em;
 }

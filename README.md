@@ -11,7 +11,8 @@ This app is a tool to track your progress and encourage you on the way of quitti
 
 This web app is based on Vue.js and Dexie.js.
 
-> ℹ This app values privacy. The data isn't meant to be synchronized between different devices, therefore local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
+> [!IMPORTANT]
+> This app values privacy. The data isn't meant to be synchronized between different devices, therefore local browser storage (IndexedDB) is used to store your data. However you have the possibility to export your data and import it on another browser or device.
 
 ![screenshot](https://user-images.githubusercontent.com/5441654/79687237-20edd300-8246-11ea-87ce-4faee94ef1c2.png)
 
@@ -41,31 +42,26 @@ Just head over to <https://youcanqu.it> and start your journey.
     git clone https://github.com/devmount/you-can-quit
     ```
 
-2. Install all dependencies using [Yarn](https://yarnpkg.com)
+2. Install all dependencies using NPM
 
     ```bash
     cd you-can-quit
-    yarn
+    npm i
     ```
 
 3. Run the app by ...
 
-    ... either run the `you-can-quit/dist/index.html` in your browser, e.g.
+    ... either build the project and run the `you-can-quit/dist/index.html` in your browser, e.g.
 
     ```bash
-    firefox dist/index.html&
+    npm run build
+    firefox dist/index.html &
     ```
 
     ... or start the development server with hot reload at localhost:8080
 
     ```bash
-    yarn serve
-    ```
-
-    ... or make the production build with minification yourself
-
-    ```bash
-    yarn build
+    npm run dev
     ```
 
 ## Upgrade from 0.x to 1.x
@@ -93,7 +89,7 @@ The breaking change in version 1.x is, that the database was switched from Fireb
     yarn
     ```
 
-3. Run the app (see instructions above in the *Get started* section) and import this data file in the administration section at the bottom.
+3. Run the app (see instructions above in the _Get started_ section) and import this data file in the administration section at the bottom.
 
 ---
 

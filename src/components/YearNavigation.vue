@@ -59,7 +59,7 @@ const emit = defineEmits(['previous', 'change', 'next']);
 }
 .navigation .button-group button {
   color: var(--c-text-light);
-  padding: 0 .5em;
+  padding: 0 .25em;
   font-size: 1.5em;
 }
 </style>
