@@ -7,6 +7,7 @@
   @keydown.82.prevent="changeMonth(calNow.year, calNow.month)"
   @keydown.right.exact="nextMonth()"
   @keydown.ctrl.right.exact="nextYear()"
+  tabindex="0"
 >
   <header>
     <h1>{{ t('title') }} <font-awesome-icon icon="sign-out-alt" class="icon" /></h1>
@@ -31,9 +32,7 @@
       />
     </div>
     <div class="info-view">
-      <Info
-        :status-data="calData"
-      />
+      <info :status-data="calData" />
     </div>
   </section>
   <section>
