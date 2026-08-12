@@ -16,19 +16,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Setup pnpm
       uses: pnpm/action-setup@v6
-    - name: Use Node.js 20
-      uses: actions/setup-node@v4
+    - name: Use Node.js 24
+      uses: actions/setup-node@v7
       with:
-        node-version: 20.x
+        node-version: 24.x
     - name: Build app
       run: |
         pnpm install --frozen-lockfile
         pnpm build
     - name: Push Build files to production
-      uses: burnett01/rsync-deployments@7.0.1
+      uses: burnett01/rsync-deployments@9.0.0
       with:
         switches: -avzr --delete
         path: dist/
