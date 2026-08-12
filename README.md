@@ -42,11 +42,11 @@ Just head over to <https://youcanqu.it> and start your journey.
     git clone https://github.com/devmount/you-can-quit
     ```
 
-2. Install all dependencies using NPM
+2. Install all dependencies using pnpm
 
     ```bash
     cd you-can-quit
-    npm i
+    pnpm install
     ```
 
 3. Run the app by ...
@@ -54,14 +54,14 @@ Just head over to <https://youcanqu.it> and start your journey.
     ... either build the project and run the `you-can-quit/dist/index.html` in your browser, e.g.
 
     ```bash
-    npm run build
+    pnpm build
     firefox dist/index.html &
     ```
 
     ... or start the development server with hot reload at localhost:8080
 
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 ## Upgrade from 0.x to 1.x
@@ -86,7 +86,7 @@ The breaking change in version 1.x is, that the database was switched from Fireb
     ```bash
     cd you-can-quit
     git pull
-    yarn
+    pnpm install
     ```
 
 3. Run the app (see instructions above in the _Get started_ section) and import this data file in the administration section at the bottom.
