@@ -3,6 +3,7 @@
   "version": "1.3.2",
   "private": false,
   "description": "A tool to support your progress in quitting whatever your bad habit is.",
+  "packageManager": "pnpm@11.21.0",
   "author": {
     "name": "Andreas Müller",
     "url": "https://devmount.de"
@@ -14,19 +15,19 @@
   },
   "browser": "./dist/index.html",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^7.2.0",
-    "@fortawesome/free-brands-svg-icons": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.2.0",
-    "@fortawesome/vue-fontawesome": "^3.0.2",
-    "@kyvg/vue3-notification": "^3.4.1",
-    "dexie": "^4.0.11",
-    "register-service-worker": "^1.7.1",
-    "vue": "^3.2.45",
-    "vue-i18n": "^11.1.0"
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/vue-fontawesome": "^3.3.3",
+    "@kyvg/vue3-notification": "^3.4.2",
+    "dexie": "^4.4.4",
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.5.41",
+    "vue-i18n": "^11.4.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.4",
-    "vite": "^8.0.16"
+    "@vitejs/plugin-vue": "^6.0.8",
+    "vite": "^8.2.1"
   },
   "browserslist": [
     "> 1%",
