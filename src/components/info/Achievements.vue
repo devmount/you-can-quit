@@ -11,7 +11,7 @@
     >
       <div class="badge" v-if="getAchievementStatus(a).state > 1">{{ getAchievementStatus(a).state }}</div>
       <font-awesome-icon :icon="t('achievements.' + a + '.icon')" class="icon" />
-      <div class="progress" :style="'width: ' + getAchievementStatus(a).progress + '%;'"></div>
+      <div class="progress" :style="{ width: getAchievementStatus(a).progress + '%' }"></div>
       <div class="description">
         <div class="title">{{ t('achievements.' + a + '.title') }}</div>
         <div><font-awesome-icon icon="info-circle" class="icon" /> {{ t('achievements.' + a + '.description') }}</div>
