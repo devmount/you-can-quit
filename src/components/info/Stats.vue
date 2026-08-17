@@ -82,7 +82,8 @@ const longestStreak = computed(() => {
       streak++;
     }
   }
-  return max;
+  // flush a streak that runs uninterrupted through the earliest tracked day
+  return streak > max ? streak : max;
 });
 
 // get total number of successful days

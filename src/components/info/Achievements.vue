@@ -346,6 +346,8 @@ const achievedNews = computed(() => {
       streak++
     }
   }
+  // flush a streak that runs uninterrupted through the earliest tracked day
+  max = streak > max ? streak : max
   let state = Math.floor(max/10)
   let progress = currentStreak.value*100/(10*(state+1))
   if (currentStreak.value >= 10*(state+1)) {
