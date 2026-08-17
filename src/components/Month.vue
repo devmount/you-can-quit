@@ -1,12 +1,13 @@
 <template>
 <div class="month-day-grid">
   <!-- day of week labels -->
-  <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+  <div v-for="l in 7" :key="'label-' + l" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
-  <div v-for="o in dayOfWeekOffset" :class="'day offset month-day-pre-offset-' + o"></div>
+  <div v-for="o in dayOfWeekOffset" :key="'pre-' + o" :class="'day offset month-day-pre-offset-' + o"></div>
   <!-- actual days -->
   <div
     v-for="d in daysInMonth"
+    :key="'day-' + d"
     class="day"
     :class="{
       past: isPast(date.year, date.month, d),
@@ -41,7 +42,7 @@
     </div>
   </div>
   <!-- offset days -->
-  <div v-for="o in fillOffset" :class="'day offset month-day-post-offset-' + o"></div>
+  <div v-for="o in fillOffset" :key="'post-' + o" :class="'day offset month-day-post-offset-' + o"></div>
 </div>
 </template>
 

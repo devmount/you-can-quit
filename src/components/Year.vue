@@ -3,13 +3,14 @@
   <div class="year-container">
     <div class="year-day-grid">
       <!-- day of week labels -->
-      <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+      <div v-for="l in 7" :key="'label-' + l" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
       <!-- offset days -->
-      <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
+      <div v-for="o in dayOfWeekOffset" :key="'pre-' + o" :class="'day offset year-day-pre-offset-' + o"></div>
       <!-- days in current year with month initials -->
-      <template v-for="m in 12">
+      <template v-for="m in 12" :key="m">
         <div
           v-for="(d,i) in daysInMonth(m)"
+          :key="'day-' + m + '-' + d"
           class="day"
           :class="{
             today: isToday(date.year, m, d),

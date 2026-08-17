@@ -23,7 +23,7 @@
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
-    <div v-for="i in achievementOffset" :class="'item offset achievement-offset-' + i"></div>
+    <div v-for="i in achievementOffset" :key="'offset-' + i" :class="'item offset achievement-offset-' + i"></div>
   </div>
 </div>
 </template>
