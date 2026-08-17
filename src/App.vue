@@ -4,7 +4,7 @@
   ref="container"
   @keydown.ctrl.left.exact="previousYear()"
   @keydown.left.exact="previousMonth()"
-  @keydown.82.prevent="changeMonth(calNow.year, calNow.month)"
+  @keydown.r.exact.prevent="changeMonth(calNow.year, calNow.month)"
   @keydown.right.exact="nextMonth()"
   @keydown.ctrl.right.exact="nextYear()"
   tabindex="0"
