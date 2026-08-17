@@ -15,6 +15,22 @@ export const getMinDate = (statusData) => {
   }, new Date(keys[0]));
 };
 
+// Walk backward from today to minDate, building a string of one char per day:
+// 's' (successful), 'f' (failed) or 'n' (no data). Pass dayFilter to only include
+// matching days (e.g. a specific weekday) while still walking every day in between.
+export const getStateString = (statusData, minDate, dayFilter = () => true) => {
+  let states = '', n = new Date(), min = new Date(minDate), key = '';
+  while (min < n) {
+    n = new Date(n.setDate(n.getDate() - 1));
+    if (!dayFilter(n)) continue;
+    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
+    states = (key in statusData && statusData[key] == -1) ? states + 'f' : states;
+    states = (key in statusData && statusData[key] == 1) ? states + 's' : states;
+    states = !(key in statusData) ? states + 'n' : states;
+  }
+  return states;
+};
+
 // Get number of successful days in a row directly preceding today
 export const getCurrentStreak = (statusData) => {
   let streak = 0, undecided = true, n = new Date(), min = new Date(getMinDate(statusData)), key = '';

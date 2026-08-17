@@ -31,7 +31,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from "vue-i18n";
-import { getDate, getMinDate, getCurrentStreak } from '@/utils';
+import { getDate, getMinDate, getCurrentStreak, getStateString } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -144,14 +144,7 @@ const achievedTen = computed(() => {
 });
 // achievement: 7 successful days in a row
 const achievedSpeed = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{6}/g) || []).length,
     progress: (currentStreak.value%7)/7*100,
@@ -218,14 +211,8 @@ const achievedTide = computed(() => {
 });
 // achievement: 6 successful days after a one day fail
 const achievedDefense = computed(() => {
-  var count = 0, states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  var count = 0
+  const states = getStateString(props.statusData, minDate.value)
   for (let i = 0; i < states.length-7; i++) {
     if (states.substring(i, i+8) == 'ssssssfs') {
       count++
@@ -260,17 +247,7 @@ const achievedDefense = computed(() => {
 });
 // achievement: 5 successful sundays in a row
 const achievedPraise = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    if (n.getDay() > 0) {
-      continue
-    }
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value, (d) => d.getDay() === 0)
   let successful = 0
   let sequence = states.replace(/^n+/g, '')
   for (let i = 0; i < sequence.length; i++) {
@@ -346,17 +323,7 @@ const achievedSpock = computed(() => {
 });
 // achievement: 8 successful wednesdays in a row
 const achievedMadness = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    if (n.getDay() != 3) {
-      continue
-    }
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value, (d) => d.getDay() === 3)
   let successful = 0
   let sequence = states.replace(/^n+/g, '')
   for (let i = 0; i < sequence.length; i++) {
@@ -425,14 +392,7 @@ const achievedStrike = computed(() => {
 });
 // achievement: 40 successful days in a row
 const achievedEpic = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{39}/g) || []).length,
     progress: (currentStreak.value%40)/40*100,
@@ -452,14 +412,7 @@ const achievedMaster = computed(() => {
 });
 // achievement: 100 successful days in a row
 const achievedStrength = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{99}/g) || []).length,
     progress: currentStreak.value%100,
