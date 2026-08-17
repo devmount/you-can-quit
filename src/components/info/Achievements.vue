@@ -31,7 +31,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from "vue-i18n";
-import { getDate } from '@/utils';
+import { getDate, getMinDate, getCurrentStreak } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -88,16 +88,7 @@ const getAchievementStatus = (a) => {
 };
 
 // get the first date entry (edited date that is most past)
-const minDate = computed(() => {
-  const keys = Object.keys(props.statusData)
-  if (keys.length === 0) {
-    return new Date(1970, 0, 1)
-  }
-  return keys.reduce((min, v) => {
-    const vd = new Date(v)
-    return vd < min ? vd : min;
-  }, new Date(keys[0]))
-});
+const minDate = computed(() => getMinDate(props.statusData));
 
 // get number of total achievements
 const totalAchievements = computed(() => {
@@ -123,20 +114,7 @@ const achievementOffset = computed(() => {
 });
 
 // get number of successful days in a row directly preceding today
-const currentStreak = computed(() => {
-  let streak = 0, undecided = true, n = new Date(), min = new Date(minDate.value), key = ''
-  while (min <= n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    if (!(key in props.statusData) && undecided) continue
-    if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] < 1)) break
-    else {
-      undecided = false
-      streak++
-    }
-  }
-  return streak
-});
+const currentStreak = computed(() => getCurrentStreak(props.statusData));
 
 /*
   below are all computed achievement properties.
