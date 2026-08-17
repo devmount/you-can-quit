@@ -4,7 +4,7 @@
   ref="container"
   @keydown.ctrl.left.exact="previousYear()"
   @keydown.left.exact="previousMonth()"
-  @keydown.82.prevent="changeMonth(calNow.year, calNow.month)"
+  @keydown.r.exact.prevent="changeMonth(calNow.year, calNow.month)"
   @keydown.right.exact="nextMonth()"
   @keydown.ctrl.right.exact="nextYear()"
   tabindex="0"
@@ -81,6 +81,9 @@ import { useI18n } from "vue-i18n";
 // get indexed db
 import db from '@/database';
 
+// helpers
+import { getDate, languages } from '@/utils';
+
 // get components
 import About from '@/components/About.vue';
 import Administration from '@/components/Administration.vue';
@@ -101,7 +104,6 @@ const calDate = reactive({
 });
 const calNow = reactive({
   day: d.getDate(),
-  weekday: d.getDay()+1,
   month: d.getMonth()+1,
   year: d.getFullYear(),
 });
@@ -110,7 +112,16 @@ const calData = ref({});
 // handle mount hooks
 onMounted(() => {
   fetchData();
-  // this.$refs['container'].focus()
+  // catch-all for any unhandled database operation failure
+  window.addEventListener('unhandledrejection', () => {
+    notify({
+      group: 'main',
+      type: 'error',
+      title: t('admin.dbError.title'),
+      text: t('admin.dbError.text'),
+      duration: 6000
+    });
+  });
 });
 
 // retrieve existing data
@@ -120,11 +131,6 @@ const fetchData = async () => {
     days[d.name] = d.status;
   });
   calData.value = days;
-};
-
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
 };
 
 // update the status of a day to 1, 0 or -1
@@ -143,7 +149,7 @@ const updateDay = async (year, month, day, status) => {
     }
   }
   // update db
-  fetchData();
+  await fetchData();
 };
 
 // change month to display
@@ -202,28 +208,51 @@ const exportBackup = () => {
   });
 };
 // import a backup JSON file and replace current database
+const notifyImportError = () => {
+  notify({
+    group: 'main',
+    type: 'error',
+    title: t('admin.importError.title'),
+    text: t('admin.importError.text'),
+    duration: 6000
+  });
+};
 const importBackup = (handle) => {
   let file = handle.files[0];
-  if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return;
+  if (!file || (file.type !== 'text/plain' && file.type !== 'application/json')) {
+    notifyImportError();
+    return;
+  }
   let reader = new FileReader();
   reader.readAsText(file, "UTF-8");
   reader.onload = async (evt) => {
-    let backup = JSON.parse(evt.target.result)
-    for (const date in backup) {
-      if (backup.hasOwnProperty(date)) {
-        const status = backup[date];
-        await db.days.put({name: date, status: status});
+    try {
+      const backup = JSON.parse(evt.target.result);
+      for (const date in backup) {
+        if (backup.hasOwnProperty(date)) {
+          const status = backup[date];
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || (status !== 1 && status !== -1)) {
+            throw new Error('Invalid backup data');
+          }
+        }
       }
+      for (const date in backup) {
+        if (backup.hasOwnProperty(date)) {
+          await db.days.put({name: date, status: backup[date]});
+        }
+      }
+      fetchData();
+      notify({
+        group: 'main',
+        title: t('admin.importSuccess.title'),
+        text: t('admin.importSuccess.text'),
+        duration: 6000
+      });
+    } catch {
+      notifyImportError();
     }
-    fetchData();
-    notify({
-      group: 'main',
-      title: t('admin.importSuccess.title'),
-      text: t('admin.importSuccess.text'),
-      duration: 6000
-    });
   }
-  reader.onerror = evt => console.error(evt);
+  reader.onerror = notifyImportError;
 };
 
 // throw all data away
@@ -398,6 +427,31 @@ button {
 .hidden {
   display: none;
 }
+
+.navigation {
+  margin: 1em 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.navigation > * {
+  flex-basis: 50%;
+}
+.navigation h2 {
+  margin: 0;
+  padding: 0 1em 0 0;
+  text-align: right;
+}
+.navigation .button-group {
+  text-align: left;
+}
+.navigation .button-group button {
+  color: var(--c-text-light);
+  padding: 0 .25em;
+  font-size: 1.5em;
+}
+
 #app .vue-notification {
   cursor: pointer;
   padding: 1em;
@@ -411,5 +465,10 @@ button {
 }
 #app .vue-notification .notification-title {
   font-size: 1.5em;
+}
+#app .vue-notification.error {
+  background-image: linear-gradient(to bottom right, var(--c-danger) 0, var(--c-danger-variant) 100%);
+  background-color: var(--c-danger);
+  border-left: 5px solid var(--c-danger-variant);
 }
 </style>

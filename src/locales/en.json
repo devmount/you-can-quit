@@ -79,9 +79,10 @@
   "day": "day | days",
   "sunday": "sunday | sundays",
   "wednesday": "wednesday | wednesdays",
-  "achievement": "Achievement | Achievements",
+  "achievement": "achievement | achievements",
   "completed": "completed",
   "done": "done",
+  "left": "left",
   "achievements": {
     "beginning": {
       "title": "The Beginning",
@@ -198,6 +199,14 @@
     "importSuccess": {
       "title": "Import successful",
       "text": "Database successfully imported and previous data overwritten."
+    },
+    "importError": {
+      "title": "Import failed",
+      "text": "The selected file is not a valid backup file."
+    },
+    "dbError": {
+      "title": "Something went wrong",
+      "text": "A database error occurred. Please try again."
     },
     "clearSuccess": {
       "title": "Clearing successful",

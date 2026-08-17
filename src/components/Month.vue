@@ -1,12 +1,13 @@
 <template>
 <div class="month-day-grid">
   <!-- day of week labels -->
-  <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+  <div v-for="l in 7" :key="'label-' + l" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
-  <div v-for="o in dayOfWeekOffset" :class="'day offset month-day-pre-offset-' + o"></div>
+  <div v-for="o in dayOfWeekOffset" :key="'pre-' + o" :class="'day offset month-day-pre-offset-' + o"></div>
   <!-- actual days -->
   <div
     v-for="d in daysInMonth"
+    :key="'day-' + d"
     class="day"
     :class="{
       past: isPast(date.year, date.month, d),
@@ -41,13 +42,14 @@
     </div>
   </div>
   <!-- offset days -->
-  <div v-for="o in fillOffset" :class="'day offset month-day-post-offset-' + o"></div>
+  <div v-for="o in fillOffset" :key="'post-' + o" :class="'day offset month-day-post-offset-' + o"></div>
 </div>
 </template>
 
 <script setup>
 import { reactive } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate } from '@/utils';
 const { t } = useI18n();
 
 const emit = defineEmits(['update'])
@@ -68,10 +70,6 @@ const now = reactive({
   year: d.getFullYear()
 });
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-};
 // check if date is a future date
 const isFuture = (year, month, day) => {
   return new Date(year, month-1, day) > new Date(now.year, now.month-1, now.day)

@@ -3,9 +3,6 @@ import { createApp } from 'vue';
 import App from '@/App.vue';
 const app = createApp(App);
 
-// service worker
-import '@/registerServiceWorker';
-
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
@@ -93,20 +90,6 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 import Notifications from '@kyvg/vue3-notification';
 app.use(Notifications);
 
-// global mixin
-app.mixin({
-  computed: {
-		// static language list of existing translations
-		languages: () => ({
-			'de': 'Deutsch',
-			'en': 'English',
-			'fr': 'Francais',
-      'it': 'Italiano',
-      'pt-br': 'Português (brasileiro)'
-    }),
-  }
-})
-
 // Vue i18n
 import de from '@/locales/de.json';
 import en from '@/locales/en.json';
@@ -114,8 +97,9 @@ import fr from '@/locales/fr.json';
 import it from '@/locales/it.json';
 import ptbr from '@/locales/pt-br.json';
 import { createI18n } from 'vue-i18n';
+
 const i18n = createI18n({
-  locale: navigator.language || navigator.userLanguage,
+  locale: navigator.language || 'en',
   fallbackLocale: 'en',
   legacy: false,
   messages: {
@@ -123,9 +107,10 @@ const i18n = createI18n({
     'en': en,
     'fr': fr,
     'it': it,
-    'pt-br': ptbr,
+    'pt-BR': ptbr,
   }
 });
+
 app.use(i18n);
 
 // set global properties

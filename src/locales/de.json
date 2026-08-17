@@ -82,6 +82,7 @@
   "achievement": "Errungenschaft | Errungenschaften",
   "completed": "abgeschlossen",
   "done": "geschafft",
+  "left": "übrig",
   "achievements": {
     "beginning": {
       "title": "Der Anfang",
@@ -198,6 +199,14 @@
     "importSuccess": {
       "title": "Import erfolgreich",
       "text": "Datenbank erfolgreich importiert und vorherige Daten überschrieben."
+    },
+    "importError": {
+      "title": "Import fehlgeschlagen",
+      "text": "Die ausgewählte Datei ist keine gültige Backup-Datei."
+    },
+    "dbError": {
+      "title": "Etwas ist schiefgelaufen",
+      "text": "Es ist ein Datenbankfehler aufgetreten. Bitte versuche es erneut."
     },
     "clearSuccess": {
       "title": "Clearing erfolgreich",

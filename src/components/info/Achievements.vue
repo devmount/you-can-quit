@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2>{{ totalAchievements }} {{ t('achievement', totalAchievements) }}</h2>
+  <h2>{{ totalAchievements }} <span class="capitalize">{{ t('achievement', totalAchievements) }}</span></h2>
   <div class="achievements">
     <!-- single achievement items -->
     <div
@@ -11,19 +11,19 @@
     >
       <div class="badge" v-if="getAchievementStatus(a).state > 1">{{ getAchievementStatus(a).state }}</div>
       <font-awesome-icon :icon="t('achievements.' + a + '.icon')" class="icon" />
-      <div class="progress" :style="'width: ' + getAchievementStatus(a).progress + '%;'"></div>
+      <div class="progress" :style="{ width: getAchievementStatus(a).progress + '%' }"></div>
       <div class="description">
         <div class="title">{{ t('achievements.' + a + '.title') }}</div>
         <div><font-awesome-icon icon="info-circle" class="icon" /> {{ t('achievements.' + a + '.description') }}</div>
         <div v-if="getAchievementStatus(a).progress == 100"><font-awesome-icon icon="check" class="icon" /> {{ t('completed') }}</div>
         <div v-else-if="getAchievementStatus(a).progress != 0">
           <font-awesome-icon icon="shoe-prints" class="icon" />
-          {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ t('done') }}, {{ getAchievementStatus(a).left }} {{ t(getAchievementStatus(a).unit, getAchievementStatus(a).left).toLowerCase() }} left
+          {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ t('done') }}, {{ getAchievementStatus(a).left }} {{ t(getAchievementStatus(a).unit, getAchievementStatus(a).left) }} {{ t('left') }}
         </div>
       </div>
     </div>
     <!-- offset to show all items inline next to each other -->
-    <div v-for="i in achievementOffset" :class="'item offset achievement-offset-' + i"></div>
+    <div v-for="i in achievementOffset" :key="'offset-' + i" :class="'item offset achievement-offset-' + i"></div>
   </div>
 </div>
 </template>
@@ -31,6 +31,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate, getMinDate, getCurrentStreak, getStateString } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -62,45 +63,10 @@ const achievements = [
 
 // get the current status of each achievement
 // this function maps an achievement key to its computed property value
-const getAchievementStatus = (a) => {
-  switch (a) {
-    case 'beginning': return achievedBeginning.value;
-    case 'ten': return achievedTen.value;
-    case 'speed': return achievedSpeed.value;
-    case 'alea': return achievedAlea.value;
-    case 'tide': return achievedTide.value;
-    case 'defense': return achievedDefense.value;
-    case 'praise': return achievedPraise.value;
-    case 'uptrend': return achievedUptrend.value;
-    case 'gatherer': return achievedGatherer.value;
-    case 'news': return achievedNews.value;
-    case 'spock': return achievedSpock.value;
-    case 'madness': return achievedMadness.value;
-    case 'clean': return achievedClean.value;
-    case 'strike': return achievedStrike.value;
-    case 'epic': return achievedEpic.value;
-    case 'master': return achievedMaster.value;
-    case 'strength': return achievedStrength.value;
-    case 'legend': return achievedLegend.value;
-    default: break;
-  }
-};
+// (defined further down, once all achievedXxx computed refs exist)
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-};
-  
 // get the first date entry (edited date that is most past)
-const minDate = computed(() => {
-  var keys = Object.keys(props.statusData)
-  if (typeof keys !== 'undefined' && keys.length > 0) {
-    return keys.reduce(function (p, v) {
-      var pd = new Date(p), vd = new Date(v)
-      return ( pd < vd ? pd : vd );
-    });
-  }
-});
+const minDate = computed(() => getMinDate(props.statusData));
 
 // get number of total achievements
 const totalAchievements = computed(() => {
@@ -126,20 +92,7 @@ const achievementOffset = computed(() => {
 });
 
 // get number of successful days in a row directly preceding today
-const currentStreak = computed(() => {
-  let streak = 0, undecided = true, n = new Date(), min = new Date(minDate.value), key = ''
-  while (min <= n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    if (!(key in props.statusData) && undecided) continue
-    if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] < 1)) break
-    else {
-      undecided = false
-      streak++
-    }
-  }
-  return streak
-});
+const currentStreak = computed(() => getCurrentStreak(props.statusData));
 
 /*
   below are all computed achievement properties.
@@ -169,14 +122,7 @@ const achievedTen = computed(() => {
 });
 // achievement: 7 successful days in a row
 const achievedSpeed = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{6}/g) || []).length,
     progress: (currentStreak.value%7)/7*100,
@@ -243,14 +189,8 @@ const achievedTide = computed(() => {
 });
 // achievement: 6 successful days after a one day fail
 const achievedDefense = computed(() => {
-  var count = 0, states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  var count = 0
+  const states = getStateString(props.statusData, minDate.value)
   for (let i = 0; i < states.length-7; i++) {
     if (states.substring(i, i+8) == 'ssssssfs') {
       count++
@@ -285,17 +225,7 @@ const achievedDefense = computed(() => {
 });
 // achievement: 5 successful sundays in a row
 const achievedPraise = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    if (n.getDay() > 0) {
-      continue
-    }
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value, (d) => d.getDay() === 0)
   let successful = 0
   let sequence = states.replace(/^n+/g, '')
   for (let i = 0; i < sequence.length; i++) {
@@ -345,6 +275,8 @@ const achievedNews = computed(() => {
       streak++
     }
   }
+  // flush a streak that runs uninterrupted through the earliest tracked day
+  max = streak > max ? streak : max
   let state = Math.floor(max/10)
   let progress = currentStreak.value*100/(10*(state+1))
   if (currentStreak.value >= 10*(state+1)) {
@@ -369,17 +301,7 @@ const achievedSpock = computed(() => {
 });
 // achievement: 8 successful wednesdays in a row
 const achievedMadness = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    if (n.getDay() != 3) {
-      continue
-    }
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value, (d) => d.getDay() === 3)
   let successful = 0
   let sequence = states.replace(/^n+/g, '')
   for (let i = 0; i < sequence.length; i++) {
@@ -448,14 +370,7 @@ const achievedStrike = computed(() => {
 });
 // achievement: 40 successful days in a row
 const achievedEpic = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{39}/g) || []).length,
     progress: (currentStreak.value%40)/40*100,
@@ -475,14 +390,7 @@ const achievedMaster = computed(() => {
 });
 // achievement: 100 successful days in a row
 const achievedStrength = computed(() => {
-  var states = '', n = new Date(), min = minDate.value, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    states = (key in props.statusData && props.statusData[key] == -1) ? states + 'f' : states
-    states = (key in props.statusData && props.statusData[key] == 1) ? states + 's' : states
-    states = !(key in props.statusData) ? states + 'n' : states
-  }
+  const states = getStateString(props.statusData, minDate.value)
   return {
     state: (states.match(/(s)\1{99}/g) || []).length,
     progress: currentStreak.value%100,
@@ -504,10 +412,10 @@ const achievedLegend = computed(() => {
   for (let i = 0; i < years.length; i++) {
     var noSuccess = 0
     for (let m = 0; m < 12; m++) {
-      const days = new Date(years[i], m, 0).getDate()
+      const days = new Date(years[i], m+1, 0).getDate()
       // iterate over all days of the current month
       for (let d = 1; d <= days; d++) {
-        var key = getDate(years[i], m, d)
+        var key = getDate(years[i], m+1, d)
         if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] == -1)) {
           noSuccess++
         }
@@ -538,9 +446,35 @@ const achievedLegend = computed(() => {
     unit: 'day'
   }
 });
+
+// Map achievement key to its computed property ref
+const achievementMap = {
+  beginning: achievedBeginning,
+  ten: achievedTen,
+  speed: achievedSpeed,
+  alea: achievedAlea,
+  tide: achievedTide,
+  defense: achievedDefense,
+  praise: achievedPraise,
+  uptrend: achievedUptrend,
+  gatherer: achievedGatherer,
+  news: achievedNews,
+  spock: achievedSpock,
+  madness: achievedMadness,
+  clean: achievedClean,
+  strike: achievedStrike,
+  epic: achievedEpic,
+  master: achievedMaster,
+  strength: achievedStrength,
+  legend: achievedLegend,
+};
+const getAchievementStatus = (a) => achievementMap[a].value;
 </script>
 
 <style>
+h2 .capitalize {
+  text-transform: capitalize;
+}
 .achievements {
   display: flex;
   flex-flow: row wrap;

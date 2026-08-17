@@ -30,45 +30,18 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate, getMinDate, getCurrentStreak } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
   statusData: Object,
 });
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2);
-};
-
 // get the minimum date (edited date that is most past)
-const minDate = computed(() => {
-  var keys = Object.keys(props.statusData);
-  if (typeof keys !== 'undefined' && keys.length > 0) {
-    return keys.reduce(function (p, v) {
-      var pd = new Date(p), vd = new Date(v);
-      return ( pd < vd ? pd : vd );
-    });
-  } else {
-    return new Date(1970, 0, 1);
-  }
-});
+const minDate = computed(() => getMinDate(props.statusData));
 
 // get number of successful days in a row directly preceding today
-const currentStreak = computed(() => {
-  let streak = 0, undecided = true, n = new Date(), min = new Date(minDate.value), key = '';
-  while (min <= n) {
-    n = new Date(n.setDate(n.getDate() - 1));
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
-    if (!(key in props.statusData) && undecided) continue;
-    if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] < 1)) break;
-    else {
-      undecided = false;
-      streak++;
-    }
-  }
-  return streak;
-});
+const currentStreak = computed(() => getCurrentStreak(props.statusData));
 
 // get maximum number of successful days in a row
 const longestStreak = computed(() => {
@@ -83,7 +56,8 @@ const longestStreak = computed(() => {
       streak++;
     }
   }
-  return max;
+  // flush a streak that runs uninterrupted through the earliest tracked day
+  return streak > max ? streak : max;
 });
 
 // get total number of successful days

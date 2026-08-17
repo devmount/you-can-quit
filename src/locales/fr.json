@@ -79,9 +79,10 @@
   "day": "jour | jours",
   "sunday": "dimanche | dimanches",
   "wednesday": "mercredi | mercredis",
-  "achievement": "Réalisation | Réalisations",
+  "achievement": "réalisation | réalisations",
   "completed": "complété",
   "done": "fait",
+  "left": "restant",
   "achievements": {
     "beginning": {
       "title": "Le débutant",
@@ -198,6 +199,14 @@
     "importSuccess": {
       "title": "Succès de l'import",
       "text": "La base de données a bien été importé et les données précédentes écrasés."
+    },
+    "importError": {
+      "title": "Échec de l'import",
+      "text": "Le fichier sélectionné n'est pas un fichier de sauvegarde valide."
+    },
+    "dbError": {
+      "title": "Une erreur est survenue",
+      "text": "Une erreur de base de données s'est produite. Veuillez réessayer."
     },
     "clearSuccess": {
       "title": "Netoyage réussi",

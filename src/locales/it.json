@@ -79,9 +79,10 @@
   "day": "giorno | giorni",
   "sunday": "domenica | domeniche",
   "wednesday": "mercoledì | mercoledì",
-  "achievement": "Conquista | Conquiste",
+  "achievement": "conquista | conquiste",
   "completed": "completato",
   "done": "fatto",
+  "left": "rimanenti",
   "achievements": {
     "beginning": {
       "title": "L'inizio",
@@ -198,6 +199,14 @@
     "importSuccess": {
       "title": "Importazione avvenuta con successo",
       "text": "Il database è stato correttamente importato e sono stati rimossi i dati precedenti."
+    },
+    "importError": {
+      "title": "Importazione fallita",
+      "text": "Il file selezionato non è un file di backup valido."
+    },
+    "dbError": {
+      "title": "Qualcosa è andato storto",
+      "text": "Si è verificato un errore del database. Riprova."
     },
     "clearSuccess": {
       "title": "Pulizia avvenuta con successo",

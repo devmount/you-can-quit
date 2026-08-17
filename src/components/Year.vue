@@ -3,13 +3,14 @@
   <div class="year-container">
     <div class="year-day-grid">
       <!-- day of week labels -->
-      <div v-for="l in 7" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
+      <div v-for="l in 7" :key="'label-' + l" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
       <!-- offset days -->
-      <div v-for="o in dayOfWeekOffset" :class="'day offset year-day-pre-offset-' + o"></div>
+      <div v-for="o in dayOfWeekOffset" :key="'pre-' + o" :class="'day offset year-day-pre-offset-' + o"></div>
       <!-- days in current year with month initials -->
-      <template v-for="m in 12">
+      <template v-for="m in 12" :key="m">
         <div
           v-for="(d,i) in daysInMonth(m)"
+          :key="'day-' + m + '-' + d"
           class="day"
           :class="{
             today: isToday(date.year, m, d),
@@ -18,7 +19,7 @@
             fail: statusData[getDate(date.year, m, d)] == -1
           }"
           :title="
-            (isToday(date.year, m, d) ? 'Today' : '') + 
+            (isToday(date.year, m, d) ? t('today') : '') +
             (i == 0 ? t('name.month.' + m) : '')
           "
         >
@@ -33,6 +34,7 @@
 <script setup>
 import { reactive, computed } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -48,10 +50,6 @@ const now = reactive({
   year: d.getFullYear()
 });
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-};
 // compute the number of days of the given month
 const daysInMonth = (month) => {
   return new Date(props.date.year, month, 0).getDate();
