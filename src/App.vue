@@ -104,7 +104,6 @@ const calDate = reactive({
 });
 const calNow = reactive({
   day: d.getDate(),
-  weekday: d.getDay()+1,
   month: d.getMonth()+1,
   year: d.getFullYear(),
 });
