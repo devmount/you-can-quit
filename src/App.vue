@@ -427,6 +427,31 @@ button {
 .hidden {
   display: none;
 }
+
+.navigation {
+  margin: 1em 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.navigation > * {
+  flex-basis: 50%;
+}
+.navigation h2 {
+  margin: 0;
+  padding: 0 1em 0 0;
+  text-align: right;
+}
+.navigation .button-group {
+  text-align: left;
+}
+.navigation .button-group button {
+  color: var(--c-text-light);
+  padding: 0 .25em;
+  font-size: 1.5em;
+}
+
 #app .vue-notification {
   cursor: pointer;
   padding: 1em;
