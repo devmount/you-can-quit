@@ -86,7 +86,7 @@ const confirm = reactive({
 .btn.btn-danger:active {
   box-shadow: 0 0 0 .3rem var(--c-danger-variant-transparent);
 }
-.btn.btn-danger.btn.btn-danger-important {
+.btn.btn-danger.btn-danger-important {
   background: var(--c-danger-important);
   border: 2px solid var(--c-danger-important);
 }
