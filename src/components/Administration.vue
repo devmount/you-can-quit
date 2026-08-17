@@ -5,25 +5,25 @@
     <div class="col-half px-1 backup-zone">
       <h3>{{ t('admin.backup.title') }}</h3>
       <p>{{ t('admin.backup.text') }}</p>
-      <button class="btn btn-primary" @click="$emit('export')">{{ t('admin.backup.buttonExport') }}</button>
+      <button type="button" class="btn btn-primary" @click="$emit('export')">{{ t('admin.backup.buttonExport') }}</button>
     </div>
     <div class="col-half px-1 danger-zone">
       <h3>{{ t('admin.danger.title') }}</h3>
       <p>{{ t('admin.danger.text') }}</p>
       <div class="btn-group">
-        <label v-if="!confirm.import" class="btn btn-danger" @click="confirm.import = true">{{ t('admin.danger.buttonImport') }}</label>
-        <label v-if="confirm.import" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.import }">
+        <button v-if="!confirm.import" type="button" class="btn btn-danger" @click="confirm.import = true">{{ t('admin.danger.buttonImport') }}</button>
+        <div v-if="confirm.import" class="btn btn-danger btn-danger-important">
           {{ t('admin.danger.confirmImport') }}
-          <span class="btn-mini" @click="$refs['backupFile'].click()">{{ t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.import = false">{{ t('admin.danger.no') }}</span>
-        </label>
+          <button type="button" class="btn-mini" @click="$refs['backupFile'].click()">{{ t('admin.danger.yes') }}</button>
+          <button type="button" class="btn-mini" @click="confirm.import = false">{{ t('admin.danger.no') }}</button>
+        </div>
         <input class="hidden" type="file" id="backup" accept=".json" ref="backupFile" @change="$emit('import', $refs['backupFile']);confirm.import = false">
-        <button v-if="!confirm.clear" class="btn btn-danger" @click="confirm.clear = true">{{ t('admin.danger.buttonClear') }}</button>
-        <button v-if="confirm.clear" class="btn btn-danger" :class="{ 'btn-danger-important': confirm.clear }">
+        <button v-if="!confirm.clear" type="button" class="btn btn-danger" @click="confirm.clear = true">{{ t('admin.danger.buttonClear') }}</button>
+        <div v-if="confirm.clear" class="btn btn-danger btn-danger-important">
           {{ t('admin.danger.confirmClear') }}
-          <span class="btn-mini" @click="$emit('clear');confirm.clear = false">{{ t('admin.danger.yes') }}</span>
-          <span class="btn-mini" @click="confirm.clear = false">{{ t('admin.danger.no') }}</span>
-        </button>
+          <button type="button" class="btn-mini" @click="$emit('clear');confirm.clear = false">{{ t('admin.danger.yes') }}</button>
+          <button type="button" class="btn-mini" @click="confirm.clear = false">{{ t('admin.danger.no') }}</button>
+        </div>
       </div>
     </div>
   </section>
@@ -91,6 +91,12 @@ const confirm = reactive({
   border: 2px solid var(--c-danger-important);
 }
 .btn-mini {
+  appearance: none;
+  border: none;
+  border-radius: 2px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
   padding: 3px 8px;
   margin-left: 10px;
   background: var(--c-danger-important-variant);
