@@ -63,29 +63,7 @@ const achievements = [
 
 // get the current status of each achievement
 // this function maps an achievement key to its computed property value
-const getAchievementStatus = (a) => {
-  switch (a) {
-    case 'beginning': return achievedBeginning.value;
-    case 'ten': return achievedTen.value;
-    case 'speed': return achievedSpeed.value;
-    case 'alea': return achievedAlea.value;
-    case 'tide': return achievedTide.value;
-    case 'defense': return achievedDefense.value;
-    case 'praise': return achievedPraise.value;
-    case 'uptrend': return achievedUptrend.value;
-    case 'gatherer': return achievedGatherer.value;
-    case 'news': return achievedNews.value;
-    case 'spock': return achievedSpock.value;
-    case 'madness': return achievedMadness.value;
-    case 'clean': return achievedClean.value;
-    case 'strike': return achievedStrike.value;
-    case 'epic': return achievedEpic.value;
-    case 'master': return achievedMaster.value;
-    case 'strength': return achievedStrength.value;
-    case 'legend': return achievedLegend.value;
-    default: break;
-  }
-};
+// (defined further down, once all achievedXxx computed refs exist)
 
 // get the first date entry (edited date that is most past)
 const minDate = computed(() => getMinDate(props.statusData));
@@ -468,6 +446,29 @@ const achievedLegend = computed(() => {
     unit: 'day'
   }
 });
+
+// Map achievement key to its computed property ref
+const achievementMap = {
+  beginning: achievedBeginning,
+  ten: achievedTen,
+  speed: achievedSpeed,
+  alea: achievedAlea,
+  tide: achievedTide,
+  defense: achievedDefense,
+  praise: achievedPraise,
+  uptrend: achievedUptrend,
+  gatherer: achievedGatherer,
+  news: achievedNews,
+  spock: achievedSpock,
+  madness: achievedMadness,
+  clean: achievedClean,
+  strike: achievedStrike,
+  epic: achievedEpic,
+  master: achievedMaster,
+  strength: achievedStrength,
+  legend: achievedLegend,
+};
+const getAchievementStatus = (a) => achievementMap[a].value;
 </script>
 
 <style>
