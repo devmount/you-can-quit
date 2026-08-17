@@ -79,9 +79,10 @@
   "day": "dia | dias",
   "sunday": "domingo | domingos",
   "wednesday": "quarta-feira | quartas-feiras",
-  "achievement": "Conquista | Conquistas",
+  "achievement": "conquista | conquistas",
   "completed": "completado",
   "done": "feito",
+  "left": "restantes",
   "achievements": {
     "beginning": {
       "title": "O Inicio",

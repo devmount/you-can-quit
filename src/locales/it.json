@@ -79,9 +79,10 @@
   "day": "giorno | giorni",
   "sunday": "domenica | domeniche",
   "wednesday": "mercoledì | mercoledì",
-  "achievement": "Conquista | Conquiste",
+  "achievement": "conquista | conquiste",
   "completed": "completato",
   "done": "fatto",
+  "left": "rimanenti",
   "achievements": {
     "beginning": {
       "title": "L'inizio",

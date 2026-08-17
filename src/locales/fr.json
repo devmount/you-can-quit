@@ -79,9 +79,10 @@
   "day": "jour | jours",
   "sunday": "dimanche | dimanches",
   "wednesday": "mercredi | mercredis",
-  "achievement": "Réalisation | Réalisations",
+  "achievement": "réalisation | réalisations",
   "completed": "complété",
   "done": "fait",
+  "left": "restant",
   "achievements": {
     "beginning": {
       "title": "Le débutant",

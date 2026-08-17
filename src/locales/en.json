@@ -79,9 +79,10 @@
   "day": "day | days",
   "sunday": "sunday | sundays",
   "wednesday": "wednesday | wednesdays",
-  "achievement": "Achievement | Achievements",
+  "achievement": "achievement | achievements",
   "completed": "completed",
   "done": "done",
+  "left": "left",
   "achievements": {
     "beginning": {
       "title": "The Beginning",

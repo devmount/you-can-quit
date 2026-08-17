@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2>{{ totalAchievements }} {{ t('achievement', totalAchievements) }}</h2>
+  <h2>{{ totalAchievements }} <span class="capitalize">{{ t('achievement', totalAchievements) }}</span></h2>
   <div class="achievements">
     <!-- single achievement items -->
     <div
@@ -18,7 +18,7 @@
         <div v-if="getAchievementStatus(a).progress == 100"><font-awesome-icon icon="check" class="icon" /> {{ t('completed') }}</div>
         <div v-else-if="getAchievementStatus(a).progress != 0">
           <font-awesome-icon icon="shoe-prints" class="icon" />
-          {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ t('done') }}, {{ getAchievementStatus(a).left }} {{ t(getAchievementStatus(a).unit, getAchievementStatus(a).left).toLowerCase() }} left
+          {{ getAchievementStatus(a).progress.toFixed(1) }}% {{ t('done') }}, {{ getAchievementStatus(a).left }} {{ t(getAchievementStatus(a).unit, getAchievementStatus(a).left) }} {{ t('left') }}
         </div>
       </div>
     </div>
@@ -541,6 +541,9 @@ const achievedLegend = computed(() => {
 </script>
 
 <style>
+h2 .capitalize {
+  text-transform: capitalize;
+}
 .achievements {
   display: flex;
   flex-flow: row wrap;
