@@ -18,7 +18,7 @@
             fail: statusData[getDate(date.year, m, d)] == -1
           }"
           :title="
-            (isToday(date.year, m, d) ? 'Today' : '') + 
+            (isToday(date.year, m, d) ? t('today') : '') +
             (i == 0 ? t('name.month.' + m) : '')
           "
         >
