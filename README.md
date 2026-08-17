@@ -58,7 +58,7 @@ Just head over to <https://youcanqu.it> and start your journey.
     firefox dist/index.html &
     ```
 
-    ... or start the development server with hot reload at localhost:8080
+    ... or start the development server with hot reload at localhost:5173
 
     ```bash
     pnpm dev
