@@ -3,9 +3,6 @@ import { createApp } from 'vue';
 import App from '@/App.vue';
 const app = createApp(App);
 
-// service worker
-import '@/registerServiceWorker';
-
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
