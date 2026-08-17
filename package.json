@@ -13,7 +13,9 @@
     "build": "vite build",
     "serve": "vite preview"
   },
-  "browser": "./dist/index.html",
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
@@ -36,12 +38,7 @@
   "bugs": {
     "url": "https://github.com/devmount/you-can-quit/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/devmount/you-can-quit/raw/master/LICENSE.md"
-    }
-  ],
+  "license": "MIT",
   "productName": "You Can Quit!",
   "repository": {
     "type": "git",
