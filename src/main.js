@@ -93,20 +93,6 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 import Notifications from '@kyvg/vue3-notification';
 app.use(Notifications);
 
-// global mixin
-app.mixin({
-  computed: {
-		// static language list of existing translations
-		languages: () => ({
-			'de': 'Deutsch',
-			'en': 'English',
-			'fr': 'Francais',
-      'it': 'Italiano',
-      'pt-BR': 'Português (brasileiro)'
-    }),
-  }
-})
-
 // Vue i18n
 import de from '@/locales/de.json';
 import en from '@/locales/en.json';

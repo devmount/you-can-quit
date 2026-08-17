@@ -81,8 +81,8 @@ import { useI18n } from "vue-i18n";
 // get indexed db
 import db from '@/database';
 
-// date helper
-import { getDate } from '@/utils';
+// helpers
+import { getDate, languages } from '@/utils';
 
 // get components
 import About from '@/components/About.vue';
