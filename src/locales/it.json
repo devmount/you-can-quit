@@ -200,6 +200,10 @@
       "title": "Importazione avvenuta con successo",
       "text": "Il database è stato correttamente importato e sono stati rimossi i dati precedenti."
     },
+    "importError": {
+      "title": "Importazione fallita",
+      "text": "Il file selezionato non è un file di backup valido."
+    },
     "clearSuccess": {
       "title": "Pulizia avvenuta con successo",
       "text": "Il database è stato pulito con successo e azzerato completamente."

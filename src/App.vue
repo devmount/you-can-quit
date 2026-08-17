@@ -202,28 +202,51 @@ const exportBackup = () => {
   });
 };
 // import a backup JSON file and replace current database
+const notifyImportError = () => {
+  notify({
+    group: 'main',
+    type: 'error',
+    title: t('admin.importError.title'),
+    text: t('admin.importError.text'),
+    duration: 6000
+  });
+};
 const importBackup = (handle) => {
   let file = handle.files[0];
-  if(!file || file.type !== 'text/plain' && file.type !== 'application/json') return;
+  if (!file || (file.type !== 'text/plain' && file.type !== 'application/json')) {
+    notifyImportError();
+    return;
+  }
   let reader = new FileReader();
   reader.readAsText(file, "UTF-8");
   reader.onload = async (evt) => {
-    let backup = JSON.parse(evt.target.result)
-    for (const date in backup) {
-      if (backup.hasOwnProperty(date)) {
-        const status = backup[date];
-        await db.days.put({name: date, status: status});
+    try {
+      const backup = JSON.parse(evt.target.result);
+      for (const date in backup) {
+        if (backup.hasOwnProperty(date)) {
+          const status = backup[date];
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || (status !== 1 && status !== -1)) {
+            throw new Error('Invalid backup data');
+          }
+        }
       }
+      for (const date in backup) {
+        if (backup.hasOwnProperty(date)) {
+          await db.days.put({name: date, status: backup[date]});
+        }
+      }
+      fetchData();
+      notify({
+        group: 'main',
+        title: t('admin.importSuccess.title'),
+        text: t('admin.importSuccess.text'),
+        duration: 6000
+      });
+    } catch {
+      notifyImportError();
     }
-    fetchData();
-    notify({
-      group: 'main',
-      title: t('admin.importSuccess.title'),
-      text: t('admin.importSuccess.text'),
-      duration: 6000
-    });
   }
-  reader.onerror = evt => console.error(evt);
+  reader.onerror = notifyImportError;
 };
 
 // throw all data away
@@ -411,5 +434,10 @@ button {
 }
 #app .vue-notification .notification-title {
   font-size: 1.5em;
+}
+#app .vue-notification.error {
+  background-image: linear-gradient(to bottom right, var(--c-danger) 0, var(--c-danger-variant) 100%);
+  background-color: var(--c-danger);
+  border-left: 5px solid var(--c-danger-variant);
 }
 </style>

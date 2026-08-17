@@ -200,6 +200,10 @@
       "title": "Import successful",
       "text": "Database successfully imported and previous data overwritten."
     },
+    "importError": {
+      "title": "Import failed",
+      "text": "The selected file is not a valid backup file."
+    },
     "clearSuccess": {
       "title": "Clearing successful",
       "text": "Database successfully cleared and previous data removed."

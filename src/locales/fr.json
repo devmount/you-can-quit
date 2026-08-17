@@ -200,6 +200,10 @@
       "title": "Succès de l'import",
       "text": "La base de données a bien été importé et les données précédentes écrasés."
     },
+    "importError": {
+      "title": "Échec de l'import",
+      "text": "Le fichier sélectionné n'est pas un fichier de sauvegarde valide."
+    },
     "clearSuccess": {
       "title": "Netoyage réussi",
       "text": "La base de données a été effacée avec succès et les données précédentes ont été supprimées."
