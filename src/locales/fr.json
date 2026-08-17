@@ -204,6 +204,10 @@
       "title": "Échec de l'import",
       "text": "Le fichier sélectionné n'est pas un fichier de sauvegarde valide."
     },
+    "dbError": {
+      "title": "Une erreur est survenue",
+      "text": "Une erreur de base de données s'est produite. Veuillez réessayer."
+    },
     "clearSuccess": {
       "title": "Netoyage réussi",
       "text": "La base de données a été effacée avec succès et les données précédentes ont été supprimées."

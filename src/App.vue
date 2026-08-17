@@ -110,7 +110,16 @@ const calData = ref({});
 // handle mount hooks
 onMounted(() => {
   fetchData();
-  // this.$refs['container'].focus()
+  // catch-all for any unhandled database operation failure
+  window.addEventListener('unhandledrejection', () => {
+    notify({
+      group: 'main',
+      type: 'error',
+      title: t('admin.dbError.title'),
+      text: t('admin.dbError.text'),
+      duration: 6000
+    });
+  });
 });
 
 // retrieve existing data
@@ -143,7 +152,7 @@ const updateDay = async (year, month, day, status) => {
     }
   }
   // update db
-  fetchData();
+  await fetchData();
 };
 
 // change month to display

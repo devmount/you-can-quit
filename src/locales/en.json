@@ -204,6 +204,10 @@
       "title": "Import failed",
       "text": "The selected file is not a valid backup file."
     },
+    "dbError": {
+      "title": "Something went wrong",
+      "text": "A database error occurred. Please try again."
+    },
     "clearSuccess": {
       "title": "Clearing successful",
       "text": "Database successfully cleared and previous data removed."

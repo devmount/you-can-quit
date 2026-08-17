@@ -204,6 +204,10 @@
       "title": "Falha na importação",
       "text": "O arquivo selecionado não é um arquivo de backup válido."
     },
+    "dbError": {
+      "title": "Algo deu errado",
+      "text": "Ocorreu um erro no banco de dados. Tente novamente."
+    },
     "clearSuccess": {
       "title": "Limpeza bem sucedida.",
       "text": "Banco de dados limpo com sucesso e dados anteriores removidos."

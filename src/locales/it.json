@@ -204,6 +204,10 @@
       "title": "Importazione fallita",
       "text": "Il file selezionato non è un file di backup valido."
     },
+    "dbError": {
+      "title": "Qualcosa è andato storto",
+      "text": "Si è verificato un errore del database. Riprova."
+    },
     "clearSuccess": {
       "title": "Pulizia avvenuta con successo",
       "text": "Il database è stato pulito con successo e azzerato completamente."
