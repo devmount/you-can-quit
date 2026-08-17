@@ -31,6 +31,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -86,11 +87,6 @@ const getAchievementStatus = (a) => {
   }
 };
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-};
-  
 // get the first date entry (edited date that is most past)
 const minDate = computed(() => {
   const keys = Object.keys(props.statusData)

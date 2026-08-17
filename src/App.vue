@@ -81,6 +81,9 @@ import { useI18n } from "vue-i18n";
 // get indexed db
 import db from '@/database';
 
+// date helper
+import { getDate } from '@/utils';
+
 // get components
 import About from '@/components/About.vue';
 import Administration from '@/components/Administration.vue';
@@ -129,11 +132,6 @@ const fetchData = async () => {
     days[d.name] = d.status;
   });
   calData.value = days;
-};
-
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
 };
 
 // update the status of a day to 1, 0 or -1

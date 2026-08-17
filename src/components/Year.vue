@@ -34,6 +34,7 @@
 <script setup>
 import { reactive, computed } from 'vue';
 import { useI18n } from "vue-i18n";
+import { getDate } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -49,10 +50,6 @@ const now = reactive({
   year: d.getFullYear()
 });
 
-// build date format yyyy-mm-dd
-const getDate = (year, month, day) => {
-  return year + '-' + ('0' + month).slice(-2) + '-' + ('0' + day).slice(-2)
-};
 // compute the number of days of the given month
 const daysInMonth = (month) => {
   return new Date(props.date.year, month, 0).getDate();
