@@ -504,10 +504,10 @@ const achievedLegend = computed(() => {
   for (let i = 0; i < years.length; i++) {
     var noSuccess = 0
     for (let m = 0; m < 12; m++) {
-      const days = new Date(years[i], m, 0).getDate()
+      const days = new Date(years[i], m+1, 0).getDate()
       // iterate over all days of the current month
       for (let d = 1; d <= days; d++) {
-        var key = getDate(years[i], m, d)
+        var key = getDate(years[i], m+1, d)
         if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] == -1)) {
           noSuccess++
         }
