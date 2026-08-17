@@ -43,15 +43,14 @@ const getDate = (year, month, day) => {
 
 // get the minimum date (edited date that is most past)
 const minDate = computed(() => {
-  var keys = Object.keys(props.statusData);
-  if (typeof keys !== 'undefined' && keys.length > 0) {
-    return keys.reduce(function (p, v) {
-      var pd = new Date(p), vd = new Date(v);
-      return ( pd < vd ? pd : vd );
-    });
-  } else {
+  const keys = Object.keys(props.statusData);
+  if (keys.length === 0) {
     return new Date(1970, 0, 1);
   }
+  return keys.reduce((min, v) => {
+    const vd = new Date(v);
+    return vd < min ? vd : min;
+  }, new Date(keys[0]));
 });
 
 // get number of successful days in a row directly preceding today
