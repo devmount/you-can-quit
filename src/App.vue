@@ -69,7 +69,7 @@
     <div class="mt-2">{{ t('footer.version') }} {{ version }}</div>
     <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
   </footer>
-  <notifications group="main" position="bottom right"/>
+  <notifications group="main" position="bottom right" :width="400" />
 </div>
 </template>
 
@@ -193,7 +193,7 @@ const randomSuccessNotification = () => {
     group: 'main',
     title: t('messages.titles.' + Math.floor(Math.random() * 7)),
     text: t('messages.texts.' + Math.floor(Math.random() * 6)),
-    duration: 10000
+    duration: 1000000
   }
 };
 
@@ -291,7 +291,7 @@ const fillOffset = computed(() => {
 </script>
 
 <style>
-body {
+:root {
   --c-text-normal: #7e8a9a;
   --c-text-light: #eee;
   --c-background: #3d444c;
@@ -307,6 +307,9 @@ body {
   --c-danger-important: #d8344f;
   --c-danger-important-variant: #ac2a40;
   --c-shadow: #24292e;
+}
+
+body {
   background-color: var(--c-background); 
   color: var(--c-text-normal);
 }
@@ -349,41 +352,43 @@ button {
   cursor: pointer;
   font-family: inherit;
 }
+
 #app {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 40px 0;
-}
-#app section {
-  margin: auto;
-  padding: .5em 0 1.5em 0;
-}
-#app section p {
-  text-align: left;
-}
-#app footer {
-  margin: 8rem 0 10rem 0;
-}
-#app footer a .icon {
-  color: var(--c-text-normal);
-  font-size: 2rem;
-  margin: 0 .8rem;
-  transition: color .3s;
-}
-#app footer .lang-select {
-  background: transparent;
-  color: inherit;
-  border: none;
-  font-family: inherit;
-  font-size: inherit;
-  text-align: center;
-}
-#app footer a:hover .icon,
-#app footer a:focus .icon,
-#app footer a:active .icon {
-  color: var(--c-accent);
+
+  section {
+    margin: auto;
+    padding: .5em 0 1.5em 0;
+  }
+  section p {
+    text-align: left;
+  }
+  footer {
+    margin: 8rem 0 10rem 0;
+  }
+  footer a .icon {
+    color: var(--c-text-normal);
+    font-size: 2rem;
+    margin: 0 .8rem;
+    transition: color .3s;
+  }
+  footer .lang-select {
+    background: transparent;
+    color: inherit;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
+  }
+  footer a:hover .icon,
+  footer a:focus .icon,
+  footer a:active .icon {
+    color: var(--c-accent);
+  }
 }
 @media (min-width: 1200px) {
   #app section {
@@ -396,6 +401,7 @@ button {
     width: 50%;
   }
 }
+
 .col-2 > div {
   margin: 0 auto;
 }
@@ -452,7 +458,7 @@ button {
   font-size: 1.5em;
 }
 
-#app .vue-notification {
+.vue-notification {
   cursor: pointer;
   padding: 1em;
   margin: 0 15px 15px 0;
@@ -463,10 +469,10 @@ button {
   box-shadow: 0 8px 20px -8px var(--c-shadow);
   border-left: 5px solid var(--c-accent-variant);
 }
-#app .vue-notification .notification-title {
+.vue-notification .notification-title {
   font-size: 1.5em;
 }
-#app .vue-notification.error {
+.vue-notification.error {
   background-image: linear-gradient(to bottom right, var(--c-danger) 0, var(--c-danger-variant) 100%);
   background-color: var(--c-danger);
   border-left: 5px solid var(--c-danger-variant);
