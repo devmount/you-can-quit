@@ -22,7 +22,7 @@
         @change="changeMonth(calNow.year, calNow.month)"
         @next="nextMonth()"
       />
-      <month
+      <month-overview
         :day-of-week-offset="dayOfWeekOffset"
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
@@ -32,7 +32,7 @@
       />
     </div>
     <div class="info-view">
-      <info :status-data="calData" />
+      <info-panel :status-data="calData" />
     </div>
   </section>
   <section>
@@ -42,18 +42,18 @@
       @change="changeMonth(calNow.year, calNow.month)"
       @next="nextYear()"
     />
-    <year
+    <year-overview
       :status-data="calData"
       :date="calDate"
     />
   </section>
-  <administration
+  <admin-section
     class="mt-5"
     @import="importBackup"
     @export="exportBackup()"
     @clear="clearDatabase()"
   />
-  <about class="mt-5" />
+  <about-section class="mt-5" />
   <footer>
     <div class="mt-2">
       {{ t('footer.switchLanguage') }}
@@ -85,12 +85,12 @@ import db from '@/database';
 import { getDate, languages } from '@/utils';
 
 // get components
-import About from '@/components/About.vue';
-import Administration from '@/components/Administration.vue';
-import Info from '@/components/Info.vue';
-import Month from '@/components/Month.vue';
+import AboutSection from '@/components/AboutSection.vue';
+import AdminSection from '@/components/AdminSection.vue';
+import InfoPanel from '@/components/InfoPanel.vue';
+import MonthOverview from '@/components/MonthOverview.vue';
 import MonthNavigation from '@/components/MonthNavigation.vue';
-import Year from '@/components/Year.vue';
+import YearOverview from '@/components/YearOverview.vue';
 import YearNavigation from '@/components/YearNavigation.vue';
 
 const { t, locale } = useI18n();
@@ -307,6 +307,8 @@ const fillOffset = computed(() => {
   --c-danger-important: #d8344f;
   --c-danger-important-variant: #ac2a40;
   --c-shadow: #24292e;
+
+  color-scheme: dark;
 }
 
 html, body {

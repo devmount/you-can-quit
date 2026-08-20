@@ -61,7 +61,7 @@ To implement an achievement, you have to touch the following files:
 
 - `src/main.js`: add your icon in camelCase style to both icon lists
 - `src/locales/en.json`: add your achievement key to the achievements list and provide title, description and icon
-- `src/components/info/Achievements.vue`:
+- `src/components/info/AchievementList.vue`:
   - Add your key to the keys list in the `data()` Object
   - Add your key and the corresponding status function to the `getAchievementStatus ()` function
   - Implement your status function under `computed`. It always returns the following object:
