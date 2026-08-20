@@ -14,7 +14,7 @@
     <p>{{ t('subtitle') }}</p>
     <hr />
   </header>
-  <section class="col-2">
+  <section class="col-2" style="--col-template: 2fr 1fr;">
     <div class="month-view">
       <month-navigation
         :date="calDate"
@@ -404,17 +404,9 @@ button {
     max-width: 1200px;
   }
   .col-2 {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .col-half {
-    width: 50%;
-  }
-  .col-2 > .month-view {
-    width: 800px;
-  }
-  .col-2 > .info-view {
-    width: 400px;
+    display: grid;
+    grid-template-columns: var(--col-template, 1fr 1fr);
+    gap: 1rem;
   }
 }
 
