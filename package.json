@@ -1,6 +1,6 @@
 {
   "name": "you-can-quit",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": false,
   "description": "A tool to support your progress in quitting whatever your bad habit is.",
   "packageManager": "pnpm@11.22.0",
