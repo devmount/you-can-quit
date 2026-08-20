@@ -103,20 +103,6 @@ h2 .capitalize {
   background-image: linear-gradient(to bottom right, var(--c-accent) 0, var(--c-accent-variant) 100%);
   background-color: var(--c-accent);
 }
-@keyframes achievement-pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px -8px var(--c-shadow);
-  }
-  30% {
-    transform: scale(1.25);
-    box-shadow: 0 0 25px 6px var(--c-accent-variant);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px -8px var(--c-shadow);
-  }
-}
 .achievements .item.pulse {
   animation: achievement-pulse 1s ease;
   z-index: 1;

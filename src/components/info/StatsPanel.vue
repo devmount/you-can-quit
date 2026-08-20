@@ -4,21 +4,21 @@
   <div class="stats">
     <div class="box">
       <div class="title">{{ t('stats.streak.current') }}</div>
-      <div class="data" :class="{ zero: currentStreak == 0 }">
+      <div class="data" :class="{ zero: currentStreak == 0, pulse: pulsing.current }">
         <span>{{ currentStreak }}</span> {{ t('day', currentStreak) }}
         <font-awesome-icon icon="angle-up" class="icon" />
       </div>
     </div>
     <div class="box">
       <div class="title">{{ t('stats.streak.longest') }}</div>
-      <div class="data" :class="{ zero: longestStreak == 0 }">
+      <div class="data" :class="{ zero: longestStreak == 0, pulse: pulsing.longest }">
         <span>{{ longestStreak }}</span> {{ t('day', longestStreak) }}
         <font-awesome-icon icon="angle-double-up" class="icon" />
       </div>
     </div>
     <div class="box">
       <div class="title">{{ t('successful') }}</div>
-      <div class="data" :class="{ zero: successfulDays == 0 }">
+      <div class="data" :class="{ zero: successfulDays == 0, pulse: pulsing.successful }">
         <span>{{ successfulDays }}</span> {{ t('day', successfulDays) }}
         <font-awesome-icon icon="check" class="icon" />
       </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import { useI18n } from "vue-i18n";
 import { getDate, getMinDate, getCurrentStreak } from '@/utils';
 const { t } = useI18n();
@@ -36,6 +36,15 @@ const { t } = useI18n();
 const props = defineProps({
   statusData: Object,
 });
+
+// briefly highlight a stat tile when its value increases
+const pulsing = reactive({ current: false, longest: false, successful: false });
+const pulseTimeouts = {};
+const triggerPulse = (key) => {
+  pulsing[key] = true;
+  clearTimeout(pulseTimeouts[key]);
+  pulseTimeouts[key] = setTimeout(() => { pulsing[key] = false; }, 1300);
+};
 
 // get the minimum date (edited date that is most past)
 const minDate = computed(() => getMinDate(props.statusData));
@@ -64,6 +73,10 @@ const longestStreak = computed(() => {
 const successfulDays = computed(() => {
   return Object.values(props.statusData).filter(value => value == 1).length;
 });
+
+watch(currentStreak, (newVal, oldVal) => { if (newVal > oldVal) triggerPulse('current'); });
+watch(longestStreak, (newVal, oldVal) => { if (newVal > oldVal) triggerPulse('longest'); });
+watch(successfulDays, (newVal, oldVal) => { if (newVal > oldVal) triggerPulse('successful'); });
 </script>
 
 <style>
@@ -90,6 +103,9 @@ const successfulDays = computed(() => {
 .stats .box .data.zero {
   color: var(--c-text-normal);
   background: var(--c-background-element);
+}
+.stats .box .data.pulse {
+  animation: achievement-pulse 1s ease;
 }
 .stats .box .data > span {
   font-size: 2.5em;

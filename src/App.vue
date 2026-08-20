@@ -339,6 +339,20 @@ html, body {
   padding: 0;
   margin: 0;
 }
+@keyframes achievement-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px -8px var(--c-shadow);
+  }
+  30% {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px 6px var(--c-accent-variant);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px -8px var(--c-shadow);
+  }
+}
 body {
   background-color: var(--c-background); 
   color: var(--c-text-normal);
