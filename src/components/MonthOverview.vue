@@ -1,5 +1,5 @@
 <template>
-<div class="month-day-grid">
+<div class="month-day-grid" :style="{ '--half-rows': halfRows }">
   <!-- day of week labels -->
   <div v-for="l in 7" :key="'label-' + l" class="day label">{{ t('name.dayofweek.' + l).slice(0, 2).toUpperCase() }}</div>
   <!-- offset days -->
@@ -17,7 +17,7 @@
       fail: statusData[getDate(date.year, date.month, d)] == -1
     }"
     :title="isToday(date.year, date.month, d) ? t('today') : ''"
-  >{{ d }}
+  ><div class="day-date"><span class="day-weekday">{{ t('name.dayofweek.' + weekdayLabel(d)).slice(0, 2) }}</span><span class="day-number">{{ d }}</span></div>
     <div v-if="isPast(date.year, date.month, d)" class="action">
       <button
         @click="emit('update', date.year, date.month, d, 1)"
@@ -28,6 +28,7 @@
       </button>
       <button
         @click="emit('update', date.year, date.month, d, 0)"
+        class="undo"
         :title="t('mark.undecided')"
       >
         <font-awesome-icon icon="undo-alt" />
@@ -47,7 +48,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { useI18n } from "vue-i18n";
 import { getDate } from '@/utils';
 const { t } = useI18n();
@@ -61,6 +62,9 @@ const props = defineProps({
   statusData: Object,
   date: Object,
 });
+
+// number of rows in the first of the two mobile/tablet columns (days 1..halfRows go left, the rest go right)
+const halfRows = computed(() => Math.ceil(props.daysInMonth / 2));
 
 // today
 const d = new Date()
@@ -82,22 +86,34 @@ const isToday = (year, month, day) => {
 const isPast = (year, month, day) => {
   return new Date(year, month-1, day) < new Date(now.year, now.month-1, now.day)
 };
+// get the day-of-week label key (1-7, Sunday-Saturday) for a given day
+const weekdayLabel = (day) => {
+  return new Date(props.date.year, props.date.month-1, day).getDay() + 1;
+};
 </script>
 
 <style>
 .month-day-grid {
   display: flex;
-  flex-flow: column wrap;
-  align-content: center;
-  height: calc((80px + 20px) * 7);
+  flex-flow: column nowrap;
+  width: 100%;
+  height: auto;
+}
+.month-day-grid .day.label,
+.month-day-grid .day.offset {
+  display: none;
 }
 .month-day-grid .day {
-  width: 90px;
-  height: 80px;
-  line-height: 80px;
+  width: 100%;
+  min-height: 3.5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  line-height: normal;
   font-size: 1.5em;
-  padding: 5px;
-  margin: 5px;
+  padding: 0;
+  margin: 5px 0;
   background: var(--c-background-element);
   position: relative;
   overflow: hidden;
@@ -105,9 +121,17 @@ const isPast = (year, month, day) => {
   transition: all 0.2s;
   cursor: default;
 }
-.month-day-grid .day.label,
-.month-day-grid .day.offset {
-  background: none;
+.month-day-grid .day .day-date {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+.month-day-grid .day .day-weekday {
+  display: inline-block;
+  width: 1.8em;
+  font-size: .55em;
+  opacity: .6;
+  margin-right: .5rem;
 }
 .month-day-grid .day.today {
   background: var(--c-text-light);
@@ -124,32 +148,83 @@ const isPast = (year, month, day) => {
 }
 .month-day-grid .day .action {
   display: flex;
-  width: 101px;
   flex-flow: row nowrap;
-  justify-content: center;
-  position: absolute;
-  bottom: -30px;
-  left: 0;
-  transition: all 0.2s;
-}
-.month-day-grid .day.past:hover {
-  line-height: 50px;
-}
-.month-day-grid .day.past:hover .action {
-  bottom: 0;
+  position: static;
 }
 .month-day-grid .day .action button {
   text-align: center;
-  width: 33.3%;
-  height: 30px;
+  width: 3.25rem;
+  height: auto;
   color: var(--c-text-normal);
 }
+.month-day-grid .day .action button.undo {
+  order: 1;
+}
+.month-day-grid .day .action button.fail {
+  order: 2;
+  color: var(--c-shadow);
+  background: var(--c-background);
+}
 .month-day-grid .day .action button.success {
+  order: 3;
   color: white;
   background: var(--c-accent-variant);
 }
-.month-day-grid .day .action button.fail {
-  color: var(--c-shadow);
-  background: var(--c-background);
+@media (min-width: 700px) {
+  .month-day-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--half-rows), auto);
+    column-gap: 1.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .month-day-grid {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    column-gap: 0;
+    height: calc((80px + 20px) * 7);
+  }
+  .month-day-grid .day.label,
+  .month-day-grid .day.offset {
+    display: block;
+    background: none;
+  }
+  .month-day-grid .day {
+    width: 90px;
+    height: 80px;
+    line-height: 80px;
+    box-sizing: content-box;
+    display: block;
+    font-size: 1.5em;
+    padding: 5px;
+    margin: 5px;
+  }
+  .month-day-grid .day .day-date {
+    display: contents;
+  }
+  .month-day-grid .day .day-weekday {
+    display: none;
+  }
+  .month-day-grid .day .action {
+    width: 101px;
+    justify-content: center;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    transition: all 0.2s;
+  }
+  .month-day-grid .day .action button {
+    width: 33.3%;
+    height: 30px;
+    order: initial;
+  }
+  .month-day-grid .day.past:hover {
+    line-height: 50px;
+  }
+  .month-day-grid .day.past:hover .action {
+    bottom: 0;
+  }
 }
 </style>

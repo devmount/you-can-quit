@@ -14,7 +14,7 @@
     <p>{{ t('subtitle') }}</p>
     <hr />
   </header>
-  <section class="col-2">
+  <section class="col-2" style="--col-template: 2fr 1fr;">
     <div class="month-view">
       <month-navigation
         :date="calDate"
@@ -22,7 +22,7 @@
         @change="changeMonth(calNow.year, calNow.month)"
         @next="nextMonth()"
       />
-      <month
+      <month-overview
         :day-of-week-offset="dayOfWeekOffset"
         :days-in-month="daysInMonth"
         :fill-offset="fillOffset"
@@ -32,7 +32,7 @@
       />
     </div>
     <div class="info-view">
-      <info :status-data="calData" />
+      <info-panel :status-data="calData" />
     </div>
   </section>
   <section>
@@ -42,18 +42,18 @@
       @change="changeMonth(calNow.year, calNow.month)"
       @next="nextYear()"
     />
-    <year
+    <year-overview
       :status-data="calData"
       :date="calDate"
     />
   </section>
-  <administration
+  <admin-section
     class="mt-5"
     @import="importBackup"
     @export="exportBackup()"
     @clear="clearDatabase()"
   />
-  <about class="mt-5" />
+  <about-section class="mt-5" />
   <footer>
     <div class="mt-2">
       {{ t('footer.switchLanguage') }}
@@ -85,12 +85,12 @@ import db from '@/database';
 import { getDate, languages } from '@/utils';
 
 // get components
-import About from '@/components/About.vue';
-import Administration from '@/components/Administration.vue';
-import Info from '@/components/Info.vue';
-import Month from '@/components/Month.vue';
+import AboutSection from '@/components/AboutSection.vue';
+import AdminSection from '@/components/AdminSection.vue';
+import InfoPanel from '@/components/InfoPanel.vue';
+import MonthOverview from '@/components/MonthOverview.vue';
 import MonthNavigation from '@/components/MonthNavigation.vue';
-import Year from '@/components/Year.vue';
+import YearOverview from '@/components/YearOverview.vue';
 import YearNavigation from '@/components/YearNavigation.vue';
 
 const { t, locale } = useI18n();
@@ -193,7 +193,7 @@ const randomSuccessNotification = () => {
     group: 'main',
     title: t('messages.titles.' + Math.floor(Math.random() * 7)),
     text: t('messages.texts.' + Math.floor(Math.random() * 6)),
-    duration: 1000000
+    duration: 6000
   }
 };
 
@@ -307,8 +307,14 @@ const fillOffset = computed(() => {
   --c-danger-important: #d8344f;
   --c-danger-important-variant: #ac2a40;
   --c-shadow: #24292e;
+
+  color-scheme: dark;
 }
 
+html, body {
+  padding: 0;
+  margin: 0;
+}
 body {
   background-color: var(--c-background); 
   color: var(--c-text-normal);
@@ -359,6 +365,8 @@ button {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 40px 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
 
   section {
     margin: auto;
@@ -392,13 +400,13 @@ button {
 }
 @media (min-width: 1200px) {
   #app section {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
   }
   .col-2 {
-    display: flex;
-  }
-  .col-half {
-    width: 50%;
+    display: grid;
+    grid-template-columns: var(--col-template, 1fr 1fr);
+    gap: 1rem;
   }
 }
 
@@ -406,13 +414,15 @@ button {
   margin: 0 auto;
 }
 .col-2 > .month-view {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
 }
 .col-2 > .info-view {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .col-half {
-  width: 90%;
+  width: 100%;
 }
 .mt-1 {
   margin-top: 1rem;
