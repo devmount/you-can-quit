@@ -506,7 +506,7 @@ button {
   font-size: 1.5em;
 }
 
-.vue-notification {
+#app .vue-notification {
   cursor: pointer;
   padding: 1em;
   margin: 0 15px 15px 0;
@@ -517,13 +517,13 @@ button {
   box-shadow: 0 8px 20px -8px var(--c-shadow);
   border-left: 5px solid var(--c-accent-variant);
 }
-.vue-notification .notification-title {
+#app .vue-notification .notification-title {
   font-size: 1.5em;
 }
-.vue-notification .notification-content {
+#app .vue-notification .notification-content {
   white-space: pre-line;
 }
-.vue-notification.error {
+#app .vue-notification.error {
   background-image: linear-gradient(to bottom right, var(--c-danger) 0, var(--c-danger-variant) 100%);
   background-color: var(--c-danger);
   border-left: 5px solid var(--c-danger-variant);
