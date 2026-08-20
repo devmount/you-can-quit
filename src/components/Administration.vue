@@ -109,5 +109,7 @@ const confirm = reactive({
 .btn-group {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 </style>

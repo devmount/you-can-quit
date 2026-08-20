@@ -193,7 +193,7 @@ const randomSuccessNotification = () => {
     group: 'main',
     title: t('messages.titles.' + Math.floor(Math.random() * 7)),
     text: t('messages.texts.' + Math.floor(Math.random() * 6)),
-    duration: 1000000
+    duration: 6000
   }
 };
 
@@ -309,6 +309,10 @@ const fillOffset = computed(() => {
   --c-shadow: #24292e;
 }
 
+html, body {
+  padding: 0;
+  margin: 0;
+}
 body {
   background-color: var(--c-background); 
   color: var(--c-text-normal);
@@ -359,6 +363,8 @@ button {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 40px 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
 
   section {
     margin: auto;
@@ -392,13 +398,21 @@ button {
 }
 @media (min-width: 1200px) {
   #app section {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
   }
   .col-2 {
     display: flex;
+    flex-wrap: wrap;
   }
   .col-half {
     width: 50%;
+  }
+  .col-2 > .month-view {
+    width: 800px;
+  }
+  .col-2 > .info-view {
+    width: 400px;
   }
 }
 
@@ -406,13 +420,15 @@ button {
   margin: 0 auto;
 }
 .col-2 > .month-view {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
 }
 .col-2 > .info-view {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 .col-half {
-  width: 90%;
+  width: 100%;
 }
 .mt-1 {
   margin-top: 1rem;
