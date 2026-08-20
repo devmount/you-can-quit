@@ -32,7 +32,7 @@
       />
     </div>
     <div class="info-view">
-      <info-panel :status-data="calData" />
+      <info-panel :status-data="calData" :newly-achieved="newlyAchieved" />
     </div>
   </section>
   <section>
@@ -83,6 +83,7 @@ import db from '@/database';
 
 // helpers
 import { getDate, languages } from '@/utils';
+import { achievements, getAchievementStatuses } from '@/achievements';
 
 // get components
 import AboutSection from '@/components/AboutSection.vue';
@@ -108,6 +109,7 @@ const calNow = reactive({
   year: d.getFullYear(),
 });
 const calData = ref({});
+const newlyAchieved = ref([]);
 
 // handle mount hooks
 onMounted(() => {
@@ -137,6 +139,15 @@ const fetchData = async () => {
 const updateDay = async (year, month, day, status) => {
   // get date format yyyy-mm-dd
   let date = getDate(year, month, day);
+  // no-op if the day already has this exact status (undecided days are absent from calData, hence the fallback to 0)
+  if ((calData.value[date] ?? 0) == status) {
+    return;
+  }
+  // snapshot achievement state before the update: some achievement patterns
+  // (e.g. "Strong Defense") can be completed by a fail or reset just as easily
+  // as by a success, so newly-earned achievements must be detected regardless
+  // of which status this update sets
+  let before = getAchievementStatuses(calData.value);
   // delete record if status == 0 (reset)
   if (status == 0) {
     await db.days.delete(date);
@@ -144,12 +155,19 @@ const updateDay = async (year, month, day, status) => {
   // add/update record if status == 1 || -1 (success || fail)
   else {
     await db.days.put({name: date, status: status});
-    if (status == 1) {
-      notify(randomSuccessNotification());
-    }
   }
   // update db
   await fetchData();
+  let after = getAchievementStatuses(calData.value);
+  let earned = achievements.filter(a => after[a].state > before[a].state);
+  // a newly earned achievement is always worth a notification, no matter which
+  // action completed it; otherwise, only a successful day gets one
+  if (earned.length) {
+    newlyAchieved.value = earned;
+    notify(randomSuccessNotification(earned));
+  } else if (status == 1) {
+    notify(randomSuccessNotification());
+  }
 };
 
 // change month to display
@@ -187,12 +205,18 @@ const previousYear = () => {
   changeMonth(calDate.year-1, calDate.month);
 };
 
-// return a notyf message object with random success title and text
-const randomSuccessNotification = () => {
+// return a notyf message object with random success title and flavor text,
+// plus a line naming any achievement(s) just earned
+const randomSuccessNotification = (earned = []) => {
+  let text = t('messages.texts.' + Math.floor(Math.random() * 6));
+  if (earned.length) {
+    let names = earned.map(a => t('achievements.' + a + '.title')).join(', ');
+    text += '\n' + t('messages.achievement', { name: names });
+  }
   return {
     group: 'main',
     title: t('messages.titles.' + Math.floor(Math.random() * 7)),
-    text: t('messages.texts.' + Math.floor(Math.random() * 6)),
+    text: text,
     duration: 6000
   }
 };
@@ -481,6 +505,9 @@ button {
 }
 .vue-notification .notification-title {
   font-size: 1.5em;
+}
+.vue-notification .notification-content {
+  white-space: pre-line;
 }
 .vue-notification.error {
   background-image: linear-gradient(to bottom right, var(--c-danger) 0, var(--c-danger-variant) 100%);
