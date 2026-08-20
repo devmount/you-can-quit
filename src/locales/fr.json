@@ -58,7 +58,8 @@
       "C'est comme ça qu'on fait !",
       "Tu es un héros, sérieusement !",
       "Encore une preuve incontestable de ton succès !"
-    ]
+    ],
+    "achievement": "Tu as obtenu «{name}» !"
   },
   "stats": {
     "title": "Statistiques",

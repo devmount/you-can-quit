@@ -58,7 +58,8 @@
       "È così che si fa!",
       "Sei fortissimǝ! Davvero!",
       "L'ennesima prova tangibile del tuo successo!"
-    ]
+    ],
+    "achievement": "Hai ottenuto «{name}»!"
   },
   "stats": {
     "title": "Statistiche",

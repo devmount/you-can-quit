@@ -58,7 +58,8 @@
       "So wird das gemacht!",
       "Du bist ein Held! Ernsthaft!",
       "Ein weiterer unwiderlegbarer Beweis deines Erfolgs!"
-    ]
+    ],
+    "achievement": "Du hast «{name}» erreicht!"
   },
   "stats": {
     "title": "Statistik",

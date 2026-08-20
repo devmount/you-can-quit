@@ -58,7 +58,8 @@
       "Mostra como é que se faz!",
       "Você é um herói! Sério mesmo!",
       "Outra prova de sucesso!"
-    ]
+    ],
+    "achievement": "Você ganhou «{name}»!"
   },
   "stats": {
     "title": "Estatísticas",

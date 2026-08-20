@@ -58,7 +58,8 @@
       "Now that's how it's done!",
       "You are a hero! Seriously!",
       "Another unbreakable proof of your success!"
-    ]
+    ],
+    "achievement": "You earned «{name}»!"
   },
   "stats": {
     "title": "Stats",
