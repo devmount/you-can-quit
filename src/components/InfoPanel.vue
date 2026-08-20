@@ -1,7 +1,7 @@
 <template>
 <div class="info">
   <stats-panel :status-data="statusData" />
-  <achievement-list :status-data="statusData" :newly-achieved="newlyAchieved" />
+  <achievement-list :status-data="statusData" :unlocked-achievements="unlockedAchievements" />
   <day-legend />
 </div>
 </template>
@@ -13,7 +13,7 @@ import StatsPanel from '@/components/info/StatsPanel.vue';
 
 defineProps({
   statusData: Object,
-  newlyAchieved: {
+  unlockedAchievements: {
     type: Array,
     default: () => [],
   },

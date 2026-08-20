@@ -36,7 +36,7 @@ const { t } = useI18n();
 
 const props = defineProps({
   statusData: Object,
-  newlyAchieved: {
+  unlockedAchievements: {
     type: Array,
     default: () => [],
   },
@@ -57,10 +57,10 @@ const achievementOffset = computed(() => {
   return 5 - (achievements.length % 5)
 });
 
-// briefly highlight newly-earned achievement tiles
+// briefly highlight unlocked achievement tiles
 const animatingKeys = ref([]);
 let animationTimeout = null;
-watch(() => props.newlyAchieved, (keys) => {
+watch(() => props.unlockedAchievements, (keys) => {
   if (!keys.length) return;
   animatingKeys.value = keys;
   clearTimeout(animationTimeout);

@@ -1,5 +1,5 @@
 // Pure achievement computation, shared between AchievementList.vue (rendering)
-// and App.vue (detecting newly-earned achievements right after a day update).
+// and App.vue (detecting unlocked achievements right after a day update).
 import { getDate, getMinDate, getCurrentStreak, getStateString } from '@/utils';
 
 // the achievements object contains all existing achievements

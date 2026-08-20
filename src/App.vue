@@ -32,7 +32,7 @@
       />
     </div>
     <div class="info-view">
-      <info-panel :status-data="calData" :newly-achieved="newlyAchieved" />
+      <info-panel :status-data="calData" :unlocked-achievements="unlockedAchievements" />
     </div>
   </section>
   <section>
@@ -109,7 +109,7 @@ const calNow = reactive({
   year: d.getFullYear(),
 });
 const calData = ref({});
-const newlyAchieved = ref([]);
+const unlockedAchievements = ref([]);
 
 // handle mount hooks
 onMounted(() => {
@@ -145,7 +145,7 @@ const updateDay = async (year, month, day, status) => {
   }
   // snapshot achievement state before the update: some achievement patterns
   // (e.g. "Strong Defense") can be completed by a fail or reset just as easily
-  // as by a success, so newly-earned achievements must be detected regardless
+  // as by a success, so unlocked achievements must be detected regardless
   // of which status this update sets
   let before = getAchievementStatuses(calData.value);
   // delete record if status == 0 (reset)
@@ -159,12 +159,12 @@ const updateDay = async (year, month, day, status) => {
   // update db
   await fetchData();
   let after = getAchievementStatuses(calData.value);
-  let earned = achievements.filter(a => after[a].state > before[a].state);
-  // a newly earned achievement is always worth a notification, no matter which
+  let unlocked = achievements.filter(a => after[a].state > before[a].state);
+  // an unlocked achievement is always worth a notification, no matter which
   // action completed it; otherwise, only a successful day gets one
-  if (earned.length) {
-    newlyAchieved.value = earned;
-    notify(randomSuccessNotification(earned));
+  if (unlocked.length) {
+    unlockedAchievements.value = unlocked;
+    notify(randomSuccessNotification(unlocked));
   } else if (status == 1) {
     notify(randomSuccessNotification());
   }
@@ -206,11 +206,11 @@ const previousYear = () => {
 };
 
 // return a notyf message object with random success title and flavor text,
-// plus a line naming any achievement(s) just earned
-const randomSuccessNotification = (earned = []) => {
+// plus a line naming any achievement(s) just unlocked
+const randomSuccessNotification = (unlocked = []) => {
   let text = t('messages.texts.' + Math.floor(Math.random() * 6));
-  if (earned.length) {
-    let names = earned.map(a => t('achievements.' + a + '.title')).join(', ');
+  if (unlocked.length) {
+    let names = unlocked.map(a => t('achievements.' + a + '.title')).join(', ');
     text += '\n' + t('messages.achievement', { name: names });
   }
   return {
