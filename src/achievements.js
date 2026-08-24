@@ -1,6 +1,6 @@
 // Pure achievement computation, shared between AchievementList.vue (rendering)
 // and App.vue (detecting unlocked achievements right after a day update).
-import { getDate, getMinDate, getCurrentStreak, getStateString } from '@/utils';
+import { getDate, getMinDate, getCurrentStreak, getLongestStreak, getStateString } from '@/utils';
 
 // the achievements object contains all existing achievements
 export const achievements = [
@@ -194,20 +194,7 @@ const achievedGatherer = (totalAchievementsWithoutGatherer) => {
 };
 // achievement: Longest streak reached a multiple of 10
 const achievedNews = (statusData, minDate, currentStreak) => {
-  var streak = 0, max = 0, n = new Date(), min = minDate, key = ''
-  while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1))
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate())
-    if (!(key in statusData) || (key in statusData && statusData[key] != 1)) {
-      max = streak > max ? streak : max
-      streak = 0
-    } else {
-      streak++
-    }
-  }
-  // flush a streak that runs uninterrupted through the earliest tracked day
-  max = streak > max ? streak : max
-  let state = Math.floor(max/10)
+  let state = Math.floor(getLongestStreak(statusData)/10)
   let progress = currentStreak*100/(10*(state+1))
   if (currentStreak >= 10*(state+1)) {
     progress = 100
