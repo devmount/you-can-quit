@@ -25,17 +25,18 @@ export const getMinDate = (statusData) => {
 };
 
 // Walk backward from today to minDate, building a string of one char per day:
-// 's' (successful), 'f' (failed) or 'n' (no data). Pass dayFilter to only include
-// matching days (e.g. a specific weekday) while still walking every day in between.
+// 's' (successful), 'f' (failed) or 'n' (no data). Pass dayFilter to only include matching days (e.g. a specific
+// weekday) while still walking every day in between.
 export const getStateString = (statusData, minDate, dayFilter = () => true) => {
   let states = '', n = new Date(), min = new Date(minDate), key = '';
   while (min < n) {
+    if (dayFilter(n)) {
+      key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
+      states = (key in statusData && statusData[key] == -1) ? states + 'f' : states;
+      states = (key in statusData && statusData[key] == 1) ? states + 's' : states;
+      states = !(key in statusData) ? states + 'n' : states;
+    }
     n = new Date(n.setDate(n.getDate() - 1));
-    if (!dayFilter(n)) continue;
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
-    states = (key in statusData && statusData[key] == -1) ? states + 'f' : states;
-    states = (key in statusData && statusData[key] == 1) ? states + 's' : states;
-    states = !(key in statusData) ? states + 'n' : states;
   }
   return states;
 };
@@ -44,14 +45,17 @@ export const getStateString = (statusData, minDate, dayFilter = () => true) => {
 export const getCurrentStreak = (statusData) => {
   let streak = 0, undecided = true, n = new Date(), min = new Date(getMinDate(statusData)), key = '';
   while (min <= n) {
-    n = new Date(n.setDate(n.getDate() - 1));
     key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
-    if (!(key in statusData) && undecided) continue;
+    if (!(key in statusData) && undecided) {
+      n = new Date(n.setDate(n.getDate() - 1));
+      continue;
+    }
     if (!(key in statusData) || (key in statusData && statusData[key] < 1)) break;
     else {
       undecided = false;
       streak++;
     }
+    n = new Date(n.setDate(n.getDate() - 1));
   }
   return streak;
 };

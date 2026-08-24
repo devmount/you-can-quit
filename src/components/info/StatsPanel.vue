@@ -56,7 +56,6 @@ const currentStreak = computed(() => getCurrentStreak(props.statusData));
 const longestStreak = computed(() => {
   var streak = 0, max = 0, n = new Date(), min = new Date(minDate.value), key = '';
   while (min < n) {
-    n = new Date(n.setDate(n.getDate() - 1));
     key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
     if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] != 1)) {
       max = streak > max ? streak : max;
@@ -64,6 +63,7 @@ const longestStreak = computed(() => {
     } else {
       streak++;
     }
+    n = new Date(n.setDate(n.getDate() - 1));
   }
   // flush a streak that runs uninterrupted through the earliest tracked day
   return streak > max ? streak : max;
