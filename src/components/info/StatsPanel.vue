@@ -30,7 +30,7 @@
 <script setup>
 import { computed, reactive, watch } from 'vue';
 import { useI18n } from "vue-i18n";
-import { getDate, getMinDate, getCurrentStreak } from '@/utils';
+import { getCurrentStreak, getLongestStreak } from '@/utils';
 const { t } = useI18n();
 
 const props = defineProps({
@@ -46,28 +46,11 @@ const triggerPulse = (key) => {
   pulseTimeouts[key] = setTimeout(() => { pulsing[key] = false; }, 1300);
 };
 
-// get the minimum date (edited date that is most past)
-const minDate = computed(() => getMinDate(props.statusData));
-
 // get number of successful days in a row directly preceding today
 const currentStreak = computed(() => getCurrentStreak(props.statusData));
 
 // get maximum number of successful days in a row
-const longestStreak = computed(() => {
-  var streak = 0, max = 0, n = new Date(), min = new Date(minDate.value), key = '';
-  while (min < n) {
-    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
-    if (!(key in props.statusData) || (key in props.statusData && props.statusData[key] != 1)) {
-      max = streak > max ? streak : max;
-      streak = 0;
-    } else {
-      streak++;
-    }
-    n = new Date(n.setDate(n.getDate() - 1));
-  }
-  // flush a streak that runs uninterrupted through the earliest tracked day
-  return streak > max ? streak : max;
-});
+const longestStreak = computed(() => getLongestStreak(props.statusData));
 
 // get total number of successful days
 const successfulDays = computed(() => {

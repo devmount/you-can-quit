@@ -59,3 +59,20 @@ export const getCurrentStreak = (statusData) => {
   }
   return streak;
 };
+
+// Get maximum number of successful days in a row
+export const getLongestStreak = (statusData) => {
+  let streak = 0, max = 0, n = new Date(), min = new Date(getMinDate(statusData)), key = '';
+  while (min < n) {
+    key = getDate(n.getFullYear(), n.getMonth()+1, n.getDate());
+    if (!(key in statusData) || (key in statusData && statusData[key] != 1)) {
+      max = streak > max ? streak : max;
+      streak = 0;
+    } else {
+      streak++;
+    }
+    n = new Date(n.setDate(n.getDate() - 1));
+  }
+  // flush a streak that runs uninterrupted through the earliest tracked day
+  return streak > max ? streak : max;
+};
