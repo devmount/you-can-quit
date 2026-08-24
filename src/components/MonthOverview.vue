@@ -18,7 +18,7 @@
     }"
     :title="isToday(date.year, date.month, d) ? t('today') : ''"
   ><div class="day-date"><span class="day-weekday">{{ t('name.dayofweek.' + weekdayLabel(d)).slice(0, 2) }}</span><span class="day-number">{{ d }}</span></div>
-    <div v-if="isPast(date.year, date.month, d)" class="action">
+    <div v-if="isPast(date.year, date.month, d) || isToday(date.year, date.month, d)" class="action">
       <button
         @click="emit('update', date.year, date.month, d, 1)"
         class="success"
@@ -223,7 +223,8 @@ const weekdayLabel = (day) => {
   .month-day-grid .day.past:hover {
     line-height: 50px;
   }
-  .month-day-grid .day.past:hover .action {
+  .month-day-grid .day.past:hover .action,
+  .month-day-grid .day.today:hover .action {
     bottom: 0;
   }
 }
