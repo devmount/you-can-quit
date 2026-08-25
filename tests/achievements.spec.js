@@ -131,9 +131,8 @@ describe('alea (a month with <=6 non-successes)', () => {
 
 describe('tide (more successes than fails)', () => {
   it('is achieved when successes outnumber fails', () => {
-    const data = { a: 1, b: 1, c: 1, d: -1, e: -1 };
-    const keyed = { '2026-01-01': 1, '2026-01-02': 1, '2026-01-03': 1, '2026-01-04': -1, '2026-01-05': -1 };
-    expect(getAchievementStatuses(keyed).tide).toMatchObject({ state: 1, progress: 100, left: 0 });
+    const data = { '2026-01-01': 1, '2026-01-02': 1, '2026-01-03': 1, '2026-01-04': -1, '2026-01-05': -1 };
+    expect(getAchievementStatuses(data).tide).toMatchObject({ state: 1, progress: 100, left: 0 });
   });
 
   it('is not achieved when successes only equal fails', () => {
