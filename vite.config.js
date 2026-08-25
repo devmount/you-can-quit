@@ -18,5 +18,11 @@ export default defineConfig({
 		env: {
 			TZ: 'UTC',
 		},
+		coverage: {
+			provider: 'v8',
+			reporter: ['text', 'html'],
+			include: ['src/**/*.{js,vue}'],
+			exclude: ['src/main.js'],
+		},
 	},
 });
