@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["vue", "vitest"],
+  "env": {
+    "browser": true,
+    "es2025": true
+  },
+  "categories": {
+    "correctness": "error"
+  }
+}

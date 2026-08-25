@@ -11,7 +11,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "oxlint --deny-warnings"
   },
   "engines": {
     "node": ">=24"
@@ -28,7 +32,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
-    "vite": "^8.2.1"
+    "@vitest/coverage-v8": "^4.1.11",
+    "@vue/test-utils": "^2.4.11",
+    "jsdom": "^30.0.1",
+    "oxlint": "^1.80.0",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.11"
   },
   "browserslist": [
     "> 1%",
