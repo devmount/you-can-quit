@@ -81,6 +81,8 @@
   "sunday": "domenica | domeniche",
   "wednesday": "mercoledì | mercoledì",
   "achievement": "conquista | conquiste",
+  "weekend": "weekend | weekend",
+  "months": "mese | mesi",
   "completed": "completato",
   "done": "fatto",
   "left": "rimanenti",
@@ -174,6 +176,41 @@
       "title": "Leggendariǝ",
       "description": "Un intero anno senza fallimenti",
       "icon": "monument"
+    },
+    "weekend": {
+      "title": "Guerrierǝ del weekend",
+      "description": "Sabato e domenica positivi, 4 weekend di fila",
+      "icon": "calendar-week"
+    },
+    "quarter": {
+      "title": "Trimestre perfetto",
+      "description": "3 mesi consecutivi senza fallimenti",
+      "icon": "calendar-check"
+    },
+    "anniversary": {
+      "title": "Anniversario",
+      "description": "Positivo nel giorno anniversario del tuo primo giorno tracciato",
+      "icon": "birthday-cake"
+    },
+    "honest": {
+      "title": "Tracciamento onesto",
+      "description": "30 giorni di fila tracciati senza interruzioni",
+      "icon": "clipboard-check"
+    },
+    "phoenix": {
+      "title": "Fenice",
+      "description": "Una serie positiva lunga quanto la tua peggiore serie di fallimenti, subito dopo di essa",
+      "icon": "fire"
+    },
+    "log": {
+      "title": "Registro completo",
+      "description": "Un anno intero tracciato senza lacune",
+      "icon": "book"
+    },
+    "steady": {
+      "title": "Mano ferma",
+      "description": "Almeno l'80% di successo negli ultimi 60 giorni tracciati",
+      "icon": "balance-scale"
     }
   },
   "admin": {

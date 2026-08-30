@@ -9,6 +9,7 @@
     <div class="col-half px-1">
       <h3>{{ t('about.how.title') }}</h3>
       <p>{{ t('about.how.text') }}</p>
+      <day-legend />
     </div>
   </section>
 </div>
@@ -16,5 +17,7 @@
 
 <script setup>
 import { useI18n } from "vue-i18n";
+import DayLegend from '@/components/info/DayLegend.vue';
+
 const { t } = useI18n();
 </script>

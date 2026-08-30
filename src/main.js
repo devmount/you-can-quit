@@ -38,7 +38,14 @@ import {
   faDumbbell,
   faHandSpock,
   faInfoCircle,
-  faShoePrints
+  faShoePrints,
+  faCalendarWeek,
+  faCalendarCheck,
+  faBirthdayCake,
+  faClipboardCheck,
+  faFire,
+  faBook,
+  faBalanceScale
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faTwitter,
@@ -80,6 +87,13 @@ library.add(
   faHandSpock,
   faInfoCircle,
   faShoePrints,
+  faCalendarWeek,
+  faCalendarCheck,
+  faBirthdayCake,
+  faClipboardCheck,
+  faFire,
+  faBook,
+  faBalanceScale,
   faTwitter,
   faGithub,
   faDev

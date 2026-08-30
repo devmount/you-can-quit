@@ -81,6 +81,8 @@
   "sunday": "sunday | sundays",
   "wednesday": "wednesday | wednesdays",
   "achievement": "achievement | achievements",
+  "weekend": "weekend | weekends",
+  "months": "month | months",
   "completed": "completed",
   "done": "done",
   "left": "left",
@@ -174,6 +176,41 @@
       "title": "Legendary Monument",
       "description": "A whole year without a fail",
       "icon": "monument"
+    },
+    "weekend": {
+      "title": "Weekend Warrior",
+      "description": "Successful Saturday and Sunday, 4 weekends in a row",
+      "icon": "calendar-week"
+    },
+    "quarter": {
+      "title": "Perfect Quarter",
+      "description": "3 consecutive months without a fail",
+      "icon": "calendar-check"
+    },
+    "anniversary": {
+      "title": "Anniversary",
+      "description": "Successful on the anniversary of your first tracked day",
+      "icon": "birthday-cake"
+    },
+    "honest": {
+      "title": "Honest Tracker",
+      "description": "Logged every day for 30 days in a row, no gaps",
+      "icon": "clipboard-check"
+    },
+    "phoenix": {
+      "title": "Phoenix",
+      "description": "A success streak as long as your worst fail streak, right after it",
+      "icon": "fire"
+    },
+    "log": {
+      "title": "Full Log",
+      "description": "Every day of a whole year logged, no gaps",
+      "icon": "book"
+    },
+    "steady": {
+      "title": "Steady Hand",
+      "description": "At least 80% success rate over your last 60 tracked days",
+      "icon": "balance-scale"
     }
   },
   "admin": {

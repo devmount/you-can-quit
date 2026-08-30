@@ -18,9 +18,9 @@ describe('AchievementList', () => {
     vi.useRealTimers();
   });
 
-  it('renders all 18 achievements plus flex-alignment offset fillers', () => {
+  it('renders all 25 achievements plus flex-alignment offset fillers', () => {
     const wrapper = mountWithI18n(AchievementList, { props: { statusData: {} } });
-    expect(realItems(wrapper)).toHaveLength(18);
+    expect(realItems(wrapper)).toHaveLength(25);
     expect(wrapper.findAll('.item.offset')).toHaveLength(5 - (achievements.length % 5));
   });
 

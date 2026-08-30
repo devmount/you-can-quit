@@ -53,8 +53,8 @@ afterEach(() => {
 });
 
 describe('getAchievementStatuses shape', () => {
-  it('returns exactly the 18 documented achievements, each with the expected fields', () => {
-    expect(achievements).toHaveLength(18);
+  it('returns exactly the 25 documented achievements, each with the expected fields', () => {
+    expect(achievements).toHaveLength(25);
     const statuses = getAchievementStatuses({});
     expect(Object.keys(statuses).sort()).toEqual([...achievements].sort());
     for (const a of achievements) {
@@ -209,7 +209,7 @@ describe('gatherer (collected 15 other achievements)', () => {
     expect(getAchievementStatuses({}).gatherer).toMatchObject({ state: 0, progress: 0, left: 15 });
   });
 
-  it('always matches the formula derived from the sum of the other 17 achievement states', () => {
+  it('always matches the formula derived from the sum of the other 24 achievement states', () => {
     const now = new Date('2026-06-15T12:00:00Z');
     vi.setSystemTime(now);
     const data = successRun(now, 0, 60);
@@ -363,5 +363,180 @@ describe('legend (a whole year without a single fail or gap)', () => {
     vi.setSystemTime(new Date('2027-01-01T12:00:00Z'));
     const data = fillYear(2026, ['2026-07-04']);
     expect(getAchievementStatuses(data).legend.state).toBe(0);
+  });
+});
+
+describe('weekend (successful Saturday and Sunday, 4 weekends in a row)', () => {
+  it('is achieved with 4 consecutive successful weekends', () => {
+    const now = new Date('2026-01-25T12:00:00Z'); // a Sunday
+    vi.setSystemTime(now);
+    const data = {};
+    for (let i = 0; i < 4; i++) {
+      const sunday = daysBack(now, i * 7);
+      const saturday = daysBack(sunday, 1);
+      data[key(sunday)] = 1;
+      data[key(saturday)] = 1;
+    }
+    expect(getAchievementStatuses(data).weekend.state).toBe(1);
+  });
+
+  it('is not achieved with only 3 consecutive successful weekends', () => {
+    const now = new Date('2026-01-25T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = {};
+    for (let i = 0; i < 3; i++) {
+      const sunday = daysBack(now, i * 7);
+      const saturday = daysBack(sunday, 1);
+      data[key(sunday)] = 1;
+      data[key(saturday)] = 1;
+    }
+    expect(getAchievementStatuses(data).weekend.state).toBe(0);
+  });
+
+  it('resets progress to 0 as soon as the current, still-forming weekend has a fail', () => {
+    const now = new Date('2026-01-31T12:00:00Z'); // a Saturday, marked failed today
+    vi.setSystemTime(now);
+    const data = { [key(now)]: -1 };
+    // 4 fully successful weekends directly before today's fail; historical state stays, live progress must not
+    for (let i = 1; i <= 4; i++) {
+      const sunday = daysBack(now, i * 7 - 1);
+      const saturday = daysBack(sunday, 1);
+      data[key(sunday)] = 1;
+      data[key(saturday)] = 1;
+    }
+    const weekend = getAchievementStatuses(data).weekend;
+    expect(weekend.state).toBe(1);
+    expect(weekend.progress).toBe(0);
+  });
+});
+
+describe('quarter (3 consecutive calendar months without a fail)', () => {
+  it('counts 3 consecutive fully-elapsed clean months', () => {
+    vi.setSystemTime(new Date('2026-04-01T12:00:00Z'));
+    const data = { ...fillMonth(2026, 1), ...fillMonth(2026, 2), ...fillMonth(2026, 3) };
+    expect(getAchievementStatuses(data).quarter.state).toBe(1);
+  });
+
+  it('does not count when only 2 consecutive months are clean', () => {
+    vi.setSystemTime(new Date('2026-04-01T12:00:00Z'));
+    const data = { ...fillMonth(2026, 1, ['2026-01-15']), ...fillMonth(2026, 2), ...fillMonth(2026, 3) };
+    expect(getAchievementStatuses(data).quarter.state).toBe(0);
+  });
+
+  it('shows ~33% progress after exactly one banked clean month, not a near-complete bar', () => {
+    vi.setSystemTime(new Date('2026-02-02T12:00:00Z')); // barely into month 2, after 1 clean month
+    const data = { ...fillMonth(2026, 1), '2026-02-01': 1 };
+    expect(getAchievementStatuses(data).quarter.progress).toBeCloseTo(100 / 3, 1);
+  });
+});
+
+describe('anniversary (successful on the anniversary of the first tracked day)', () => {
+  it('is achieved when the one-year anniversary is marked successful', () => {
+    vi.setSystemTime(new Date('2026-03-10T12:00:00Z'));
+    const data = { '2025-03-10': 1, '2026-03-10': 1 };
+    expect(getAchievementStatuses(data).anniversary.state).toBe(1);
+  });
+
+  it('is not achieved when the one-year anniversary is not marked successful', () => {
+    vi.setSystemTime(new Date('2026-03-10T12:00:00Z'));
+    const data = { '2025-03-10': 1, '2026-03-10': -1 };
+    expect(getAchievementStatuses(data).anniversary.state).toBe(0);
+  });
+
+  it('shows no smooth countdown on any day other than the anniversary itself', () => {
+    vi.setSystemTime(new Date('2026-06-15T12:00:00Z')); // unrelated to the anniversary date below
+    const data = { '2025-03-10': 1 };
+    expect(getAchievementStatuses(data).anniversary.progress).toBe(0);
+  });
+
+  it('is repeatable, counting one more state for every year the anniversary is hit', () => {
+    vi.setSystemTime(new Date('2028-03-10T12:00:00Z'));
+    // 2025 is the start date itself (not an anniversary yet); 2027 is deliberately failed
+    const data = { '2025-03-10': 1, '2026-03-10': 1, '2027-03-10': -1, '2028-03-10': 1 };
+    expect(getAchievementStatuses(data).anniversary.state).toBe(2);
+  });
+});
+
+describe('honest (logged a status for 30 days in a row, no gaps)', () => {
+  it('counts 30 consecutive tracked days regardless of success or fail', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = { ...successRun(now, 0, 15, 1), ...successRun(now, 15, 15, -1) };
+    expect(getAchievementStatuses(data).honest.state).toBe(1);
+  });
+
+  it('does not count 29 consecutive tracked days', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    expect(getAchievementStatuses(successRun(now, 0, 29)).honest.state).toBe(0);
+  });
+});
+
+describe('phoenix (a success streak as long as the worst fail streak, right after it)', () => {
+  it('is achieved when the success streak right after the worst fail streak is at least as long', () => {
+    const now = new Date('2026-05-01T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = { ...successRun(now, 0, 3, 1), ...successRun(now, 3, 3, -1) };
+    expect(getAchievementStatuses(data).phoenix.state).toBe(1);
+  });
+
+  it('is not achieved when the recovery streak is shorter than the worst fail streak', () => {
+    const now = new Date('2026-05-01T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = { ...successRun(now, 0, 2, 1), ...successRun(now, 2, 3, -1) };
+    expect(getAchievementStatuses(data).phoenix.state).toBe(0);
+  });
+});
+
+describe('log (every day of a whole calendar year logged, no gaps)', () => {
+  it('counts a fully-elapsed year with every day logged', () => {
+    vi.setSystemTime(new Date('2027-01-01T12:00:00Z'));
+    const data = fillYear(2026);
+    expect(getAchievementStatuses(data).log.state).toBe(1);
+  });
+
+  it('does not count the same year with a single missing day', () => {
+    vi.setSystemTime(new Date('2027-01-01T12:00:00Z'));
+    const data = fillYear(2026, ['2026-07-04']);
+    expect(getAchievementStatuses(data).log.state).toBe(0);
+  });
+
+  it('counts a year logged with failed days too, unlike legend which requires zero fails', () => {
+    vi.setSystemTime(new Date('2027-01-01T12:00:00Z'));
+    const data = Object.fromEntries(Object.keys(fillYear(2026)).map((k) => [k, -1]));
+    const statuses = getAchievementStatuses(data);
+    expect(statuses.log.state).toBe(1);
+    expect(statuses.legend.state).toBe(0);
+  });
+});
+
+describe('steady (at least 80% success rate over the last 60 tracked days)', () => {
+  it('is achieved with exactly 48 successes out of the last 60 tracked days', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = { ...successRun(now, 0, 48, 1), ...successRun(now, 48, 12, -1) };
+    expect(getAchievementStatuses(data).steady.state).toBe(1);
+  });
+
+  it('is not achieved with only 47 successes out of the last 60 tracked days', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = { ...successRun(now, 0, 47, 1), ...successRun(now, 47, 13, -1) };
+    expect(getAchievementStatuses(data).steady.state).toBe(0);
+  });
+
+  it('is not achieved with fewer than 60 tracked days, regardless of ratio', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    const data = successRun(now, 0, 59, 1); // 100% success, but not enough data yet
+    expect(getAchievementStatuses(data).steady.state).toBe(0);
+  });
+
+  it('skips untracked gaps when collecting the most recent 60 tracked days', () => {
+    const now = new Date('2026-06-15T12:00:00Z');
+    vi.setSystemTime(now);
+    // 48 successes, then an untracked gap, then 12 fails further back - the gap must not break the window
+    const data = { ...successRun(now, 0, 48, 1), ...successRun(now, 49, 12, -1) };
+    expect(getAchievementStatuses(data).steady.state).toBe(1);
   });
 });
