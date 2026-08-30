@@ -81,6 +81,8 @@
   "sunday": "Sonntag | Sonntag",
   "wednesday": "Mittwoch | Mittwoche",
   "achievement": "Errungenschaft | Errungenschaften",
+  "weekend": "Wochenende | Wochenenden",
+  "months": "Monat | Monate",
   "completed": "abgeschlossen",
   "done": "geschafft",
   "left": "übrig",
@@ -174,6 +176,41 @@
       "title": "Legendäres Denkmal",
       "description": "Ein ganzes Jahr ohne Misserfolg",
       "icon": "monument"
+    },
+    "weekend": {
+      "title": "Wochenend-Kämpfer",
+      "description": "Samstag und Sonntag erfolgreich: 4 Wochenenden in Folge",
+      "icon": "calendar-week"
+    },
+    "quarter": {
+      "title": "Perfektes Quartal",
+      "description": "3 aufeinanderfolgende erfolgreiche Monate",
+      "icon": "calendar-check"
+    },
+    "anniversary": {
+      "title": "Jahrestag",
+      "description": "Erfolgreich am Jahrestag des ersten erfassten Tages",
+      "icon": "birthday-cake"
+    },
+    "honest": {
+      "title": "Ehrliche Haut",
+      "description": "30 Tage in Folge lückenlos erfasst,",
+      "icon": "clipboard-check"
+    },
+    "phoenix": {
+      "title": "Phönix",
+      "description": "Eine mindestens so lange Erfolgssträhne direkt nach der längsten Fehlschlagsträhne",
+      "icon": "fire"
+    },
+    "log": {
+      "title": "Lückenloser Log",
+      "description": "Jeder Tag eines ganzen Jahres lückenlos erfasst",
+      "icon": "book"
+    },
+    "steady": {
+      "title": "Ruhige Hand",
+      "description": "Mindestens 80% Erfolgsquote in den letzten 60 erfassten Tagen",
+      "icon": "balance-scale"
     }
   },
   "admin": {

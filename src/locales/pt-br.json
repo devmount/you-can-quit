@@ -81,6 +81,8 @@
   "sunday": "domingo | domingos",
   "wednesday": "quarta-feira | quartas-feiras",
   "achievement": "conquista | conquistas",
+  "weekend": "fim de semana | fins de semana",
+  "months": "mês | meses",
   "completed": "completado",
   "done": "feito",
   "left": "restantes",
@@ -174,6 +176,41 @@
       "title": "Monumento Lendário",
       "description": "Um ano inteiro sem falhas",
       "icon": "monument"
+    },
+    "weekend": {
+      "title": "Guerreiro de Fim de Semana",
+      "description": "Sábado e domingo de sucesso, 4 fins de semana seguidos",
+      "icon": "calendar-week"
+    },
+    "quarter": {
+      "title": "Trimestre Perfeito",
+      "description": "3 meses consecutivos sem falhas",
+      "icon": "calendar-check"
+    },
+    "anniversary": {
+      "title": "Aniversário",
+      "description": "Sucesso no aniversário do seu primeiro dia rastreado",
+      "icon": "birthday-cake"
+    },
+    "honest": {
+      "title": "Rastreador Honesto",
+      "description": "30 dias seguidos registrados sem interrupção",
+      "icon": "clipboard-check"
+    },
+    "phoenix": {
+      "title": "Fênix",
+      "description": "Uma sequência de sucesso tão longa quanto sua pior sequência de falhas, logo em seguida",
+      "icon": "fire"
+    },
+    "log": {
+      "title": "Registro Completo",
+      "description": "Um ano inteiro registrado sem lacunas",
+      "icon": "book"
+    },
+    "steady": {
+      "title": "Mão Firme",
+      "description": "Pelo menos 80% de sucesso nos seus últimos 60 dias registrados",
+      "icon": "balance-scale"
     }
   },
   "admin": {

@@ -81,6 +81,8 @@
   "sunday": "dimanche | dimanches",
   "wednesday": "mercredi | mercredis",
   "achievement": "réalisation | réalisations",
+  "weekend": "week-end | week-ends",
+  "months": "mois | mois",
   "completed": "complété",
   "done": "fait",
   "left": "restant",
@@ -174,6 +176,41 @@
       "title": "Monument légendaire",
       "description": "Une année entière sans échec",
       "icon": "monument"
+    },
+    "weekend": {
+      "title": "Guerrier du week-end",
+      "description": "Samedi et dimanche réussis, 4 week-ends d'affilée",
+      "icon": "calendar-week"
+    },
+    "quarter": {
+      "title": "Trimestre parfait",
+      "description": "3 mois consécutifs sans échec",
+      "icon": "calendar-check"
+    },
+    "anniversary": {
+      "title": "Anniversaire",
+      "description": "Réussi le jour anniversaire de ton premier jour suivi",
+      "icon": "birthday-cake"
+    },
+    "honest": {
+      "title": "Suivi honnête",
+      "description": "30 jours renseignés d'affilée, sans interruption",
+      "icon": "clipboard-check"
+    },
+    "phoenix": {
+      "title": "Phénix",
+      "description": "Une série de succès aussi longue que ta pire série d'échecs, juste après elle",
+      "icon": "fire"
+    },
+    "log": {
+      "title": "Registre complet",
+      "description": "Une année entière renseignée, sans aucune lacune",
+      "icon": "book"
+    },
+    "steady": {
+      "title": "Main sûre",
+      "description": "Au moins 80% de réussite sur tes 60 derniers jours renseignés",
+      "icon": "balance-scale"
     }
   },
   "admin": {
