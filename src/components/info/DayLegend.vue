@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <h2>{{ t('legend.title') }}</h2>
+  <h3>{{ t('legend.title') }}</h3>
   <div class="legend">
     <div class="today">{{ t('today') }}</div>
     <div class="successful">{{ t('legend.day.successful') }}</div>
@@ -19,14 +19,16 @@ const { t } = useI18n();
 .legend {
   text-align: left;
   padding-top: 17px;
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
   cursor: default;
+  width: max-content;
+  margin: 0 auto;
 }
 .legend > div {
   position: relative;
   padding: 0 0 10px 35px;
-  width: calc(50% - 35px);
 }
 .legend > div::before {
   content: '';
