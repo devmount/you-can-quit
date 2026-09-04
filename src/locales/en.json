@@ -49,7 +49,15 @@
       "Bulls Eye!",
       "Nailed!",
       "Nice one!",
-      "Impressive!"
+      "Impressive!",
+      "Boom!",
+      "Crushed It!",
+      "On Fire!",
+      "Way To Go!",
+      "Unstoppable!",
+      "Home Run!",
+      "Legend!",
+      "Solid!"
     ],
     "texts": [
       "There's the proof. You rock!",
@@ -57,7 +65,15 @@
       "You're a true inspiration!",
       "Now that's how it's done!",
       "You are a hero! Seriously!",
-      "Another unbreakable proof of your success!"
+      "Another unbreakable proof of your success!",
+      "One more day, one step closer.",
+      "Willpower level: expert.",
+      "Future you says thank you.",
+      "That's what discipline looks like.",
+      "Keep this up and there's no stopping you.",
+      "You showed up. That's everything.",
+      "Small win, big difference.",
+      "Proof that you're stronger than the habit."
     ],
     "achievement": "You earned «{name}»!"
   },
