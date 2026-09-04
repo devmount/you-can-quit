@@ -94,7 +94,7 @@ import MonthNavigation from '@/components/MonthNavigation.vue';
 import YearOverview from '@/components/YearOverview.vue';
 import YearNavigation from '@/components/YearNavigation.vue';
 
-const { t, locale } = useI18n();
+const { t, tm, locale } = useI18n();
 const version = inject('version');
 
 // today
@@ -208,14 +208,16 @@ const previousYear = () => {
 // return a notyf message object with random success title and flavor text,
 // plus a line naming any achievement(s) just unlocked
 const randomSuccessNotification = (unlocked = []) => {
-  let text = t('messages.texts.' + Math.floor(Math.random() * 6));
+  const titles = tm('messages.titles');
+  const texts = tm('messages.texts');
+  let text = texts[Math.floor(Math.random() * texts.length)];
   if (unlocked.length) {
-    let names = unlocked.map(a => t('achievements.' + a + '.title')).join(', ');
+    const names = unlocked.map(a => t('achievements.' + a + '.title')).join(', ');
     text += '\n' + t('messages.achievement', { name: names });
   }
   return {
     group: 'main',
-    title: t('messages.titles.' + Math.floor(Math.random() * 7)),
+    title: titles[Math.floor(Math.random() * titles.length)],
     text: text,
     duration: 6000
   }
