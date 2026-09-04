@@ -49,7 +49,15 @@
       "Hai fatto centro!",
       "Capolavoro!",
       "Spettacolo!",
-      "Straordinario!"
+      "Straordinario!",
+      "Boom!",
+      "Spaccato!",
+      "Che fuoco!",
+      "Vai così!",
+      "Inarrestabile!",
+      "Colpo da maestro!",
+      "Leggenda!",
+      "Solido!"
     ],
     "texts": [
       "Ora c'è la prova, sei grande!",
@@ -57,7 +65,15 @@
       "Sei davvero un'ispirazione!",
       "È così che si fa!",
       "Sei fortissimǝ! Davvero!",
-      "L'ennesima prova tangibile del tuo successo!"
+      "L'ennesima prova tangibile del tuo successo!",
+      "Un giorno in più, un passo più vicino alla meta.",
+      "Livello di forza di volontà: esperto.",
+      "Il te del futuro ti ringrazia.",
+      "Ecco cosa vuol dire disciplina.",
+      "Continua così, nessuno può fermarti.",
+      "Ci sei statǝ. Questo è tutto ciò che conta.",
+      "Piccola vittoria, grande differenza.",
+      "La prova che sei più forte della tua abitudine."
     ],
     "achievement": "Hai ottenuto «{name}»!"
   },

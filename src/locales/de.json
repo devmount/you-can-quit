@@ -49,7 +49,15 @@
       "Volltreffer!",
       "Perfekt!",
       "Nice one!",
-      "Beeindruckend!"
+      "Beeindruckend!",
+      "Boom!",
+      "Klasse!",
+      "Bravo!",
+      "Weiter so!",
+      "Unaufhaltsam!",
+      "Stark!",
+      "Spitzenklasse!",
+      "Traumhaft!"
     ],
     "texts": [
       "Das ist der Beweis. Du rockst!",
@@ -57,7 +65,15 @@
       "Du bist eine echte Inspiration!",
       "So wird das gemacht!",
       "Du bist ein Held! Ernsthaft!",
-      "Ein weiterer unwiderlegbarer Beweis deines Erfolgs!"
+      "Ein weiterer unwiderlegbarer Beweis deines Erfolgs!",
+      "Ein Tag mehr, ein Schritt näher am Ziel.",
+      "Willenskraft: Experte.",
+      "Dein zukünftiges Ich sagt danke.",
+      "So sieht Disziplin aus.",
+      "Mach weiter so, dich hält nichts auf.",
+      "Du bist drangeblieben. Das ist alles, was zählt.",
+      "Kleiner Sieg, große Wirkung.",
+      "Beweis, dass du stärker bist als die Gewohnheit."
     ],
     "achievement": "Du hast «{name}» erreicht!"
   },

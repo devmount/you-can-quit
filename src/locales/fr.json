@@ -49,7 +49,15 @@
       "Dans le mille !",
       "Cloué !",
       "Bien joué !",
-      "Imprésionnant !"
+      "Imprésionnant !",
+      "Boom !",
+      "Déchiré !",
+      "En feu !",
+      "Bravo !",
+      "Imparable !",
+      "Un carton plein !",
+      "Légende !",
+      "Du solide !"
     ],
     "texts": [
       "Voilà la preuve. Tu es génial !",
@@ -57,7 +65,15 @@
       "Tu es une vraie inspiration !",
       "C'est comme ça qu'on fait !",
       "Tu es un héros, sérieusement !",
-      "Encore une preuve incontestable de ton succès !"
+      "Encore une preuve incontestable de ton succès !",
+      "Un jour de plus, un pas de plus vers ton but.",
+      "Niveau de volonté : expert.",
+      "Le toi de demain te dit merci.",
+      "Voilà à quoi ressemble la discipline.",
+      "Continue comme ça, rien ne peut t'arrêter.",
+      "Tu as tenu bon. C'est tout ce qui compte.",
+      "Petite victoire, grand impact.",
+      "La preuve que tu es plus fort que cette habitude."
     ],
     "achievement": "Tu as obtenu «{name}» !"
   },
