@@ -67,7 +67,7 @@
       <a href="https://dev.to/devmount/you-can-quit-with-the-help-of-vue-and-dexie-221i" target="_blank"><font-awesome-icon :icon="['fab', 'dev']" class="icon" /></a>
     </div>
     <div class="mt-2">{{ t('footer.version') }} {{ version }}</div>
-    <div> with 🤍 by <a href="https://devmount.de" target="_blank">devmount</a></div>
+    <div> with 🤍 by <a href="https://devmount.com" target="_blank">devmount</a></div>
   </footer>
   <notifications group="main" position="bottom right" :width="400" />
 </div>

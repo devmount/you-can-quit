@@ -6,7 +6,7 @@
   "packageManager": "pnpm@11.25.0",
   "author": {
     "name": "Andreas Müller",
-    "url": "https://devmount.de"
+    "url": "https://devmount.com"
   },
   "scripts": {
     "dev": "vite",
