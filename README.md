@@ -1,7 +1,7 @@
 # you-can-quit
 
 [![release](https://img.shields.io/github/v/tag/devmount/you-can-quit.svg?label=release&color=78d19a&style=flat-square)](https://github.com/devmount/you-can-quit/releases)
-[![last commit](https://img.shields.io/github/last-commit/devmount/you-can-quit?label=updated&color=78d19a&style=flat-square)](https://github.com/devmount/you-can-quit/commits/master)
+[![last commit](https://img.shields.io/github/last-commit/devmount/you-can-quit?label=updated&color=78d19a&style=flat-square)](https://github.com/devmount/you-can-quit/commits/main)
 [![license](https://img.shields.io/badge/license-MIT-78d19a.svg?style=flat-square)](./LICENSE.md)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-78d19a.svg?style=flat-square)](./.github/CONTRIBUTING.md)
 
@@ -34,35 +34,17 @@ This web app is based on Vue.js and Dexie.js.
 
 Just head over to <https://youcanqu.it> and start your journey.
 
-## Build it yourself
+## Become a developer
 
-1. Get all files
+Here is how you can set up a local development environment. This project requires [Node.js](https://nodejs.org/) 24 or newer and uses [pnpm](https://pnpm.io/installation#using-npm) as package manager.
 
-    ```bash
-    git clone https://github.com/devmount/you-can-quit
-    ```
+1. [Clone](https://help.github.com/en/articles/cloning-a-repository) this project with Git
+2. Install dependencies by running `pnpm install` within the cloned directory `you-can-quit/`
+3. Run `pnpm dev` to start the development server with hot reload at <http://localhost:5173>
 
-2. Install all dependencies using pnpm
+Run `pnpm build` to create a production build in the `dist/` directory and `pnpm serve` to preview it locally. To run a specific version, check out its tag from the [releases page](https://github.com/devmount/you-can-quit/releases).
 
-    ```bash
-    cd you-can-quit
-    pnpm install
-    ```
-
-3. Run the app by ...
-
-    ... either build the project and run the `you-can-quit/dist/index.html` in your browser, e.g.
-
-    ```bash
-    pnpm build
-    firefox dist/index.html &
-    ```
-
-    ... or start the development server with hot reload at localhost:5173
-
-    ```bash
-    pnpm dev
-    ```
+Before creating a pull request, run `pnpm lint` and `pnpm test` to make sure everything passes. Please read the [contribution guidelines](.github/CONTRIBUTING.md) first.
 
 ## Upgrade from 0.x to 1.x
 
@@ -89,7 +71,7 @@ The breaking change in version 1.x is, that the database was switched from Fireb
     pnpm install
     ```
 
-3. Run the app (see instructions above in the _Get started_ section) and import this data file in the administration section at the bottom.
+3. Run the app (see instructions above in the _Become a developer_ section) and import this data file in the administration section at the bottom.
 
 ---
 

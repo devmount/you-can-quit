@@ -26,4 +26,4 @@ Exporting creates a JSON file with your tracked days as a download on your devic
 
 ### 4. Can I run it without using the hosted version?
 
-Yes. You can build and run the application yourself, see the [developer setup in the README](README.md).
+Yes. You can build and run the application yourself, see the [developer setup in the README](README.md#become-a-developer).
